@@ -14601,7 +14601,7 @@ private fun OpenNowMark(size: androidx.compose.ui.unit.Dp, modifier: Modifier = 
         painter = painterResource(R.drawable.opennow_logo_mark),
         contentDescription = "NexPlay",
         modifier = modifier
-            .width(size * 1.85f)
+            .width(size * 0.667f)
             .height(size),
         contentScale = ContentScale.Fit,
     )
