@@ -18,3 +18,12 @@ internal fun Context.physicalStreamDisplayResolution(): Pair<Int, Int>? {
     if (width <= 0 || height <= 0) return null
     return maxOf(width, height) to minOf(width, height)
 }
+
+/** Physical pixel density (dots per inch) of the device's display, sent to the host so the
+ *  virtual desktop scales UI like the local screen does. Falls back to the resources density. */
+internal fun Context.deviceStreamDpi(): Int {
+    val display = getSystemService(DisplayManager::class.java)?.getDisplay(Display.DEFAULT_DISPLAY)
+    val metrics = display?.let { runCatching { resources.displayMetrics.also { m -> display.getRealMetrics(m) } }.getOrNull() }
+        ?: resources.displayMetrics
+    return metrics.densityDpi.coerceAtLeast(160)
+}

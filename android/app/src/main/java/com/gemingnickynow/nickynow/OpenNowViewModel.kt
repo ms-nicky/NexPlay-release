@@ -196,6 +196,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
         authStore = authStore,
         http = http,
         physicalDisplayResolutionProvider = { application.physicalStreamDisplayResolution() },
+        deviceDpiProvider = { application.deviceStreamDpi() },
         diagnosticsSink = { response -> recordSessionDiagnosticResponse(response) },
         isAndroidTv = isAndroidTvProfile(application),
     )

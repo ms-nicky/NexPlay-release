@@ -9,6 +9,9 @@ plugins {
 val localProperties = Properties().apply {
     rootProject.file("local.properties").takeIf { it.exists() }?.inputStream()?.use { load(it) }
 }
+val keystoreProperties = Properties().apply {
+    rootProject.file("keystore.properties").takeIf { it.exists() }?.inputStream()?.use { load(it) }
+}
 fun Sequence<String?>.firstNonBlankOrNull(): String? =
     mapNotNull { value -> value?.trim()?.takeIf { it.isNotEmpty() } }.firstOrNull()
 
@@ -76,6 +79,18 @@ android {
 
     }
 
+    signingConfigs {
+        create("release") {
+            val storeFileProp = keystoreProperties.getProperty("storeFile")
+            if (!storeFileProp.isNullOrBlank()) {
+                storeFile = file(storeFileProp)
+                storePassword = keystoreProperties.getProperty("storePassword")
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         debug {
             isMinifyEnabled = false
@@ -83,6 +98,9 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            keystoreProperties.getProperty("storeFile")?.takeIf { it.isNotBlank() }?.let {
+                signingConfig = signingConfigs.getByName("release")
+            }
             buildConfigField("boolean", "APK_UPDATES_SUPPORTED", (!buildingPlayReleaseBundle).toString())
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

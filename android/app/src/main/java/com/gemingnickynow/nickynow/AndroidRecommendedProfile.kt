@@ -53,8 +53,8 @@ internal fun recommendedAndroidStreamProfile(
     } ?: "16:9"
     val choices = streamResolutionChoicesForAspect(aspectRatio)
     val selected = choices
-        .filter { it.width <= displayWidth && it.height <= displayHeight && it.height <= maxHeight }
-        .maxByOrNull { it.width * it.height }
+        .filter { it.width <= displayWidth && it.height <= displayHeight }
+        .minByOrNull { abs(it.height - displayHeight) }
         ?: choices
             .filter { it.height <= maxHeight }
             .maxByOrNull { it.width * it.height }

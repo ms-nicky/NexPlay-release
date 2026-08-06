@@ -246,6 +246,40 @@ class GfnApiTest {
     }
 
     @Test
+    fun monitorSettingsReportDeviceDpiInDesktopDescriptorMode() {
+        val settings = StreamSettings(
+            resolution = "1920x1080",
+            aspectRatio = "16:9",
+            fps = 60,
+            codec = VideoCodec.H264,
+            colorQuality = ColorQuality.EightBit420,
+        )
+
+        val touchBody = buildMinimalClaimRequestBody(
+            appId = "123",
+            deviceId = "device",
+            settings = settings,
+            deviceDpi = 420,
+            appLaunchMode = GfnAppLaunchMode.TOUCH_FRIENDLY,
+        )
+        val touchMonitor = touchBody.getValue("sessionRequestData").jsonObject
+            .getValue("clientRequestMonitorSettings").jsonArray.single().jsonObject
+        assertEquals(420, touchMonitor.getValue("dpi").jsonPrimitive.int)
+        assertEquals(true, touchMonitor.containsKey("monitorId"))
+
+        val browserBody = buildMinimalClaimRequestBody(
+            appId = "123",
+            deviceId = "device",
+            settings = settings,
+            deviceDpi = 420,
+            streamingBaseUrl = "https://np-bom-01.cloudmatchbeta.nvidiagrid.net",
+        )
+        val browserMonitor = browserBody.getValue("sessionRequestData").jsonObject
+            .getValue("clientRequestMonitorSettings").jsonArray.single().jsonObject
+        assertEquals(0, browserMonitor.getValue("dpi").jsonPrimitive.int)
+    }
+
+    @Test
     fun larger4kPanelRemainsPhysicalMetadataForRequested1440pViewport() {
         val settings = StreamSettings(
             resolution = "2560x1440",

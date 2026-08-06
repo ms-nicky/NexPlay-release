@@ -334,11 +334,14 @@ private fun monitorSettings(
     profile: StreamRequestProfile,
     fps: Int,
     identity: CloudMatchClientIdentity,
+    deviceDpi: Int? = null,
 ): JsonObject =
     buildJsonObject {
         // For touch sessions we MUST emit the full desktop descriptor
-        // (monitorId=0, positionX=0, positionY=0, dpi=100) so the server
+        // (monitorId=0, positionX=0, positionY=0) so the server
         // allocates the full resolution matrix including ultrawide.
+        // The reported DPI follows the physical device so the host's
+        // virtual desktop scales UI like the local screen does.
         if (identity.desktopMonitorDescriptor) {
             put("monitorId", 0)
             put("positionX", 0)
@@ -350,7 +353,7 @@ private fun monitorSettings(
         put("sdrHdrMode", if (profile.hdrEnabled) 1 else 0)
         put("displayData", if (profile.hdrEnabled) hdrDisplayDataJson() else JsonNull)
         put("hdr10PlusGamingData", JsonNull)
-        put("dpi", if (identity.desktopMonitorDescriptor) 100 else 0)
+        put("dpi", if (identity.desktopMonitorDescriptor) (deviceDpi ?: 100) else 0)
     }
 
 private fun requestedStreamingFeatures(settings: StreamSettings, profile: StreamRequestProfile): JsonObject =
@@ -473,6 +476,7 @@ internal fun buildMinimalClaimRequestBody(
     deviceId: String,
     settings: StreamSettings? = null,
     physicalDisplayResolution: Pair<Int, Int>? = null,
+    deviceDpi: Int? = null,
     streamingBaseUrl: String? = null,
     appLaunchMode: Int = GfnAppLaunchMode.GAMEPAD_FRIENDLY,
     isAndroidTv: Boolean = false,
@@ -499,7 +503,7 @@ internal fun buildMinimalClaimRequestBody(
             put("clientPlatformName", if (appLaunchMode == GfnAppLaunchMode.TOUCH_FRIENDLY) "android" else identity.platformName)
             if (settings != null && profile != null) {
                 putJsonArray("clientRequestMonitorSettings") {
-                    add(monitorSettings(profile, settings.fps, identity))
+                    add(monitorSettings(profile, settings.fps, identity, deviceDpi))
                 }
             }
             put(
@@ -2579,6 +2583,7 @@ class GfnSessionRepository(
     private val authStore: AuthStore,
     private val http: OkHttpClient = defaultHttpClient(),
     private val physicalDisplayResolutionProvider: () -> Pair<Int, Int>? = { null },
+    private val deviceDpiProvider: () -> Int? = { null },
     private val diagnosticsSink: (GfnSessionDiagnosticResponse) -> Unit = {},
     private val isAndroidTv: Boolean = false,
 ) {
@@ -2605,6 +2610,7 @@ class GfnSessionRepository(
             accountLinked = accountLinked,
             deviceId = deviceId,
             physicalDisplayResolution = physicalDisplayResolutionProvider(),
+            deviceDpi = deviceDpiProvider(),
             streamingBaseUrl = base,
             appLaunchMode = appLaunchMode,
         )
@@ -2785,6 +2791,7 @@ class GfnSessionRepository(
                 deviceId = deviceId,
                 settings = settings,
                 physicalDisplayResolution = physicalDisplayResolutionProvider(),
+                deviceDpi = deviceDpiProvider(),
                 streamingBaseUrl = active.streamingBaseUrl,
                 appLaunchMode = appLaunchMode,
             )
@@ -2919,6 +2926,7 @@ class GfnSessionRepository(
         accountLinked: Boolean,
         deviceId: String,
         physicalDisplayResolution: Pair<Int, Int>?,
+        deviceDpi: Int?,
         streamingBaseUrl: String?,
         appLaunchMode: Int,
     ): JsonObject {
@@ -2943,7 +2951,7 @@ class GfnSessionRepository(
                 put("streamerVersion", 1)
                 put("clientPlatformName", if (appLaunchMode == GfnAppLaunchMode.TOUCH_FRIENDLY) "android" else identity.platformName)
                 putJsonArray("clientRequestMonitorSettings") {
-                    add(monitorSettings(profile, settings.fps, identity))
+                    add(monitorSettings(profile, settings.fps, identity, deviceDpi))
                 }
                 put("useOps", true)
                 put("audioMode", 2)
@@ -2970,6 +2978,7 @@ class GfnSessionRepository(
         deviceId: String,
         settings: StreamSettings,
         physicalDisplayResolution: Pair<Int, Int>?,
+        deviceDpi: Int?,
         streamingBaseUrl: String?,
         appLaunchMode: Int,
     ): JsonObject =
@@ -2978,6 +2987,7 @@ class GfnSessionRepository(
             deviceId = deviceId,
             settings = settings,
             physicalDisplayResolution = physicalDisplayResolution,
+            deviceDpi = deviceDpi,
             streamingBaseUrl = streamingBaseUrl,
             appLaunchMode = appLaunchMode,
             isAndroidTv = isAndroidTv,
