@@ -10,7 +10,7 @@ Open it from Android Studio with **File > Open > `android/`**. Android Studio wi
 - `:app:assembleRelease` builds the direct-distribution release APK with APK update support.
 - `:app:bundleRelease` builds the Google Play Android App Bundle. This task removes `REQUEST_INSTALL_PACKAGES` and disables APK self-updates so Play installs use Google Play's update mechanism.
 
-Release and debug builds include `arm64-v8a`, `armeabi-v7a`, and `x86_64`. The `armeabi-v7a` slice supports 32-bit ARM phones and 32-bit Android TV firmware. NexPlay recommends 720p/30 FPS/12 Mbps for 32-bit processes and memory-constrained TVs, and warns when a custom profile exceeds that recommendation without overriding the user's selection.
+Builds include `arm64-v8a` and `armeabi-v7a` (plus `x86_64` without any ABI flag). Pass `-Pabi32Only=true` to build `armeabi-v7a` only, or `-Pabi32And64Only=true` to build ARM 32-bit and 64-bit together. The `armeabi-v7a` slice supports 32-bit ARM phones and 32-bit Android TV firmware. NexPlay recommends 720p/30 FPS/12 Mbps for 32-bit processes and memory-constrained TVs, and warns when a custom profile exceeds that recommendation without overriding the user's selection.
 
 ## APK Update Manifest
 

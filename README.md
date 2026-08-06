@@ -24,6 +24,8 @@ cd android
 ./gradlew :app:assembleDebug
 # Debug APK (32-bit ARM only)
 ./gradlew :app:assembleDebug -Pabi32Only=true
+# Debug APK (32-bit + 64-bit ARM)
+./gradlew :app:assembleDebug -Pabi32And64Only=true
 ```
 
 Requires Android SDK with platform 37, NDK 28.2, and CMake 3.22.1.

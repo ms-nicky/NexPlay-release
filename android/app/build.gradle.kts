@@ -70,10 +70,12 @@ android {
         buildConfigField("boolean", "APK_UPDATES_SUPPORTED", "true")
 
         ndk {
-            abiFilters += if (providers.gradleProperty("abi32Only").orNull.toBoolean()) {
-                listOf("armeabi-v7a")
-            } else {
-                listOf("arm64-v8a", "armeabi-v7a", "x86_64")
+            val abi32Only = providers.gradleProperty("abi32Only").orNull.toBoolean()
+            val abi32And64Only = providers.gradleProperty("abi32And64Only").orNull.toBoolean()
+            abiFilters += when {
+                abi32Only -> listOf("armeabi-v7a")
+                abi32And64Only -> listOf("armeabi-v7a", "arm64-v8a")
+                else -> listOf("arm64-v8a", "armeabi-v7a", "x86_64")
             }
         }
 
