@@ -61,8 +61,8 @@ android {
         applicationId = "com.gemingnickynow.nickynow"
         minSdk = 23
         targetSdk = 36
-        versionCode = 66
-        versionName = "1.1.0"
+        versionCode = 67
+        versionName = "1.1.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "POSTHOG_PROJECT_TOKEN", buildConfigString(postHogProjectToken))
