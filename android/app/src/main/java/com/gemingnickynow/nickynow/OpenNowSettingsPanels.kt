@@ -1109,7 +1109,7 @@ private const val GFN_STORAGE_MANAGEMENT_URL = "https://gfn.link/cloudstorage"
 private const val GFN_STORAGE_RESET_URL = "https://gfn.link/resetstorage"
 private const val GFN_ADD_STORAGE_URL = "https://gfn.link/addstorage"
 private const val GFN_ACCOUNT_HELP_URL = "https://gfn.link/5399"
-private const val OPENNOW_GITHUB_URL = "https://github.com/ms-nicky/nickynow"
+private const val OPENNOW_GITHUB_URL = "https://github.com/ms-nicky/NexPlay"
 
 private data class DeveloperCredit(
     val name: String,
@@ -1342,7 +1342,7 @@ internal fun OpenNowGitHubPanel() {
     ) {
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text("NexPlay Repository", color = SettingsText, fontWeight = FontWeight.SemiBold)
-            Text("ms-nicky/nickynow", color = SettingsTextMuted, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text("ms-nicky/NexPlay", color = SettingsTextMuted, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
         }
         OutlinedButton(onClick = { openExternalUrlOrCopy(context, clipboard, OPENNOW_GITHUB_URL, "GitHub link copied") }) {
             Text("GitHub", maxLines = 1, overflow = TextOverflow.Ellipsis)
