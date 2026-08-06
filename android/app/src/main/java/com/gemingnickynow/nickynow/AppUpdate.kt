@@ -40,7 +40,7 @@ internal const val ANDROID_UPDATE_SOURCE_URL = "https://api.printedwaste.com/rel
 internal const val GOOGLE_PLAY_STORE_PACKAGE = "com.android.vending"
 internal const val GOOGLE_PLAY_STORE_LISTING_URL = "https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}"
 private const val UPDATE_FILE_PROVIDER_AUTHORITY_SUFFIX = ".updates"
-private val UPDATE_USER_AGENT = "OpenNOW-AndroidUpdater/${BuildConfig.VERSION_NAME}"
+private val UPDATE_USER_AGENT = "NexPlay-AndroidUpdater/${BuildConfig.VERSION_NAME}"
 private val KNOWN_PACKAGE_INSTALLER_GRANT_TARGETS = setOf(
     "com.android.packageinstaller",
     "com.google.android.packageinstaller",
@@ -231,7 +231,7 @@ class AndroidAppUpdater(
                     publish(
                         status = AndroidUpdateStatus.NotAvailable,
                         sourceUrl = normalizedSourceUrl,
-                        message = "OpenNOW Android is up to date.",
+                        message = "NexPlay Android is up to date.",
                         availableVersionName = candidate.versionName,
                         availableVersionCode = candidate.versionCode,
                         releaseNotes = candidate.releaseNotes,
@@ -246,7 +246,7 @@ class AndroidAppUpdater(
                     publish(
                         status = AndroidUpdateStatus.Available,
                         sourceUrl = normalizedSourceUrl,
-                        message = "OpenNOW ${candidate.displayVersion} is available to download.$compareHint",
+                        message = "NexPlay ${candidate.displayVersion} is available to download.$compareHint",
                         availableVersionName = candidate.versionName,
                         availableVersionCode = candidate.versionCode,
                         releaseNotes = candidate.releaseNotes,
@@ -332,7 +332,7 @@ class AndroidAppUpdater(
             publish(
                 status = AndroidUpdateStatus.Downloading,
                 sourceUrl = normalizedSourceUrl,
-                message = "Downloading OpenNOW ${candidate.displayVersion}...",
+                message = "Downloading NexPlay ${candidate.displayVersion}...",
                 availableVersionName = candidate.versionName,
                 availableVersionCode = candidate.versionCode,
                 releaseNotes = candidate.releaseNotes,
@@ -377,7 +377,7 @@ class AndroidAppUpdater(
             runCatching { appContext.startActivity(settingsIntent) }
             _state.value = _state.value.copy(
                 status = AndroidUpdateStatus.Downloaded,
-                message = "Allow OpenNOW to install unknown apps, then tap Install again.",
+                message = "Allow NexPlay to install unknown apps, then tap Install again.",
             )
             return
         }
@@ -387,7 +387,7 @@ class AndroidAppUpdater(
             .setDataAndType(uri, APK_MIME_TYPE)
             .putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true)
             .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
-        installIntent.clipData = ClipData.newRawUri("OpenNOW update", uri)
+        installIntent.clipData = ClipData.newRawUri("NexPlay update", uri)
         try {
             grantInstallUriPermissions(uri, installIntent)
             appContext.startActivity(installIntent)
@@ -431,7 +431,7 @@ class AndroidAppUpdater(
                 publish(
                     status = AndroidUpdateStatus.NotAvailable,
                     sourceUrl = GOOGLE_PLAY_STORE_LISTING_URL,
-                    message = "OpenNOW is up to date on Google Play (build $currentBuild).",
+                    message = "NexPlay is up to date on Google Play (build $currentBuild).",
                     availableVersionCode = currentBuild,
                     lastCheckedAt = checkedAt,
                 )
@@ -467,7 +467,7 @@ class AndroidAppUpdater(
             }
             val contentType = response.header("Content-Type").orEmpty()
             if (looksLikeApk(sourceUrl, contentType)) {
-                return directApkCandidate(sourceUrl, response.header("X-OpenNOW-Version-Name"), response.header("X-OpenNOW-Version-Code")?.toLongOrNull(), response.header("X-OpenNOW-SHA256"))
+                return directApkCandidate(sourceUrl, response.header("X-NexPlay-Version-Name"), response.header("X-NexPlay-Version-Code")?.toLongOrNull(), response.header("X-NexPlay-SHA256"))
             }
             val body = response.body?.string()?.takeIf { it.isNotBlank() } ?: error("Update source returned an empty manifest.")
             return parseAndroidUpdateCandidate(sourceUrl, body)
@@ -724,11 +724,11 @@ private fun HttpUrl.isLoopbackHttp(): Boolean =
 private fun AndroidUpdateCandidate.safeFileName(): String {
     val raw = fileName
         ?: apkUrl.toHttpUrlOrNull()?.pathSegments?.lastOrNull()
-        ?: "OpenNOW-${versionName ?: versionCode ?: "update"}.apk"
+        ?: "NexPlay-${versionName ?: versionCode ?: "update"}.apk"
     val normalized = raw.substringBefore("?")
         .replace(Regex("[^A-Za-z0-9._-]"), "_")
         .takeIf { it.endsWith(".apk", ignoreCase = true) }
-        ?: "OpenNOW-${versionName ?: versionCode ?: "update"}.apk"
+        ?: "NexPlay-${versionName ?: versionCode ?: "update"}.apk"
     return normalized
 }
 

@@ -13,7 +13,7 @@ import androidx.work.WorkerParameters
 import java.util.concurrent.TimeUnit
 
 private const val AUTH_REFRESH_WORK_NAME = "opennow-auth-token-refresh"
-private const val AUTH_REFRESH_LOG_TAG = "OpenNOWAuthRefresh"
+private const val AUTH_REFRESH_LOG_TAG = "NexPlayAuthRefresh"
 private const val AUTH_REFRESH_INTERVAL_MINUTES = 15L
 private const val AUTH_REFRESH_FLEX_MINUTES = 5L
 private const val AUTH_REFRESH_BACKOFF_MINUTES = 5L

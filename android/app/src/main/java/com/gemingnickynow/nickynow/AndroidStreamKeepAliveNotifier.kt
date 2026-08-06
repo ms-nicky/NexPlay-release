@@ -32,7 +32,7 @@ private const val STREAM_SERVICE_ACTION_START = "com.gemingnickynow.nickynow.str
 private const val STREAM_SERVICE_ACTION_STOP = "com.gemingnickynow.nickynow.stream.STOP"
 private const val STREAM_SERVICE_EXTRA_TITLE = "title"
 private const val STREAM_SERVICE_EXTRA_SHUTDOWN_REQUEST = "shutdown_request"
-private const val STREAM_SERVICE_TAG = "OpenNOWStreamService"
+private const val STREAM_SERVICE_TAG = "NexPlayStreamService"
 private const val STREAM_TASK_REMOVAL_TIMEOUT_MS = 15_000L
 
 internal fun shouldKeepAndroidStreamAlive(state: OpenNowUiState): Boolean =
@@ -70,7 +70,7 @@ class AndroidStreamKeepAliveNotifier(context: Context) {
         }
         cancellationApplied = false
 
-        val title = state.streamGame?.title ?: "OpenNOW"
+        val title = state.streamGame?.title ?: "NexPlay"
         val shutdownRequestJson = activeStreamShutdownRequest(state)?.let { request ->
             OpenNowJson.encodeToString(request)
         }
@@ -148,7 +148,7 @@ class AndroidStreamKeepAliveService : Service() {
                                     Log.w(STREAM_SERVICE_TAG, "Unable to read active stream shutdown request", error)
                                 }
                         }
-                    startStreamForeground(intent?.getStringExtra(STREAM_SERVICE_EXTRA_TITLE) ?: "OpenNOW")
+                    startStreamForeground(intent?.getStringExtra(STREAM_SERVICE_EXTRA_TITLE) ?: "NexPlay")
                 }
                 else -> {
                     releaseStreamWakeLock()
@@ -233,7 +233,7 @@ class AndroidStreamKeepAliveService : Service() {
     private fun acquireStreamWakeLock() {
         if (streamWakeLock?.isHeld == true) return
         streamWakeLock = getSystemService(PowerManager::class.java)
-            .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "OpenNOW:ActiveStream")
+            .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "NexPlay:ActiveStream")
             .apply {
                 setReferenceCounted(false)
                 acquire()
@@ -254,7 +254,7 @@ private fun ensureStreamNotificationChannel(context: Context) {
         "Active stream",
         NotificationManager.IMPORTANCE_LOW,
     ).apply {
-        description = "Keeps an active OpenNOW stream connected while the screen is off."
+        description = "Keeps an active NexPlay stream connected while the screen is off."
         lockscreenVisibility = Notification.VISIBILITY_PUBLIC
         setShowBadge(false)
     }
@@ -284,7 +284,7 @@ private fun buildStreamNotification(context: Context, title: String): Notificati
         .setSmallIcon(R.drawable.ic_tab_stream)
         .setContentTitle(title)
         .setContentText("Streaming continues while the screen is off")
-        .setSubText("OpenNOW")
+        .setSubText("NexPlay")
         .setCategory(Notification.CATEGORY_TRANSPORT)
         .setVisibility(Notification.VISIBILITY_PUBLIC)
         .setOngoing(true)

@@ -862,7 +862,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
             ?: "Unknown"
         val provider = snapshot.authSession?.provider?.displayName?.takeIf { it.isNotBlank() } ?: "Unknown"
         return buildString {
-            appendLine("OpenNOW Android ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
+            appendLine("NexPlay Android ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
             appendLine("Client: ${if (snapshot.androidTvProfile) "Android TV" else "Android mobile"}")
             appendLine("Hardware: $model · Android ${Build.VERSION.RELEASE}")
             appendLine("Screen: ${recommendation?.displayWidth ?: "?"}x${recommendation?.displayHeight ?: "?"} · processors ${recommendation?.processorCount ?: "?"} · memory ${recommendation?.totalMemoryMiB?.let { "$it MiB" } ?: "unknown"}")
@@ -1415,7 +1415,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun resetSettings() {
-        Toast.makeText(getApplication(), "Clearing app data and relaunching OpenNOW", Toast.LENGTH_SHORT).show()
+        Toast.makeText(getApplication(), "Clearing app data and relaunching NexPlay", Toast.LENGTH_SHORT).show()
         wipeAppDataAndRelaunch(getApplication())
     }
 
@@ -2786,7 +2786,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
         val session = snapshot.streamSession
         val codecReport = snapshot.codecReport
         return buildString {
-            appendLine("OpenNOW Android diagnostics")
+            appendLine("NexPlay Android diagnostics")
             appendLine(snapshot.androidUpdate.debugHeaderLine())
             appendLine("page=${snapshot.page} initializing=${snapshot.initializing} loadingGames=${snapshot.loadingGames}")
             appendLine("user=${snapshot.authSession?.user?.displayName.orEmpty()} tier=${snapshot.subscriptionInfo?.membershipTier ?: snapshot.authSession?.user?.membershipTier.orEmpty()} provider=${snapshot.authSession?.provider?.code.orEmpty()}")

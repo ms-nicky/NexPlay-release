@@ -102,7 +102,7 @@ internal class InputDiagnosticsBuffer(
 object NativeInputDiagnostics {
     private const val MAX_RECENT_LINES = 240
     private const val MAX_RETAINED_LINES = 48
-    private const val TAG = "OpenNOWInput"
+    private const val TAG = "NexPlayInput"
     private val buffer = InputDiagnosticsBuffer(
         maxRecentLines = MAX_RECENT_LINES,
         maxRetainedLines = MAX_RETAINED_LINES,

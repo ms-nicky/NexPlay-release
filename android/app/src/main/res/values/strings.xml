@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">NickyNow</string>
-    <string name="status_starting_opennow">Starting NickyNow</string>
+    <string name="app_name">NexPlay</string>
+    <string name="status_starting_opennow">Starting NexPlay</string>
     <string name="login_with_provider">Sign in with %1$s</string>
     <string name="login_tv_start">Sign in on another device with %1$s</string>
     <string name="login_tv_title">Use this code to sign in</string>
@@ -99,8 +99,8 @@
     <string name="stream_panel_direct_click">Direct click</string>
     <string name="stream_panel_touch_controller">Touch controller</string>
     <string name="stream_touch_builtin_title">Built-in game touch detected</string>
-    <string name="stream_touch_builtin_available">This game supports built-in touch controls. You can still turn on NickyNow’s touch controller below if you prefer.</string>
-    <string name="stream_touch_builtin_overridden">This game supports built-in touch controls. NickyNow’s touch controller is enabled for this session.</string>
+    <string name="stream_touch_builtin_available">This game supports built-in touch controls. You can still turn on NexPlay’s touch controller below if you prefer.</string>
+    <string name="stream_touch_builtin_overridden">This game supports built-in touch controls. NexPlay’s touch controller is enabled for this session.</string>
     <string name="stream_touch_builtin_active">Built-in active</string>
     <string name="stream_panel_joysticks">Joysticks</string>
     <string name="stream_panel_joystick_fixed">Fixed</string>
@@ -251,7 +251,7 @@
     <string name="settings_color">Color</string>
     <string name="settings_av1_ten_bit_badge">H.264/H.265 only</string>
     <string name="settings_av1_ten_bit_hint">AV1 uses 8-bit color. Choose H.265 for 10-bit; HDR is limited to compatible Android TV modes.</string>
-    <string name="settings_av1_ten_bit_downgraded">AV1 uses 8-bit color in NickyNow. Switched to 8-bit and disabled HDR. Choose H.265 or H.264 to use 10-bit.</string>
+    <string name="settings_av1_ten_bit_downgraded">AV1 uses 8-bit color in NexPlay. Switched to 8-bit and disabled HDR. Choose H.265 or H.264 to use 10-bit.</string>
     <string name="settings_hdr">HDR (Performance &amp; Ultimate)</string>
     <string name="settings_hdr_android_handheld_hint">HDR streaming is not available on Android handhelds. 10-bit SDR remains available with H.265.</string>
     <string name="settings_hdr_android_tv_compatibility_hint">HDR on Android TV requires H.265 at 60 FPS or lower and a resolution up to 3840 x 2160.</string>
@@ -275,7 +275,7 @@
     <string name="settings_cloud_gsync_desc">Asks the cloud session to use variable refresh timing when supported by your device, display, plan, and the GFN session.</string>
     <string name="settings_microphone">Microphone</string>
     <string name="settings_microphone_desc">Sends your default Android microphone to the streamed game. You can mute it from Stream Controls.</string>
-    <string name="settings_microphone_permission_denied">Microphone permission was not granted. NickyNow will keep microphone streaming off.</string>
+    <string name="settings_microphone_permission_denied">Microphone permission was not granted. NexPlay will keep microphone streaming off.</string>
     <string name="settings_dynamic_color">Use system colors</string>
     <string name="settings_accent">Accent</string>
     <string name="settings_launch_page">Launch page</string>
@@ -292,7 +292,7 @@
     <string name="settings_catalog_background_image_custom">Custom image</string>
     <string name="settings_catalog_background_built_in">Built-in background</string>
     <string name="catalog_background_colorful_abstract">Colorful abstract (default)</string>
-    <string name="catalog_background_original">Original NickyNow</string>
+    <string name="catalog_background_original">Original NexPlay</string>
     <string name="action_choose_image">Choose image</string>
     <string name="action_use_default">Use default</string>
     <string name="settings_tv_safe_area">Screen edge padding</string>
@@ -313,12 +313,12 @@
     <string name="action_mute_music">Mute music</string>
     <string name="settings_stretch_stream_to_fit">Stretch stream to fit</string>
     <string name="settings_session_counter">Smart session timer</string>
-    <string name="settings_thanks_body">Thanks to the people helping improve NickyNow for everyone.</string>
-    <string name="settings_thanks_darkevilpt">DarkevilPT</string>
-    <string name="settings_thanks_darkevilpt_note">Community support</string>
+    <string name="settings_thanks_body">Developed with passion by ms-nicky.</string>
+    <string name="settings_thanks_darkevilpt">ms-nicky</string>
+    <string name="settings_thanks_darkevilpt_note">Developer</string>
     <string name="settings_donate">Donate</string>
     <string name="settings_donate_link_copied">Donate link copied</string>
-    <string name="accent_opennow">NickyNow</string>
+    <string name="accent_opennow">NexPlay</string>
     <string name="accent_pixel">Pixel blue</string>
     <string name="accent_hot_pink">Hot pink</string>
     <string name="accent_lime">Lime</string>

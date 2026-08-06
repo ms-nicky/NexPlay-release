@@ -10,7 +10,7 @@ import android.util.Log
 import java.io.File
 import kotlin.system.exitProcess
 
-private const val APP_DATA_RESET_LOG_TAG = "OpenNOW.AppDataReset"
+private const val APP_DATA_RESET_LOG_TAG = "NexPlay.AppDataReset"
 private const val APP_DATA_RESET_RELAUNCH_DELAY_MS = 500L
 private const val APP_DATA_RESET_RELAUNCH_REQUEST_CODE = 1007
 

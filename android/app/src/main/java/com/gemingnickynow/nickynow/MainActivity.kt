@@ -620,7 +620,7 @@ class MainActivity : ComponentActivity() {
             keyCode in KeyEvent.KEYCODE_BUTTON_A..KeyEvent.KEYCODE_BUTTON_MODE
 
     private companion object {
-        private const val MAIN_ACTIVITY_LOG_TAG = "OpenNOWMainActivity"
+        private const val MAIN_ACTIVITY_LOG_TAG = "NexPlayMainActivity"
         private const val STREAM_SYSTEM_UI_ENFORCE_INTERVAL_MS = 500L
         private const val STREAM_SYSTEM_UI_INPUT_REAPPLY_MS = 250L
         private const val MIN_PIP_ASPECT_RATIO = 1f / 2.39f

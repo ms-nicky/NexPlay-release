@@ -1401,7 +1401,7 @@ class GfnAuthRepository(
             .filter { it.isNotBlank() && !it.equals("unknown", ignoreCase = true) }
             .distinctBy { it.lowercase(Locale.US) }
             .joinToString(" ")
-        return model.ifBlank { "OpenNOW Android" }
+        return model.ifBlank { "NexPlay Android" }
     }
 
     private fun buildAuthUrl(provider: LoginProvider, challenge: String, port: Int): String {
@@ -1457,7 +1457,7 @@ class GfnAuthRepository(
                         }
                         val code = authorizationCodeFromParams(params)
                         if (code != null) {
-                            writeCallbackResponse(callbackSocket, "Login complete. Return to OpenNOW.")
+                            writeCallbackResponse(callbackSocket, "Login complete. Return to NexPlay.")
                             return@withContext code
                         }
                         writeCallbackResponse(callbackSocket, "Waiting for NVIDIA to finish sign-in.")
@@ -1580,10 +1580,10 @@ class GfnAuthRepository(
 
     private fun writeCallbackResponse(socket: Socket, message: String) {
         val html = """
-            <!doctype html><html><head><meta charset="utf-8"><title>OpenNOW Login</title></head>
+            <!doctype html><html><head><meta charset="utf-8"><title>NexPlay Login</title></head>
             <body style="font-family:sans-serif;background:#07100b;color:#dfffea;display:grid;place-items:center;height:100vh">
             <main style="max-width:480px;padding:24px;border:1px solid #245138;border-radius:12px">
-            <h2>OpenNOW Login</h2><p>$message</p>
+            <h2>NexPlay Login</h2><p>$message</p>
             </main></body></html>
         """.trimIndent()
         val bytes = html.toByteArray()

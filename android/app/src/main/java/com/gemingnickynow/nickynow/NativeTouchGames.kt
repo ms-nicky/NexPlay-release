@@ -47,7 +47,7 @@ internal fun shouldUseNativeTouch(
 /**
  * Resolves native game touch for the active stream after the player has made a session-level
  * choice. A catalog touch capability is useful guidance, but it must not lock the player out of
- * OpenNOW's virtual controller.
+ * NexPlay's virtual controller.
  */
 internal fun shouldUseNativeTouchForStream(
     mode: NativeTouchMode,

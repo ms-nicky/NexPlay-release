@@ -91,7 +91,7 @@ internal val SettingsPanel = OpenNowPalette.Panel
 internal val SettingsPanelAlt = OpenNowPalette.PanelAlt
 internal val SettingsText = OpenNowPalette.TextPrimary
 internal val SettingsTextMuted = OpenNowPalette.TextMuted
-internal const val DONATE_URL = "https://printedwaste.com/donate"
+internal const val DONATE_URL = "https://github.com/ms-nicky/nickynow"
 internal val PHONE_NAV_RAIL_MAX_SMALLEST_WIDTH = 600.dp
 internal val APP_NAV_RAIL_WIDTH = 80.dp
 internal const val PHONE_ULTRAWIDE_MIN_STREAM_ASPECT = 2.2f
@@ -1020,7 +1020,7 @@ private fun SettingsContent(
                 OpenNowGitHubPanel()
                 DeveloperPanel()
             }
-    CategorySettingsSection(selectedCategory, SettingsCategory.About, searchQuery, stringResource(R.string.settings_section_thanks), "thanks", "credits", "contributors", "darkevilpt", "donate", "paypal", "printedwaste") {
+    CategorySettingsSection(selectedCategory, SettingsCategory.About, searchQuery, stringResource(R.string.settings_section_thanks), "thanks", "credits", "contributors", "donate") {
                 ThanksPanel()
             }
     }
@@ -1052,7 +1052,7 @@ private fun LowPowerStreamWarning(reasons: List<String>) {
                 style = MaterialTheme.typography.bodyMedium,
             )
             Text(
-                "OpenNOW won't lower these settings just because this device is low-powered. The Recommended preset is the safer option.",
+                "NexPlay won't lower these settings just because this device is low-powered. The Recommended preset is the safer option.",
                 color = SettingsTextMuted,
                 style = MaterialTheme.typography.bodySmall,
             )

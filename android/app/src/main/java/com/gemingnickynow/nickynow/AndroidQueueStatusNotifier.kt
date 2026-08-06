@@ -25,7 +25,7 @@ private const val QUEUE_SERVICE_ACTION_UPDATE = "com.gemingnickynow.nickynow.que
 private const val QUEUE_SERVICE_ACTION_STOP = "com.gemingnickynow.nickynow.queue.STOP"
 private const val QUEUE_SERVICE_EXTRA_TITLE = "title"
 private const val QUEUE_SERVICE_EXTRA_TEXT = "text"
-private const val QUEUE_SERVICE_TAG = "OpenNOWQueueService"
+private const val QUEUE_SERVICE_TAG = "NexPlayQueueService"
 private val QUEUE_NOTIFICATION_SMALL_ICON = R.drawable.ic_tab_stream
 
 /** Returns true if the queue wait is over and the game is now launching/loading. */
@@ -64,7 +64,7 @@ class AndroidQueueStatusNotifier(context: Context) {
         // Send a one-shot high-priority heads-up alert when queue finishes and game is loading.
         if (!queueReadyAlertSent && isQueueComplete(state)) {
             queueReadyAlertSent = true
-            val readyTitle = state.streamGame?.title ?: "OpenNOW"
+            val readyTitle = state.streamGame?.title ?: "NexPlay"
             AndroidServiceCommandDispatcher.dispatch("queue-ready-alert") {
                 if (canPostNotifications()) {
                     ensureQueueAlertChannel(appContext)
@@ -76,7 +76,7 @@ class AndroidQueueStatusNotifier(context: Context) {
             }
         }
 
-        val title = state.streamGame?.title ?: "OpenNOW"
+        val title = state.streamGame?.title ?: "NexPlay"
         val text = queueLaunchStatusText(state)
         if (serviceStartRequested && activeTitle == title && activeText == text) return
         serviceStartRequested = true
@@ -150,17 +150,17 @@ class AndroidQueueStatusService : Service() {
         runCatching {
             when (intent?.action) {
                 QUEUE_SERVICE_ACTION_STOP -> {
-                    startQueueForeground("OpenNOW", "Queue status")
+                    startQueueForeground("NexPlay", "Queue status")
                     ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
                     stopSelf(startId)
                 }
                 QUEUE_SERVICE_ACTION_UPDATE, null -> {
-                    val title = intent?.getStringExtra(QUEUE_SERVICE_EXTRA_TITLE) ?: "OpenNOW"
+                    val title = intent?.getStringExtra(QUEUE_SERVICE_EXTRA_TITLE) ?: "NexPlay"
                     val text = intent?.getStringExtra(QUEUE_SERVICE_EXTRA_TEXT) ?: "Queue status"
                     startQueueForeground(title, text)
                 }
                 else -> {
-                    startQueueForeground("OpenNOW", "Queue status")
+                    startQueueForeground("NexPlay", "Queue status")
                     ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
                     stopSelf(startId)
                 }
@@ -199,7 +199,7 @@ private fun ensureQueueNotificationChannel(context: Context) {
         "Queue status",
         NotificationManager.IMPORTANCE_LOW,
     ).apply {
-        description = "Shows OpenNOW queue and session startup progress."
+        description = "Shows NexPlay queue and session startup progress."
         lockscreenVisibility = Notification.VISIBILITY_PUBLIC
         setShowBadge(false)
     }
@@ -229,7 +229,7 @@ private fun buildQueueNotification(context: Context, title: String, text: String
         .setSmallIcon(QUEUE_NOTIFICATION_SMALL_ICON)
         .setContentTitle(title)
         .setContentText(text)
-        .setSubText("OpenNOW")
+        .setSubText("NexPlay")
         .setCategory(Notification.CATEGORY_PROGRESS)
         .setProgress(0, 0, true)
         .setVisibility(Notification.VISIBILITY_PUBLIC)
@@ -279,7 +279,7 @@ private fun buildQueueReadyNotification(context: Context, gameTitle: String): No
         .setSmallIcon(QUEUE_NOTIFICATION_SMALL_ICON)
         .setContentTitle("$gameTitle is ready to play!")
         .setContentText("Your GFN queue is done. Tap to return to the app.")
-        .setSubText("OpenNOW")
+        .setSubText("NexPlay")
         .setCategory(Notification.CATEGORY_ALARM)
         .setVisibility(Notification.VISIBILITY_PUBLIC)
         .setOngoing(false)

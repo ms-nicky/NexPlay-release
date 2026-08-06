@@ -5,7 +5,7 @@ import java.util.concurrent.Executors
 
 /** Keeps service and notification Binder calls ordered and off the UI thread. */
 internal object AndroidServiceCommandDispatcher {
-    private const val TAG = "OpenNOWServiceCommands"
+    private const val TAG = "NexPlayServiceCommands"
     private val executor = Executors.newSingleThreadExecutor { command ->
         Thread(command, "opennow-service-commands").apply {
             priority = Thread.NORM_PRIORITY

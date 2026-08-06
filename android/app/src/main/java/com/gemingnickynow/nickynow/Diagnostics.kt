@@ -19,7 +19,7 @@ import java.util.Locale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-internal const val OPENNOW_DEBUG_LOG_TAG = "OpenNOWDebug"
+internal const val OPENNOW_DEBUG_LOG_TAG = "NexPlayDebug"
 
 private const val DIAGNOSTIC_PAYLOAD_BODY_LIMIT = 20_000
 private const val HTTP_DIAGNOSTIC_LIMIT = 80

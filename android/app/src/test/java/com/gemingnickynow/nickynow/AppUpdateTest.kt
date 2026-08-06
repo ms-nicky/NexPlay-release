@@ -16,7 +16,7 @@ class AppUpdateTest {
                 {
                   "versionCode": 7,
                   "versionName": "0.5.2",
-                  "apkUrl": "OpenNOW-0.5.2.apk",
+                  "apkUrl": "NexPlay-0.5.2.apk",
                   "sha256": "SHA256: AA BB CC",
                   "releaseNotes": "Native Android update"
                 }
@@ -24,7 +24,7 @@ class AppUpdateTest {
         )
 
         assertEquals("https://updates.example.com/android/opennow.json", candidate?.sourceUrl)
-        assertEquals("https://updates.example.com/android/OpenNOW-0.5.2.apk", candidate?.apkUrl)
+        assertEquals("https://updates.example.com/android/NexPlay-0.5.2.apk", candidate?.apkUrl)
         assertEquals("0.5.2", candidate?.versionName)
         assertEquals(7L, candidate?.versionCode)
         assertEquals("aabbcc", candidate?.sha256)
@@ -40,14 +40,14 @@ class AppUpdateTest {
                   "android": {
                     "version_code": 8,
                     "version_name": "0.5.3",
-                    "download_url": "https://cdn.example.com/OpenNOW-0.5.3.apk",
+                    "download_url": "https://cdn.example.com/NexPlay-0.5.3.apk",
                     "release_notes": "Fix haptics\\nImprove updater\\r\\nClean up stream UI"
                   }
                 }
             """.trimIndent(),
         )
 
-        assertEquals("https://cdn.example.com/OpenNOW-0.5.3.apk", candidate?.apkUrl)
+        assertEquals("https://cdn.example.com/NexPlay-0.5.3.apk", candidate?.apkUrl)
         assertEquals("0.5.3", candidate?.versionName)
         assertEquals(8L, candidate?.versionCode)
         assertEquals("Fix haptics\nImprove updater\nClean up stream UI", candidate?.releaseNotes)
@@ -56,19 +56,19 @@ class AppUpdateTest {
     @Test
     fun parsesGithubReleaseApkAsset() {
         val candidate = parseAndroidUpdateCandidate(
-            "https://api.github.com/repos/OpenCloudGaming/OpenNOW/releases/latest",
+            "https://api.github.com/repos/OpenCloudGaming/NexPlay/releases/latest",
             """
                 {
                   "tag_name": "v0.5.4",
                   "body": "Release notes",
                   "assets": [
                     {
-                      "name": "OpenNOW-desktop.zip",
+                      "name": "NexPlay-desktop.zip",
                       "browser_download_url": "https://github.com/example/desktop.zip"
                     },
                     {
-                      "name": "OpenNOW-android.apk",
-                      "browser_download_url": "https://github.com/example/OpenNOW-android.apk",
+                      "name": "NexPlay-android.apk",
+                      "browser_download_url": "https://github.com/example/NexPlay-android.apk",
                       "digest": "sha256:012345"
                     }
                   ]
@@ -76,7 +76,7 @@ class AppUpdateTest {
             """.trimIndent(),
         )
 
-        assertEquals("https://github.com/example/OpenNOW-android.apk", candidate?.apkUrl)
+        assertEquals("https://github.com/example/NexPlay-android.apk", candidate?.apkUrl)
         assertEquals("0.5.4", candidate?.versionName)
         assertEquals("012345", candidate?.sha256)
         assertEquals("Release notes", candidate?.releaseNotes)
@@ -90,7 +90,7 @@ class AppUpdateTest {
                 {
                   "id": "5b000fc7-4f4c-464d-862a-ce9409c61081",
                   "appSlug": "opennow",
-                  "appName": "OpenNOW",
+                  "appName": "NexPlay",
                   "platform": "android",
                   "channel": "stable",
                   "versionCode": 6,

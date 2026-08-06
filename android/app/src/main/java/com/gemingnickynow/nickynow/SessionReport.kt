@@ -386,7 +386,7 @@ private fun buildSessionDowngrades(
             SessionReportFinding(
                 title = "Safe video recovery",
                 detail = buildString {
-                    append("OpenNOW changed the live transport from ${profileSummary(initial)} to ${profileSummary(finalSettings)} to keep the session connected")
+                    append("NexPlay changed the live transport from ${profileSummary(initial)} to ${profileSummary(finalSettings)} to keep the session connected")
                     recoveryReason?.let { append(". Reason: ${it.trimEnd('.')}.") } ?: append(".")
                 },
                 kind = SessionReportFindingKind.Warning,

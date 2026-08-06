@@ -1,8 +1,8 @@
-# NickyNow
+# NexPlay
 
 Custom GeForce NOW client for Android, built on the open-source [OpenNOW](https://github.com/OpenCloudGaming/OpenNOW) native Android client.
 
-NickyNow is a community-built GeForce NOW client written natively in Kotlin and Jetpack Compose. It lets you browse the catalog, tune your stream, and launch cloud gaming sessions from your phone or Android TV.
+NexPlay is a community-built GeForce NOW client written natively in Kotlin and Jetpack Compose. It lets you browse the catalog, tune your stream, and launch cloud gaming sessions from your phone or Android TV.
 
 ## Features
 

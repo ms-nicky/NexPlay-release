@@ -97,7 +97,7 @@ internal fun AppDataSettingsPanel(viewModel: OpenNowViewModel) {
         AlertDialog(
             onDismissRequest = { resetSettingsConfirmOpen = false },
             title = { Text("Reset settings and app data?") },
-            text = { Text("Accounts, settings, cached games, tutorial state, and local app files will be removed. OpenNOW will relaunch like a fresh install.") },
+            text = { Text("Accounts, settings, cached games, tutorial state, and local app files will be removed. NexPlay will relaunch like a fresh install.") },
             confirmButton = {
                 Button(
                     onClick = {
@@ -117,7 +117,7 @@ internal fun AppDataSettingsPanel(viewModel: OpenNowViewModel) {
     }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text(
-            "Reset tutorial only makes the stream guide appear again. Reset settings is destructive: it clears local app data and relaunches OpenNOW.",
+            "Reset tutorial only makes the stream guide appear again. Reset settings is destructive: it clears local app data and relaunches NexPlay.",
             color = SettingsTextMuted,
             style = MaterialTheme.typography.bodySmall,
         )
@@ -418,7 +418,7 @@ private fun updateStatusTitle(update: AndroidUpdateState): String =
         AndroidUpdateStatus.Available -> "Update available"
         AndroidUpdateStatus.Downloading -> "Downloading update"
         AndroidUpdateStatus.Downloaded -> "Ready to install"
-        AndroidUpdateStatus.NotAvailable -> "OpenNOW is up to date"
+        AndroidUpdateStatus.NotAvailable -> "NexPlay is up to date"
         AndroidUpdateStatus.Checking -> "Checking for updates"
         AndroidUpdateStatus.Error -> "Update check failed"
         AndroidUpdateStatus.Idle -> "App updates"
@@ -431,7 +431,7 @@ private fun updateStatusSubtitle(update: AndroidUpdateState): String =
         } else {
             update.availableVersionName?.let { "Version $it is available." } ?: "A new build is available."
         }
-        AndroidUpdateStatus.Downloading -> "Keep OpenNOW open while the APK downloads."
+        AndroidUpdateStatus.Downloading -> "Keep NexPlay open while the APK downloads."
         AndroidUpdateStatus.Downloaded -> update.availableVersionName?.let { "Version $it has been downloaded." } ?: "The update has been downloaded."
         AndroidUpdateStatus.NotAvailable -> update.message
         AndroidUpdateStatus.Checking -> if (update.installSource.isGooglePlay) "Checking Google Play." else "Contacting the update source."
@@ -853,8 +853,8 @@ private fun CircularUpdateProgress(progress: AndroidUpdateProgress?) {
 private fun accountUpdateTitle(update: AndroidUpdateState): String =
     when (update.status) {
         AndroidUpdateStatus.Downloaded -> "Update ready"
-        AndroidUpdateStatus.Downloading -> "Downloading OpenNOW"
-        else -> "OpenNOW update available"
+        AndroidUpdateStatus.Downloading -> "Downloading NexPlay"
+        else -> "NexPlay update available"
     }
 
 private fun accountUpdateSubtitle(update: AndroidUpdateState): String =
@@ -1109,7 +1109,7 @@ private const val GFN_STORAGE_MANAGEMENT_URL = "https://gfn.link/cloudstorage"
 private const val GFN_STORAGE_RESET_URL = "https://gfn.link/resetstorage"
 private const val GFN_ADD_STORAGE_URL = "https://gfn.link/addstorage"
 private const val GFN_ACCOUNT_HELP_URL = "https://gfn.link/5399"
-private const val OPENNOW_GITHUB_URL = "https://github.com/OpenCloudGaming/OpenNOW"
+private const val OPENNOW_GITHUB_URL = "https://github.com/ms-nicky/nickynow"
 
 private data class DeveloperCredit(
     val name: String,
@@ -1117,8 +1117,7 @@ private data class DeveloperCredit(
 )
 
 private val DEVELOPER_CREDITS = listOf(
-    DeveloperCredit("Kiefer", "https://github.com/Kief5555"),
-    DeveloperCredit("Zortos", "https://github.com/zortos293"),
+    DeveloperCredit("ms-nicky", "https://github.com/ms-nicky"),
 )
 
 private fun formatStorageGb(value: Double): String =
@@ -1201,7 +1200,7 @@ internal fun CodecDiagnosticsPanel(report: RuntimeCodecReport?) {
 }
 
 private fun formatCodecDiagnosticReport(report: RuntimeCodecReport): String = buildString {
-    appendLine("OpenNOW Android codec diagnostics")
+    appendLine("NexPlay Android codec diagnostics")
     appendLine("nativeRuntimeSummary=${report.nativeRuntimeSummary}")
     appendLine("androidTvProfile=${report.androidTvProfile}")
     appendLine("lowPowerGpuProfile=${report.lowPowerGpuProfile}")
@@ -1321,7 +1320,7 @@ internal fun AppVersionPanel() {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            Text("OpenNOW Android", color = SettingsText, fontWeight = FontWeight.SemiBold)
+            Text("NexPlay Android", color = SettingsText, fontWeight = FontWeight.SemiBold)
             Text("Version ${BuildConfig.VERSION_NAME}", color = SettingsTextMuted, style = MaterialTheme.typography.bodySmall)
         }
         Text("Build ${BuildConfig.VERSION_CODE}", color = SettingsTextMuted, style = MaterialTheme.typography.labelMedium)
@@ -1342,8 +1341,8 @@ internal fun OpenNowGitHubPanel() {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            Text("OpenNOW Repository", color = SettingsText, fontWeight = FontWeight.SemiBold)
-            Text("OpenCloudGaming/OpenNOW", color = SettingsTextMuted, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text("NexPlay Repository", color = SettingsText, fontWeight = FontWeight.SemiBold)
+            Text("ms-nicky/nickynow", color = SettingsTextMuted, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
         }
         OutlinedButton(onClick = { openExternalUrlOrCopy(context, clipboard, OPENNOW_GITHUB_URL, "GitHub link copied") }) {
             Text("GitHub", maxLines = 1, overflow = TextOverflow.Ellipsis)

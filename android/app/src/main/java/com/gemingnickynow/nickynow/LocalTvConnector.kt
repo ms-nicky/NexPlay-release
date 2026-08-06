@@ -196,7 +196,7 @@ internal class LocalTvConnector {
                 if (response.first != STATUS_OK) error(response.second.ifBlank { "TV rejected pairing" })
                 phoneTarget = PhoneTarget(host, port, phoneKeys, shared)
                 _state.value = LocalTvConnectorState(
-                    connectedTvName = response.second.ifBlank { "OpenNOW TV" },
+                    connectedTvName = response.second.ifBlank { "NexPlay TV" },
                     requestTrustedAccess = requestTrustedAccess,
                 )
             }.onFailure { error ->
@@ -557,7 +557,7 @@ internal class LocalTvConnector {
             .distinct()
             .joinToString(" ")
             .take(80)
-            .ifBlank { "OpenNOW Android" }
+            .ifBlank { "NexPlay Android" }
 
     private fun base64Url(bytes: ByteArray): String =
         Base64.encodeToString(bytes, Base64.URL_SAFE or Base64.NO_WRAP or Base64.NO_PADDING)

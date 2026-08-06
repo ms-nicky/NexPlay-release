@@ -49,15 +49,15 @@ internal fun androidBugReportBlockMessage(
     return when {
         update.status == AndroidUpdateStatus.Available ||
             versionCheck.status == AndroidBugReportVersionCheckStatus.UpdateRequired ->
-            "Update OpenNOW from Google Play before sending a bug report. This keeps reports tied to the latest supported build."
+            "Update NexPlay from Google Play before sending a bug report. This keeps reports tied to the latest supported build."
         versionCheck.status == AndroidBugReportVersionCheckStatus.CheckFailed ->
-            versionCheck.message ?: "OpenNOW could not verify the latest Google Play version. Retry the check before reporting."
+            versionCheck.message ?: "NexPlay could not verify the latest Google Play version. Retry the check before reporting."
         versionCheck.status == AndroidBugReportVersionCheckStatus.Checking ->
-            "Checking Google Play for a newer OpenNOW build before bug reporting is enabled."
+            "Checking Google Play for a newer NexPlay build before bug reporting is enabled."
         versionCheck.status == AndroidBugReportVersionCheckStatus.Current &&
             update.status == AndroidUpdateStatus.NotAvailable -> null
         versionCheck.status == AndroidBugReportVersionCheckStatus.Current ->
-            "OpenNOW could not confirm that this is still the latest Google Play build. Retry the check before reporting."
+            "NexPlay could not confirm that this is still the latest Google Play build. Retry the check before reporting."
         else -> "Check Google Play for updates before sending a bug report."
     }
 }

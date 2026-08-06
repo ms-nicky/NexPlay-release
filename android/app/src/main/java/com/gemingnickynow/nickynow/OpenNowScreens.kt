@@ -1201,7 +1201,7 @@ private fun DiagnosticShareDialog(
             title = { Text("Create temporary diagnostics paste?") },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                    Text("OpenNOW will remove tokens, account identifiers, email addresses, session IDs, and network addresses before uploading.")
+                    Text("NexPlay will remove tokens, account identifiers, email addresses, session IDs, and network addresses before uploading.")
                     Text("The randomized link is unlisted but not encrypted, and the paste service deletes uploads within 24 hours.", color = TextMuted)
                     share.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
                 }
@@ -1257,7 +1257,7 @@ private fun AndroidUpdatePromptDialog(
         ?: "A new build"
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (update.status == AndroidUpdateStatus.Downloaded) "Update ready" else "OpenNOW update available") },
+        title = { Text(if (update.status == AndroidUpdateStatus.Downloaded) "Update ready" else "NexPlay update available") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Text(
@@ -1382,7 +1382,7 @@ private fun LoginScreen(state: OpenNowUiState, viewModel: OpenNowViewModel) {
                 )
                 Spacer(Modifier.height(if (compactForPhonePairing) 8.dp else 20.dp))
                 Text(
-                    "OpenNOW",
+                    "NexPlay",
                     color = TextPrimary,
                     style = if (compactForPhonePairing) MaterialTheme.typography.headlineLarge else MaterialTheme.typography.displaySmall,
                     fontWeight = FontWeight.Bold,
@@ -1497,7 +1497,7 @@ private fun LoginScreen(state: OpenNowUiState, viewModel: OpenNowViewModel) {
             title = { Text("Sign in with token") },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Text("Paste an NVIDIA access token or token-response JSON. OpenNOW verifies the access token before saving the account.")
+                    Text("Paste an NVIDIA access token or token-response JSON. NexPlay verifies the access token before saving the account.")
                     OutlinedTextField(
                         value = tokenInput,
                         onValueChange = { tokenInput = it },
@@ -1565,7 +1565,7 @@ private fun TvPhoneSignInConnector(
             enabled = !connector.busy,
             modifier = modifier,
         ) {
-            Text(if (connector.busy) "Starting phone pairing…" else "Sign in from OpenNOW on phone")
+            Text(if (connector.busy) "Starting phone pairing…" else "Sign in from NexPlay on phone")
         }
     } else {
         val qrCode = remember(connector.pairUri) { connector.pairUri?.let(QrCode::encodeText) }
@@ -2631,7 +2631,7 @@ private fun TopStatusBar(
     showLogo: Boolean = true,
     content: @Composable RowScope.() -> Unit = {},
 ) {
-    val displayName = state.authSession?.user?.displayName ?: "OpenNOW"
+    val displayName = state.authSession?.user?.displayName ?: "NexPlay"
     val tier = state.subscriptionInfo?.membershipTier ?: state.authSession?.user?.membershipTier ?: "GFN"
     val barScrim = if (showLogo) ChromeScrim else Color.Transparent
     Surface(
@@ -8203,7 +8203,7 @@ private fun NoActiveStreamScreen(
         Text("No active stream", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(8.dp))
         Text(
-            "OpenNOW does not have a local stream attached right now.",
+            "NexPlay does not have a local stream attached right now.",
             color = TextMuted,
             textAlign = TextAlign.Center,
         )
@@ -9155,7 +9155,7 @@ private fun BugReportDataDisclosure(
                     verticalArrangement = Arrangement.spacedBy(7.dp),
                 ) {
                     Text(
-                        "PrintedWaste and OpenNOW maintainers may view the report text, app version/build, device model, Android version, provider and membership category, current game, stream status/settings, and a redacted diagnostic log.",
+                        "PrintedWaste and NexPlay maintainers may view the report text, app version/build, device model, Android version, provider and membership category, current game, stream status/settings, and a redacted diagnostic log.",
                         color = TextMuted,
                         style = MaterialTheme.typography.bodySmall,
                     )
@@ -9439,7 +9439,7 @@ private fun BugReportVersionGateCard(
             )
             Text(
                 androidBugReportBlockMessage(update, versionCheck)
-                    ?: "OpenNOW must verify the installed Play Store build before sending a report.",
+                    ?: "NexPlay must verify the installed Play Store build before sending a report.",
                 color = TextMuted,
                 style = MaterialTheme.typography.bodySmall,
             )
@@ -10745,7 +10745,7 @@ private fun ActiveStreamModePill(
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Text(
-                        "This sends the profile-change summary and likely cause to PrintedWaste and OpenNOW maintainers so they can investigate it.",
+                        "This sends the profile-change summary and likely cause to PrintedWaste and NexPlay maintainers so they can investigate it.",
                     )
                     BugReportDataDisclosure(
                         includeTypedTextWarning = false,
@@ -10861,23 +10861,23 @@ internal fun activeStreamModeCauseAssessment(
     val lowerReason = recordedReason?.lowercase(Locale.US).orEmpty()
     val summary = when {
         "did not negotiate" in lowerReason ->
-            "WebRTC could not negotiate the requested $requestedCodec codec for this connection, so OpenNOW retried the local video transport with $actualCodec."
+            "WebRTC could not negotiate the requested $requestedCodec codec for this connection, so NexPlay retried the local video transport with $actualCodec."
         "video offer" in lowerReason ->
-            "The session did not provide a video offer before the startup timeout, so OpenNOW retried the local video transport with $actualCodec."
+            "The session did not provide a video offer before the startup timeout, so NexPlay retried the local video transport with $actualCodec."
         "no frame rendered" in lowerReason || "first video frame" in lowerReason ->
-            "Video data arrived, but the device did not render a frame before the recovery timeout. OpenNOW applied $saferProfileSummary to restore video."
+            "Video data arrived, but the device did not render a frame before the recovery timeout. NexPlay applied $saferProfileSummary to restore video."
         "decoder stalled" in lowerReason || "media stall" in lowerReason ->
-            "The device decoder stopped producing video frames during startup. OpenNOW applied $saferProfileSummary while keeping the same cloud session."
+            "The device decoder stopped producing video frames during startup. NexPlay applied $saferProfileSummary while keeping the same cloud session."
         "decoded at" in lowerReason ->
-            "The decoder produced an unexpected output size for the requested stream mode, so OpenNOW tried the $actualCodec transport profile. Recorded detail: $recordedReason"
+            "The decoder produced an unexpected output size for the requested stream mode, so NexPlay tried the $actualCodec transport profile. Recorded detail: $recordedReason"
         status.resolutionSource == StreamResolutionChangeSource.ServerNegotiatedFallback ->
             "The cloud server selected ${status.displayedResolution} instead of the requested ${status.requestedResolution}. This was a server/session negotiation decision, not a change to your saved setting."
         status.resolutionSource == StreamResolutionChangeSource.ProviderOrGameModeChange ->
             "The decoded stream changed to ${status.displayedResolution} after startup without matching the server's initial mode. This points to a game or cloud-provider output-mode change."
         recordedReason != null ->
-            "OpenNOW recorded this recovery reason: $recordedReason"
+            "NexPlay recorded this recovery reason: $recordedReason"
         status.safeVideoRecoveryActive ->
-            "The original video transport stopped progressing, so OpenNOW adjusted the local profile to keep video playing without ending the cloud session."
+            "The original video transport stopped progressing, so NexPlay adjusted the local profile to keep video playing without ending the cloud session."
         else ->
             "The live stream profile no longer matched the requested profile."
     }
@@ -10899,7 +10899,7 @@ internal fun activeStreamModeDeveloperReport(
     return ActiveStreamModeDeveloperReport(
         title = "Automatic stream change: ${primary.label} ${primary.requestedValue} to ${primary.actualValue}",
         description = buildString {
-            appendLine("OpenNOW detected an automatic stream profile change while the session was active.")
+            appendLine("NexPlay detected an automatic stream profile change while the session was active.")
             appendLine()
             appendLine("Cause assessment:")
             appendLine(cause.summary)
@@ -11245,7 +11245,7 @@ internal fun initialStreamConnectionStatus(nativeState: String): InitialStreamCo
             normalized.equals("ICE FAILED", ignoreCase = true) -> InitialStreamConnectionStatus(
             phase = "Retrying",
             title = "Connection interrupted",
-            detail = "OpenNOW is retrying the initial stream connection.",
+            detail = "NexPlay is retrying the initial stream connection.",
         )
         normalized.startsWith("Recovering video", ignoreCase = true) -> InitialStreamConnectionStatus(
             phase = "Recovering video",
@@ -11260,7 +11260,7 @@ internal fun initialStreamConnectionStatus(nativeState: String): InitialStreamCo
         normalized.startsWith("Reconnecting", ignoreCase = true) -> InitialStreamConnectionStatus(
             phase = "Retrying connection",
             title = "Connecting again",
-            detail = "The initial connection did not finish, so OpenNOW is retrying it.",
+            detail = "The initial connection did not finish, so NexPlay is retrying it.",
         )
         normalized.startsWith("Recovering cloud session", ignoreCase = true) -> InitialStreamConnectionStatus(
             phase = "Checking session",
@@ -11275,7 +11275,7 @@ internal fun initialStreamConnectionStatus(nativeState: String): InitialStreamCo
         else -> InitialStreamConnectionStatus(
             phase = "Starting stream",
             title = "Preparing your game",
-            detail = "OpenNOW is waiting for the live video to begin.",
+            detail = "NexPlay is waiting for the live video to begin.",
         )
     }
 }
@@ -11320,7 +11320,7 @@ private fun InitialStreamConnectionOverlay(
                     verticalArrangement = Arrangement.spacedBy(5.dp),
                 ) {
                     Text(
-                        gameTitle?.takeIf { it.isNotBlank() } ?: "OpenNOW stream",
+                        gameTitle?.takeIf { it.isNotBlank() } ?: "NexPlay stream",
                         color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.labelLarge,
                         fontWeight = FontWeight.Bold,
@@ -14599,7 +14599,7 @@ private fun LoadingShimmer(modifier: Modifier = Modifier) {
 private fun OpenNowMark(size: androidx.compose.ui.unit.Dp, modifier: Modifier = Modifier) {
     Image(
         painter = painterResource(R.drawable.opennow_logo_mark),
-        contentDescription = "OpenNOW",
+        contentDescription = "NexPlay",
         modifier = modifier
             .width(size * 1.85f)
             .height(size),
@@ -14611,7 +14611,7 @@ private fun OpenNowMark(size: androidx.compose.ui.unit.Dp, modifier: Modifier = 
 private fun OpenNowAppIcon(size: androidx.compose.ui.unit.Dp) {
     Image(
         painter = painterResource(R.drawable.opennow_icon),
-        contentDescription = "OpenNOW",
+        contentDescription = "NexPlay",
         modifier = Modifier.size(size),
         contentScale = ContentScale.Fit,
     )
