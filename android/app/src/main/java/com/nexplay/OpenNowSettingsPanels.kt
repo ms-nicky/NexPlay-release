@@ -1118,8 +1118,6 @@ private data class DeveloperCredit(
 
 private val DEVELOPER_CREDITS = listOf(
     DeveloperCredit("ms-nicky", "https://github.com/ms-nicky"),
-    DeveloperCredit("Kiefer", "https://github.com/Kief5555"),
-    DeveloperCredit("Zortos", "https://github.com/zortos293"),
 )
 
 private fun formatStorageGb(value: Double): String =

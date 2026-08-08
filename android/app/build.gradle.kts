@@ -71,11 +71,10 @@ android {
 
         ndk {
             val abi32Only = providers.gradleProperty("abi32Only").orNull.toBoolean()
-            val abi32And64Only = providers.gradleProperty("abi32And64Only").orNull.toBoolean()
+            val includeX86_64 = providers.gradleProperty("includeX86_64").orNull.toBoolean()
             abiFilters += when {
                 abi32Only -> listOf("armeabi-v7a")
-                abi32And64Only -> listOf("armeabi-v7a", "arm64-v8a")
-                else -> listOf("arm64-v8a", "armeabi-v7a", "x86_64")
+                else -> listOf("arm64-v8a", "armeabi-v7a") + if (includeX86_64) listOf("x86_64") else emptyList()
             }
         }
 

@@ -14979,10 +14979,20 @@ internal fun shimmerBandStartX(progress: Float, containerWidth: Float, bandWidth
 
 @Composable
 private fun OpenNowMark(size: androidx.compose.ui.unit.Dp, modifier: Modifier = Modifier) {
+    val alpha = remember { Animatable(0f) }
+    LaunchedEffect(Unit) {
+        alpha.animateTo(1f, animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing))
+    }
     Image(
         painter = painterResource(R.drawable.nexplay_logo_mark),
         contentDescription = "NexPlay",
         modifier = modifier
+            .graphicsLayer {
+                this.alpha = alpha.value
+                val reveal = 1f - alpha.value
+                scaleX = 1f + reveal * 0.04f
+                scaleY = 1f + reveal * 0.04f
+            }
             .width(size * 1.85f)
             .height(size),
         contentScale = ContentScale.Fit,
@@ -14991,10 +15001,21 @@ private fun OpenNowMark(size: androidx.compose.ui.unit.Dp, modifier: Modifier = 
 
 @Composable
 private fun OpenNowAppIcon(size: androidx.compose.ui.unit.Dp) {
+    val alpha = remember { Animatable(0f) }
+    LaunchedEffect(Unit) {
+        alpha.animateTo(1f, animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing))
+    }
     Image(
         painter = painterResource(R.drawable.nexplay_icon),
         contentDescription = "NexPlay",
-        modifier = Modifier.size(size),
+        modifier = Modifier
+            .graphicsLayer {
+                this.alpha = alpha.value
+                val reveal = 1f - alpha.value
+                scaleX = 1f + reveal * 0.04f
+                scaleY = 1f + reveal * 0.04f
+            }
+            .size(size),
         contentScale = ContentScale.Fit,
     )
 }
