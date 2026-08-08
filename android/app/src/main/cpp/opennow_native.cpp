@@ -5,7 +5,7 @@
 #include <string>
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_gemingnickynow_nickynow_NativeCodecProbe_nativeRuntimeSummary(JNIEnv *env, jobject) {
+Java_com_nexplay_NativeCodecProbe_nativeRuntimeSummary(JNIEnv *env, jobject) {
     std::ostringstream out;
     out << "{";
     out << "\"nativeLibrary\":\"opennow_native\",";
@@ -18,7 +18,7 @@ Java_com_gemingnickynow_nickynow_NativeCodecProbe_nativeRuntimeSummary(JNIEnv *e
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_gemingnickynow_nickynow_NativeCodecProbe_nativeDecoderAvailable(JNIEnv *env, jobject, jstring mimeType) {
+Java_com_nexplay_NativeCodecProbe_nativeDecoderAvailable(JNIEnv *env, jobject, jstring mimeType) {
     if (mimeType == nullptr) {
         return JNI_FALSE;
     }

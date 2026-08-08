@@ -54,15 +54,15 @@ val buildingPlayReleaseBundle = gradle.startParameter.taskNames.any { taskName -
 }
 
 android {
-    namespace = "com.gemingnickynow.nickynow"
+    namespace = "com.nexplay"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.gemingnickynow.nickynow"
+        applicationId = "com.nexplay"
         minSdk = 23
         targetSdk = 36
-        versionCode = 67
-        versionName = "1.1.2"
+        versionCode = 71
+        versionName = "1.1.5"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "POSTHOG_PROJECT_TOKEN", buildConfigString(postHogProjectToken))

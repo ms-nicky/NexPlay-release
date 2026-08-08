@@ -54,6 +54,10 @@ opennow-stable/package-lock.json
 AGENTS.md
 release-notes.md
 
+# Signing (never commit!)
+android/keystore.properties
+android/nexplay-release.jks
+
 # Nix
 result
 .deriveddata/
