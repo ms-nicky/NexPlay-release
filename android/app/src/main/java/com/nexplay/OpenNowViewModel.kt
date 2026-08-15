@@ -1,7 +1,9 @@
 package com.nexplay
 
 import android.app.Application
+import android.content.Context
 import android.content.Intent
+import android.media.projection.MediaProjectionManager
 import android.net.Uri
 import android.os.Build
 import android.os.SystemClock
@@ -10,6 +12,7 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.compose.runtime.Immutable
+import androidx.core.content.ContextCompat
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -170,6 +173,7 @@ data class OpenNowUiState(
     val remoteStreamMenuRequestToken: Int = 0,
     val remoteStatsToggleRequestToken: Int = 0,
     val sessionReport: SessionReport? = null,
+    val youtubeLive: YouTubeLiveBroadcastState = YouTubeLiveBroadcastState(),
 )
 
 internal fun OpenNowUiState.isAndroidUpdateCheckBlockedByStream(): Boolean =
@@ -325,6 +329,11 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
         viewModelScope.launch {
             appUpdater.state.collect { next ->
                 _state.update { it.copy(androidUpdate = next) }
+            }
+        }
+        viewModelScope.launch {
+            YouTubeLiveBroadcastService.state.collect { next ->
+                _state.update { it.copy(youtubeLive = next) }
             }
         }
         viewModelScope.launch {
@@ -1556,6 +1565,83 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
             )
         }
     }
+
+    fun startYouTubeLive(resultCode: Int, data: Intent) {
+        val app = getApplication<Application>()
+        if (state.value.youtubeLive.active) return
+        val settings = settingsStore.settings.value
+        if (settings.youtubeLiveStreamKey.isBlank()) {
+            Toast.makeText(app, app.getString(R.string.youtube_live_error_missing_key), Toast.LENGTH_LONG).show()
+            return
+        }
+        // Android 14: getMediaProjection() must be called exactly once, while the app is in the
+        // foreground, before starting the mediaProjection-typed foreground service. The service
+        // reuses this same instance via pendingProjection and never calls getMediaProjection again.
+        val projectionManager = app.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+        val projection = projectionManager.getMediaProjection(resultCode, data)
+        if (projection == null) {
+            _state.update {
+                it.copy(
+                    youtubeLive = it.youtubeLive.copy(
+                        status = "failed",
+                        message = app.getString(R.string.youtube_live_error_missing_permission),
+                    ),
+                )
+            }
+            return
+        }
+        YouTubeLiveBroadcastService.pendingProjection = projection
+        val (width, height, rotation) = youtubeLiveCaptureParams(app)
+        val fps = 30
+        val bitrate = youtubeLiveBitrate(width, height)
+        ContextCompat.startForegroundService(
+            app,
+            Intent(app, YouTubeLiveBroadcastService::class.java).apply {
+                action = YouTubeLiveBroadcastService.ACTION_START
+                putExtra(YouTubeLiveBroadcastService.EXTRA_RTMP_URL, buildYouTubeRtmpUrl(settings.youtubeLiveRtmpUrl, settings.youtubeLiveStreamKey))
+                putExtra(YouTubeLiveBroadcastService.EXTRA_WIDTH, width)
+                putExtra(YouTubeLiveBroadcastService.EXTRA_HEIGHT, height)
+                putExtra(YouTubeLiveBroadcastService.EXTRA_FPS, fps)
+                putExtra(YouTubeLiveBroadcastService.EXTRA_BITRATE, bitrate)
+                putExtra(YouTubeLiveBroadcastService.EXTRA_ROTATION, rotation)
+            },
+        )
+    }
+
+    fun stopYouTubeLive() {
+        val app = getApplication<Application>()
+        app.startService(
+            Intent(app, YouTubeLiveBroadcastService::class.java).apply {
+                action = YouTubeLiveBroadcastService.ACTION_STOP
+            },
+        )
+    }
+
+    private fun buildYouTubeRtmpUrl(baseUrl: String, streamKey: String): String {
+        val base = baseUrl.trim().trimEnd('/')
+        val key = streamKey.trim().trimStart('/')
+        return when {
+            base.isBlank() -> key
+            key.isBlank() -> base
+            else -> "$base/$key"
+        }
+    }
+
+    private fun youtubeLiveCaptureParams(app: Context): Triple<Int, Int, Int> {
+        val metrics = app.resources.displayMetrics
+        val portrait = metrics.heightPixels > metrics.widthPixels
+        val maxSide = maxOf(metrics.widthPixels, metrics.heightPixels)
+        val minSide = minOf(metrics.widthPixels, metrics.heightPixels)
+        val scale = if (maxSide > 1920) 1920f / maxSide else 1f
+        var width = (maxSide * scale).toInt()
+        var height = (minSide * scale).toInt()
+        if (width % 2 != 0) width -= 1
+        if (height % 2 != 0) height -= 1
+        return Triple(width, height, if (portrait) 90 else 0)
+    }
+
+    private fun youtubeLiveBitrate(width: Int, height: Int): Int =
+        if (maxOf(width, height) > 1280) 6_000_000 else 4_000_000
 
     fun applyStreamPreset(preset: StreamPreset) {
         val snapshot = state.value

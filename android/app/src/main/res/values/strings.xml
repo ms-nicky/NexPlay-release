@@ -334,4 +334,27 @@
     <string name="settings_native_streamer">Native streamer (Experimental)</string>
     <string name="settings_native_streamer_desc">Intercepts the hardware decoder to inject low-latency vendor properties. May be unstable.</string>
     <string name="settings_native_touch_high_performance_hint">Native touch Auto uses gamepad mode for high-resolution or high-FPS streams so the selected stream mode is preserved. Choose Every game to prioritize native touch instead.</string>
+
+    <!-- YouTube Live broadcast -->
+    <string name="settings_section_youtube_live">YouTube Live</string>
+    <string name="settings_youtube_live_desc">Rebroadcast your game stream to YouTube Live. Enter the RTMP URL and stream key from YouTube Studio, then press Go Live on the streaming screen.</string>
+    <string name="settings_youtube_live_rtmp_url">RTMP URL</string>
+    <string name="settings_youtube_live_stream_key">Stream key</string>
+    <string name="stream_go_live">Go Live</string>
+    <string name="youtube_live_live">LIVE</string>
+    <string name="youtube_live_connecting">Connecting…</string>
+    <string name="youtube_live_screen_capture_required">Screen capture permission is needed to go live on YouTube.</string>
+    <string name="youtube_live_error_missing_key">Enter your YouTube stream key in Settings to go live.</string>
+    <string name="youtube_live_error_missing_url">Missing RTMP URL in Settings.</string>
+    <string name="youtube_live_error_missing_permission">Screen capture permission wasn\'t granted.</string>
+    <string name="youtube_live_notification_channel">YouTube Live broadcast</string>
+    <string name="youtube_live_notification_title">Go Live</string>
+    <string name="youtube_live_notification_connecting">Connecting to YouTube…</string>
+    <string name="youtube_live_notification_live">Now live on YouTube</string>
+    <string name="youtube_live_notification_stop">Stop</string>
+    <string name="youtube_live_failed_connection">Failed to connect to the streaming server</string>
+    <string name="youtube_live_auth_error">The stream key was rejected by YouTube</string>
+    <string name="youtube_live_error_prepare">Failed to prepare encoders: %1$s</string>
+    <string name="youtube_live_error_unsupported">This device\'s encoders don\'t support the chosen stream settings.</string>
+    <string name="youtube_live_error_start">Failed to start the broadcast: %1$s</string>
 </resources>

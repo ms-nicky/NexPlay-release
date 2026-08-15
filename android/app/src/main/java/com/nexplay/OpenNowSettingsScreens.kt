@@ -723,6 +723,29 @@ private fun SettingsContent(
                     )
                 }
             }
+    CategorySettingsSection(selectedCategory, SettingsCategory.Stream, searchQuery, stringResource(R.string.settings_section_youtube_live), "youtube", "live", "rtmp", "broadcast", "stream key", "go live") {
+                Text(
+                    stringResource(R.string.settings_youtube_live_desc),
+                    color = SettingsTextMuted,
+                    style = MaterialTheme.typography.bodySmall,
+                )
+                OutlinedTextField(
+                    value = settings.youtubeLiveRtmpUrl,
+                    onValueChange = { value -> viewModel.updateSettings(settings.copy(youtubeLiveRtmpUrl = value)) },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    label = { Text(stringResource(R.string.settings_youtube_live_rtmp_url)) },
+                    placeholder = { Text("rtmp://a.rtmp.youtube.com/live2") },
+                )
+                OutlinedTextField(
+                    value = settings.youtubeLiveStreamKey,
+                    onValueChange = { value -> viewModel.updateSettings(settings.copy(youtubeLiveStreamKey = value)) },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    label = { Text(stringResource(R.string.settings_youtube_live_stream_key)) },
+                    placeholder = { Text("xxxx-xxxx-xxxx-xxxx") },
+                )
+            }
     CategorySettingsSection(selectedCategory, SettingsCategory.Input, searchQuery, stringResource(R.string.settings_section_audio_keyboard), "input", "microphone", "mic", "voice", "audio", "keyboard", "button", "shortcut", "layout", "language", "clipboard", "paste") {
                 SettingSwitch(
                     label = stringResource(R.string.settings_microphone),

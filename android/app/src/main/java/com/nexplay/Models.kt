@@ -369,6 +369,8 @@ data class AppSettings(
     val analyticsConsentAsked: Boolean = false,
     val allowEscapeToExitFullscreen: Boolean = false,
     val nativeLowLatencyDecoder: Boolean = false,
+    val youtubeLiveRtmpUrl: String = "rtmp://a.rtmp.youtube.com/live2",
+    val youtubeLiveStreamKey: String = "",
 )
 
 internal const val MIN_GAME_CARD_SCALE = 0.75f

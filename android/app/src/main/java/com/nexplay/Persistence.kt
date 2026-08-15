@@ -328,6 +328,8 @@ internal fun AppSettings.normalizedForAndroid(): AppSettings {
         tvLayoutProfileVersion = tvLayoutProfileVersion.coerceAtLeast(0),
         controllerUiSounds = controllerUiSounds,
         autoFullScreen = true,
+        youtubeLiveRtmpUrl = youtubeLiveRtmpUrl.trim().trimEnd('/'),
+        youtubeLiveStreamKey = youtubeLiveStreamKey.trim(),
     )
 }
 

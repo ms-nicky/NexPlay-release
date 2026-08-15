@@ -176,6 +176,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:5.4.0")
     implementation("com.google.android.play:app-update:2.1.0")
     implementation("io.github.webrtc-sdk:android:144.7559.09")
+    implementation("com.github.pedroSG94.RootEncoder:library:2.8.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
     implementation("com.posthog:posthog-android:3.51.2")

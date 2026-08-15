@@ -10,6 +10,7 @@ import android.hardware.input.InputManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
+import android.media.projection.MediaProjectionManager
 import android.os.Build
 import android.os.SystemClock
 import android.provider.Settings
@@ -6872,6 +6873,37 @@ private fun StreamScreen(
             ).show()
         }
     }
+    val screenCaptureLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.StartActivityForResult(),
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+            viewModel.startYouTubeLive(result.resultCode, result.data!!)
+        } else {
+            Toast.makeText(
+                context,
+                context.getString(R.string.youtube_live_screen_capture_required),
+                Toast.LENGTH_LONG,
+            ).show()
+        }
+    }
+    val startScreenCapture = {
+        if (state.settings.youtubeLiveStreamKey.isBlank()) {
+            Toast.makeText(
+                context,
+                context.getString(R.string.youtube_live_error_missing_key),
+                Toast.LENGTH_LONG,
+            ).show()
+        } else {
+            val projectionManager =
+                context.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+            screenCaptureLauncher.launch(projectionManager.createScreenCaptureIntent())
+        }
+    }
+    LaunchedEffect(state.youtubeLive.status, state.youtubeLive.message) {
+        if (state.youtubeLive.status == "failed" && state.youtubeLive.message.isNotBlank()) {
+            Toast.makeText(context, state.youtubeLive.message, Toast.LENGTH_LONG).show()
+        }
+    }
     val streamSettings = launchStreamSettings.copy(
         mouseSensitivity = state.settings.stream.mouseSensitivity,
         mouseAcceleration = state.settings.stream.mouseAcceleration,
@@ -7263,6 +7295,16 @@ private fun StreamScreen(
                     modifier = Modifier.align(statsAlignment),
                 )
             }
+            YouTubeLivePill(
+                broadcastState = state.youtubeLive,
+                onStart = startScreenCapture,
+                onStop = viewModel::stopYouTubeLive,
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(
+                        top = if (statsVisible && statsAlignment == Alignment.TopEnd) 48.dp else 8.dp,
+                    ),
+            )
             if (networkNotice != null || activeStreamMode != null) {
                 Column(
                     modifier = Modifier
@@ -10799,6 +10841,52 @@ private fun StreamStatsPill(
                     StreamStatusKeyboardButton(onClick = onKeyboardOpen)
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun YouTubeLivePill(
+    broadcastState: YouTubeLiveBroadcastState,
+    onStart: () -> Unit,
+    onStop: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val live = broadcastState.connected
+    val connecting = broadcastState.active && !live
+    val label = when {
+        live -> stringResource(R.string.youtube_live_live)
+        connecting -> stringResource(R.string.youtube_live_connecting)
+        else -> stringResource(R.string.stream_go_live)
+    }
+    Surface(
+        onClick = { if (broadcastState.active) onStop() else onStart() },
+        modifier = modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+        shape = RoundedCornerShape(999.dp),
+        color = when {
+            live -> Color(0xFFCC0000)
+            connecting -> Color(0xFF454545)
+            else -> Color(0xFF1E1E1E)
+        }.copy(alpha = 0.92f),
+        border = BorderStroke(1.dp, Color.White.copy(alpha = 0.18f)),
+        tonalElevation = 0.dp,
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(8.dp)
+                    .background(if (live) Color.White else Color(0xFFFF4040), CircleShape),
+            )
+            Text(
+                label,
+                color = Color.White,
+                style = MaterialTheme.typography.labelLarge,
+                fontWeight = FontWeight.SemiBold,
+            )
         }
     }
 }
