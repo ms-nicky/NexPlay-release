@@ -1,8 +1,8 @@
 {
   "android": {
-    "apkUrl": "https://github.com/ms-nicky/NexPlay-release/releases/download/v1.1.5/NexPlay-1.1.5-release.apk",
-    "versionName": "1.1.5",
-    "versionCode": 71,
-    "releaseNotes": "NexPlay 1.1.5"
+    "apkUrl": "https://github.com/ms-nicky/NexPlay-release/releases/download/v1.1.6/NexPlay-1.1.6-release.apk",
+    "versionName": "1.1.6",
+    "versionCode": 72,
+    "releaseNotes": "NexPlay 1.1.6"
   }
 }
