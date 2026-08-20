@@ -1,8 +1,8 @@
 {
   "android": {
-    "apkUrl": "https://github.com/ms-nicky/NexPlay-release/releases/download/v1.1.6/NexPlay-1.1.6-release.apk",
-    "versionName": "1.1.6",
-    "versionCode": 73,
-    "releaseNotes": "NexPlay 1.1.6"
+    "apkUrl": "https://github.com/ms-nicky/NexPlay-release/releases/download/v1.2.0/NexPlay-1.2.0-release.apk",
+    "versionName": "1.2.0",
+    "versionCode": 74,
+    "releaseNotes": "NexPlay 1.2.0 - YouTube Live logging, hide Go Live button"
   }
 }
