@@ -371,6 +371,7 @@ data class AppSettings(
     val nativeLowLatencyDecoder: Boolean = false,
     val youtubeLiveRtmpUrl: String = "rtmp://a.rtmp.youtube.com/live2",
     val youtubeLiveStreamKey: String = "",
+    val hideGoLiveButton: Boolean = false,
 )
 
 internal const val MIN_GAME_CARD_SCALE = 0.75f

@@ -729,6 +729,13 @@ private fun SettingsContent(
                     color = SettingsTextMuted,
                     style = MaterialTheme.typography.bodySmall,
                 )
+                SettingSwitch(
+                    label = stringResource(R.string.settings_hide_go_live_button),
+                    checked = settings.hideGoLiveButton,
+                    description = stringResource(R.string.settings_hide_go_live_button_desc),
+                ) { enabled ->
+                    viewModel.updateSettings(settings.copy(hideGoLiveButton = enabled))
+                }
                 OutlinedTextField(
                     value = settings.youtubeLiveRtmpUrl,
                     onValueChange = { value -> viewModel.updateSettings(settings.copy(youtubeLiveRtmpUrl = value)) },

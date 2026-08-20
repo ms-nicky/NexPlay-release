@@ -11,6 +11,7 @@ import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.pedro.common.AudioCodec
 import com.pedro.common.ConnectChecker
@@ -20,7 +21,12 @@ import com.pedro.encoder.input.sources.audio.MicrophoneSource
 import com.pedro.encoder.input.sources.video.NoVideoSource
 import com.pedro.encoder.input.sources.video.ScreenSource
 import com.pedro.library.generic.GenericStream
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 
 data class YouTubeLiveBroadcastState(
     val active: Boolean = false,
@@ -33,6 +39,7 @@ data class YouTubeLiveBroadcastState(
 class YouTubeLiveBroadcastService : Service(), ConnectChecker {
 
     companion object {
+        private const val TAG = "YouTubeLive"
         const val ACTION_START = "com.nexplay.broadcast.START"
         const val ACTION_STOP = "com.nexplay.broadcast.STOP"
         const val EXTRA_RTMP_URL = "com.nexplay.broadcast.RTMP_URL"
@@ -45,12 +52,6 @@ class YouTubeLiveBroadcastService : Service(), ConnectChecker {
         private const val CHANNEL_ID = "nexplay_youtube_live"
         private const val NOTIFICATION_ID = 23971
 
-        /**
-         * Primed by the ViewModel with a fresh MediaProjection while the app is foreground,
-         * right before the service is started. Consumed once by [YouTubeLiveBroadcastService]
-         * to satisfy the Android 14 mediaProjection foreground-service gate without ever
-         * calling getMediaProjection() twice.
-         */
         @Volatile
         var pendingProjection: MediaProjection? = null
 
@@ -63,6 +64,7 @@ class YouTubeLiveBroadcastService : Service(), ConnectChecker {
 
     private var genericStream: GenericStream? = null
     private var mediaProjection: MediaProjection? = null
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private val notificationManager: NotificationManager by lazy {
         getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
@@ -70,11 +72,14 @@ class YouTubeLiveBroadcastService : Service(), ConnectChecker {
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
+        StreamFileLogger.initialize(applicationContext)
+        StreamFileLogger.log(TAG, "Service created")
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        StreamFileLogger.log(TAG, "onStartCommand action=${intent?.action}")
         when (intent?.action) {
             ACTION_START -> startBroadcast(intent)
             ACTION_STOP -> stopBroadcast()
@@ -84,20 +89,25 @@ class YouTubeLiveBroadcastService : Service(), ConnectChecker {
     }
 
     private fun startBroadcast(intent: Intent) {
-        if (genericStream != null) return
-        // Must be called promptly after startForegroundService().
+        StreamFileLogger.log(TAG, "startBroadcast called")
+        if (genericStream != null) {
+            StreamFileLogger.log(TAG, "Stream already active, ignoring start request")
+            return
+        }
         startForeground(
             NOTIFICATION_ID,
             buildNotification(getString(R.string.youtube_live_notification_connecting)),
         )
         val url = intent.getStringExtra(EXTRA_RTMP_URL).orEmpty()
         if (url.isBlank()) {
+            StreamFileLogger.logError(TAG, "RTMP URL is blank")
             fail(getString(R.string.youtube_live_error_missing_url))
             return
         }
         val projection = pendingProjection
         pendingProjection = null
         if (projection == null) {
+            StreamFileLogger.logError(TAG, "MediaProjection is null")
             fail(getString(R.string.youtube_live_error_missing_permission))
             return
         }
@@ -108,60 +118,98 @@ class YouTubeLiveBroadcastService : Service(), ConnectChecker {
         val fps = intent.getIntExtra(EXTRA_FPS, 30)
         val bitrate = intent.getIntExtra(EXTRA_BITRATE, 4_500_000)
         val rotation = intent.getIntExtra(EXTRA_ROTATION, 0)
+        StreamFileLogger.log(TAG, "Stream params: ${width}x${height} fps=$fps bitrate=$bitrate rotation=$rotation")
 
-        val stream = GenericStream(applicationContext, this, NoVideoSource(), MicrophoneSource()).apply {
-            // MediaProjection only produces frames when the screen changes, so force a constant fps.
-            getGlInterface().setForceRender(true, 15)
+        setState { it.copy(active = true, connected = false, status = "connecting", message = "", startedAtMs = 0L) }
+
+        scope.launch {
+            setupAndStartStream(url, projection, width, height, fps, bitrate, rotation)
+        }
+    }
+
+    private fun setupAndStartStream(
+        url: String,
+        projection: MediaProjection,
+        width: Int,
+        height: Int,
+        fps: Int,
+        bitrate: Int,
+        rotation: Int,
+    ) {
+        val stream = try {
+            GenericStream(applicationContext, this@YouTubeLiveBroadcastService, NoVideoSource(), MicrophoneSource()).apply {
+                getGlInterface().setForceRender(true, 15)
+            }
+        } catch (e: Exception) {
+            StreamFileLogger.logError(TAG, "Failed to create GenericStream", e)
+            fail(getString(R.string.youtube_live_error_prepare, e.message ?: e.javaClass.simpleName))
+            return
         }
         genericStream = stream
 
         val prepared = try {
-            // API 29+: capture the app's own audio (the GFN game sound) via AudioPlaybackCapture,
-            // which needs no microphone permission. Older devices fall back to the microphone.
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                StreamFileLogger.log(TAG, "Setting up InternalAudioSource")
                 stream.changeAudioSource(InternalAudioSource(projection))
             }
-            stream.prepareVideo(width, height, bitrate, fps, rotation = rotation) &&
-                stream.prepareAudio(32000, true, 128 * 1024, echoCanceler = false, noiseSuppressor = false)
+            StreamFileLogger.log(TAG, "Preparing video encoder...")
+            val videoReady = stream.prepareVideo(width, height, bitrate, fps, rotation = rotation)
+            StreamFileLogger.log(TAG, "Video encoder ready=$videoReady")
+            StreamFileLogger.log(TAG, "Preparing audio encoder...")
+            val audioReady = stream.prepareAudio(32000, true, 128 * 1024, echoCanceler = false, noiseSuppressor = false)
+            StreamFileLogger.log(TAG, "Audio encoder ready=$audioReady")
+            videoReady && audioReady
         } catch (e: Exception) {
+            StreamFileLogger.logError(TAG, "Failed to prepare encoders", e)
             fail(getString(R.string.youtube_live_error_prepare, e.message ?: e.javaClass.simpleName))
             return
         }
         if (!prepared) {
+            StreamFileLogger.logError(TAG, "Encoders not supported")
             fail(getString(R.string.youtube_live_error_unsupported))
             return
         }
 
         try {
+            StreamFileLogger.log(TAG, "Setting up ScreenSource")
             stream.changeVideoSource(ScreenSource(applicationContext, projection))
             stream.setVideoCodec(VideoCodec.H264)
             stream.setAudioCodec(AudioCodec.AAC)
-            setState { it.copy(active = true, connected = false, status = "connecting", message = "", startedAtMs = 0L) }
+            StreamFileLogger.log(TAG, "Starting RTMP stream to $url")
             stream.startStream(url)
         } catch (e: Exception) {
+            StreamFileLogger.logError(TAG, "Failed to start broadcast", e)
             fail(getString(R.string.youtube_live_error_start, e.message ?: e.javaClass.simpleName))
         }
     }
 
     private fun fail(message: String) {
+        StreamFileLogger.logError(TAG, "Broadcast failed: $message")
         setState {
             it.copy(active = false, connected = false, status = "failed", message = message, startedAtMs = 0L)
         }
-        stopStreamInternal()
-        stopSelf()
+        scope.launch {
+            stopStreamInternal()
+            stopSelf()
+        }
     }
 
     private fun stopBroadcast() {
+        StreamFileLogger.log(TAG, "stopBroadcast called")
         setState {
             it.copy(active = false, connected = false, status = "stopped", message = "", startedAtMs = 0L)
         }
-        stopStreamInternal()
-        stopSelf()
+        scope.launch {
+            stopStreamInternal()
+            StreamFileLogger.flushToFile(applicationContext)
+            stopSelf()
+        }
     }
 
     private fun stopStreamInternal() {
+        StreamFileLogger.log(TAG, "stopStreamInternal: cleaning up")
         runCatching { genericStream?.stopStream() }
-        genericStream?.release()
+        runCatching { genericStream?.release() }
         genericStream = null
         runCatching { mediaProjection?.stop() }
         mediaProjection = null
@@ -174,11 +222,19 @@ class YouTubeLiveBroadcastService : Service(), ConnectChecker {
     }
 
     override fun onDestroy() {
-        stopStreamInternal()
+        StreamFileLogger.log(TAG, "Service destroyed")
+        StreamFileLogger.flushToFile(applicationContext)
+        scope.cancel()
+        runCatching { genericStream?.stopStream() }
+        runCatching { genericStream?.release() }
+        genericStream = null
+        runCatching { mediaProjection?.stop() }
+        mediaProjection = null
         super.onDestroy()
     }
 
     override fun onConnectionStarted(url: String) {
+        StreamFileLogger.log(TAG, "onConnectionStarted")
         setState { it.copy(active = true, connected = false, status = "connecting", message = "") }
         notificationManager.notify(
             NOTIFICATION_ID,
@@ -187,6 +243,7 @@ class YouTubeLiveBroadcastService : Service(), ConnectChecker {
     }
 
     override fun onConnectionSuccess() {
+        StreamFileLogger.log(TAG, "onConnectionSuccess - LIVE")
         setState {
             it.copy(
                 active = true,
@@ -203,29 +260,34 @@ class YouTubeLiveBroadcastService : Service(), ConnectChecker {
     }
 
     override fun onConnectionFailed(reason: String) {
+        StreamFileLogger.logError(TAG, "onConnectionFailed: $reason")
         fail(reason.ifBlank { getString(R.string.youtube_live_failed_connection) })
     }
 
     override fun onDisconnect() {
+        StreamFileLogger.log(TAG, "onDisconnect")
         if (state.value.active) {
             setState {
                 it.copy(active = false, connected = false, status = "ended", startedAtMs = 0L)
             }
-            stopStreamInternal()
-            stopSelf()
+            scope.launch {
+                stopStreamInternal()
+                stopSelf()
+            }
         }
     }
 
     override fun onAuthError() {
+        StreamFileLogger.logError(TAG, "onAuthError - stream key rejected")
         fail(getString(R.string.youtube_live_auth_error))
     }
 
     override fun onAuthSuccess() {
-        // Nothing to do; onConnectionSuccess follows.
+        StreamFileLogger.log(TAG, "onAuthSuccess")
     }
 
     override fun onNewBitrate(bitrate: Long) {
-        // Optional future use: surface the live bitrate in the overlay.
+        StreamFileLogger.log(TAG, "onNewBitrate: $bitrate bps")
     }
 
     private fun createNotificationChannel() {

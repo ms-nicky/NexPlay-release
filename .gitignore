@@ -57,6 +57,7 @@ release-notes.md
 # Signing (never commit!)
 android/keystore.properties
 android/nexplay-release.jks
+keystore/
 
 # Nix
 result

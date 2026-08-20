@@ -7295,16 +7295,18 @@ private fun StreamScreen(
                     modifier = Modifier.align(statsAlignment),
                 )
             }
-            YouTubeLivePill(
-                broadcastState = state.youtubeLive,
-                onStart = startScreenCapture,
-                onStop = viewModel::stopYouTubeLive,
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(
-                        top = if (statsVisible && statsAlignment == Alignment.TopEnd) 48.dp else 8.dp,
-                    ),
-            )
+            if (!state.settings.hideGoLiveButton) {
+                YouTubeLivePill(
+                    broadcastState = state.youtubeLive,
+                    onStart = startScreenCapture,
+                    onStop = viewModel::stopYouTubeLive,
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(
+                            top = if (statsVisible && statsAlignment == Alignment.TopEnd) 48.dp else 8.dp,
+                        ),
+                )
+            }
             if (networkNotice != null || activeStreamMode != null) {
                 Column(
                     modifier = Modifier

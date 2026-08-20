@@ -357,4 +357,6 @@
     <string name="youtube_live_error_prepare">Failed to prepare encoders: %1$s</string>
     <string name="youtube_live_error_unsupported">This device\'s encoders don\'t support the chosen stream settings.</string>
     <string name="youtube_live_error_start">Failed to start the broadcast: %1$s</string>
+    <string name="settings_hide_go_live_button">Hide Go Live button</string>
+    <string name="settings_hide_go_live_button_desc">Hide the YouTube Go Live button from the streaming screen</string>
 </resources>
