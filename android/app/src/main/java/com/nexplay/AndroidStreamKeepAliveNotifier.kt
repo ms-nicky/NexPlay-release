@@ -28,7 +28,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import java.util.concurrent.atomic.AtomicLong
 
-private const val STREAM_CHANNEL_ID = "opennow_active_stream"
+private const val STREAM_CHANNEL_ID = "nexplay_active_stream"
 private const val STREAM_NOTIFICATION_ID = 4211
 private const val STREAM_SERVICE_ACTION_START = "com.nexplay.stream.START"
 private const val STREAM_SERVICE_ACTION_STOP = "com.nexplay.stream.STOP"
@@ -38,7 +38,7 @@ private const val STREAM_SERVICE_EXTRA_MICROPHONE_CAPTURE = "microphone_capture"
 private const val STREAM_SERVICE_TAG = "NexPlayStreamService"
 private const val STREAM_TASK_REMOVAL_TIMEOUT_MS = 15_000L
 
-internal fun shouldKeepAndroidStreamAlive(state: OpenNowUiState): Boolean =
+internal fun shouldKeepAndroidStreamAlive(state: NexPlayUiState): Boolean =
     state.page == AppPage.Stream &&
         state.streamStatus != "idle" &&
         state.streamSession?.isReadyForStream() == true
@@ -49,7 +49,7 @@ internal data class ActiveStreamShutdownRequest(
     val settings: StreamSettings,
 )
 
-internal fun activeStreamShutdownRequest(state: OpenNowUiState): ActiveStreamShutdownRequest? {
+internal fun activeStreamShutdownRequest(state: NexPlayUiState): ActiveStreamShutdownRequest? {
     if (!shouldKeepAndroidStreamAlive(state)) return null
     val session = state.streamSession ?: return null
     return ActiveStreamShutdownRequest(
@@ -70,7 +70,7 @@ internal fun androidStreamForegroundServiceType(
         }
 
 internal fun shouldPrepareAndroidStreamMicrophone(
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     permissionGranted: Boolean,
 ): Boolean =
     shouldKeepAndroidStreamAlive(state) &&
@@ -86,7 +86,7 @@ class AndroidStreamKeepAliveNotifier(context: Context) {
     private var activeMicrophoneCapture = false
     private var cancellationApplied = false
 
-    fun update(state: OpenNowUiState) {
+    fun update(state: NexPlayUiState) {
         if (!shouldKeepAndroidStreamAlive(state)) {
             cancel()
             return
@@ -95,7 +95,7 @@ class AndroidStreamKeepAliveNotifier(context: Context) {
 
         val title = state.streamGame?.title ?: "NexPlay"
         val shutdownRequestJson = activeStreamShutdownRequest(state)?.let { request ->
-            OpenNowJson.encodeToString(request)
+            NexPlayJson.encodeToString(request)
         }
         val microphoneCaptureActive = shouldPrepareAndroidStreamMicrophone(
             state = state,
@@ -198,7 +198,7 @@ class AndroidStreamKeepAliveService : Service() {
                 STREAM_SERVICE_ACTION_START, null -> {
                     intent?.getStringExtra(STREAM_SERVICE_EXTRA_SHUTDOWN_REQUEST)
                         ?.let { encoded ->
-                            runCatching { OpenNowJson.decodeFromString<ActiveStreamShutdownRequest>(encoded) }
+                            runCatching { NexPlayJson.decodeFromString<ActiveStreamShutdownRequest>(encoded) }
                                 .onSuccess { activeShutdownRequest = it }
                                 .onFailure { error ->
                                     Log.w(STREAM_SERVICE_TAG, "Unable to read active stream shutdown request", error)
@@ -258,7 +258,7 @@ class AndroidStreamKeepAliveService : Service() {
     private suspend fun terminateCloudSessionAfterTaskRemoval(request: ActiveStreamShutdownRequest) {
         runCatching {
             withTimeout(STREAM_TASK_REMOVAL_TIMEOUT_MS) {
-                val openNowApplication = application as OpenNowApplication
+                val openNowApplication = application as NexPlayApplication
                 val auth = openNowApplication.authRepository.restore(
                     forceRefresh = false,
                     throwOnRefreshFailure = false,

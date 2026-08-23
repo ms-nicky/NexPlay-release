@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">NexPlay</string>
-    <string name="status_starting_opennow">Starting NexPlay</string>
+    <string name="status_starting_nexplay">Starting NexPlay</string>
     <string name="login_with_provider">Sign in with %1$s</string>
     <string name="login_tv_start">Sign in on another device with %1$s</string>
     <string name="login_tv_title">Use this code to sign in</string>
@@ -325,7 +325,7 @@
     <string name="settings_thanks_darkevilpt_note">Developer</string>
     <string name="settings_donate">Donate</string>
     <string name="settings_donate_link_copied">Donate link copied</string>
-    <string name="accent_opennow">NexPlay</string>
+    <string name="accent_nexplay">NexPlay</string>
     <string name="accent_pixel">Pixel blue</string>
     <string name="accent_hot_pink">Hot pink</string>
     <string name="accent_lime">Lime</string>

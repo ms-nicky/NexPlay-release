@@ -33,7 +33,7 @@
         android:required="false" />
 
     <application
-        android:name=".OpenNowApplication"
+        android:name=".NexPlayApplication"
         android:allowBackup="false"
         android:banner="@drawable/nexplay_banner"
         android:hardwareAccelerated="true"
@@ -73,7 +73,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="opennow" />
+                <data android:scheme="nexplay" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

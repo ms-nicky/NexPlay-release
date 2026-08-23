@@ -2,25 +2,25 @@
 <resources>
     <!--
       Styles only the pre-Compose window: the launch background and system bar tinting. Everything
-      the user actually sees is drawn by OpenNowTheme in ui/theme/. Colours reference colors.xml
-      rather than repeating hex that also lives in OpenNowPalette.
+      the user actually sees is drawn by NexPlayTheme in ui/theme/. Colours reference colors.xml
+      rather than repeating hex that also lives in NexPlayPalette.
     -->
-    <style name="OpenNowWindowBase" parent="android:style/Theme.Material.NoActionBar">
+    <style name="NexPlayWindowBase" parent="android:style/Theme.Material.NoActionBar">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowBackground">@color/opennow_background</item>
+        <item name="android:windowBackground">@color/nexplay_background</item>
         <item name="android:windowDisablePreview">false</item>
-        <item name="android:colorAccent">@color/opennow_accent</item>
+        <item name="android:colorAccent">@color/nexplay_accent</item>
     </style>
 
     <!--
       Only the font differs by API level: a font resource can be referenced from a theme from API 26
       onwards, so values-v26 points this at the bundled Inter and the launch window matches Compose.
-      Everything else stays in OpenNowWindowBase so the two variants cannot drift.
+      Everything else stays in NexPlayWindowBase so the two variants cannot drift.
     -->
-    <style name="Theme.OpenNOW" parent="OpenNowWindowBase">
+    <style name="Theme.NexPlay" parent="NexPlayWindowBase">
         <item name="android:fontFamily">sans</item>
     </style>
 </resources>

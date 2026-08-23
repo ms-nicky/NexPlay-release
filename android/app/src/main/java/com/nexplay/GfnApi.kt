@@ -245,7 +245,7 @@ private val GRAPHQL_MEDIA_TYPE = "application/graphql".toMediaType()
 private val REDIRECT_PORTS = intArrayOf(2259, 6460, 7119, 8870, 9096)
 private const val OAUTH_CALLBACK_TIMEOUT_MS = 120_000L
 private const val OAUTH_CALLBACK_PROBE_TIMEOUT_MS = 2_000
-private const val OAUTH_CALLBACK_PROBE_PATH = "/opennow-callback-probe"
+private const val OAUTH_CALLBACK_PROBE_PATH = "/nexplay-callback-probe"
 private const val DEVICE_CODE_MIN_POLL_INTERVAL_SECONDS = 5
 internal const val TOKEN_REFRESH_WINDOW_MS = 10 * 60 * 1000L
 internal const val CLIENT_TOKEN_REFRESH_WINDOW_MS = 5 * 60 * 1000L
@@ -258,7 +258,7 @@ internal class SessionClaimNotReadyException(
     val latestSession: SessionInfo?,
 ) : IllegalStateException("Session did not become ready after claiming.")
 
-val OpenNowJson: Json = Json {
+val NexPlayJson: Json = Json {
     ignoreUnknownKeys = true
     explicitNulls = false
     isLenient = true
@@ -277,7 +277,7 @@ fun defaultHttpClient(): OkHttpClient =
             }
             chain.proceed(canonicalRequest)
         }
-        .dns(OpenNowDns)
+        .dns(NexPlayDns)
         .connectTimeout(15, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
@@ -597,7 +597,7 @@ private fun resolveSessionProxyConfig(settings: StreamSettings): SessionProxyCon
 
 private data class NamedDnsResolver(val name: String, val dns: Dns)
 
-private object OpenNowDns : Dns {
+private object NexPlayDns : Dns {
     private val dohResolvers: List<NamedDnsResolver> by lazy {
         val bootstrapClient = OkHttpClient.Builder()
             .connectTimeout(5, TimeUnit.SECONDS)
@@ -678,12 +678,12 @@ private fun JsonObject.checkGraphQlErrors(label: String = "GFN GraphQL"): JsonOb
 
 private suspend fun OkHttpClient.awaitText(request: Request): Pair<Int, String> =
     withContext(Dispatchers.IO) {
-        val requestBody = OpenNowHttpDiagnostics.captureRequestBody(request)
+        val requestBody = NexPlayHttpDiagnostics.captureRequestBody(request)
         val startedAtMs = SystemClock.elapsedRealtime()
         try {
             newCall(request).execute().use { response ->
                 val text = response.body?.string().orEmpty()
-                OpenNowHttpDiagnostics.record(
+                NexPlayHttpDiagnostics.record(
                     request = request,
                     requestBody = requestBody,
                     statusCode = response.code,
@@ -693,7 +693,7 @@ private suspend fun OkHttpClient.awaitText(request: Request): Pair<Int, String> 
                 response.code to text
             }
         } catch (error: Throwable) {
-            OpenNowHttpDiagnostics.record(
+            NexPlayHttpDiagnostics.record(
                 request = request,
                 requestBody = requestBody,
                 statusCode = null,
@@ -839,7 +839,7 @@ internal fun parseManualAuthTokens(input: String, currentTimeMs: Long = nowMs())
     require(trimmed.length <= 64_000) { "The pasted token data is too large." }
 
     val root = if (trimmed.startsWith('{')) {
-        runCatching { OpenNowJson.parseToJsonElement(trimmed).jsonObject }
+        runCatching { NexPlayJson.parseToJsonElement(trimmed).jsonObject }
             .getOrElse { throw IllegalArgumentException("The pasted token JSON is invalid.", it) }
     } else {
         null
@@ -885,7 +885,7 @@ private fun decodeJwtPayload(token: String): JsonObject? {
     val payload = token.split(".").getOrNull(1) ?: return null
     return runCatching {
         val json = String(Base64.decode(payload, Base64.URL_SAFE or Base64.NO_WRAP), Charsets.UTF_8)
-        OpenNowJson.parseToJsonElement(json).jsonObject
+        NexPlayJson.parseToJsonElement(json).jsonObject
     }.getOrNull()
 }
 
@@ -923,7 +923,7 @@ class GfnAuthRepository(
             .build()
         val (code, text) = http.awaitText(request)
         if (code !in 200..299) return listOf(defaultProvider())
-        val root = runCatching { OpenNowJson.parseToJsonElement(text).jsonObject }.getOrNull() ?: return listOf(defaultProvider())
+        val root = runCatching { NexPlayJson.parseToJsonElement(text).jsonObject }.getOrNull() ?: return listOf(defaultProvider())
         val providers = root.obj("gfnServiceInfo")
             ?.arr("gfnServiceEndpoints")
             ?.mapNotNull { item ->
@@ -1084,7 +1084,7 @@ class GfnAuthRepository(
             .build()
         val (code, text) = http.awaitText(request)
         check(code in 200..299) { "Client token request failed ($code): ${text.take(400)}" }
-        val root = OpenNowJson.parseToJsonElement(text).jsonObject
+        val root = NexPlayJson.parseToJsonElement(text).jsonObject
         return ClientTokenResponse(
             token = requireNotNull(root.string("client_token")) { "Missing client token" },
             expiresAt = expiresAt(root.int("expires_in")),
@@ -1170,7 +1170,7 @@ class GfnAuthRepository(
             .build()
         val (code, text) = http.awaitText(request)
         check(code in 200..299) { "Client-token refresh failed ($code): ${text.take(400)}" }
-        return OpenNowJson.parseToJsonElement(text).jsonObject
+        return NexPlayJson.parseToJsonElement(text).jsonObject
     }
 
     private suspend fun refreshAuthTokens(refresh: String, base: AuthTokens, authClientId: String): AuthTokens {
@@ -1186,7 +1186,7 @@ class GfnAuthRepository(
             .build()
         val (code, text) = http.awaitText(request)
         check(code in 200..299) { "Token refresh failed ($code): ${text.take(400)}" }
-        val root = OpenNowJson.parseToJsonElement(text).jsonObject
+        val root = NexPlayJson.parseToJsonElement(text).jsonObject
         return AuthTokens(
             accessToken = requireNotNull(root.string("access_token")) { "Missing access token" },
             refreshToken = root.string("refresh_token") ?: refresh,
@@ -1238,7 +1238,7 @@ class GfnAuthRepository(
             .build()
         val (status, text) = http.awaitText(request)
         check(status in 200..299) { "Token exchange failed ($status): ${text.take(400)}" }
-        val root = OpenNowJson.parseToJsonElement(text).jsonObject
+        val root = NexPlayJson.parseToJsonElement(text).jsonObject
         return AuthTokens(
             accessToken = requireNotNull(root.string("access_token")) { "Missing access token" },
             refreshToken = root.string("refresh_token"),
@@ -1270,7 +1270,7 @@ class GfnAuthRepository(
             .build()
         val (status, text) = http.awaitText(request)
         check(status in 200..299) { "Device sign-in failed ($status): ${text.take(400)}" }
-        val root = OpenNowJson.parseToJsonElement(text).jsonObject
+        val root = NexPlayJson.parseToJsonElement(text).jsonObject
         val deviceCode = requireNotNull(root.string("device_code")) { "Missing device code" }
         val userCode = requireNotNull(root.string("user_code")) { "Missing user code" }
         val verificationUri = root.string("verification_uri")
@@ -1306,7 +1306,7 @@ class GfnAuthRepository(
                 .post(body)
                 .build()
             val (status, text) = http.awaitText(request)
-            val root = runCatching { OpenNowJson.parseToJsonElement(text).jsonObject }.getOrNull()
+            val root = runCatching { NexPlayJson.parseToJsonElement(text).jsonObject }.getOrNull()
             if (status in 200..299 && root != null) {
                 return AuthTokens(
                     accessToken = requireNotNull(root.string("access_token")) { "Missing access token" },
@@ -1376,7 +1376,7 @@ class GfnAuthRepository(
             .build()
         val (code, text) = http.awaitText(request)
         return if (code in 200..299) {
-            runCatching { OpenNowJson.parseToJsonElement(text).jsonObject }.getOrDefault(JsonObject(emptyMap()))
+            runCatching { NexPlayJson.parseToJsonElement(text).jsonObject }.getOrDefault(JsonObject(emptyMap()))
         } else {
             JsonObject(emptyMap())
         }
@@ -1797,7 +1797,7 @@ class GfnCatalogRepository(
             .build()
         val (code, text) = http.awaitText(request)
         if (code !in 200..299) return emptyList()
-        return dedupeGames(OpenNowJson.parseToJsonElement(text).jsonArray
+        return dedupeGames(NexPlayJson.parseToJsonElement(text).jsonArray
             .mapNotNull { item ->
                 val obj = item.asObject() ?: return@mapNotNull null
                 if (obj.string("status") != "AVAILABLE") return@mapNotNull null
@@ -1897,7 +1897,7 @@ class GfnCatalogRepository(
                 if (code !in 200..299) {
                     "GFN-PC"
                 } else {
-                    OpenNowJson.parseToJsonElement(text).jsonObject.obj("requestStatus")?.string("serverId") ?: "GFN-PC"
+                    NexPlayJson.parseToJsonElement(text).jsonObject.obj("requestStatus")?.string("serverId") ?: "GFN-PC"
                 }
             }.getOrDefault("GFN-PC")
             // Catalog, library, and subscription refreshes start together. Share their
@@ -1934,7 +1934,7 @@ class GfnCatalogRepository(
             .build()
         val (code, text) = http.awaitText(request)
         check(code in 200..299) { "Games GraphQL failed ($code): ${text.take(400)}" }
-        return OpenNowJson.parseToJsonElement(text).jsonObject
+        return NexPlayJson.parseToJsonElement(text).jsonObject
     }
 
     private suspend fun fetchAppMetaData(token: String, appIds: List<String>, vpcId: String): List<JsonObject> {
@@ -1954,7 +1954,7 @@ class GfnCatalogRepository(
             .build()
         val (code, text) = http.awaitText(request)
         if (code !in 200..299) return emptyList()
-        return OpenNowJson.parseToJsonElement(text).jsonObject.checkGraphQlErrors("App metadata")
+        return NexPlayJson.parseToJsonElement(text).jsonObject.checkGraphQlErrors("App metadata")
             .obj("data")?.obj("apps")?.arr("items")?.mapNotNull { it.asObject() }.orEmpty()
     }
 
@@ -2077,7 +2077,7 @@ class GfnCatalogRepository(
             val options = group.arr("filters")?.mapNotNull { filterRaw ->
                 val filter = filterRaw.asObject() ?: return@mapNotNull null
                 val filterJson = filter.arr("filters")?.firstOrNull()?.asString() ?: return@mapNotNull null
-                val parsed = runCatching { OpenNowJson.parseToJsonElement(filterJson) }.getOrNull() ?: return@mapNotNull null
+                val parsed = runCatching { NexPlayJson.parseToJsonElement(filterJson) }.getOrNull() ?: return@mapNotNull null
                 val id = filter.string("id") ?: return@mapNotNull null
                 filterPayloadById[id] = parsed
                 CatalogFilterOption(
@@ -2113,7 +2113,7 @@ class GfnCatalogRepository(
             .build()
         val (code, text) = http.awaitText(request)
         check(code in 200..299) { "GFN GraphQL failed ($code): ${text.take(400)}" }
-        return OpenNowJson.parseToJsonElement(text).jsonObject
+        return NexPlayJson.parseToJsonElement(text).jsonObject
     }
 
     private fun launchMetadataByAppQuery(): String = """
@@ -2232,7 +2232,7 @@ class GfnSubscriptionRepository(
             .build()
         val (code, text) = http.awaitText(request)
         if (code !in 200..299) return SubscriptionInfo()
-        val data = OpenNowJson.parseToJsonElement(text).jsonObject
+        val data = NexPlayJson.parseToJsonElement(text).jsonObject
         val allotted = data.double("allottedTimeInMinutes") ?: 0.0
         val purchased = data.double("purchasedTimeInMinutes") ?: 0.0
         val rolled = data.double("rolledOverTimeInMinutes") ?: 0.0
@@ -2405,7 +2405,7 @@ class GfnAccountConnectorRepository(
             .build()
         val (code, text) = http.awaitText(request)
         check(code in 200..299) { "Store connection failed ($code): ${text.take(240)}" }
-        return OpenNowJson.parseToJsonElement(text).jsonObject.string("login_url")
+        return NexPlayJson.parseToJsonElement(text).jsonObject.string("login_url")
             ?: error("Store connection did not return a login URL")
     }
 
@@ -2432,7 +2432,7 @@ class GfnAccountConnectorRepository(
             .build()
         val (code, text) = http.awaitText(request)
         check(code in 200..299) { "Account connectors failed ($code): ${text.take(400)}" }
-        return OpenNowJson.parseToJsonElement(text).jsonObject
+        return NexPlayJson.parseToJsonElement(text).jsonObject
     }
 
     private fun accountLinkingHeaders(accessToken: String): Headers =
@@ -2486,12 +2486,12 @@ class PrintedWasteRepository(
     suspend fun fetchQueue(): Map<String, PrintedWasteZone> {
         val request = Request.Builder()
             .url(PRINTEDWASTE_QUEUE_URL)
-            .header("User-Agent", "opennow-android")
+            .header("User-Agent", "nexplay-android")
             .header("Accept", "application/json")
             .build()
         val (code, text) = http.awaitText(request)
         check(code in 200..299) { "PrintedWaste queue returned HTTP $code" }
-        val payload = OpenNowJson.parseToJsonElement(text).jsonObject
+        val payload = NexPlayJson.parseToJsonElement(text).jsonObject
         check(payload.boolean("status") == true) { "PrintedWaste queue returned status:false" }
         val data = payload.obj("data") ?: error("PrintedWaste queue missing data")
         return data.mapNotNull { (zoneId, raw) ->
@@ -2512,12 +2512,12 @@ class PrintedWasteRepository(
     suspend fun fetchServerMapping(): Map<String, PrintedWasteServerMappingEntry> {
         val request = Request.Builder()
             .url(PRINTEDWASTE_SERVER_MAPPING_URL)
-            .header("User-Agent", "opennow-android")
+            .header("User-Agent", "nexplay-android")
             .header("Accept", "application/json")
             .build()
         val (code, text) = http.awaitText(request)
         check(code in 200..299) { "PrintedWaste mapping returned HTTP $code" }
-        val payload = OpenNowJson.parseToJsonElement(text).jsonObject
+        val payload = NexPlayJson.parseToJsonElement(text).jsonObject
         check(payload.boolean("status") == true) { "PrintedWaste mapping returned status:false" }
         val data = payload.obj("data") ?: error("PrintedWaste mapping missing data")
         return data.mapNotNull { (zoneId, raw) ->
@@ -2635,7 +2635,7 @@ class GfnSessionRepository(
             .build()
         val (code, text) = requestHttp.awaitText(request)
         recordDiagnosticResponse("session.create", request, code, text)
-        val payload = OpenNowJson.parseToJsonElement(text).jsonObject
+        val payload = NexPlayJson.parseToJsonElement(text).jsonObject
         return toSessionInfo(zone, base, payload, clientId, deviceId)
     }
 
@@ -2660,7 +2660,7 @@ class GfnSessionRepository(
             .build()
         val (code, text) = requestHttp.awaitText(request)
         recordDiagnosticResponse("session.poll", request, code, text)
-        val payload = OpenNowJson.parseToJsonElement(text).jsonObject
+        val payload = NexPlayJson.parseToJsonElement(text).jsonObject
         val realServer = streamingServerIp(payload)
         if (isZoneHostname(host) && realServer != null && !isZoneHostname(realServer) && READY_SESSION_STATUSES.contains(payload.obj("session")?.int("status"))) {
             val directBase = "https://$realServer"
@@ -2671,7 +2671,7 @@ class GfnSessionRepository(
             val (code, directText) = http.awaitText(directRequest)
             recordDiagnosticResponse("session.poll.direct", directRequest, code, directText)
             if (code in 200..299) {
-                val directPayload = OpenNowJson.parseToJsonElement(directText).jsonObject
+                val directPayload = NexPlayJson.parseToJsonElement(directText).jsonObject
                 if (directPayload.obj("requestStatus")?.int("statusCode") == 1) {
                     return toSessionInfo(zone, directBase, directPayload, cid, did)
                 }
@@ -2715,7 +2715,7 @@ class GfnSessionRepository(
         val (code, text) = requestHttp.awaitText(request)
         recordDiagnosticResponse("session.active", request, code, text)
         if (code !in 200..299) return emptyList()
-        val payload = runCatching { OpenNowJson.parseToJsonElement(text).jsonObject }.getOrNull() ?: return emptyList()
+        val payload = runCatching { NexPlayJson.parseToJsonElement(text).jsonObject }.getOrNull() ?: return emptyList()
         if (payload.obj("requestStatus")?.int("statusCode") != 1) return emptyList()
         return payload.arr("sessions")?.mapNotNull { raw ->
             val s = raw.asObject() ?: return@mapNotNull null
@@ -2772,7 +2772,7 @@ class GfnSessionRepository(
             val (code, text) = requestHttp.awaitText(prefetch)
             recordDiagnosticResponse("session.claim.prefetch", prefetch, code, text)
             if (code in 200..299) {
-                streamingServerIp(OpenNowJson.parseToJsonElement(text).jsonObject)?.let { effectiveServerIp = it }
+                streamingServerIp(NexPlayJson.parseToJsonElement(text).jsonObject)?.let { effectiveServerIp = it }
             }
         }
         val sessionBase = if (useProviderBaseForSessionOps) providerBase else "https://$effectiveServerIp"
@@ -2783,7 +2783,7 @@ class GfnSessionRepository(
             .build()
         val (validationCode, validationText) = http.awaitText(validationRequest)
         recordDiagnosticResponse("session.claim.validation", validationRequest, validationCode, validationText)
-        val validation = runCatching { OpenNowJson.parseToJsonElement(validationText).jsonObject }.getOrNull()
+        val validation = runCatching { NexPlayJson.parseToJsonElement(validationText).jsonObject }.getOrNull()
         val status = validation?.obj("session")?.int("status")
         if (status != 1) {
             val claimBody = buildClaimRequestBody(
@@ -2824,7 +2824,7 @@ class GfnSessionRepository(
             val (code, text) = http.awaitText(poll)
             recordDiagnosticResponse("session.claim.poll", poll, code, text)
             if (code in 200..299) {
-                val payload = OpenNowJson.parseToJsonElement(text).jsonObject
+                val payload = NexPlayJson.parseToJsonElement(text).jsonObject
                 val pollStatus = payload.obj("session")?.int("status")
                 val polledSession = toSessionInfo("", sessionBase, payload, clientId, deviceId)
                 latestSession = polledSession
@@ -2901,7 +2901,7 @@ class GfnSessionRepository(
         val (code, text) = requestHttp.awaitText(request)
         recordDiagnosticResponse("session.adUpdate", request, code, text)
         check(code in 200..299) { "Queue ad update failed ($code): ${text.take(400)}" }
-        return toSessionInfo(session.zone, base, OpenNowJson.parseToJsonElement(text).jsonObject, cid, did)
+        return toSessionInfo(session.zone, base, NexPlayJson.parseToJsonElement(text).jsonObject, cid, did)
     }
 
     private fun recordDiagnosticResponse(operation: String, request: Request, statusCode: Int, responseBody: String) {
@@ -2912,7 +2912,7 @@ class GfnSessionRepository(
                     method = request.method,
                     url = request.url.toString(),
                     statusCode = statusCode,
-                    requestBody = OpenNowHttpDiagnostics.captureRequestBody(request),
+                    requestBody = NexPlayHttpDiagnostics.captureRequestBody(request),
                     responseBody = responseBody,
                 ),
             )
@@ -3308,7 +3308,7 @@ suspend fun fetchDynamicRegions(
             .build()
         val (code, text) = http.awaitText(request)
         if (code !in 200..299) return@runCatching emptyList<StreamRegion>() to null
-        val data = OpenNowJson.parseToJsonElement(text).jsonObject
+        val data = NexPlayJson.parseToJsonElement(text).jsonObject
         val vpcId = data.obj("requestStatus")?.string("serverId")
         val regions = data.arr("metaData")?.mapNotNull {
             val obj = it.asObject() ?: return@mapNotNull null

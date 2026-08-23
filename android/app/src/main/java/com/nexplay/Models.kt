@@ -62,7 +62,7 @@ enum class MicrophoneMode {
 
 @Serializable
 enum class UiAccent {
-    OpenNow,
+    NexPlay,
     Pixel,
     HotPink,
     Lime,
@@ -324,7 +324,7 @@ data class AppSettings(
     val showCardTitles: Boolean = true,
     val expressiveUi: Boolean = true,
     val dynamicColor: Boolean = false,
-    val uiAccent: UiAccent = UiAccent.OpenNow,
+    val uiAccent: UiAccent = UiAccent.NexPlay,
     val launchPage: AppLaunchPage = AppLaunchPage.Store,
     val nerdMode: Boolean = false,
     val hideStreamButtons: Boolean = false,
@@ -599,7 +599,7 @@ internal fun streamSettingsSessionSignature(settings: StreamSettings): String {
     val compatible = settings.withCodecColorCompatibility()
     val (width, height) = streamResolutionPixels(compatible)
     return listOf(
-        "opennow-android-stream-v1",
+        "nexplay-android-stream-v1",
         "res=${width}x$height",
         "fps=${compatible.fps}",
         "bitrate=${compatible.maxBitrateMbps}",

@@ -16,9 +16,9 @@ import android.util.Log
 import androidx.core.app.ServiceCompat
 import java.util.concurrent.atomic.AtomicLong
 
-internal const val QUEUE_CHANNEL_ID = "opennow_queue_status"
+internal const val QUEUE_CHANNEL_ID = "nexplay_queue_status"
 internal const val QUEUE_NOTIFICATION_ID = 4210
-private const val QUEUE_ALERT_CHANNEL_ID = "opennow_queue_ready"
+private const val QUEUE_ALERT_CHANNEL_ID = "nexplay_queue_ready"
 private const val QUEUE_ALERT_NOTIFICATION_ID = 4212
 
 private const val QUEUE_SERVICE_ACTION_UPDATE = "com.nexplay.queue.UPDATE"
@@ -29,7 +29,7 @@ private const val QUEUE_SERVICE_TAG = "NexPlayQueueService"
 private val QUEUE_NOTIFICATION_SMALL_ICON = R.drawable.ic_tab_stream
 
 /** Returns true if the queue wait is over and the game is now launching/loading. */
-private fun isQueueComplete(state: OpenNowUiState): Boolean {
+private fun isQueueComplete(state: NexPlayUiState): Boolean {
     val queuePosition = queueDisplayPosition(state)
     if (queuePosition != null) return false // Still in queue
     val phase = state.launchPhase
@@ -49,7 +49,7 @@ class AndroidQueueStatusNotifier(context: Context) {
     private var activeText: String? = null
     private var cancellationApplied = true
 
-    fun update(state: OpenNowUiState) {
+    fun update(state: NexPlayUiState) {
         if (!shouldShowQueueLaunchStatus(state)) {
             cancel()
             return

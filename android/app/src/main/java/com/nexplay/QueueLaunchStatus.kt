@@ -1,6 +1,6 @@
 package com.nexplay
 
-internal fun queueLaunchStatusText(state: OpenNowUiState): String {
+internal fun queueLaunchStatusText(state: NexPlayUiState): String {
     val session = state.streamSession
     val queuePosition = queueDisplayPosition(state)
     return when {
@@ -13,7 +13,7 @@ internal fun queueLaunchStatusText(state: OpenNowUiState): String {
     }
 }
 
-internal fun queueDisplayPosition(state: OpenNowUiState): Int? {
+internal fun queueDisplayPosition(state: NexPlayUiState): Int? {
     val session = state.streamSession
     if (session?.seatSetupStep == 5) return null
     return state.queuePosition?.takeIf { it > 0 } ?: queueDisplayPosition(session)
@@ -24,7 +24,7 @@ internal fun queueDisplayPosition(session: SessionInfo?): Int? {
     return session?.queuePosition?.takeIf { it > 0 }
 }
 
-internal fun shouldShowQueueLaunchStatus(state: OpenNowUiState): Boolean {
+internal fun shouldShowQueueLaunchStatus(state: NexPlayUiState): Boolean {
     if (state.streamStatus == "idle") return false
     val sessionStatus = state.streamSession?.status
     return sessionStatus == null || sessionStatus !in setOf(2, 3)

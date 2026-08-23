@@ -17,7 +17,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.security.MessageDigest
 
 internal const val ANDROID_BUG_REPORT_ENDPOINT =
-    "https://api.printedwaste.com/releases/opennow/bug-reports"
+    "https://api.printedwaste.com/releases/nexplay/bug-reports"
 internal const val ANDROID_BUG_REPORT_MAX_FILES = 5
 internal const val ANDROID_BUG_REPORT_MAX_FILE_BYTES = 10L * 1024L * 1024L
 internal const val ANDROID_BUG_REPORT_MIN_DESCRIPTION_CHARS = 50
@@ -106,7 +106,7 @@ internal class AndroidBugReportUploadException(
 internal fun androidBugReportReporterId(stableDeviceId: String): String {
     require(stableDeviceId.isNotBlank()) { "Bug report installation ID is unavailable" }
     val digest = MessageDigest.getInstance("SHA-256")
-        .digest("opennow-android-bug-report-v1:$stableDeviceId".toByteArray(Charsets.UTF_8))
+        .digest("nexplay-android-bug-report-v1:$stableDeviceId".toByteArray(Charsets.UTF_8))
     return ANDROID_BUG_REPORT_REPORTER_ID_PREFIX + digest.joinToString("") { "%02x".format(it) }
 }
 
@@ -135,7 +135,7 @@ internal fun buildAndroidBugReportRequest(
     require(report.files.size <= ANDROID_BUG_REPORT_MAX_FILES) {
         "Bug reports support up to $ANDROID_BUG_REPORT_MAX_FILES files"
     }
-    runCatching { OpenNowJson.parseToJsonElement(report.metadata).jsonObject }
+    runCatching { NexPlayJson.parseToJsonElement(report.metadata).jsonObject }
         .getOrElse { throw IllegalArgumentException("Bug report metadata must be a JSON object", it) }
 
     val multipart = MultipartBody.Builder()
@@ -195,7 +195,7 @@ internal suspend fun uploadAndroidBugReport(
 }
 
 internal fun parseAndroidBugReportReference(body: String): String? = runCatching {
-    val json = OpenNowJson.parseToJsonElement(body).jsonObject
+    val json = NexPlayJson.parseToJsonElement(body).jsonObject
     listOf("id", "reportId", "bugReportId")
         .firstNotNullOfOrNull { key -> json[key]?.jsonPrimitive?.contentOrNull?.takeIf(String::isNotBlank) }
 }.getOrNull()
@@ -233,7 +233,7 @@ private fun androidBugReportResponseExplicitlyRejected(body: String): Boolean =
         ?.let { element -> runCatching { element.jsonPrimitive.booleanOrNull }.getOrNull() }) == false
 
 private fun parseBugReportJsonObject(body: String): JsonObject? = runCatching {
-    OpenNowJson.parseToJsonElement(body).jsonObject
+    NexPlayJson.parseToJsonElement(body).jsonObject
 }.getOrNull()
 
 private fun JsonObject.serverString(key: String): String? =

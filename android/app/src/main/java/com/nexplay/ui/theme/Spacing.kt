@@ -3,7 +3,7 @@ package com.nexplay.ui.theme
 import androidx.compose.ui.unit.dp
 
 /** One spacing scale, so gutters and padding stop being decided independently at each call site. */
-object OpenNowSpacing {
+object NexPlaySpacing {
     val xs = 4.dp
     val sm = 8.dp
     val md = 12.dp

@@ -6,11 +6,11 @@ import com.nexplay.StreamQualityLevel
 /**
  * The single source of truth for every colour in the app.
  *
- * Before this existed the palette was declared twice (once in `OpenNowScreens.kt`, once in
- * `OpenNowSettingsScreens.kt` with identical hex under different names) and another ~75 one-off
+ * Before this existed the palette was declared twice (once in `NexPlayScreens.kt`, once in
+ * `NexPlaySettingsScreens.kt` with identical hex under different names) and another ~75 one-off
  * `Color(0x..)` literals were scattered inline. Anything that appears more than once belongs here.
  */
-object OpenNowPalette {
+object NexPlayPalette {
     // Core surfaces
     val Background = Color(0xff090b0d)
     val Panel = Color(0xff11161a)
@@ -90,6 +90,6 @@ object OpenNowPalette {
  */
 fun StreamQualityLevel.tint(): Color? = when (this) {
     StreamQualityLevel.Good -> null
-    StreamQualityLevel.Fair -> OpenNowPalette.StatusFair
-    StreamQualityLevel.Poor -> OpenNowPalette.StatusPoor
+    StreamQualityLevel.Fair -> NexPlayPalette.StatusFair
+    StreamQualityLevel.Poor -> NexPlayPalette.StatusPoor
 }

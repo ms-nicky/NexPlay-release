@@ -96,7 +96,7 @@ import kotlin.math.sqrt
 
 object NativeCodecProbe {
     init {
-        runCatching { System.loadLibrary("opennow_native") }
+        runCatching { System.loadLibrary("nexplay_native") }
     }
 
     external fun nativeRuntimeSummary(): String
@@ -247,7 +247,7 @@ object CodecProbe {
     private fun probeWebRtcDecoders(): Map<VideoCodec, WebRtcCodecProbe> {
         val eglBase = runCatching { EglBase.create() }.getOrNull() ?: return emptyMap()
         return try {
-            val streamingFactory = OpenNowVideoDecoderFactory(eglBase.eglBaseContext)
+            val streamingFactory = NexPlayVideoDecoderFactory(eglBase.eglBaseContext)
             val hardwareFactory = openNowHardwareVideoDecoderFactory(eglBase.eglBaseContext)
             val streamingSupported = streamingFactory.supportedCodecsByVideoCodec()
             val hardwareSupported = hardwareFactory.supportedCodecsByVideoCodec()
@@ -312,7 +312,7 @@ object CodecProbe {
         }
     }
 
-    internal fun isOpenNowHardwareDecoderAllowed(info: MediaCodecInfo): Boolean {
+    internal fun isNexPlayHardwareDecoderAllowed(info: MediaCodecInfo): Boolean {
         if (!isHardwareCodec(info)) return false
         val name = info.name.lowercase(Locale.US)
         if (name.contains("google") || name.contains("software") || name.contains("sw")) return false
@@ -337,7 +337,7 @@ object CodecProbe {
         val name = info.name.lowercase(Locale.US)
         return when (codec) {
             VideoCodec.H264 -> true
-            VideoCodec.H265 -> !name.contains("exynos") || isOpenNowHardwareDecoderAllowed(info)
+            VideoCodec.H265 -> !name.contains("exynos") || isNexPlayHardwareDecoderAllowed(info)
             VideoCodec.AV1 -> !name.contains("google")
         }
     }
@@ -407,10 +407,10 @@ internal fun isConstrainedStreamingRuntime(
 private fun openNowHardwareVideoDecoderFactory(sharedContext: EglBase.Context): VideoDecoderFactory =
     HardwareVideoDecoderFactory(
         sharedContext,
-        Predicate<MediaCodecInfo> { info -> CodecProbe.isOpenNowHardwareDecoderAllowed(info) },
+        Predicate<MediaCodecInfo> { info -> CodecProbe.isNexPlayHardwareDecoderAllowed(info) },
     )
 
-private class OpenNowVideoDecoderFactory(
+private class NexPlayVideoDecoderFactory(
     sharedContext: EglBase.Context,
     private val nativeLowLatencyDecoderEnabled: Boolean = false,
     private val requestedFps: () -> Int = { 60 },
@@ -419,7 +419,7 @@ private class OpenNowVideoDecoderFactory(
     private val hardwareFactory = openNowHardwareVideoDecoderFactory(sharedContext)
 
     override fun createDecoder(info: VideoCodecInfo): VideoDecoder? {
-        val codec = info.name.toOpenNowVideoCodec()
+        val codec = info.name.toNexPlayVideoCodec()
         val hardwareDecoder = if (codec != null) hardwareFactory.createDecoder(info) else null
         val decoder = when (codec) {
             VideoCodec.H264 -> hardwareDecoder ?: defaultFactory.createDecoder(info)
@@ -461,9 +461,9 @@ private class OpenNowVideoDecoderFactory(
 
     override fun getSupportedCodecs(): Array<VideoCodecInfo> {
         val defaultCodecs = defaultFactory.getSupportedCodecs()
-            .filterNot { it.name.toOpenNowVideoCodec() in ADVANCED_STREAM_CODECS }
+            .filterNot { it.name.toNexPlayVideoCodec() in ADVANCED_STREAM_CODECS }
         val nativeAdvancedCodecs = hardwareFactory.getSupportedCodecs()
-            .filter { it.name.toOpenNowVideoCodec() in ADVANCED_STREAM_CODECS }
+            .filter { it.name.toNexPlayVideoCodec() in ADVANCED_STREAM_CODECS }
         return (defaultCodecs + nativeAdvancedCodecs)
             .distinctBy { it.stableKey() }
             .toTypedArray()
@@ -477,7 +477,7 @@ private class OpenNowVideoDecoderFactory(
     }
 }
 
-private fun String.toOpenNowVideoCodec(): VideoCodec? =
+private fun String.toNexPlayVideoCodec(): VideoCodec? =
     when (uppercase(Locale.US)) {
         "AVC", "H264", "H.264" -> VideoCodec.H264
         "HEVC", "H265", "H.265" -> VideoCodec.H265
@@ -496,10 +496,10 @@ private fun RtpCapabilities.CodecCapability.openNowCodecName(): String? {
     val fromMime = mimeType
         ?.substringAfter("/", "")
         ?.takeIf { it.isNotBlank() }
-        ?.toOpenNowVideoCodec()
+        ?.toNexPlayVideoCodec()
         ?.webRtcCodecName()
     if (fromMime != null) return fromMime
-    return name?.toOpenNowVideoCodec()?.webRtcCodecName() ?: name?.uppercase(Locale.US)
+    return name?.toNexPlayVideoCodec()?.webRtcCodecName() ?: name?.uppercase(Locale.US)
 }
 
 private fun RtpCapabilities.CodecCapability.codecParameterInt(name: String): Int? =
@@ -776,7 +776,7 @@ class GfnSignalingClient(
     }
 
     private fun handleMessage(text: String) {
-        val parsed = runCatching { OpenNowJson.parseToJsonElement(text).jsonObject }.getOrNull()
+        val parsed = runCatching { NexPlayJson.parseToJsonElement(text).jsonObject }.getOrNull()
         if (parsed == null) {
             onEvent(SignalingEvent.Log("Ignoring non-JSON signaling packet"))
             return
@@ -800,7 +800,7 @@ class GfnSignalingClient(
         val peerMsg = parsed["peer_msg"]?.jsonObject ?: return
         remotePeerId = peerMsg["from"]?.jsonPrimitive?.intOrNull ?: remotePeerId
         val msg = peerMsg["msg"]?.jsonPrimitive?.contentOrNull ?: return
-        val payload = runCatching { OpenNowJson.parseToJsonElement(msg).jsonObject }.getOrNull() ?: return
+        val payload = runCatching { NexPlayJson.parseToJsonElement(msg).jsonObject }.getOrNull() ?: return
         when {
             payload["type"]?.jsonPrimitive?.contentOrNull == "offer" -> {
                 val sdp = payload["sdp"]?.jsonPrimitive?.contentOrNull
@@ -3577,12 +3577,12 @@ class NativeStreamClient(
     private val eglBase: EglBase = EglBase.create()
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private val inputExecutor = java.util.concurrent.Executors.newSingleThreadExecutor { runnable ->
-        Thread(runnable, "opennow-input-sender").apply {
+        Thread(runnable, "nexplay-input-sender").apply {
             priority = Thread.MAX_PRIORITY
         }
     }
     private val teardownExecutor = java.util.concurrent.Executors.newSingleThreadExecutor { runnable ->
-        Thread(runnable, "opennow-native-teardown").apply {
+        Thread(runnable, "nexplay-native-teardown").apply {
             priority = Thread.NORM_PRIORITY
         }
     }
@@ -3832,7 +3832,7 @@ class NativeStreamClient(
             .setOptions(PeerConnectionFactory.Options())
             .setAudioDeviceModule(audioDeviceModule)
             .setVideoDecoderFactory(
-                OpenNowVideoDecoderFactory(
+                NexPlayVideoDecoderFactory(
                     sharedContext = eglBase.eglBaseContext,
                     nativeLowLatencyDecoderEnabled = lowLatencyEnabled,
                     requestedFps = { settings.fps },

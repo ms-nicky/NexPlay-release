@@ -114,7 +114,7 @@ private data class PendingActiveSessionLaunch(
 )
 
 @Immutable
-data class OpenNowUiState(
+data class NexPlayUiState(
     val initializing: Boolean = false,
     val page: AppPage = AppPage.Home,
     val authSession: AuthSession? = null,
@@ -176,15 +176,15 @@ data class OpenNowUiState(
     val youtubeLive: YouTubeLiveBroadcastState = YouTubeLiveBroadcastState(),
 )
 
-internal fun OpenNowUiState.isAndroidUpdateCheckBlockedByStream(): Boolean =
+internal fun NexPlayUiState.isAndroidUpdateCheckBlockedByStream(): Boolean =
     streamStatus != "idle" || streamSession != null || activeStreamSettings != null
 
-internal fun OpenNowUiState.isNativeStreamReady(): Boolean =
+internal fun NexPlayUiState.isNativeStreamReady(): Boolean =
     streamStatus in setOf("connecting", "streaming") &&
         streamSession?.isReadyForStream() == true
 
-class OpenNowViewModel(application: Application) : AndroidViewModel(application) {
-    private val openNowApplication = application as OpenNowApplication
+class NexPlayViewModel(application: Application) : AndroidViewModel(application) {
+    private val openNowApplication = application as NexPlayApplication
     private val http: OkHttpClient = openNowApplication.httpClient
     private val settingsStore = SettingsStore(application)
     private val sessionTimerAnchorStore = SessionTimerAnchorStore(application)
@@ -244,7 +244,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
         }
     }
     private val _state = MutableStateFlow(
-        OpenNowUiState(
+        NexPlayUiState(
             page = defaultLaunchAppPage(initialSettings),
             authSession = initialAuthSession,
             providers = initialProviders(initialAuthSession),
@@ -258,7 +258,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
             queuedGameKeys = queuedGameStore.load(),
         ),
     )
-    val state: StateFlow<OpenNowUiState> = _state.asStateFlow()
+    val state: StateFlow<NexPlayUiState> = _state.asStateFlow()
 
     private var gamesJob: Job? = null
     private var launchJob: Job? = null
@@ -275,7 +275,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
     init {
         viewModelScope.launch {
             settingsStore.settings.collect { next ->
-                OpenNowAnalytics.applyOptOut(!next.analyticsSharingEnabled)
+                NexPlayAnalytics.applyOptOut(!next.analyticsSharingEnabled)
                 _state.update { it.copy(settings = next) }
             }
         }
@@ -861,7 +861,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    private fun diagnosticSummaryHeader(snapshot: OpenNowUiState): String {
+    private fun diagnosticSummaryHeader(snapshot: NexPlayUiState): String {
         val recommendation = deviceRecommendation
         val model = listOf(Build.MANUFACTURER, Build.MODEL)
             .map(String::trim)
@@ -1017,7 +1017,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
                 loginToolsVisible = false,
             )
         }
-        OpenNowAnalytics.capture(
+        NexPlayAnalytics.capture(
             event = "user_logged_in",
             properties = buildMap {
                 put("provider", session.provider.code)
@@ -1086,8 +1086,8 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
     fun logout() {
         viewModelScope.launch {
             pendingActiveSessionLaunch = null
-            OpenNowAnalytics.capture(event = "user_logged_out")
-            OpenNowAnalytics.reset()
+            NexPlayAnalytics.capture(event = "user_logged_out")
+            NexPlayAnalytics.reset()
             authRepository.logout()
             val nextSession = authStore.activeSession()
             _state.update {
@@ -1185,7 +1185,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
                         settingsRefreshing = false,
                     )
                 }
-                OpenNowAnalytics.capture(
+                NexPlayAnalytics.capture(
                     event = "account_switched",
                     properties = mapOf(
                         "provider" to session.provider.code,
@@ -1240,7 +1240,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
     fun setCatalogSearch(query: String) {
         _state.update { it.copy(catalogSearch = query) }
         if (query.isNotBlank()) {
-            OpenNowAnalytics.capture(
+            NexPlayAnalytics.capture(
                 event = "catalog_searched",
                 properties = mapOf("query" to query),
             )
@@ -1274,7 +1274,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
             val filters = if (filterId in it.catalogFilterIds) it.catalogFilterIds - filterId else it.catalogFilterIds + filterId
             it.copy(catalogFilterIds = filters)
         }
-        OpenNowAnalytics.capture(
+        NexPlayAnalytics.capture(
             event = "catalog_filter_applied",
             properties = mapOf(
                 "filter_id" to filterId,
@@ -1291,7 +1291,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
 
     fun selectGame(game: GameInfo) {
         _state.update { it.copy(selectedGame = game) }
-        OpenNowAnalytics.capture(
+        NexPlayAnalytics.capture(
             event = "game_selected",
             properties = mapOf(
                 "game_id" to game.id,
@@ -1320,7 +1320,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
 
     fun downloadAndroidUpdate() {
         if (androidUpdateJob?.isActive == true || !state.value.androidUpdate.canDownload) return
-        OpenNowAnalytics.capture(event = "app_update_downloaded")
+        NexPlayAnalytics.capture(event = "app_update_downloaded")
         androidUpdateJob = viewModelScope.launch {
             appUpdater.downloadUpdate()
         }
@@ -1329,7 +1329,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
     fun performAndroidUpdatePrimaryAction() {
         val update = state.value.androidUpdate
         if (update.canOpenPlayStore) {
-            OpenNowAnalytics.capture(
+            NexPlayAnalytics.capture(
                 event = "app_update_opened_play_store",
                 properties = buildMap {
                     put("current_version_code", update.currentVersionCode)
@@ -1669,7 +1669,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
             val next = if (gameId in it.favoriteGameIds) it.favoriteGameIds - gameId else it.favoriteGameIds + gameId
             it.copy(favoriteGameIds = next)
         }
-        OpenNowAnalytics.capture(
+        NexPlayAnalytics.capture(
             event = "favorite_toggled",
             properties = mapOf(
                 "game_id" to gameId,
@@ -1771,7 +1771,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
                 "Starting launch game=${game.title} base=${hostForDebug(baseUrl)} settings=${settings.debugSummary()} override=${streamingBaseUrlOverride != null}",
             )
             recordQueuedGame(game)
-            OpenNowAnalytics.capture(
+            NexPlayAnalytics.capture(
                 event = "stream_started",
                 properties = mapOf(
                     "game_id" to game.id,
@@ -2030,7 +2030,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
                     recordDebugEvent("stream", "No cloud session found to stop")
                 }
             }
-            OpenNowAnalytics.capture(
+            NexPlayAnalytics.capture(
                 event = "stream_stopped",
                 properties = mapOf(
                     "game_title" to (state.value.streamGame?.title ?: ""),
@@ -2519,7 +2519,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
         ensureSessionReportAccumulator()
         if (state.value.streamStatus == "streaming") return
         recordDebugEvent("stream", "Native stream connected session=${state.value.streamSession?.shortDebugId().orEmpty()} game=${state.value.streamGame?.title.orEmpty()}")
-        OpenNowAnalytics.capture(
+        NexPlayAnalytics.capture(
             event = "stream_connected",
             properties = mapOf(
                 "game_title" to (state.value.streamGame?.title ?: ""),
@@ -2568,7 +2568,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
 
     fun markStreamError(message: String) {
         recordDebugEvent("stream", "Native stream error message=${message.take(DEBUG_EVENT_MESSAGE_LIMIT)} session=${state.value.streamSession?.shortDebugId().orEmpty()}")
-        OpenNowAnalytics.capture(
+        NexPlayAnalytics.capture(
             event = "stream_error",
             properties = mapOf(
                 "error_message" to message,
@@ -2915,7 +2915,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
             }
             appendLine(DisplayRefreshDiagnostics.snapshot())
             appendLine(NativeInputDiagnostics.snapshot())
-            appendLine(OpenNowHttpDiagnostics.snapshot())
+            appendLine(NexPlayHttpDiagnostics.snapshot())
             snapshot.error?.let { appendLine("error=$it") }
             val events = debugEventSnapshot()
             appendLine("events.count=${events.size} max=$DEBUG_EVENT_LIMIT")
@@ -2950,7 +2950,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
 
     fun debugLogFileName(): String {
         val timestamp = SimpleDateFormat("yyyyMMdd-HHmmss", Locale.US).format(Date())
-        return "opennow-android-logs-$timestamp.txt"
+        return "nexplay-android-logs-$timestamp.txt"
     }
 
     private companion object {
@@ -3684,7 +3684,7 @@ internal fun externalLaunchIdFromParts(
     queryParameters: Map<String, String?>,
 ): String? {
     val normalizedScheme = scheme.orEmpty().lowercase(Locale.US)
-    val uriCandidates = if (normalizedScheme == "opennow") {
+    val uriCandidates = if (normalizedScheme == "nexplay") {
         buildList {
             add(queryParameters["id"])
             add(queryParameters["appId"])

@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
  * Six radii, down from the thirteen distinct values that were previously spread across ~109
  * inline `RoundedCornerShape(...)` call sites.
  */
-object OpenNowRadius {
+object NexPlayRadius {
     val xs = 4.dp
     val sm = 8.dp
     val md = 12.dp
@@ -18,10 +18,10 @@ object OpenNowRadius {
 }
 
 /** Wired into `MaterialTheme(shapes = ...)`, which previously received no shapes at all. */
-val OpenNowShapes = Shapes(
-    extraSmall = RoundedCornerShape(OpenNowRadius.xs),
-    small = RoundedCornerShape(OpenNowRadius.sm),
-    medium = RoundedCornerShape(OpenNowRadius.md),
-    large = RoundedCornerShape(OpenNowRadius.lg),
-    extraLarge = RoundedCornerShape(OpenNowRadius.xl),
+val NexPlayShapes = Shapes(
+    extraSmall = RoundedCornerShape(NexPlayRadius.xs),
+    small = RoundedCornerShape(NexPlayRadius.sm),
+    medium = RoundedCornerShape(NexPlayRadius.md),
+    large = RoundedCornerShape(NexPlayRadius.lg),
+    extraLarge = RoundedCornerShape(NexPlayRadius.xl),
 )

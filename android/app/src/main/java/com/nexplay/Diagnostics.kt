@@ -34,7 +34,7 @@ private val DebugPayloadJson = Json {
     encodeDefaults = true
 }
 
-internal object OpenNowHttpDiagnostics {
+internal object NexPlayHttpDiagnostics {
     private val lines = ArrayDeque<String>()
 
     @Synchronized
@@ -125,7 +125,7 @@ internal fun sanitizeDiagnosticLogPayload(
     val trimmed = raw.trim()
     if (trimmed.isBlank()) return "(empty)"
     val formatted = runCatching {
-        val sanitized = redactDiagnosticJsonElement(OpenNowJson.parseToJsonElement(trimmed))
+        val sanitized = redactDiagnosticJsonElement(NexPlayJson.parseToJsonElement(trimmed))
         DebugPayloadJson.encodeToString(JsonElement.serializer(), sanitized)
     }.getOrElse {
         redactDiagnosticText(trimmed)
@@ -212,7 +212,7 @@ internal fun sanitizeDiagnosticExport(raw: String): String {
 }
 
 private const val ANDROID_DIAGNOSTIC_PASTE_URL =
-    "https://paste.rtech.support/upload/opennow-android-diagnostics.txt"
+    "https://paste.rtech.support/upload/nexplay-android-diagnostics.txt"
 private const val ANDROID_DIAGNOSTIC_PASTE_EXPIRY_SECONDS = 86_400
 
 internal suspend fun uploadAndroidDiagnosticPaste(
@@ -232,7 +232,7 @@ internal suspend fun uploadAndroidDiagnosticPaste(
             error("Diagnostics upload failed (HTTP ${response.code})")
         }
         val jsonUrl = runCatching {
-            OpenNowJson.parseToJsonElement(body).jsonObject["url"]?.jsonPrimitive?.content
+            NexPlayJson.parseToJsonElement(body).jsonObject["url"]?.jsonPrimitive?.content
         }.getOrNull()
         (jsonUrl ?: body.lineSequence().firstOrNull { it.startsWith("https://") })
             ?.trim()

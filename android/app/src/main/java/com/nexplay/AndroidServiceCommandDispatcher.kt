@@ -7,7 +7,7 @@ import java.util.concurrent.Executors
 internal object AndroidServiceCommandDispatcher {
     private const val TAG = "NexPlayServiceCommands"
     private val executor = Executors.newSingleThreadExecutor { command ->
-        Thread(command, "opennow-service-commands").apply {
+        Thread(command, "nexplay-service-commands").apply {
             priority = Thread.NORM_PRIORITY
         }
     }

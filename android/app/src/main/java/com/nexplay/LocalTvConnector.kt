@@ -110,7 +110,7 @@ internal class LocalTvConnector {
                 pairedSharedKey = null
                 serverSocket = server
                 val pairUri = Uri.Builder()
-                    .scheme("opennow")
+                    .scheme("nexplay")
                     .authority("pair")
                     .appendQueryParameter("h", address.hostAddress)
                     .appendQueryParameter("p", server.localPort.toString())
@@ -167,7 +167,7 @@ internal class LocalTvConnector {
     }
 
     fun isPairUri(uri: Uri?): Boolean =
-        uri?.scheme.equals("opennow", ignoreCase = true) && uri?.host.equals("pair", ignoreCase = true)
+        uri?.scheme.equals("nexplay", ignoreCase = true) && uri?.host.equals("pair", ignoreCase = true)
 
     fun pairPhone(uri: Uri) {
         if (!isPairUri(uri)) return
@@ -248,7 +248,7 @@ internal class LocalTvConnector {
         scope.launch {
             runCatching {
                 val requestId = UUID.randomUUID().toString()
-                val sessionJson = OpenNowJson.encodeToString(session)
+                val sessionJson = NexPlayJson.encodeToString(session)
                 val plaintext = "${System.currentTimeMillis()}\n$requestId\n$sessionJson"
                 val encrypted = encrypt(target.sharedKey, plaintext)
                 val response = sendFrame(
@@ -402,7 +402,7 @@ internal class LocalTvConnector {
         }
         val requestId = plaintext.substring(firstBreak + 1, secondBreak)
         if (requestId.isBlank() || !recentRequestIds.add(requestId)) return STATUS_FORBIDDEN to "Sign-in request was already used"
-        val session = runCatching { OpenNowJson.decodeFromString<AuthSession>(plaintext.substring(secondBreak + 1)) }
+        val session = runCatching { NexPlayJson.decodeFromString<AuthSession>(plaintext.substring(secondBreak + 1)) }
             .getOrElse { return STATUS_BAD_REQUEST to "Sign-in data could not be read" }
         if (session.tokens.accessToken.isBlank() || session.user.userId.isBlank() || session.provider.code.isBlank()) {
             return STATUS_BAD_REQUEST to "Sign-in data is incomplete"

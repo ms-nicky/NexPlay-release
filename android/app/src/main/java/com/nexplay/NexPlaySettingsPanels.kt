@@ -68,7 +68,7 @@ import androidx.compose.foundation.layout.Spacer
 import kotlinx.coroutines.delay
 
 @Composable
-internal fun AppDataSettingsPanel(viewModel: OpenNowViewModel) {
+internal fun AppDataSettingsPanel(viewModel: NexPlayViewModel) {
     var clearCacheConfirmOpen by remember { mutableStateOf(false) }
     var resetSettingsConfirmOpen by remember { mutableStateOf(false) }
     if (clearCacheConfirmOpen) {
@@ -138,7 +138,7 @@ internal fun AppDataSettingsPanel(viewModel: OpenNowViewModel) {
 }
 
 @Composable
-internal fun AndroidUpdatePanel(state: OpenNowUiState, viewModel: OpenNowViewModel) {
+internal fun AndroidUpdatePanel(state: NexPlayUiState, viewModel: NexPlayViewModel) {
     val update = state.androidUpdate
     if (!update.updateChecksSupported) {
         AndroidUpdateUnavailablePanel(update)
@@ -481,7 +481,7 @@ private fun formatUpdateBytes(bytes: Long): String {
 }
 
 @Composable
-internal fun AccountSettingsPanel(state: OpenNowUiState, viewModel: OpenNowViewModel) {
+internal fun AccountSettingsPanel(state: NexPlayUiState, viewModel: NexPlayViewModel) {
     val currentSession = state.authSession
     val currentUserId = currentSession?.user?.userId
     val context = LocalContext.current
@@ -1328,7 +1328,7 @@ internal fun AppVersionPanel() {
 }
 
 @Composable
-internal fun OpenNowGitHubPanel() {
+internal fun NexPlayGitHubPanel() {
     val context = LocalContext.current
     val clipboard = LocalClipboardManager.current
     Row(
@@ -1430,7 +1430,7 @@ private fun openExternalUrlOrCopy(
 }
 
 @Composable
-internal fun DebugLogsPanel(state: OpenNowUiState, viewModel: OpenNowViewModel) {
+internal fun DebugLogsPanel(state: NexPlayUiState, viewModel: NexPlayViewModel) {
     val context = LocalContext.current
     val clipboard = LocalClipboardManager.current
     var copied by remember { mutableStateOf(false) }

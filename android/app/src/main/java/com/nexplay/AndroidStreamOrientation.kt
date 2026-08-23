@@ -3,7 +3,7 @@ package com.nexplay
 internal const val PHONE_STREAM_LANDSCAPE_MAX_SMALLEST_WIDTH_DP = 600
 
 internal fun shouldLockPhoneStreamLandscape(
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     smallestScreenWidthDp: Int,
 ): Boolean =
     state.page == AppPage.Stream &&

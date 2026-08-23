@@ -50,7 +50,7 @@ val Inter = FontFamily(
  * label was composed. Material also lerps against its own hardcoded `sp` styles, so `sp`
  * throughout is the only combination that cannot collide. `TypographyUnitsTest` enforces this.
  */
-val OpenNowTypography = Typography().run {
+val NexPlayTypography = Typography().run {
     copy(
         displayLarge = displayLarge.copy(
             fontFamily = Inter, fontWeight = FontWeight.ExtraBold,
@@ -119,7 +119,7 @@ val OpenNowTypography = Typography().run {
  * Tabular, slashed-zero figures for anything that updates in place — queue position, FPS, bitrate,
  * latency, slider values. Proportional digits make those readouts visibly jitter on every tick.
  */
-val OpenNowNumericStyle = TextStyle(
+val NexPlayNumericStyle = TextStyle(
     fontFamily = Inter,
     fontFeatureSettings = "tnum, zero",
 )

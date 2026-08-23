@@ -289,12 +289,12 @@ import com.nexplay.ui.controls.ControlSwitchRow
 import com.nexplay.ui.controls.LocalControlRowStyle
 import com.nexplay.ui.controls.LocalControlSectionStyle
 import com.nexplay.ui.theme.LocalReduceMotion
-import com.nexplay.ui.theme.OpenNowMotion
-import com.nexplay.ui.theme.OpenNowPalette
-import com.nexplay.ui.theme.OpenNowRadius
-import com.nexplay.ui.theme.OpenNowShapes
-import com.nexplay.ui.theme.OpenNowSpacing
-import com.nexplay.ui.theme.OpenNowTypography
+import com.nexplay.ui.theme.NexPlayMotion
+import com.nexplay.ui.theme.NexPlayPalette
+import com.nexplay.ui.theme.NexPlayRadius
+import com.nexplay.ui.theme.NexPlayShapes
+import com.nexplay.ui.theme.NexPlaySpacing
+import com.nexplay.ui.theme.NexPlayTypography
 import com.nexplay.ui.theme.numeric
 import com.nexplay.ui.theme.tint
 import kotlin.math.roundToInt
@@ -303,13 +303,13 @@ import kotlin.math.sqrt
 
 // Aliases onto the shared token layer. The names stay so existing call sites keep working; the
 // values now live in exactly one place instead of being duplicated across two files.
-private val Green = OpenNowPalette.AccentDefault
-private val Background = OpenNowPalette.Background
-private val Panel = OpenNowPalette.Panel
-private val PanelAlt = OpenNowPalette.PanelAlt
-private val TextPrimary = OpenNowPalette.TextPrimary
-private val TextMuted = OpenNowPalette.TextMuted
-private val ChromeScrim = OpenNowPalette.ChromeScrim
+private val Green = NexPlayPalette.AccentDefault
+private val Background = NexPlayPalette.Background
+private val Panel = NexPlayPalette.Panel
+private val PanelAlt = NexPlayPalette.PanelAlt
+private val TextPrimary = NexPlayPalette.TextPrimary
+private val TextMuted = NexPlayPalette.TextMuted
+private val ChromeScrim = NexPlayPalette.ChromeScrim
 private val TopBarCompactControlHeight = 30.dp
 private const val DEVICE_LOGIN_SIDE_BY_SIDE_MIN_WIDTH_DP = 520
 private const val COMPACT_STREAM_DEVICE_STATUS_REFRESH_MS = 5_000L
@@ -318,17 +318,17 @@ private const val ACTIVE_STREAM_MODE_NOTICE_DURATION_MS = 8_000L
 private const val STREAM_NETWORK_NOTICE_DURATION_MS = 12_000L
 private val UiAccent.color: Color
     get() = when (this) {
-        UiAccent.OpenNow -> OpenNowPalette.AccentDefault
-        UiAccent.Pixel -> OpenNowPalette.AccentPixel
-        UiAccent.HotPink -> OpenNowPalette.AccentHotPink
-        UiAccent.Lime -> OpenNowPalette.AccentLime
-        UiAccent.Coral -> OpenNowPalette.AccentCoral
-        UiAccent.Violet -> OpenNowPalette.AccentViolet
+        UiAccent.NexPlay -> NexPlayPalette.AccentDefault
+        UiAccent.Pixel -> NexPlayPalette.AccentPixel
+        UiAccent.HotPink -> NexPlayPalette.AccentHotPink
+        UiAccent.Lime -> NexPlayPalette.AccentLime
+        UiAccent.Coral -> NexPlayPalette.AccentCoral
+        UiAccent.Violet -> NexPlayPalette.AccentViolet
     }
 
 @Composable
 internal fun uiAccentLabel(accent: UiAccent): String = when (accent) {
-    UiAccent.OpenNow -> stringResource(R.string.accent_opennow)
+    UiAccent.NexPlay -> stringResource(R.string.accent_nexplay)
     UiAccent.Pixel -> stringResource(R.string.accent_pixel)
     UiAccent.HotPink -> stringResource(R.string.accent_hot_pink)
     UiAccent.Lime -> stringResource(R.string.accent_lime)
@@ -337,29 +337,29 @@ internal fun uiAccentLabel(accent: UiAccent): String = when (accent) {
 }
 
 @Composable
-fun OpenNowTheme(settings: AppSettings, content: @Composable () -> Unit) {
+fun NexPlayTheme(settings: AppSettings, content: @Composable () -> Unit) {
     val context = LocalContext.current
     val accent = settings.uiAccent.color
     val fallbackScheme = darkColorScheme(
         primary = accent,
-        onPrimary = OpenNowPalette.OnAccent,
+        onPrimary = NexPlayPalette.OnAccent,
         background = Background,
         surface = Panel,
         surfaceVariant = PanelAlt,
         onBackground = TextPrimary,
         onSurface = TextPrimary,
         onSurfaceVariant = TextMuted,
-        errorContainer = OpenNowPalette.ErrorContainer,
-        onErrorContainer = OpenNowPalette.OnErrorContainer,
+        errorContainer = NexPlayPalette.ErrorContainer,
+        onErrorContainer = NexPlayPalette.OnErrorContainer,
     )
     val colorScheme = if (settings.dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         dynamicDarkColorScheme(context).copy(
             primary = accent,
-            onPrimary = OpenNowPalette.OnAccent,
+            onPrimary = NexPlayPalette.OnAccent,
             secondary = accent,
             tertiary = Green,
-            errorContainer = OpenNowPalette.ErrorContainer,
-            onErrorContainer = OpenNowPalette.OnErrorContainer,
+            errorContainer = NexPlayPalette.ErrorContainer,
+            onErrorContainer = NexPlayPalette.OnErrorContainer,
         )
     } else {
         fallbackScheme
@@ -379,16 +379,16 @@ fun OpenNowTheme(settings: AppSettings, content: @Composable () -> Unit) {
     CompositionLocalProvider(LocalReduceMotion provides reduceMotion) {
         MaterialTheme(
             colorScheme = colorScheme,
-            typography = OpenNowTypography,
-            shapes = OpenNowShapes,
+            typography = NexPlayTypography,
+            shapes = NexPlayShapes,
             content = content,
         )
     }
 }
 
 @Composable
-fun OpenNowApp(
-    viewModel: OpenNowViewModel,
+fun NexPlayApp(
+    viewModel: NexPlayViewModel,
     onMicrophoneCaptureActiveChange: (Boolean) -> Unit = {},
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -547,7 +547,7 @@ fun OpenNowApp(
         },
     )
 
-    OpenNowTheme(state.settings) {
+    NexPlayTheme(state.settings) {
         val primaryColor = MaterialTheme.colorScheme.primary
         CompositionLocalProvider(
             LocalTvLoadingProfile provides state.androidTvProfile,
@@ -679,9 +679,9 @@ private fun SessionReportDialog(
     // Four tones for a 0-100 score was more colour than information, and AccentLime vs
     // AccentDefault is indistinguishable at the 0.12 alpha this fills with.
     val scoreColor = when (report.rating) {
-        SessionReportRating.Excellent, SessionReportRating.Good -> OpenNowPalette.StatusGood
-        SessionReportRating.Fair -> OpenNowPalette.StatusFair
-        SessionReportRating.Poor -> OpenNowPalette.StatusPoor
+        SessionReportRating.Excellent, SessionReportRating.Good -> NexPlayPalette.StatusGood
+        SessionReportRating.Fair -> NexPlayPalette.StatusFair
+        SessionReportRating.Poor -> NexPlayPalette.StatusPoor
     }
     val configuration = LocalConfiguration.current
     val landscapeLayout = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
@@ -701,7 +701,7 @@ private fun SessionReportDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .heightIn(max = (configuration.screenHeightDp * 0.66f).dp),
-                    horizontalArrangement = Arrangement.spacedBy(OpenNowSpacing.lg),
+                    horizontalArrangement = Arrangement.spacedBy(NexPlaySpacing.lg),
                     verticalAlignment = Alignment.Top,
                 ) {
                     Column(
@@ -738,7 +738,7 @@ private fun SessionReportDialog(
         dismissButton = {
             Row(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(OpenNowRadius.sm))
+                    .clip(RoundedCornerShape(NexPlayRadius.sm))
                     .clickable { dontShowAgain = !dontShowAgain },
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -762,11 +762,11 @@ private fun SessionReportSummary(report: SessionReport, scoreColor: Color) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Surface(
             color = scoreColor.copy(alpha = 0.12f),
-            shape = RoundedCornerShape(OpenNowRadius.lg + 2.dp),
+            shape = RoundedCornerShape(NexPlayRadius.lg + 2.dp),
             border = BorderStroke(1.dp, scoreColor.copy(alpha = 0.38f)),
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(OpenNowSpacing.lg),
+                modifier = Modifier.fillMaxWidth().padding(NexPlaySpacing.lg),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
@@ -1101,9 +1101,9 @@ private data class SessionReportMetricData(
 private fun SessionReportMetricGrid(metrics: List<SessionReportMetricData>) {
     BoxWithConstraints(Modifier.fillMaxWidth()) {
         val columns = if (maxWidth >= 520.dp) 3 else 2
-        Column(verticalArrangement = Arrangement.spacedBy(OpenNowSpacing.sm)) {
+        Column(verticalArrangement = Arrangement.spacedBy(NexPlaySpacing.sm)) {
             metrics.chunked(columns).forEach { row ->
-                Row(horizontalArrangement = Arrangement.spacedBy(OpenNowSpacing.sm)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(NexPlaySpacing.sm)) {
                     row.forEach { metric -> SessionReportMetric(metric, Modifier.weight(1f)) }
                     // Six items divide evenly into 2 and 3, so this is defensive only.
                     repeat(columns - row.size) { Spacer(Modifier.weight(1f)) }
@@ -1119,11 +1119,11 @@ private fun SessionReportMetric(metric: SessionReportMetricData, modifier: Modif
     Surface(
         modifier = modifier,
         color = PanelAlt,
-        shape = RoundedCornerShape(OpenNowRadius.md),
+        shape = RoundedCornerShape(NexPlayRadius.md),
     ) {
         // A fixed three-line structure keeps every card the same height without an intrinsics
         // pass, which would be a second measure inside an already-scrolling dialog.
-        Column(Modifier.padding(horizontal = OpenNowSpacing.md, vertical = 10.dp)) {
+        Column(Modifier.padding(horizontal = NexPlaySpacing.md, vertical = 10.dp)) {
             Text(metric.label, color = TextMuted, style = MaterialTheme.typography.labelSmall, maxLines = 1)
             Text(
                 metric.value ?: notMeasured,
@@ -1147,7 +1147,7 @@ private fun SessionReportMetric(metric: SessionReportMetricData, modifier: Modif
 
 @Composable
 private fun SessionReportFindingRow(finding: SessionReportFinding) {
-    val titleColor = if (finding.kind == SessionReportFindingKind.Warning) OpenNowPalette.StatusFair else Green
+    val titleColor = if (finding.kind == SessionReportFindingKind.Warning) NexPlayPalette.StatusFair else Green
     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
         Text(finding.title, color = titleColor, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
         Text(finding.detail, color = TextMuted, style = MaterialTheme.typography.bodySmall)
@@ -1159,7 +1159,7 @@ private fun normalizeSessionReportResolution(value: String?): Pair<Int, Int>? =
 
 @Composable
 private fun DiagnosticShareDialog(
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     onUpload: () -> Unit,
     onDismiss: () -> Unit,
 ) {
@@ -1326,7 +1326,7 @@ private fun AndroidUpdatePromptDialog(
 private fun LoadingScreen(text: String) {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            OpenNowMark(72.dp)
+            NexPlayMark(72.dp)
             CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
             Text(text, color = TextMuted)
         }
@@ -1334,7 +1334,7 @@ private fun LoadingScreen(text: String) {
 }
 
 @Composable
-private fun LoginScreen(state: OpenNowUiState, viewModel: OpenNowViewModel) {
+private fun LoginScreen(state: NexPlayUiState, viewModel: NexPlayViewModel) {
     val signInFocusRequester = remember { FocusRequester() }
     val context = LocalContext.current
     var tokenDialogVisible by remember { mutableStateOf(false) }
@@ -1394,7 +1394,7 @@ private fun LoginScreen(state: OpenNowUiState, viewModel: OpenNowViewModel) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
-                OpenNowMark(
+                NexPlayMark(
                     size = if (compactForPhonePairing) 56.dp else 88.dp,
                     modifier = Modifier.clickable(onClick = viewModel::recordLoginIconTap),
                 )
@@ -1571,8 +1571,8 @@ internal fun shouldUseDedicatedTvPairingLayout(
 
 @Composable
 private fun TvPhoneSignInConnector(
-    state: OpenNowUiState,
-    viewModel: OpenNowViewModel,
+    state: NexPlayUiState,
+    viewModel: NexPlayViewModel,
     dedicated: Boolean = false,
     modifier: Modifier = Modifier,
 ) {
@@ -2047,15 +2047,15 @@ private fun CatalogBuiltInWallpaperBackdrop(
     Image(
         painter = painterResource(preset.drawableRes),
         contentDescription = null,
-        modifier = modifier.background(OpenNowPalette.WallpaperBackdrop),
+        modifier = modifier.background(NexPlayPalette.WallpaperBackdrop),
         contentScale = ContentScale.Crop,
     )
 }
 
 @Composable
 private fun MainShell(
-    state: OpenNowUiState,
-    viewModel: OpenNowViewModel,
+    state: NexPlayUiState,
+    viewModel: NexPlayViewModel,
     musicControl: TopBarMusicControl,
     onMicrophoneCaptureActiveChange: (Boolean) -> Unit,
 ) {
@@ -2423,7 +2423,7 @@ internal fun shouldRestoreTvNavigationFocus(
 
 @Composable
 private fun AppNavigationRail(
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     activeSearchTarget: SearchTarget?,
     showAppIcon: Boolean,
     largeIcons: Boolean,
@@ -2459,7 +2459,7 @@ private fun AppNavigationRail(
                             .padding(top = 12.dp, bottom = 8.dp),
                         contentAlignment = Alignment.Center,
                     ) {
-                        OpenNowAppIcon(
+                        NexPlayAppIcon(
                             if (largeIcons) 44.dp else 34.dp,
                         )
                     }
@@ -2648,7 +2648,7 @@ private fun RowScope.BottomNavItem(selected: Boolean, onClick: () -> Unit, iconR
 
 @Composable
 private fun TopStatusBar(
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     onResumeActiveSession: () -> Unit,
     onOpenStreamSettings: () -> Unit,
     musicControl: TopBarMusicControl,
@@ -2672,7 +2672,7 @@ private fun TopStatusBar(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             if (showLogo) {
-                OpenNowMark(30.dp)
+                NexPlayMark(30.dp)
                 Spacer(Modifier.width(8.dp))
             }
             Row(
@@ -2713,7 +2713,7 @@ private fun TopStatusBar(
 
 @Composable
 private fun TopStatusDetails(
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     onOpenStreamSettings: () -> Unit,
 ) {
     val stream = state.activeStreamSettings ?: state.settings.stream
@@ -2764,7 +2764,7 @@ private fun TopBarMusicButton(control: TopBarMusicControl) {
             .semantics { contentDescription = description }
             .clickable(onClick = control.onToggle),
         shape = RoundedCornerShape(999.dp),
-        color = if (control.muted) OpenNowPalette.ErrorContainer.copy(alpha = 0.92f) else PanelAlt.copy(alpha = 0.78f),
+        color = if (control.muted) NexPlayPalette.ErrorContainer.copy(alpha = 0.92f) else PanelAlt.copy(alpha = 0.78f),
         tonalElevation = 0.dp,
     ) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -2772,7 +2772,7 @@ private fun TopBarMusicButton(control: TopBarMusicControl) {
                 Icon(
                     painter = painterResource(R.drawable.ic_volume_off),
                     contentDescription = null,
-                    tint = OpenNowPalette.OnErrorContainer,
+                    tint = NexPlayPalette.OnErrorContainer,
                     modifier = Modifier.size(17.dp),
                 )
             } else {
@@ -3020,8 +3020,8 @@ internal fun isTvActivateKey(event: androidx.compose.ui.input.key.KeyEvent): Boo
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun HomeScreen(
-    state: OpenNowUiState,
-    viewModel: OpenNowViewModel,
+    state: NexPlayUiState,
+    viewModel: NexPlayViewModel,
     tvProfile: Boolean,
     hideChromeWhenScrolled: Boolean,
     controlsInTopBar: Boolean,
@@ -3157,7 +3157,7 @@ private fun HomeScreen(
 
 @Composable
 private fun StoreScrollableControls(
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     onSortChange: (String) -> Unit,
     onFilterToggle: (String) -> Unit,
     showToolbar: Boolean = true,
@@ -3183,7 +3183,7 @@ private fun StoreScrollableControls(
 
 @Composable
 private fun StoreCatalogToolbar(
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     onSortChange: (String) -> Unit,
     onFilterToggle: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -3215,13 +3215,13 @@ private fun InlineErrorNotice(error: String?) {
     Surface(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
-        color = OpenNowPalette.ErrorContainer,
+        color = NexPlayPalette.ErrorContainer,
         tonalElevation = 0.dp,
     ) {
         Column(Modifier.padding(horizontal = 12.dp, vertical = 10.dp)) {
             Text(
                 compactErrorTitle(error),
-                color = OpenNowPalette.OnErrorContainer,
+                color = NexPlayPalette.OnErrorContainer,
                 style = MaterialTheme.typography.labelLarge,
                 fontWeight = FontWeight.Bold,
                 maxLines = 1,
@@ -3229,7 +3229,7 @@ private fun InlineErrorNotice(error: String?) {
             )
             Text(
                 compactErrorBody(error),
-                color = OpenNowPalette.OnErrorContainer,
+                color = NexPlayPalette.OnErrorContainer,
                 style = MaterialTheme.typography.bodySmall,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
@@ -3272,8 +3272,8 @@ private fun StoreScrollActionButton(iconRes: Int, contentDescription: String, on
 
 @Composable
 private fun LibraryScreen(
-    state: OpenNowUiState,
-    viewModel: OpenNowViewModel,
+    state: NexPlayUiState,
+    viewModel: NexPlayViewModel,
     tvProfile: Boolean,
     hideChromeWhenScrolled: Boolean,
     controlsInTopBar: Boolean,
@@ -3489,7 +3489,7 @@ private const val LIBRARY_STORE_FILTER_PREFIX = "library_store:"
 
 @Composable
 private fun ActiveSessionResumeCard(
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     onResumeActiveSession: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -3536,7 +3536,7 @@ private fun ActiveSessionResumeCard(
     }
 }
 
-private fun activeSessionGame(state: OpenNowUiState, active: ActiveSessionInfo): GameInfo? =
+private fun activeSessionGame(state: NexPlayUiState, active: ActiveSessionInfo): GameInfo? =
     (state.games + state.libraryGames).firstOrNull { game ->
         game.launchAppId == active.appId.toString() ||
             game.variants.any { variant -> variant.id == active.appId.toString() }
@@ -3818,7 +3818,7 @@ private fun GameCardSkeleton(
     showStoreLabels: Boolean,
     showCardTitles: Boolean,
 ) {
-    val cardShape = RoundedCornerShape(OpenNowRadius.md)
+    val cardShape = RoundedCornerShape(NexPlayRadius.md)
     Column(Modifier.fillMaxWidth()) {
         Card(
             modifier = Modifier
@@ -3846,7 +3846,7 @@ private fun GameCardSkeleton(
             Column(
                 Modifier
                     .fillMaxWidth()
-                    .padding(top = OpenNowSpacing.sm),
+                    .padding(top = NexPlaySpacing.sm),
                 verticalArrangement = Arrangement.spacedBy(6.dp),
             ) {
                 if (showCardTitles) {
@@ -3992,7 +3992,7 @@ private fun StoreGameGrid(
     favoriteIds: List<String>,
     settings: AppSettings,
     tvProfile: Boolean,
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     onSelect: (GameInfo) -> Unit,
     onFavorite: (String) -> Unit,
     onPlay: (GameInfo) -> Unit,
@@ -4072,7 +4072,7 @@ private fun StoreGameGrid(
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         SectionHeader(
                             title = stringResource(R.string.store_recommendations),
-                            modifier = Modifier.padding(top = OpenNowSpacing.lg, bottom = OpenNowSpacing.sm),
+                            modifier = Modifier.padding(top = NexPlaySpacing.lg, bottom = NexPlaySpacing.sm),
                         )
                     }
                 }
@@ -4132,7 +4132,7 @@ private fun StoreStartRails(
         Modifier
             .fillMaxWidth()
             .padding(top = 2.dp, bottom = 6.dp),
-        verticalArrangement = Arrangement.spacedBy(OpenNowSpacing.lg),
+        verticalArrangement = Arrangement.spacedBy(NexPlaySpacing.lg),
     ) {
         // The hero leads, then the rails — the catalog opens on one thing worth looking at rather
         // than on three equally-weighted horizontal strips.
@@ -4264,7 +4264,7 @@ private fun StoreComingNextCarousel(
         Modifier
             .fillMaxWidth()
             .padding(top = 6.dp),
-        verticalArrangement = Arrangement.spacedBy(OpenNowSpacing.md),
+        verticalArrangement = Arrangement.spacedBy(NexPlaySpacing.md),
     ) {
         SectionHeader(
             title = title,
@@ -4285,8 +4285,8 @@ private fun StoreComingNextCarousel(
         AnimatedContent(
             targetState = page,
             transitionSpec = {
-                fadeIn(tween(if (reduceMotion) 0 else OpenNowMotion.DurationStandard)) togetherWith
-                    fadeOut(tween(if (reduceMotion) 0 else OpenNowMotion.DurationFast))
+                fadeIn(tween(if (reduceMotion) 0 else NexPlayMotion.DurationStandard)) togetherWith
+                    fadeOut(tween(if (reduceMotion) 0 else NexPlayMotion.DurationFast))
             },
             label = "coming-next-carousel",
         ) { targetPage ->
@@ -4428,15 +4428,15 @@ private fun StoreRailSection(
     onChooseStore: (GameInfo) -> Unit,
 ) {
     val landscapeLayout = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
-    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(OpenNowSpacing.sm)) {
+    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(NexPlaySpacing.sm)) {
         SectionHeader(title = title)
         // The row breaks out of the grid's edge padding and re-applies it as content padding, so
         // cards scroll all the way under the screen edge instead of stopping short of it. The
         // header stays aligned to the content because the bleed is only on the row.
-        BoxWithConstraints(Modifier.horizontalBleed(OpenNowSpacing.ScreenEdge)) {
-            val spacing = OpenNowSpacing.md
+        BoxWithConstraints(Modifier.horizontalBleed(NexPlaySpacing.ScreenEdge)) {
+            val spacing = NexPlaySpacing.md
             val baseCardWidth = storeRailCardWidth(tvProfile, landscapeLayout)
-            val contentInset = OpenNowSpacing.ScreenEdge
+            val contentInset = NexPlaySpacing.ScreenEdge
             val visibleCount = storeRailVisibleCardCount(
                 availableWidthDp = maxWidth.value - contentInset.value * 2f,
                 baseCardWidthDp = baseCardWidth.value,
@@ -4491,7 +4491,7 @@ private fun StoreRailGameCard(
 ) {
     var focused by remember { mutableStateOf(false) }
     val focusManager = LocalFocusManager.current
-    val shape = RoundedCornerShape(if (expressiveUi) OpenNowRadius.md else OpenNowRadius.sm)
+    val shape = RoundedCornerShape(if (expressiveUi) NexPlayRadius.md else NexPlayRadius.sm)
     val actionButtonSize = 34.dp
     val enhancedControllerFocus = shouldShowEnhancedControllerFocus(
         focused = focused,
@@ -4513,8 +4513,8 @@ private fun StoreRailGameCard(
             else -> 1f
         },
         animationSpec = tween(
-            durationMillis = if (reduceMotion) 0 else OpenNowMotion.DurationStandard,
-            easing = OpenNowMotion.EasingStandard,
+            durationMillis = if (reduceMotion) 0 else NexPlayMotion.DurationStandard,
+            easing = NexPlayMotion.EasingStandard,
         ),
         label = "rail-card-scale",
     )
@@ -4566,7 +4566,7 @@ private fun StoreRailGameCard(
                 onLongClickLabel = stringResource(R.string.store_selector_play_long_press),
             ),
         shape = shape,
-        color = OpenNowPalette.ImagePlaceholder,
+        color = NexPlayPalette.ImagePlaceholder,
         tonalElevation = if (focused) 4.dp else 0.dp,
         shadowElevation = if (focused) 8.dp else 1.dp,
     ) {
@@ -4777,8 +4777,8 @@ private fun rememberCatalogCardAlpha(focused: Boolean, tvProfile: Boolean): Floa
     val alpha by animateFloatAsState(
         targetValue = target,
         animationSpec = tween(
-            durationMillis = if (reduceMotion) 0 else OpenNowMotion.DurationStandard,
-            easing = OpenNowMotion.EasingStandard,
+            durationMillis = if (reduceMotion) 0 else NexPlayMotion.DurationStandard,
+            easing = NexPlayMotion.EasingStandard,
         ),
         label = "catalog-card-dim",
     )
@@ -4918,9 +4918,9 @@ private fun gameGridSpec(
     settings: AppSettings,
     handheldLayout: Boolean,
 ): GameGridSpec {
-    val horizontalSpacing = if (compact) OpenNowSpacing.sm else OpenNowSpacing.GridGutter
-    val verticalSpacing = if (compact) OpenNowSpacing.md else OpenNowSpacing.GridRowGap
-    val horizontalPadding = OpenNowSpacing.ScreenEdge
+    val horizontalSpacing = if (compact) NexPlaySpacing.sm else NexPlaySpacing.GridGutter
+    val verticalSpacing = if (compact) NexPlaySpacing.md else NexPlaySpacing.GridRowGap
+    val horizontalPadding = NexPlaySpacing.ScreenEdge
 
     val baseCellWidth = when {
         !handheldLayout -> GRID_CELL_WIDTH_TV
@@ -4943,7 +4943,7 @@ private fun gameGridSpec(
         estimatedColumns = estimatedColumns,
         horizontalSpacing = horizontalSpacing,
         verticalSpacing = verticalSpacing,
-        contentPadding = PaddingValues(horizontal = horizontalPadding, vertical = OpenNowSpacing.md),
+        contentPadding = PaddingValues(horizontal = horizontalPadding, vertical = NexPlaySpacing.md),
         // TV grid cards match the TV rail cards, which have always been square — this is the shape
         // NVIDIA's tvCardImageUrl assets are cut for.
         squareCards = !handheldLayout,
@@ -4988,7 +4988,7 @@ private fun GameCard(
 ) {
     var focused by remember { mutableStateOf(false) }
     val focusManager = LocalFocusManager.current
-    val cardShape = RoundedCornerShape(if (expressiveUi) OpenNowRadius.md else OpenNowRadius.sm)
+    val cardShape = RoundedCornerShape(if (expressiveUi) NexPlayRadius.md else NexPlayRadius.sm)
     val handheldPosterCard = !tvProfile
     val launcherTile = handheldPosterCard && thumbnailFavoriteOverlay
     val overlayActionSize = if (launcherTile) 34.dp else 44.dp
@@ -5018,8 +5018,8 @@ private fun GameCard(
             else -> 1f
         },
         animationSpec = tween(
-            durationMillis = if (reduceMotion) 0 else OpenNowMotion.DurationStandard,
-            easing = OpenNowMotion.EasingStandard,
+            durationMillis = if (reduceMotion) 0 else NexPlayMotion.DurationStandard,
+            easing = NexPlayMotion.EasingStandard,
         ),
         label = "game-card-scale",
     )
@@ -5114,7 +5114,7 @@ private fun GameCard(
                 ControllerFocusFrame(
                     visible = enhancedControllerFocus,
                     animate = controllerBackgroundAnimations && !reduceMotion,
-                    cornerRadius = if (expressiveUi) OpenNowRadius.md else OpenNowRadius.sm,
+                    cornerRadius = if (expressiveUi) NexPlayRadius.md else NexPlayRadius.sm,
                 )
             }
         }
@@ -5122,7 +5122,7 @@ private fun GameCard(
             Column(
                 Modifier
                     .fillMaxWidth()
-                    .padding(top = OpenNowSpacing.sm),
+                    .padding(top = NexPlaySpacing.sm),
                 verticalArrangement = Arrangement.spacedBy(2.dp),
             ) {
                 if (showCardTitles) {
@@ -5404,7 +5404,7 @@ private fun GameDetailsSheet(
                     },
                 )
                 .clickable(onClick = {}),
-            shape = if (fullScreen) RoundedCornerShape(0.dp) else RoundedCornerShape(topStart = OpenNowRadius.xl, topEnd = OpenNowRadius.xl),
+            shape = if (fullScreen) RoundedCornerShape(0.dp) else RoundedCornerShape(topStart = NexPlayRadius.xl, topEnd = NexPlayRadius.xl),
             color = Panel,
             tonalElevation = 8.dp,
         ) {
@@ -5424,7 +5424,7 @@ private fun GameDetailsSheet(
                                     }
                                 },
                             )
-                            .padding(vertical = OpenNowSpacing.md),
+                            .padding(vertical = NexPlaySpacing.md),
                         contentAlignment = Alignment.Center,
                     ) {
                         Box(
@@ -5724,9 +5724,9 @@ private fun GameDetailsScrollableContent(
                         .border(
                             width = if (gameFocused) 3.dp else 1.dp,
                             color = if (gameFocused) MaterialTheme.colorScheme.primary else Color.White.copy(alpha = 0.12f),
-                            shape = RoundedCornerShape(OpenNowRadius.lg),
+                            shape = RoundedCornerShape(NexPlayRadius.lg),
                         )
-                        .clip(RoundedCornerShape(OpenNowRadius.lg))
+                        .clip(RoundedCornerShape(NexPlayRadius.lg))
                         .clickable {
                             onDismiss()
                             onPlay(game)
@@ -6163,7 +6163,7 @@ private fun OwnershipStatusRow(game: GameInfo, compact: Boolean) {
         ) {
             Text(
                 "Not owned",
-                color = OpenNowPalette.OnErrorContainer,
+                color = NexPlayPalette.OnErrorContainer,
                 style = MaterialTheme.typography.labelLarge,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = if (compact) 8.dp else 10.dp),
@@ -6754,8 +6754,8 @@ private fun StoreLaunchVariantRow(
 
 @Composable
 private fun StreamScreen(
-    state: OpenNowUiState,
-    viewModel: OpenNowViewModel,
+    state: NexPlayUiState,
+    viewModel: NexPlayViewModel,
     onMicrophoneCaptureActiveChange: (Boolean) -> Unit,
 ) {
     val context = LocalContext.current
@@ -7849,7 +7849,7 @@ private fun StreamSessionTimerMenuRow(
 ) {
     val display = sessionTimerDisplay(limit, startedAtMs, nowMs)
     val progressColor = when {
-        display.warning -> OpenNowPalette.StatusNotice
+        display.warning -> NexPlayPalette.StatusNotice
         else -> MaterialTheme.colorScheme.primary
     }
     Column(
@@ -7867,7 +7867,7 @@ private fun StreamSessionTimerMenuRow(
             }
             Text(
                 display.value,
-                color = if (display.warning) OpenNowPalette.StatusNotice else TextPrimary,
+                color = if (display.warning) NexPlayPalette.StatusNotice else TextPrimary,
                 style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.Bold,
                 maxLines = 1,
@@ -8347,7 +8347,7 @@ private fun MotionEvent.firstTwoPointerCentroid(): Offset =
 
 @Composable
 private fun ActiveSessionDecisionScreen(
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     onResumeSession: () -> Unit,
     onReplaceSession: () -> Unit,
     onCancel: () -> Unit,
@@ -8931,12 +8931,12 @@ private fun StreamControlsPanel(
             .fillMaxWidth(0.94f)
             .fillMaxHeight(0.72f)
             .streamTouchPassthrough(PASSTHROUGH_ID_PANEL),
-        shape = RoundedCornerShape(OpenNowRadius.lg + 2.dp),
+        shape = RoundedCornerShape(NexPlayRadius.lg + 2.dp),
         // Firmer than the old 0.93: at that alpha TextMuted did not reliably clear 4.5:1 over
         // bright gameplay. The hairline keeps the panel's edge visible against a light frame.
-        color = OpenNowPalette.PanelOverVideo,
+        color = NexPlayPalette.PanelOverVideo,
         contentColor = TextPrimary,
-        border = BorderStroke(1.dp, OpenNowPalette.PanelHairline),
+        border = BorderStroke(1.dp, NexPlayPalette.PanelHairline),
         tonalElevation = 6.dp,
     ) {
         // Every control row inside the panel picks up the denser, over-video styling — and, more
@@ -8969,8 +8969,8 @@ private fun StreamControlsPanel(
             modifier = Modifier
                 .fillMaxSize()
                 .onPreviewKeyEvent { handleVerticalDpadFocusMove(it, focusManager) },
-            contentPadding = PaddingValues(OpenNowSpacing.md + 2.dp),
-            verticalArrangement = Arrangement.spacedBy(OpenNowSpacing.md),
+            contentPadding = PaddingValues(NexPlaySpacing.md + 2.dp),
+            verticalArrangement = Arrangement.spacedBy(NexPlaySpacing.md),
         ) {
             when (currentPage) {
                 StreamControlsPage.StatusBar -> statusBarPageItems(
@@ -9231,7 +9231,7 @@ private fun StreamControlsPanel(
                         value = stringResource(R.string.stream_panel_steam_menu_summary),
                     )
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(OpenNowSpacing.sm),
+                        horizontalArrangement = Arrangement.spacedBy(NexPlaySpacing.sm),
                         modifier = Modifier.fillMaxWidth(),
                     ) {
                         StreamPanelKeyButton(stringResource(R.string.stream_panel_key_esc), Modifier.weight(1f)) {
@@ -9367,9 +9367,9 @@ private fun BuiltInGameTouchNotice(usingBuiltInTouch: Boolean) {
     Surface(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(14.dp),
-        color = OpenNowPalette.StatusNotice.copy(alpha = 0.10f),
+        color = NexPlayPalette.StatusNotice.copy(alpha = 0.10f),
         contentColor = TextPrimary,
-        border = BorderStroke(1.dp, OpenNowPalette.StatusNotice.copy(alpha = 0.38f)),
+        border = BorderStroke(1.dp, NexPlayPalette.StatusNotice.copy(alpha = 0.38f)),
     ) {
         Column(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 11.dp),
@@ -9377,7 +9377,7 @@ private fun BuiltInGameTouchNotice(usingBuiltInTouch: Boolean) {
         ) {
             Text(
                 stringResource(R.string.stream_touch_builtin_title),
-                color = OpenNowPalette.StatusNotice,
+                color = NexPlayPalette.StatusNotice,
                 style = MaterialTheme.typography.labelLarge,
                 fontWeight = FontWeight.Bold,
             )
@@ -9405,9 +9405,9 @@ private fun BugReportDataDisclosure(
     Surface(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(14.dp),
-        color = OpenNowPalette.StatusNotice.copy(alpha = 0.10f),
+        color = NexPlayPalette.StatusNotice.copy(alpha = 0.10f),
         contentColor = TextPrimary,
-        border = BorderStroke(1.dp, OpenNowPalette.StatusNotice.copy(alpha = 0.38f)),
+        border = BorderStroke(1.dp, NexPlayPalette.StatusNotice.copy(alpha = 0.38f)),
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -9425,7 +9425,7 @@ private fun BugReportDataDisclosure(
                 Text(
                     "PrintedWaste API",
                     modifier = Modifier.weight(1f),
-                    color = OpenNowPalette.StatusNotice,
+                    color = NexPlayPalette.StatusNotice,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.labelLarge,
                 )
@@ -9541,13 +9541,13 @@ private fun StreamPanelHeader(
         modifier = Modifier
             .fillMaxWidth()
             .padding(
-                start = OpenNowSpacing.md + 2.dp,
-                end = OpenNowSpacing.md + 2.dp,
-                top = OpenNowSpacing.md + 2.dp,
-                bottom = OpenNowSpacing.sm,
+                start = NexPlaySpacing.md + 2.dp,
+                end = NexPlaySpacing.md + 2.dp,
+                top = NexPlaySpacing.md + 2.dp,
+                bottom = NexPlaySpacing.sm,
             ),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(OpenNowSpacing.sm),
+        horizontalArrangement = Arrangement.spacedBy(NexPlaySpacing.sm),
     ) {
         if (!onMain) {
             StreamPanelHeaderButton(
@@ -9630,7 +9630,7 @@ private fun StreamPanelHeader(
                         .focusRequester(focusRequester)
                         .onFocusChanged { doneFocused = it.isFocused },
                     border = BorderStroke(2.dp, if (doneFocused) MaterialTheme.colorScheme.primary else TextPrimary),
-                    contentPadding = PaddingValues(horizontal = OpenNowSpacing.md, vertical = 6.dp),
+                    contentPadding = PaddingValues(horizontal = NexPlaySpacing.md, vertical = 6.dp),
                 ) {
                     Text(stringResource(R.string.stream_panel_done), maxLines = 1)
                 }
@@ -9676,14 +9676,14 @@ private fun streamPanelPageTransition(
         return fadeIn(tween(0)) togetherWith fadeOut(tween(0))
     }
     val forward = from == StreamControlsPage.Main && to != StreamControlsPage.Main
-    val duration = OpenNowMotion.DurationStandard
-    val easing = OpenNowMotion.EasingStandard
+    val duration = NexPlayMotion.DurationStandard
+    val easing = NexPlayMotion.EasingStandard
     return (
         slideInHorizontally(tween(duration, easing = easing)) { width -> if (forward) width / 6 else -width / 6 } +
             fadeIn(tween(duration, easing = easing))
         ) togetherWith (
         slideOutHorizontally(tween(duration, easing = easing)) { width -> if (forward) -width / 6 else width / 6 } +
-            fadeOut(tween(OpenNowMotion.DurationFast, easing = easing))
+            fadeOut(tween(NexPlayMotion.DurationFast, easing = easing))
         )
 }
 
@@ -10246,7 +10246,7 @@ private fun StreamBugReporter(
             if (landscapeLayout) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(OpenNowSpacing.lg),
+                    horizontalArrangement = Arrangement.spacedBy(NexPlaySpacing.lg),
                     verticalAlignment = Alignment.Top,
                 ) {
                     Column(
@@ -10453,7 +10453,7 @@ private fun LazyListScope.statusBarPageItems(
         )
     }
     item {
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(OpenNowSpacing.sm)) {
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(NexPlaySpacing.sm)) {
             ControlActionRow(
                 label = stringResource(R.string.stream_statusbar_appearance),
                 actionLabel = settings.streamStatsStyle.label,
@@ -10713,13 +10713,13 @@ private fun StreamKeyboardBar(
             // it — including on the text field — was also forwarded into the game as touch input.
             .streamTouchPassthrough(PASSTHROUGH_ID_KEYBOARD),
         // imePadding on the parent keeps this single compact row directly above the system IME.
-        shape = RoundedCornerShape(topStart = OpenNowRadius.lg, topEnd = OpenNowRadius.lg),
-        color = OpenNowPalette.PanelOverVideo,
-        border = BorderStroke(1.dp, OpenNowPalette.PanelHairline),
+        shape = RoundedCornerShape(topStart = NexPlayRadius.lg, topEnd = NexPlayRadius.lg),
+        color = NexPlayPalette.PanelOverVideo,
+        border = BorderStroke(1.dp, NexPlayPalette.PanelHairline),
         tonalElevation = 8.dp,
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = OpenNowSpacing.sm, vertical = 6.dp),
+            modifier = Modifier.padding(horizontal = NexPlaySpacing.sm, vertical = 6.dp),
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -10801,19 +10801,19 @@ private fun StreamStatsPill(
     val deviceStatus = rememberCompactStreamDeviceStatus()
     Surface(
         modifier = modifier
-            .padding(OpenNowSpacing.sm)
+            .padding(NexPlaySpacing.sm)
             .widthIn(max = if (compact) 720.dp else 300.dp),
-        shape = RoundedCornerShape(if (compact) OpenNowRadius.full else OpenNowRadius.lg),
+        shape = RoundedCornerShape(if (compact) NexPlayRadius.full else NexPlayRadius.lg),
         // Stays genuinely see-through — this one sits over gameplay by design. The hairline is
         // what keeps its edge readable against a bright frame.
         color = Panel.copy(alpha = 0.52f),
-        border = BorderStroke(1.dp, OpenNowPalette.PanelHairline),
+        border = BorderStroke(1.dp, NexPlayPalette.PanelHairline),
         tonalElevation = 0.dp,
     ) {
         if (compact) {
             Row(
-                Modifier.padding(horizontal = OpenNowSpacing.md, vertical = 6.dp),
-                horizontalArrangement = Arrangement.spacedBy(OpenNowSpacing.md),
+                Modifier.padding(horizontal = NexPlaySpacing.md, vertical = 6.dp),
+                horizontalArrangement = Arrangement.spacedBy(NexPlaySpacing.md),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 StreamStatsMetricItems(streamStats, streamSettings, metrics, deviceStatus, serverLocation)
@@ -10825,9 +10825,9 @@ private fun StreamStatsPill(
             FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = OpenNowSpacing.md, vertical = OpenNowSpacing.sm),
+                    .padding(horizontal = NexPlaySpacing.md, vertical = NexPlaySpacing.sm),
                 maxItemsInEachRow = 2,
-                horizontalArrangement = Arrangement.spacedBy(OpenNowSpacing.md),
+                horizontalArrangement = Arrangement.spacedBy(NexPlaySpacing.md),
                 verticalArrangement = Arrangement.spacedBy(6.dp),
             ) {
                 StreamStatsMetricItems(
@@ -10924,9 +10924,9 @@ private fun StreamNetworkQualityNotice(
             .padding(horizontal = 8.dp)
             .widthIn(max = 520.dp)
             .semantics { contentDescription = warning.message },
-        shape = RoundedCornerShape(OpenNowRadius.md),
+        shape = RoundedCornerShape(NexPlayRadius.md),
         color = Color(0xff4a2f0b).copy(alpha = 0.92f),
-        border = BorderStroke(1.dp, OpenNowPalette.StatusNotice.copy(alpha = 0.62f)),
+        border = BorderStroke(1.dp, NexPlayPalette.StatusNotice.copy(alpha = 0.62f)),
         tonalElevation = 0.dp,
     ) {
         Text(
@@ -11029,9 +11029,9 @@ private fun ActiveStreamModePill(
                     Surface(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp),
-                        color = OpenNowPalette.StatusNotice.copy(alpha = 0.10f),
+                        color = NexPlayPalette.StatusNotice.copy(alpha = 0.10f),
                         contentColor = TextPrimary,
-                        border = BorderStroke(1.dp, OpenNowPalette.StatusNotice.copy(alpha = 0.32f)),
+                        border = BorderStroke(1.dp, NexPlayPalette.StatusNotice.copy(alpha = 0.32f)),
                     ) {
                         Column(
                             modifier = Modifier.padding(12.dp),
@@ -11039,7 +11039,7 @@ private fun ActiveStreamModePill(
                         ) {
                             Text(
                                 text = "Why it happened",
-                                color = OpenNowPalette.StatusNotice,
+                                color = NexPlayPalette.StatusNotice,
                                 style = MaterialTheme.typography.labelLarge,
                                 fontWeight = FontWeight.Bold,
                             )
@@ -11818,7 +11818,7 @@ private fun StreamExitConfirmation(
             // The scrim covers everything, so it reports the full screen — otherwise a mis-tap on
             // "Exit Stream" also lands in the game underneath.
             .streamTouchPassthrough(PASSTHROUGH_ID_EXIT, inflate = 0.dp)
-            .background(OpenNowPalette.StreamScrim)
+            .background(NexPlayPalette.StreamScrim)
             // indication = null: a full-screen ripple is wrong, and without its own interaction
             // source the scrim competes with the two buttons for D-pad focus.
             .clickable(
@@ -11830,20 +11830,20 @@ private fun StreamExitConfirmation(
     ) {
         Surface(
             modifier = modifier
-                .padding(OpenNowSpacing.xl)
+                .padding(NexPlaySpacing.xl)
                 .fillMaxWidth()
                 // Unbounded fillMaxWidth made this enormous on a tablet or TV.
                 .widthIn(max = 440.dp),
             // Same radius as the controls panel, so the two overlays read as one family.
-            shape = RoundedCornerShape(OpenNowRadius.lg + 2.dp),
-            color = OpenNowPalette.PanelOverVideo,
+            shape = RoundedCornerShape(NexPlayRadius.lg + 2.dp),
+            color = NexPlayPalette.PanelOverVideo,
             contentColor = TextPrimary,
-            border = BorderStroke(1.dp, OpenNowPalette.PanelHairline),
+            border = BorderStroke(1.dp, NexPlayPalette.PanelHairline),
             tonalElevation = 8.dp,
         ) {
             Column(
-                Modifier.padding(OpenNowSpacing.lg + 2.dp),
-                verticalArrangement = Arrangement.spacedBy(OpenNowSpacing.md),
+                Modifier.padding(NexPlaySpacing.lg + 2.dp),
+                verticalArrangement = Arrangement.spacedBy(NexPlaySpacing.md),
             ) {
                 Text(
                     stringResource(R.string.stream_exit_eyebrow),
@@ -11859,7 +11859,7 @@ private fun StreamExitConfirmation(
                     style = MaterialTheme.typography.bodySmall,
                 )
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(OpenNowSpacing.md),
+                    horizontalArrangement = Arrangement.spacedBy(NexPlaySpacing.md),
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     OutlinedButton(
@@ -11878,7 +11878,7 @@ private fun StreamExitConfirmation(
 }
 
 @Composable
-private fun QueueLoadingScreen(state: OpenNowUiState, viewModel: OpenNowViewModel) {
+private fun QueueLoadingScreen(state: NexPlayUiState, viewModel: NexPlayViewModel) {
     val session = state.streamSession
     val game = state.streamGame
     val ads = sessionAdItems(session?.adState)
@@ -12391,7 +12391,7 @@ private fun queueUrgency(queuePosition: Int?): Float {
     return ((10 - position).toFloat() / 9f).coerceIn(0f, 1f)
 }
 
-private fun activeQueuePosition(state: OpenNowUiState): Int? =
+private fun activeQueuePosition(state: NexPlayUiState): Int? =
     queueDisplayPosition(state)
 
 @Composable
@@ -12409,7 +12409,7 @@ private fun rememberStableQueuePosition(queuePosition: Int?): Int? {
     return stableQueuePosition
 }
 
-private fun queueLaunchStatusText(state: OpenNowUiState, queuePosition: Int?): String =
+private fun queueLaunchStatusText(state: NexPlayUiState, queuePosition: Int?): String =
     queuePosition?.let { "Queue position $it" } ?: queueLaunchStatusText(state)
 
 private fun queueIdleStatusColor(queueCopy: String): Color =
@@ -12553,7 +12553,7 @@ private fun LandscapeQueuePositionDock(queuePosition: Int, modifier: Modifier = 
 private fun QueueAdPanel(
     ad: SessionAdInfo,
     mediaUrl: String,
-    viewModel: OpenNowViewModel,
+    viewModel: NexPlayViewModel,
     game: GameInfo?,
     queueCopy: String,
     queuePosition: Int?,
@@ -12640,7 +12640,7 @@ private fun QueueAdPlayback(
     ad: SessionAdInfo,
     mediaUrl: String,
     playbackKey: String,
-    viewModel: OpenNowViewModel,
+    viewModel: NexPlayViewModel,
     modifier: Modifier = Modifier,
 ) {
     QueueAdPlayer(
@@ -12732,7 +12732,7 @@ private fun QueueStatusAndActions(
 
 @Composable
 private fun MinimizedQueueDock(
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     onRestore: () -> Unit,
     onCancel: () -> Unit,
     modifier: Modifier = Modifier,
@@ -14415,9 +14415,9 @@ private fun FilterMenu(
 
 @Composable
 private fun PrintedWasteSelector(
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     game: GameInfo,
-    viewModel: OpenNowViewModel,
+    viewModel: NexPlayViewModel,
     modifier: Modifier = Modifier,
 ) {
     BackHandler(onBack = viewModel::dismissPrintedWasteSelector)
@@ -14566,7 +14566,7 @@ private fun PrintedWasteGameSummary(
 
 @Composable
 private fun PrintedWasteOptionsColumn(
-    state: OpenNowUiState,
+    state: NexPlayUiState,
     zones: List<PrintedWasteZoneOption>,
     selectedZoneId: String?,
     selectedZone: PrintedWasteZoneOption?,
@@ -14943,7 +14943,7 @@ internal fun UrlImage(
             }
         }
     }
-    Box(modifier.background(OpenNowPalette.ImagePlaceholder), contentAlignment = Alignment.Center) {
+    Box(modifier.background(NexPlayPalette.ImagePlaceholder), contentAlignment = Alignment.Center) {
         if (imageData != null) {
             key(activeSource) {
                 AsyncImage(
@@ -14969,7 +14969,7 @@ internal fun UrlImage(
             UrlImageState.Loaded -> Unit
             UrlImageState.Empty,
             UrlImageState.Failed,
-            -> OpenNowMark(42.dp)
+            -> NexPlayMark(42.dp)
         }
     }
 }
@@ -15010,7 +15010,7 @@ private fun LoadingShimmer(modifier: Modifier = Modifier) {
         )
         localOffset
     } else null
-    val baseColor = OpenNowPalette.ShimmerBase
+    val baseColor = NexPlayPalette.ShimmerBase
     val highlightColor1 = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.32f)
     val highlightColor2 = MaterialTheme.colorScheme.primary.copy(alpha = 0.18f)
 
@@ -15068,7 +15068,7 @@ internal fun shimmerBandStartX(progress: Float, containerWidth: Float, bandWidth
 }
 
 @Composable
-private fun OpenNowMark(size: androidx.compose.ui.unit.Dp, modifier: Modifier = Modifier) {
+private fun NexPlayMark(size: androidx.compose.ui.unit.Dp, modifier: Modifier = Modifier) {
     val alpha = remember { Animatable(0f) }
     LaunchedEffect(Unit) {
         alpha.animateTo(1f, animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing))
@@ -15090,7 +15090,7 @@ private fun OpenNowMark(size: androidx.compose.ui.unit.Dp, modifier: Modifier = 
 }
 
 @Composable
-private fun OpenNowAppIcon(size: androidx.compose.ui.unit.Dp) {
+private fun NexPlayAppIcon(size: androidx.compose.ui.unit.Dp) {
     val alpha = remember { Animatable(0f) }
     LaunchedEffect(Unit) {
         alpha.animateTo(1f, animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing))

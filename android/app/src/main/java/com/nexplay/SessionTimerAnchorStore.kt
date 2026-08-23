@@ -2,7 +2,7 @@ package com.nexplay
 
 import android.content.Context
 
-private const val SESSION_TIMER_STORE_NAME = "opennow_session_timer"
+private const val SESSION_TIMER_STORE_NAME = "nexplay_session_timer"
 private const val KEY_SESSION_ID = "session_id"
 private const val KEY_STARTED_AT_MS = "started_at_ms"
 

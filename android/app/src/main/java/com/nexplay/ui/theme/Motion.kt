@@ -7,7 +7,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
  * Duration and easing tokens, replacing the assorted `tween(1_100)` / `tween(900)` / `tween(820)`
  * values that were picked independently across the UI.
  */
-object OpenNowMotion {
+object NexPlayMotion {
     /** Press, toggle, ripple — anything that must feel instantaneous. */
     const val DurationFast = 120
 

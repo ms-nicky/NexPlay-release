@@ -1,8 +1,8 @@
 {
   "android": {
-    "apkUrl": "https://github.com/ms-nicky/NexPlay-release/releases/download/v1.2.1/NexPlay-1.2.1-release.apk",
-    "versionName": "1.2.1",
-    "versionCode": 75,
-    "releaseNotes": "NexPlay 1.2.1 - Fix crash when pressing Go Live during stream"
+    "apkUrl": "https://github.com/ms-nicky/NexPlay-release/releases/download/v1.3.0/app-release.apk",
+    "versionName": "1.3.0",
+    "versionCode": 77,
+    "releaseNotes": "NexPlay 1.3.0 - Upstream sync: Exynos HEVC, touch recovery, mouse precision, Finger Mouse, controller fix"
   }
 }

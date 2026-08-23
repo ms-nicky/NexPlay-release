@@ -490,7 +490,7 @@ class AndroidAppUpdater(
                 mkdirs()
                 listFiles()?.forEach { it.delete() }
             }
-            val tmp = File(updatesDir, "opennow-update.tmp")
+            val tmp = File(updatesDir, "nexplay-update.tmp")
             val outputName = candidate.safeFileName()
             val outputFile = File(updatesDir, outputName)
             var transferred = 0L
@@ -659,7 +659,7 @@ internal fun normalizeAndroidUpdateSourceUrl(raw: String): String {
 }
 
 internal fun parseAndroidUpdateCandidate(sourceUrl: String, body: String): AndroidUpdateCandidate? {
-    val root = runCatching { OpenNowJson.parseToJsonElement(body).jsonObject }.getOrNull() ?: return null
+    val root = runCatching { NexPlayJson.parseToJsonElement(body).jsonObject }.getOrNull() ?: return null
     parseGithubReleaseCandidate(sourceUrl, root)?.let { return it }
 
     val manifest = root.obj("android") ?: root.obj("androidUpdate") ?: root

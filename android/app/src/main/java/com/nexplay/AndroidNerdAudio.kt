@@ -13,7 +13,7 @@ import android.os.SystemClock
 internal class AndroidNerdAudioController(context: Context) {
     private val appContext = context.applicationContext
     private val mainHandler = Handler(Looper.getMainLooper())
-    private val audioThread = HandlerThread("opennow-cue-audio").apply { start() }
+    private val audioThread = HandlerThread("nexplay-cue-audio").apply { start() }
     private val audioHandler = Handler(audioThread.looper)
     private var cuePlayer: MediaPlayer? = null
     private var cuePurpose: MusicCuePurpose? = null

@@ -38,9 +38,9 @@ import androidx.compose.ui.unit.dp
 import com.nexplay.LocalSettingsControllerNavigationEnabled
 import com.nexplay.handleVerticalDpadFocusMove
 import com.nexplay.isTvActivateKey
-import com.nexplay.ui.theme.OpenNowPalette
-import com.nexplay.ui.theme.OpenNowRadius
-import com.nexplay.ui.theme.OpenNowSpacing
+import com.nexplay.ui.theme.NexPlayPalette
+import com.nexplay.ui.theme.NexPlayRadius
+import com.nexplay.ui.theme.NexPlaySpacing
 
 /**
  * How a settings-style row is painted.
@@ -86,14 +86,14 @@ data class ControlRowStyle(
                 containerFocused = container,
                 borderRestWidth = 1.dp,
                 borderFocusWidth = 2.dp,
-                horizontalPadding = OpenNowSpacing.md,
-                verticalPadding = OpenNowSpacing.sm,
+                horizontalPadding = NexPlaySpacing.md,
+                verticalPadding = NexPlaySpacing.sm,
                 contentGap = 3.dp,
                 labelStyle = MaterialTheme.typography.bodyLarge,
                 labelWeight = null,
                 supportingStyle = MaterialTheme.typography.bodySmall,
                 supportingColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                indentStep = OpenNowSpacing.xl,
+                indentStep = NexPlaySpacing.xl,
                 focusable = controllerNavigation,
                 showFocusRing = controllerNavigation,
             )
@@ -108,26 +108,26 @@ data class ControlRowStyle(
          */
         @Composable
         fun stream(): ControlRowStyle = ControlRowStyle(
-            shape = RoundedCornerShape(OpenNowRadius.md),
-            containerRest = OpenNowPalette.PanelRowRest,
-            containerFocused = OpenNowPalette.PanelRowFocused,
+            shape = RoundedCornerShape(NexPlayRadius.md),
+            containerRest = NexPlayPalette.PanelRowRest,
+            containerFocused = NexPlayPalette.PanelRowFocused,
             borderRestWidth = 1.dp,
             borderFocusWidth = 2.dp,
-            horizontalPadding = OpenNowSpacing.md,
+            horizontalPadding = NexPlaySpacing.md,
             verticalPadding = 10.dp,
             contentGap = 2.dp,
             labelStyle = MaterialTheme.typography.titleSmall,
             labelWeight = FontWeight.SemiBold,
             supportingStyle = MaterialTheme.typography.labelSmall,
-            supportingColor = OpenNowPalette.TextMuted,
-            indentStep = OpenNowSpacing.xl,
+            supportingColor = NexPlayPalette.TextMuted,
+            indentStep = NexPlaySpacing.xl,
             focusable = true,
             showFocusRing = true,
         )
     }
 }
 
-/** Settings rows have always been 14dp — between [OpenNowRadius.md] and [OpenNowRadius.lg]. */
+/** Settings rows have always been 14dp — between [NexPlayRadius.md] and [NexPlayRadius.lg]. */
 private val SETTINGS_ROW_RADIUS = 14.dp
 
 internal val LocalControlRowStyle = compositionLocalOf<ControlRowStyle?> { null }
@@ -276,8 +276,8 @@ data class ControlSectionStyle(
             usesCard = false,
             titleStyle = MaterialTheme.typography.labelMedium,
             titleWeight = FontWeight.Bold,
-            titleColor = OpenNowPalette.TextMuted,
-            itemSpacing = OpenNowSpacing.sm,
+            titleColor = NexPlayPalette.TextMuted,
+            itemSpacing = NexPlaySpacing.sm,
         )
     }
 }

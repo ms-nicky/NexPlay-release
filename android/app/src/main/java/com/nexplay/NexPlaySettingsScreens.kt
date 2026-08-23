@@ -78,19 +78,19 @@ import androidx.core.content.ContextCompat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import com.nexplay.ui.theme.OpenNowPalette
+import com.nexplay.ui.theme.NexPlayPalette
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.UUID
 import kotlin.math.roundToInt
 
 // Aliases onto the shared token layer — these used to be a byte-for-byte copy of the palette in
-// OpenNowScreens.kt, which meant any colour change had to be made twice or the two would drift.
-internal val SettingsBackground = OpenNowPalette.Background
-internal val SettingsPanel = OpenNowPalette.Panel
-internal val SettingsPanelAlt = OpenNowPalette.PanelAlt
-internal val SettingsText = OpenNowPalette.TextPrimary
-internal val SettingsTextMuted = OpenNowPalette.TextMuted
+// NexPlayScreens.kt, which meant any colour change had to be made twice or the two would drift.
+internal val SettingsBackground = NexPlayPalette.Background
+internal val SettingsPanel = NexPlayPalette.Panel
+internal val SettingsPanelAlt = NexPlayPalette.PanelAlt
+internal val SettingsText = NexPlayPalette.TextPrimary
+internal val SettingsTextMuted = NexPlayPalette.TextMuted
 internal const val DONATE_URL = "https://github.com/ms-nicky/NexPlay"
 internal val PHONE_NAV_RAIL_MAX_SMALLEST_WIDTH = 600.dp
 internal val APP_NAV_RAIL_WIDTH = 80.dp
@@ -196,8 +196,8 @@ private val gameLanguageOptions = listOf(
 
 @Composable
 internal fun SettingsScreen(
-    state: OpenNowUiState,
-    viewModel: OpenNowViewModel,
+    state: NexPlayUiState,
+    viewModel: NexPlayViewModel,
     tvProfile: Boolean,
     searchRequested: Boolean,
     searchQuery: String,
@@ -367,8 +367,8 @@ internal fun SettingsScreen(
 
 @Composable
 private fun SettingsBody(
-    state: OpenNowUiState,
-    viewModel: OpenNowViewModel,
+    state: NexPlayUiState,
+    viewModel: NexPlayViewModel,
     tvProfile: Boolean,
     controllerFamily: AndroidControllerFamily?,
     searchQuery: String,
@@ -431,8 +431,8 @@ private fun SettingsBody(
 
 @Composable
 private fun SettingsContent(
-    state: OpenNowUiState,
-    viewModel: OpenNowViewModel,
+    state: NexPlayUiState,
+    viewModel: NexPlayViewModel,
     searchQuery: String,
     selectedCategory: SettingsCategory?,
     showSessionProxyWarning: () -> Unit,
@@ -1050,9 +1050,9 @@ private fun SettingsContent(
                     BatteryOptimizationPanel()
                 }
     }
-    CategorySettingsSection(selectedCategory, SettingsCategory.About, searchQuery, "About", "about", "version", "build", "app", "github", "developer", "kiefer", "zortos", "opennow", "repository") {
+    CategorySettingsSection(selectedCategory, SettingsCategory.About, searchQuery, "About", "about", "version", "build", "app", "github", "developer", "kiefer", "zortos", "nexplay", "repository") {
                 AppVersionPanel()
-                OpenNowGitHubPanel()
+                NexPlayGitHubPanel()
                 DeveloperPanel()
             }
     CategorySettingsSection(selectedCategory, SettingsCategory.About, searchQuery, stringResource(R.string.settings_section_thanks), "thanks", "credits", "contributors", "darkevilpt", "donate", "paypal", "printedwaste") {
@@ -1097,8 +1097,8 @@ private fun LowPowerStreamWarning(reasons: List<String>) {
 
 @Composable
 private fun SettingsCategoryLanding(
-    state: OpenNowUiState,
-    viewModel: OpenNowViewModel,
+    state: NexPlayUiState,
+    viewModel: NexPlayViewModel,
     categories: List<SettingsCategory>,
     onSelectCategory: (SettingsCategory) -> Unit,
 ) {
@@ -1133,7 +1133,7 @@ private fun SettingsCategoryLanding(
 }
 
 @Composable
-private fun AdvancedOptionsSettings(settings: AppSettings, viewModel: OpenNowViewModel) {
+private fun AdvancedOptionsSettings(settings: AppSettings, viewModel: NexPlayViewModel) {
     SettingSwitch(
         label = stringResource(R.string.settings_nerd_mode),
         checked = settings.nerdMode,
@@ -1154,7 +1154,7 @@ private fun AdvancedOptionsSettings(settings: AppSettings, viewModel: OpenNowVie
 }
 
 @Composable
-private fun CatalogBackgroundImageSetting(settings: AppSettings, viewModel: OpenNowViewModel) {
+private fun CatalogBackgroundImageSetting(settings: AppSettings, viewModel: NexPlayViewModel) {
     val context = LocalContext.current
     val appContext = context.applicationContext
     val currentSettings by rememberUpdatedState(settings)
@@ -1365,7 +1365,7 @@ private fun appLaunchPageLabel(page: AppLaunchPage): String =
     }
 
 @Composable
-private fun SettingsAccountCard(state: OpenNowUiState, onClick: () -> Unit) {
+private fun SettingsAccountCard(state: NexPlayUiState, onClick: () -> Unit) {
     val account = state.savedAccounts.firstOrNull { it.userId == state.authSession?.user?.userId }
         ?: state.savedAccounts.firstOrNull()
     val displayName = account?.displayName?.takeIf { it.isNotBlank() }

@@ -46,7 +46,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    private val viewModel: OpenNowViewModel by viewModels()
+    private val viewModel: NexPlayViewModel by viewModels()
     private val queueStatusNotifier by lazy { AndroidQueueStatusNotifier(this) }
     private val streamKeepAliveNotifier by lazy { AndroidStreamKeepAliveNotifier(this) }
     private var notificationPermissionRequested = false
@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         defaultRequestedOrientation = requestedOrientation
         volumeControlStream = AudioManager.STREAM_MUSIC
-        val openNowApplication = application as OpenNowApplication
+        val openNowApplication = application as NexPlayApplication
         pendingExternalLaunchIntent = intent
         setContent {
             var ready by remember { mutableStateOf(false) }
@@ -79,7 +79,7 @@ class MainActivity : ComponentActivity() {
                 ready = true
             }
             if (ready) {
-                OpenNowApp(
+                NexPlayApp(
                     viewModel = viewModel,
                     onMicrophoneCaptureActiveChange = streamKeepAliveNotifier::setMicrophoneCaptureActive,
                 )
@@ -576,7 +576,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun requestQueueNotificationPermissionIfNeeded(state: OpenNowUiState) {
+    private fun requestQueueNotificationPermissionIfNeeded(state: NexPlayUiState) {
         if (notificationPermissionRequested) return
         if (!shouldShowQueueLaunchStatus(state)) return
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return

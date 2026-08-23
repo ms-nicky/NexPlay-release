@@ -21,9 +21,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-private const val STORE_NAME = "opennow_native"
-private const val CATALOG_CACHE_STORE_NAME = "opennow_catalog_cache"
-private const val SECURE_STORE_NAME = "opennow_auth_secure"
+private const val STORE_NAME = "nexplay_native"
+private const val CATALOG_CACHE_STORE_NAME = "nexplay_catalog_cache"
+private const val SECURE_STORE_NAME = "nexplay_auth_secure"
 private const val KEY_SETTINGS = "settings"
 private const val KEY_AUTH = "auth"
 private const val KEY_DEVICE_ID = "gfn_device_id"
@@ -345,14 +345,14 @@ class SettingsStore(context: Context) {
 
     private fun load(): AppSettings {
         val raw = prefs.getString(KEY_SETTINGS, null) ?: return AppSettings()
-        return runCatching { OpenNowJson.decodeFromString<AppSettings>(raw) }.getOrElse { AppSettings() }
+        return runCatching { NexPlayJson.decodeFromString<AppSettings>(raw) }.getOrElse { AppSettings() }
     }
 
     fun update(transform: (AppSettings) -> AppSettings) {
         val next = transform(_settings.value)
             .withCurrentStreamPresentationDefaults(androidTvProfile)
             .normalizedForAndroid()
-        prefs.edit().putString(KEY_SETTINGS, OpenNowJson.encodeToString(next)).apply()
+        prefs.edit().putString(KEY_SETTINGS, NexPlayJson.encodeToString(next)).apply()
         _settings.value = next
     }
 
@@ -360,7 +360,7 @@ class SettingsStore(context: Context) {
         val normalized = next
             .withCurrentStreamPresentationDefaults(androidTvProfile)
             .normalizedForAndroid()
-        prefs.edit().putString(KEY_SETTINGS, OpenNowJson.encodeToString(normalized)).apply()
+        prefs.edit().putString(KEY_SETTINGS, NexPlayJson.encodeToString(normalized)).apply()
         _settings.value = normalized
     }
 
@@ -384,7 +384,7 @@ class AuthStore(context: Context) {
         if (!hasSecureAuth) {
             val legacyRaw = legacyPrefs.getString(KEY_AUTH, null)
             if (!legacyRaw.isNullOrBlank()) {
-                val parsed = runCatching { OpenNowJson.decodeFromString<PersistedAuthState>(legacyRaw) }.getOrNull()
+                val parsed = runCatching { NexPlayJson.decodeFromString<PersistedAuthState>(legacyRaw) }.getOrNull()
                 if (parsed != null) {
                     val secureCommitSuccess = sharedPrefs.edit().putString(KEY_AUTH, legacyRaw).commit()
                     if (secureCommitSuccess) {
@@ -415,7 +415,7 @@ class AuthStore(context: Context) {
 
     private fun load(): PersistedAuthState {
         val raw = sharedPrefs.getString(KEY_AUTH, null) ?: return PersistedAuthState()
-        return runCatching { OpenNowJson.decodeFromString<PersistedAuthState>(raw) }.getOrElse { PersistedAuthState() }
+        return runCatching { NexPlayJson.decodeFromString<PersistedAuthState>(raw) }.getOrElse { PersistedAuthState() }
     }
 
     fun reload(): PersistedAuthState = synchronized(AUTH_STORE_LOCK) {
@@ -423,7 +423,7 @@ class AuthStore(context: Context) {
     }
 
     fun save(next: PersistedAuthState) = synchronized(AUTH_STORE_LOCK) {
-        sharedPrefs.edit().putString(KEY_AUTH, OpenNowJson.encodeToString(next)).commit()
+        sharedPrefs.edit().putString(KEY_AUTH, NexPlayJson.encodeToString(next)).commit()
         _state.value = next
     }
 
@@ -558,28 +558,28 @@ class CatalogCacheStore(context: Context) {
     private inline fun <reified T> load(key: String): T? =
         runCatching {
             val raw = prefs.getString(storageKey(key), null) ?: return null
-            val obj = OpenNowJson.parseToJsonElement(raw).jsonObject
+            val obj = NexPlayJson.parseToJsonElement(raw).jsonObject
             val expiresAt = obj["expiresAt"]?.jsonPrimitive?.longOrNull ?: return null
             if (System.currentTimeMillis() > expiresAt) return null
             val data = obj["data"] ?: return null
-            OpenNowJson.decodeFromJsonElement<T>(data)
+            NexPlayJson.decodeFromJsonElement<T>(data)
         }.getOrNull()
 
     private fun <T> load(key: String, serializer: kotlinx.serialization.KSerializer<T>): T? =
         runCatching {
             val raw = prefs.getString(storageKey(key), null) ?: return null
-            val obj = OpenNowJson.parseToJsonElement(raw).jsonObject
+            val obj = NexPlayJson.parseToJsonElement(raw).jsonObject
             val expiresAt = obj["expiresAt"]?.jsonPrimitive?.longOrNull ?: return null
             if (System.currentTimeMillis() > expiresAt) return null
             val data = obj["data"] ?: return null
-            OpenNowJson.decodeFromJsonElement(serializer, data)
+            NexPlayJson.decodeFromJsonElement(serializer, data)
         }.getOrNull()
 
     private inline fun <reified T> save(key: String, data: T) {
         val now = System.currentTimeMillis()
         val payload = kotlinx.serialization.json.buildJsonObject {
             put("expiresAt", kotlinx.serialization.json.JsonPrimitive(now + CATALOG_CACHE_TTL_MS))
-            put("data", OpenNowJson.encodeToJsonElement(data))
+            put("data", NexPlayJson.encodeToJsonElement(data))
         }
         prefs.edit().putString(storageKey(key), payload.toString()).apply()
     }
@@ -588,7 +588,7 @@ class CatalogCacheStore(context: Context) {
         val now = System.currentTimeMillis()
         val payload = kotlinx.serialization.json.buildJsonObject {
             put("expiresAt", kotlinx.serialization.json.JsonPrimitive(now + CATALOG_CACHE_TTL_MS))
-            put("data", OpenNowJson.encodeToJsonElement(serializer, data))
+            put("data", NexPlayJson.encodeToJsonElement(serializer, data))
         }
         prefs.edit().putString(storageKey(key), payload.toString()).apply()
     }
@@ -607,7 +607,7 @@ class QueuedGameStore(context: Context) {
 
     fun load(): List<String> {
         val raw = prefs.getString(KEY_QUEUED_GAME_KEYS, null) ?: return emptyList()
-        return runCatching { OpenNowJson.decodeFromString<List<String>>(raw) }
+        return runCatching { NexPlayJson.decodeFromString<List<String>>(raw) }
             .getOrElse { emptyList() }
             .map { it.trim() }
             .filter { it.isNotBlank() }
@@ -620,7 +620,7 @@ class QueuedGameStore(context: Context) {
         if (normalized.isBlank()) return load()
         val next = (listOf(normalized) + load().filterNot { it == normalized })
             .take(QUEUED_GAME_LIMIT)
-        prefs.edit().putString(KEY_QUEUED_GAME_KEYS, OpenNowJson.encodeToString(next)).apply()
+        prefs.edit().putString(KEY_QUEUED_GAME_KEYS, NexPlayJson.encodeToString(next)).apply()
         return next
     }
 }

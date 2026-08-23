@@ -12,7 +12,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import java.util.concurrent.TimeUnit
 
-private const val AUTH_REFRESH_WORK_NAME = "opennow-auth-token-refresh"
+private const val AUTH_REFRESH_WORK_NAME = "nexplay-auth-token-refresh"
 private const val AUTH_REFRESH_LOG_TAG = "NexPlayAuthRefresh"
 private const val AUTH_REFRESH_INTERVAL_MINUTES = 15L
 private const val AUTH_REFRESH_FLEX_MINUTES = 5L
@@ -67,7 +67,7 @@ internal class AndroidAuthRefreshWorker(
     workerParams: WorkerParameters,
 ) : CoroutineWorker(appContext, workerParams) {
     override suspend fun doWork(): Result {
-        val application = applicationContext as OpenNowApplication
+        val application = applicationContext as NexPlayApplication
         val authStore = application.authStore
         val activeSession = authStore.reload().let { state ->
             state.sessions.firstOrNull { it.user.userId == state.activeUserId }

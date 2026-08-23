@@ -11,7 +11,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class OpenNowApplication : Application() {
+class NexPlayApplication : Application() {
     private val startupScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private val startupDataReady = CompletableDeferred<Unit>()
     internal val httpClient by lazy(::defaultHttpClient)
@@ -24,7 +24,7 @@ class OpenNowApplication : Application() {
 
         startupScope.launch {
             val settings = runCatching {
-                SettingsStore(this@OpenNowApplication).settings.value.also {
+                SettingsStore(this@NexPlayApplication).settings.value.also {
                     // Warm secure auth and run its one-time migration on the same background path.
                     authStore.state.value
                 }
@@ -49,7 +49,7 @@ class OpenNowApplication : Application() {
     }
 
     private fun initializeBackgroundServices(settings: AppSettings) {
-        OpenNowAnalytics.setup(this, settings)
+        NexPlayAnalytics.setup(this, settings)
         AndroidAuthRefreshScheduler.schedule(this)
     }
 

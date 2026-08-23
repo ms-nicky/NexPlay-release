@@ -9,7 +9,7 @@ import com.posthog.android.PostHogAndroidConfig
 private const val ANALYTICS_LOG_TAG = "NexPlayAnalytics"
 private const val ANALYTICS_FLUSH_INTERVAL_SECONDS = 10
 
-internal object OpenNowAnalytics {
+internal object NexPlayAnalytics {
     fun setup(application: Application, settings: AppSettings) {
         val token = BuildConfig.POSTHOG_PROJECT_TOKEN.trim()
         if (token.isEmpty()) {
@@ -20,7 +20,7 @@ internal object OpenNowAnalytics {
         val config = PostHogAndroidConfig(
             apiKey = token,
             host = BuildConfig.POSTHOG_HOST,
-        ).apply { applyOpenNowSettings(settings) }
+        ).apply { applyNexPlaySettings(settings) }
 
         runCatching {
             PostHogAndroid.setup(application, config)
@@ -70,7 +70,7 @@ internal object OpenNowAnalytics {
     }
 }
 
-internal fun PostHogAndroidConfig.applyOpenNowSettings(settings: AppSettings) {
+internal fun PostHogAndroidConfig.applyNexPlaySettings(settings: AppSettings) {
     optOut = !settings.analyticsSharingEnabled
     captureApplicationLifecycleEvents = true
     captureDeepLinks = false

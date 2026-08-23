@@ -40,7 +40,7 @@ class LowLatencyVideoDecoder(
 
     override fun getImplementationName(): String {
         val suffix = if (lowLatencyEnabled) "low-latency" else "performance"
-        return delegate.implementationName + "+opennow-$suffix"
+        return delegate.implementationName + "+nexplay-$suffix"
     }
 
     private fun patchMediaCodecWrapperFactory() {
