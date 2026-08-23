@@ -2739,14 +2739,28 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
             runCatching {
                 val activeSessions = sessionRepository.getActiveSessions(token, baseUrl, currentSettings)
                 recordDebugEvent("recovery", "Recovery active sessions count=${activeSessions.size} base=${hostForDebug(baseUrl)}")
-                val resolvedAppId = runCatching {
+                val resolvedAppIdRaw = runCatching {
                     resolveFallbackLaunchAppId(
                         token = token,
                         game = game,
                         active = active,
                         baseUrl = baseUrl,
-                    ).toIntOrNull()
+                    )
                 }.getOrNull()
+                val resolvedAppId = resolvedAppIdRaw?.toIntOrNull()
+                if (shouldCreateFreshRecoverySession(activeSessions.size)) {
+                    return@runCatching createFreshRecoverySession(
+                        token = token,
+                        auth = auth,
+                        previousSession = previousSession,
+                        active = active,
+                        game = game,
+                        settings = currentSettings,
+                        resolvedAppId = resolvedAppIdRaw,
+                        reason = "missing active session",
+                        stopPreviousSession = false,
+                    )
+                }
                 val readyCandidate = activeSessionRecoveryCandidate(
                     sessions = activeSessions,
                     previousSessionId = previousSession.sessionId,
@@ -3404,6 +3418,71 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
             }
             pollUntilReady(token, latest, settings)
         }
+    }
+
+    private suspend fun createFreshRecoverySession(
+        token: String,
+        auth: AuthSession,
+        previousSession: SessionInfo,
+        active: ActiveSessionInfo?,
+        game: GameInfo?,
+        settings: StreamSettings,
+        resolvedAppId: String?,
+        reason: String,
+        stopPreviousSession: Boolean = true,
+    ): SessionInfo {
+        val launchAppId = resolvedAppId
+            ?: error("Could not resolve appId for fresh stream recovery.")
+        val selectedVariant = game?.variants?.getOrNull(game.selectedVariantIndex)
+            ?: game?.variants?.firstOrNull()
+        val accountLinked = game?.let { shouldSendAccountLinked(it, selectedVariant) } ?: true
+        val normalizedZone = previousSession.zone.trim().lowercase(Locale.US).takeIf { zone ->
+            zone.isNotBlank() &&
+                !zone.startsWith(".") &&
+                !zone.contains('/') &&
+                !zone.contains(':')
+        }
+        val reusableProviderBase = listOfNotNull(
+            previousSession.streamingBaseUrl,
+            active?.streamingBaseUrl,
+        ).firstOrNull { !it.isLikelyDirectServerUrl() }
+        val creationBase = reusableProviderBase
+            ?: effectiveStreamingBaseUrl(auth).takeIf { normalizedZone == null }
+
+        recordDebugEvent(
+            "recovery",
+            "Escalating $reason to fresh cloud session old=${previousSession.shortDebugId()} " +
+                "zone=${normalizedZone.orEmpty()} base=${hostForDebug(creationBase)}",
+        )
+        if (stopPreviousSession) {
+            runCatching {
+                sessionRepository.stopSession(token, previousSession, settings)
+            }.onSuccess {
+                recordDebugEvent("recovery", "Stopped stalled session before fresh recovery ${previousSession.shortDebugId()}")
+            }.onFailure { error ->
+                recordDebugEvent(
+                    "recovery",
+                    "Failed to stop stalled session before fresh recovery ${previousSession.shortDebugId()} error=${error.debugMessage()}",
+                )
+            }.getOrThrow()
+        } else {
+            recordDebugEvent("recovery", "Skipped stop for missing stalled session ${previousSession.shortDebugId()}")
+        }
+        sessionTimerAnchorStore.clear(previousSession.sessionId)
+
+        _state.update { it.copy(activeSession = null, launchPhase = "Creating fresh stream session") }
+        val created = sessionRepository.createSession(
+            token = token,
+            streamingBaseUrl = creationBase,
+            appId = launchAppId,
+            internalTitle = game?.title.orEmpty(),
+            zone = normalizedZone ?: "prod",
+            settings = settings,
+            accountLinked = accountLinked,
+            appLaunchMode = appLaunchModeFor(game, settings),
+        )
+        recordDebugEvent("recovery", "Created fresh recovery session ${created.debugSummary()}")
+        return pollUntilReady(token, created, settings)
     }
 
     private suspend fun pollUntilReady(token: String, created: SessionInfo, settings: StreamSettings): SessionInfo {
