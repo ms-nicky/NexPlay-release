@@ -5021,7 +5021,6 @@ private fun GameCard(
     val interaction = remember { MutableInteractionSource() }
     val pressed by interaction.collectIsPressedAsState()
     val hovered by interaction.collectIsHoveredAsState()
-    val reduceMotion = LocalReduceMotion.current
     val cardScale by animateFloatAsState(
         targetValue = when {
             pressed -> 0.965f
