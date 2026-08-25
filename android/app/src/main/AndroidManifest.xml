@@ -43,7 +43,7 @@
         android:resizeableActivity="true"
         android:roundIcon="@drawable/nexplay_icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.OpenNOW">
+        android:theme="@style/Theme.NexPlay">
         <service
             android:name=".AndroidQueueStatusService"
             android:exported="false"

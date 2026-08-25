@@ -4,6 +4,7 @@ node_modules/
 # Lock files (keep bun.lock, ignore others)
 yarn.lock
 pnpm-lock.yaml
+build.txt
 
 # Build outputs
 dist/
