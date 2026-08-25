@@ -111,6 +111,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items as gridItems
+import androidx.compose.foundation.lazy.grid.itemsIndexed as gridItemsIndexed
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -288,6 +289,7 @@ import com.nexplay.ui.controls.ControlSliderRow
 import com.nexplay.ui.controls.ControlSwitchRow
 import com.nexplay.ui.controls.LocalControlRowStyle
 import com.nexplay.ui.controls.LocalControlSectionStyle
+import com.nexplay.ui.animation.staggeredEntrance
 import com.nexplay.ui.theme.LocalReduceMotion
 import com.nexplay.ui.theme.NexPlayMotion
 import com.nexplay.ui.theme.NexPlayPalette
@@ -3957,7 +3959,7 @@ private fun GameGrid(
                 horizontalArrangement = Arrangement.spacedBy(gridSpec.horizontalSpacing),
                 verticalArrangement = Arrangement.spacedBy(gridSpec.verticalSpacing),
             ) {
-                gridItems(games, key = { it.id }) { game ->
+                gridItemsIndexed(games, key = { _, game -> game.id }) { index, game ->
                     GameCard(
                         game = game,
                         favorite = game.id in favoriteIds,
@@ -3975,6 +3977,7 @@ private fun GameGrid(
                         squareCard = gridSpec.squareCards,
                         thumbnailFavoriteOverlay = true,
                         controllerActionMode = controllerActionMode,
+                        entranceIndex = index,
                         onSelect = onSelect,
                         onFavorite = onFavorite,
                         onPlay = onPlay,
@@ -4076,7 +4079,7 @@ private fun StoreGameGrid(
                         )
                     }
                 }
-                gridItems(games, key = { it.id }) { game ->
+                gridItemsIndexed(games, key = { _, game -> game.id }) { index, game ->
                     GameCard(
                         game = game,
                         favorite = game.id in favoriteIds,
@@ -4094,6 +4097,7 @@ private fun StoreGameGrid(
                         squareCard = gridSpec.squareCards,
                         thumbnailFavoriteOverlay = true,
                         controllerActionMode = controllerActionMode,
+                        entranceIndex = index,
                         onSelect = onSelect,
                         onFavorite = onFavorite,
                         onPlay = onPlay,
@@ -4577,6 +4581,17 @@ private fun StoreRailGameCard(
                 // Crop everywhere — see the note in GameCard.
                 contentScale = ContentScale.Crop,
             )
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            0.0f to Color.Transparent,
+                            0.6f to Color.Transparent,
+                            1.0f to Color.Black.copy(alpha = 0.4f),
+                        ),
+                    ),
+            )
             if (shouldOverlayCatalogCardTitle(tvProfile)) {
                 GameCardTitleOverlay(game.title)
             }
@@ -4981,6 +4996,7 @@ private fun GameCard(
     squareCard: Boolean,
     thumbnailFavoriteOverlay: Boolean,
     controllerActionMode: Boolean,
+    entranceIndex: Int = 0,
     onSelect: (GameInfo) -> Unit,
     onFavorite: (String) -> Unit,
     onPlay: (GameInfo) -> Unit,
@@ -4988,6 +5004,7 @@ private fun GameCard(
 ) {
     var focused by remember { mutableStateOf(false) }
     val focusManager = LocalFocusManager.current
+    val reduceMotion = LocalReduceMotion.current
     val cardShape = RoundedCornerShape(if (expressiveUi) NexPlayRadius.md else NexPlayRadius.sm)
     val handheldPosterCard = !tvProfile
     val launcherTile = handheldPosterCard && thumbnailFavoriteOverlay
@@ -5029,6 +5046,7 @@ private fun GameCard(
         Modifier
             .fillMaxWidth()
             .padding(vertical = if (tvProfile) CATALOG_CONTROLLER_FOCUS_INSET else 0.dp)
+            .staggeredEntrance(index = entranceIndex, enabled = !reduceMotion && !tvProfile)
             .graphicsLayer {
                 scaleX = cardScale
                 scaleY = cardScale
@@ -5076,7 +5094,10 @@ private fun GameCard(
             colors = CardDefaults.cardColors(
                 containerColor = if (expressiveUi) MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.72f) else Panel,
             ),
-            elevation = CardDefaults.cardElevation(defaultElevation = if (focused) 8.dp else 0.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = if (focused) 12.dp else 0.dp,
+                pressedElevation = 4.dp,
+            ),
             shape = cardShape,
         ) {
             Box(
@@ -5097,6 +5118,18 @@ private fun GameCard(
                     // correctly-cut art this is identical to Fit; when the CDN returns something
                     // off-ratio, Fit pillarboxed it against a flat swatch and Crop simply trims.
                     contentScale = ContentScale.Crop,
+                )
+                // Subtle gradient overlay for depth and better title readability
+                Box(
+                    Modifier
+                        .fillMaxSize()
+                        .background(
+                            Brush.verticalGradient(
+                                0.0f to Color.Transparent,
+                                0.6f to Color.Transparent,
+                                1.0f to Color.Black.copy(alpha = 0.45f),
+                            ),
+                        ),
                 )
                 if (shouldOverlayCatalogCardTitle(tvProfile)) {
                     GameCardTitleOverlay(game.title)
