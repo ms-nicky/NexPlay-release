@@ -1,8 +1,8 @@
 {
   "android": {
-    "apkUrl": "https://github.com/ms-nicky/NexPlay-release/releases/download/v1.3.0/app-release.apk",
-    "versionName": "1.3.0",
-    "versionCode": 77,
-    "releaseNotes": "NexPlay 1.3.0 - UI animasi, gradient overlays, upstream sync: Exynos HEVC, touch recovery, mouse precision"
+    "apkUrl": "https://github.com/ms-nicky/NexPlay-release/releases/download/v1.4.0/app-release.apk",
+    "versionName": "1.4.0",
+    "versionCode": 78,
+    "releaseNotes": "NexPlay 1.4.0 - UI animasi, gradient overlays, upstream sync"
   }
 }
