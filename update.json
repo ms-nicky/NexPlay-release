@@ -1,8 +1,8 @@
 {
   "android": {
-    "apkUrl": "https://github.com/ms-nicky/NexPlay-release/releases/download/v1.4.0/app-release.apk",
-    "versionName": "1.4.0",
-    "versionCode": 78,
-    "releaseNotes": "NexPlay 1.4.0 - UI animasi, gradient overlays, upstream sync"
+    "apkUrl": "https://github.com/ms-nicky/NexPlay-release/releases/download/v1.4.1/app-release.apk",
+    "versionName": "1.4.1",
+    "versionCode": 79,
+    "releaseNotes": "NexPlay 1.4.1 - Fix auth migration OpenNow → NexPlay, native library rename, build optimization"
   }
 }
