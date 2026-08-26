@@ -56,6 +56,7 @@ val buildingPlayReleaseBundle = gradle.startParameter.taskNames.any { taskName -
 android {
     namespace = "com.nexplay"
     compileSdk = 37
+    ndkVersion = "28.2.13676358"
 
     defaultConfig {
         applicationId = "com.nexplay"
