@@ -81,6 +81,20 @@ object NexPlayPalette {
 
     /** Backdrop behind the catalog wallpaper. */
     val WallpaperBackdrop = Color(0xff07100b)
+
+    // Enhanced card / glass effects
+    /** Subtle accent glow that bleeds behind a focused card. */
+    val AccentGlow = AccentDefault.copy(alpha = 0.12f)
+    /** Stronger accent glow for hero / carousel focus. */
+    val AccentGlowStrong = AccentDefault.copy(alpha = 0.22f)
+    /** Frosted surface for glassmorphism overlays. */
+    val GlassSurface = Color(0xff11161a).copy(alpha = 0.72f)
+    /** Inner border shimmer when a card is pressed. */
+    val CardPressShimmer = Color.White.copy(alpha = 0.10f)
+    /** Deep vignette for hero images. */
+    val HeroVignette = Color.Black.copy(alpha = 0.92f)
+    /** Gradient end for card bottom overlay — deeper than raw black for richness. */
+    val CardGradientDeep = Color(0xff050709)
 }
 
 /**

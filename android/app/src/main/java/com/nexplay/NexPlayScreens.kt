@@ -3501,21 +3501,37 @@ private fun ActiveSessionResumeCard(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(18.dp),
         color = PanelAlt.copy(alpha = 0.92f),
-        tonalElevation = 3.dp,
+        tonalElevation = 4.dp,
+        shadowElevation = 6.dp,
     ) {
         Row(
-            Modifier.padding(horizontal = 14.dp, vertical = 12.dp),
+            Modifier
+                .padding(horizontal = 14.dp, vertical = 12.dp)
+                .border(
+                    width = 1.dp,
+                    color = NexPlayPalette.AccentDefault.copy(alpha = 0.20f),
+                    shape = RoundedCornerShape(18.dp),
+                ),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            UrlImage(
-                game?.imageUrl,
-                Modifier
-                    .width(44.dp)
-                    .height(58.dp)
-                    .clip(RoundedCornerShape(10.dp)),
-            )
-            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Box(
+                modifier = Modifier
+                    .width(48.dp)
+                    .height(62.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .border(
+                        width = 1.dp,
+                        color = Color.White.copy(alpha = 0.08f),
+                        shape = RoundedCornerShape(12.dp),
+                    ),
+            ) {
+                UrlImage(
+                    game?.imageUrl,
+                    Modifier.fillMaxSize(),
+                )
+            }
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                 Text("Resume cloud session", color = TextPrimary, fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 Text(
                     game?.title ?: "App ${active.appId}",
@@ -3525,7 +3541,7 @@ private fun ActiveSessionResumeCard(
                 )
                 Text(
                     activeSessionSummary(active),
-                    color = TextMuted,
+                    color = NexPlayPalette.AccentDefault.copy(alpha = 0.70f),
                     style = MaterialTheme.typography.labelSmall,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -4304,11 +4320,14 @@ private fun StoreComingNextCarousel(
                     .aspectRatio(heroAspectRatio(tvProfile, landscape))
                     .onFocusChanged { focused = it.isFocused || it.hasFocus }
                     .border(
-                        width = if (focused) 3.dp else 1.dp,
+                        width = when {
+                            focused -> 3.dp
+                            else -> 1.dp
+                        },
                         color = when {
                             enhancedControllerFocus -> Color.Transparent
-                            focused -> Color.White
-                            else -> Color.White.copy(alpha = 0.08f)
+                            focused -> Color.White.copy(alpha = 0.75f)
+                            else -> Color.White.copy(alpha = 0.06f)
                         },
                         shape = shape,
                     )
@@ -4343,29 +4362,53 @@ private fun StoreComingNextCarousel(
                     ),
                 shape = shape,
                 color = Panel,
-                tonalElevation = if (focused) 5.dp else 0.dp,
-                shadowElevation = if (focused) 9.dp else 1.dp,
+                tonalElevation = if (focused) 6.dp else 1.dp,
+                shadowElevation = if (focused) 14.dp else 3.dp,
             ) {
                 Box(Modifier.fillMaxSize()) {
                     UrlImage(gameHeroImageUrl(context, featured), Modifier.fillMaxSize())
-                    // Horizontal scrim carries the title block; the vertical one settles the art
-                    // into the surface below so the hero reads as part of the page, not a sticker.
+                    // Rich horizontal scrim: deep left for title readability, fading right
                     Box(
                         Modifier
                             .matchParentSize()
                             .background(
                                 Brush.horizontalGradient(
-                                    listOf(Color.Black.copy(alpha = 0.88f), Color.Black.copy(alpha = 0.3f), Color.Transparent),
+                                    listOf(
+                                        NexPlayPalette.HeroVignette,
+                                        Color.Black.copy(alpha = 0.55f),
+                                        Color.Black.copy(alpha = 0.15f),
+                                        Color.Transparent,
+                                    ),
                                 ),
                             ),
                     )
+                    // Bottom vignette: blends the hero into the page surface
                     Box(
                         Modifier
                             .matchParentSize()
                             .background(
                                 Brush.verticalGradient(
-                                    0.45f to Color.Transparent,
-                                    1f to Background.copy(alpha = 0.85f),
+                                    0.35f to Color.Transparent,
+                                    0.7f to Background.copy(alpha = 0.50f),
+                                    1f to Background.copy(alpha = 0.92f),
+                                ),
+                            ),
+                    )
+                    // Subtle accent glow strip along the bottom edge
+                    Box(
+                        Modifier
+                            .fillMaxWidth()
+                            .height(3.dp)
+                            .align(Alignment.BottomCenter)
+                            .background(
+                                Brush.horizontalGradient(
+                                    listOf(
+                                        Color.Transparent,
+                                        NexPlayPalette.AccentDefault.copy(alpha = 0.35f),
+                                        NexPlayPalette.AccentDefault.copy(alpha = 0.55f),
+                                        NexPlayPalette.AccentDefault.copy(alpha = 0.35f),
+                                        Color.Transparent,
+                                    ),
                                 ),
                             ),
                     )
@@ -4539,11 +4582,16 @@ private fun StoreRailGameCard(
             }
             .onFocusChanged { focused = it.isFocused || it.hasFocus }
             .border(
-                width = if (focused) 3.dp else 1.dp,
+                width = when {
+                    pressed -> 2.dp
+                    focused -> 3.dp
+                    else -> 1.dp
+                },
                 color = when {
                     enhancedControllerFocus -> Color.Transparent
-                    focused -> MaterialTheme.colorScheme.primary
-                    else -> Color.White.copy(alpha = 0.08f)
+                    pressed -> NexPlayPalette.CardPressShimmer
+                    focused -> MaterialTheme.colorScheme.primary.copy(alpha = 0.85f)
+                    else -> Color.White.copy(alpha = 0.06f)
                 },
                 shape = shape,
             )
@@ -4571,8 +4619,8 @@ private fun StoreRailGameCard(
             ),
         shape = shape,
         color = NexPlayPalette.ImagePlaceholder,
-        tonalElevation = if (focused) 4.dp else 0.dp,
-        shadowElevation = if (focused) 8.dp else 1.dp,
+        tonalElevation = if (focused) 5.dp else 1.dp,
+        shadowElevation = if (focused) 10.dp else 2.dp,
     ) {
         Box(Modifier.fillMaxSize().clip(shape)) {
             UrlImage(
@@ -4587,11 +4635,27 @@ private fun StoreRailGameCard(
                     .background(
                         Brush.verticalGradient(
                             0.0f to Color.Transparent,
-                            0.6f to Color.Transparent,
-                            1.0f to Color.Black.copy(alpha = 0.4f),
+                            0.5f to Color.Transparent,
+                            0.8f to Color.Black.copy(alpha = 0.30f),
+                            1.0f to NexPlayPalette.CardGradientDeep.copy(alpha = 0.82f),
                         ),
                     ),
             )
+            // Accent glow at bottom on focus
+            if (focused && !tvProfile) {
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .height(36.dp)
+                        .align(Alignment.BottomCenter)
+                        .background(
+                            Brush.verticalGradient(
+                                0.0f to Color.Transparent,
+                                1.0f to NexPlayPalette.AccentGlow,
+                            ),
+                        ),
+                )
+            }
             if (shouldOverlayCatalogCardTitle(tvProfile)) {
                 GameCardTitleOverlay(game.title)
             }
@@ -5067,11 +5131,16 @@ private fun GameCard(
                 )
                 .onFocusChanged { focused = it.isFocused || it.hasFocus }
                 .border(
-                    width = if (focused) 3.dp else 1.dp,
+                    width = when {
+                        pressed -> 2.dp
+                        focused -> 3.dp
+                        else -> 1.dp
+                    },
                     color = when {
                         enhancedControllerFocus -> Color.Transparent
-                        focused -> MaterialTheme.colorScheme.primary
-                        else -> Color.Transparent
+                        pressed -> NexPlayPalette.CardPressShimmer
+                        focused -> MaterialTheme.colorScheme.primary.copy(alpha = 0.85f)
+                        else -> Color.White.copy(alpha = 0.06f)
                     },
                     shape = cardShape,
                 )
@@ -5094,8 +5163,9 @@ private fun GameCard(
                 containerColor = if (expressiveUi) MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.72f) else Panel,
             ),
             elevation = CardDefaults.cardElevation(
-                defaultElevation = if (focused) 12.dp else 0.dp,
-                pressedElevation = 4.dp,
+                defaultElevation = if (focused) 16.dp else 2.dp,
+                pressedElevation = 6.dp,
+                hoveredElevation = if (!tvProfile) 8.dp else 0.dp,
             ),
             shape = cardShape,
         ) {
@@ -5118,18 +5188,34 @@ private fun GameCard(
                     // off-ratio, Fit pillarboxed it against a flat swatch and Crop simply trims.
                     contentScale = ContentScale.Crop,
                 )
-                // Subtle gradient overlay for depth and better title readability
+                // Multi-stop gradient: subtle mid-tone + deep bottom for rich depth
                 Box(
                     Modifier
                         .fillMaxSize()
                         .background(
                             Brush.verticalGradient(
                                 0.0f to Color.Transparent,
-                                0.6f to Color.Transparent,
-                                1.0f to Color.Black.copy(alpha = 0.45f),
+                                0.45f to Color.Transparent,
+                                0.75f to Color.Black.copy(alpha = 0.35f),
+                                1.0f to NexPlayPalette.CardGradientDeep.copy(alpha = 0.88f),
                             ),
                         ),
                 )
+                // Subtle accent glow at the bottom edge when focused
+                if (focused && !tvProfile) {
+                    Box(
+                        Modifier
+                            .fillMaxWidth()
+                            .height(48.dp)
+                            .align(Alignment.BottomCenter)
+                            .background(
+                                Brush.verticalGradient(
+                                    0.0f to Color.Transparent,
+                                    1.0f to NexPlayPalette.AccentGlow,
+                                ),
+                            ),
+                    )
+                }
                 if (shouldOverlayCatalogCardTitle(tvProfile)) {
                     GameCardTitleOverlay(game.title)
                 }
@@ -15151,5 +15237,10 @@ internal val ColorQuality.label: String
     }
 
 private val GameCardOverlayGradient = Brush.verticalGradient(
-    colors = listOf(Color.Transparent, Color.Transparent, Color.Black.copy(alpha = 0.95f))
+    colors = listOf(
+        Color.Transparent,
+        NexPlayPalette.CardGradientDeep.copy(alpha = 0.15f),
+        NexPlayPalette.CardGradientDeep.copy(alpha = 0.65f),
+        NexPlayPalette.CardGradientDeep.copy(alpha = 0.95f),
+    )
 )

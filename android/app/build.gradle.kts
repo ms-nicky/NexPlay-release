@@ -62,8 +62,8 @@ android {
         applicationId = "com.nexplay"
         minSdk = 23
         targetSdk = 36
-        versionCode = 79
-        versionName = "1.4.1"
+        versionCode = 80
+        versionName = "1.5.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "POSTHOG_PROJECT_TOKEN", buildConfigString(postHogProjectToken))
