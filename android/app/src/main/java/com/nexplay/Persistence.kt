@@ -24,6 +24,10 @@ import kotlinx.coroutines.launch
 private const val STORE_NAME = "nexplay_native"
 private const val CATALOG_CACHE_STORE_NAME = "nexplay_catalog_cache"
 private const val SECURE_STORE_NAME = "nexplay_auth_secure"
+// Legacy store names from before the OpenNow → NexPlay rename (v1.3.x and earlier)
+private const val LEGACY_STORE_NAME = "opennow_native"
+private const val LEGACY_CATALOG_CACHE_STORE_NAME = "opennow_catalog_cache"
+private const val LEGACY_SECURE_STORE_NAME = "opennow_auth_secure"
 private const val KEY_SETTINGS = "settings"
 private const val KEY_AUTH = "auth"
 private const val KEY_DEVICE_ID = "gfn_device_id"
@@ -377,19 +381,28 @@ class AuthStore(context: Context) {
 
     private fun loadAndMigrate(context: Context): PersistedAuthState {
         val legacyPrefs = ExternalPrefs.get(context, STORE_NAME)
+        // Check legacy OpenNow store (pre-v1.4.0) if current store is empty
+        val legacyOpenNowPrefs = ExternalPrefs.get(context, LEGACY_STORE_NAME)
+        val legacySecurePrefs = context.applicationContext.getSharedPreferences(LEGACY_SECURE_STORE_NAME, Context.MODE_PRIVATE)
 
         // Migrate auth credentials if not yet in secure storage
         val hasSecureAuth = sharedPrefs.contains(KEY_AUTH)
         var migratedState: PersistedAuthState? = null
         if (!hasSecureAuth) {
+            // Try current store first, then legacy OpenNow store
             val legacyRaw = legacyPrefs.getString(KEY_AUTH, null)
+                ?: legacyOpenNowPrefs.getString(KEY_AUTH, null)
+                ?: legacySecurePrefs.getString(KEY_AUTH, null)
             if (!legacyRaw.isNullOrBlank()) {
                 val parsed = runCatching { NexPlayJson.decodeFromString<PersistedAuthState>(legacyRaw) }.getOrNull()
                 if (parsed != null) {
                     val secureCommitSuccess = sharedPrefs.edit().putString(KEY_AUTH, legacyRaw).commit()
                     if (secureCommitSuccess) {
                         migratedState = parsed
+                        // Clean up from all legacy stores
                         legacyPrefs.edit().remove(KEY_AUTH).commit()
+                        legacyOpenNowPrefs.edit().remove(KEY_AUTH).commit()
+                        legacySecurePrefs.edit().remove(KEY_AUTH).commit()
                     }
                 }
             }
@@ -398,11 +411,17 @@ class AuthStore(context: Context) {
         // Migrate device ID independently — always run even if auth was already migrated,
         // since hasSecureAuth being true does not guarantee KEY_DEVICE_ID is in secure storage.
         if (!sharedPrefs.contains(KEY_DEVICE_ID)) {
+            // Try current store first, then legacy OpenNow store
             val legacyDeviceId = legacyPrefs.getString(KEY_DEVICE_ID, null)
+                ?: legacyOpenNowPrefs.getString(KEY_DEVICE_ID, null)
+                ?: legacySecurePrefs.getString(KEY_DEVICE_ID, null)
             if (!legacyDeviceId.isNullOrBlank()) {
                 val secureCommitSuccess = sharedPrefs.edit().putString(KEY_DEVICE_ID, legacyDeviceId).commit()
                 if (secureCommitSuccess) {
+                    // Clean up from all legacy stores
                     legacyPrefs.edit().remove(KEY_DEVICE_ID).commit()
+                    legacyOpenNowPrefs.edit().remove(KEY_DEVICE_ID).commit()
+                    legacySecurePrefs.edit().remove(KEY_DEVICE_ID).commit()
                 }
             }
         }
@@ -505,15 +524,41 @@ class CatalogCacheStore(context: Context) {
         ExternalPrefs.get(appContext, CATALOG_CACHE_STORE_NAME)
     }
 
-    fun loadMainGames(userId: String, providerStreamingBaseUrl: String): List<GameInfo>? =
-        loadGameList(key("main", userId, providerStreamingBaseUrl))
+    private var legacyMigrated = false
+
+    private fun migrateLegacyCatalogCacheIfNeeded() {
+        if (legacyMigrated) return
+        legacyMigrated = true
+        val legacyPrefs = ExternalPrefs.get(appContext, LEGACY_CATALOG_CACHE_STORE_NAME)
+        val legacyKeys = legacyPrefs.all.keys.filter { it.startsWith(KEY_CATALOG_CACHE_PREFIX) }
+        if (legacyKeys.isEmpty()) return
+        val currentKeys = prefs.all.keys
+        legacyPrefs.edit().apply {
+            legacyKeys.forEach { key ->
+                if (key !in currentKeys) {
+                    val value = legacyPrefs.getString(key, null)
+                    if (value != null) {
+                        prefs.edit().putString(key, value).commit()
+                    }
+                }
+                remove(key)
+            }
+        }.commit()
+    }
+
+    fun loadMainGames(userId: String, providerStreamingBaseUrl: String): List<GameInfo>? {
+        migrateLegacyCatalogCacheIfNeeded()
+        return loadGameList(key("main", userId, providerStreamingBaseUrl))
+    }
 
     fun saveMainGames(userId: String, providerStreamingBaseUrl: String, games: List<GameInfo>) {
         saveGameList(key("main", userId, providerStreamingBaseUrl), games)
     }
 
-    fun loadLibraryGames(userId: String, providerStreamingBaseUrl: String): List<GameInfo>? =
-        loadGameList(key("library", userId, providerStreamingBaseUrl))
+    fun loadLibraryGames(userId: String, providerStreamingBaseUrl: String): List<GameInfo>? {
+        migrateLegacyCatalogCacheIfNeeded()
+        return loadGameList(key("library", userId, providerStreamingBaseUrl))
+    }
 
     fun saveLibraryGames(userId: String, providerStreamingBaseUrl: String, games: List<GameInfo>) {
         saveGameList(key("library", userId, providerStreamingBaseUrl), games)
@@ -525,8 +570,10 @@ class CatalogCacheStore(context: Context) {
         searchQuery: String,
         sortId: String,
         filterIds: List<String>,
-    ): CatalogBrowseResult? =
-        load(key("catalog", userId, providerStreamingBaseUrl, searchQuery, sortId, filterIds.sorted().joinToString(",")))
+    ): CatalogBrowseResult? {
+        migrateLegacyCatalogCacheIfNeeded()
+        return load(key("catalog", userId, providerStreamingBaseUrl, searchQuery, sortId, filterIds.sorted().joinToString(",")))
+    }
 
     fun saveCatalog(
         userId: String,

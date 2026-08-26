@@ -8,7 +8,7 @@ extern "C" JNIEXPORT jstring JNICALL
 Java_com_nexplay_NativeCodecProbe_nativeRuntimeSummary(JNIEnv *env, jobject) {
     std::ostringstream out;
     out << "{";
-    out << "\"nativeLibrary\":\"opennow_native\",";
+    out << "\"nativeLibrary\":\"nexplay_native\",";
     out << "\"mediaNdk\":true,";
     out << "\"rtpPacketSize\":1140,";
     out << "\"inputProtocolVersion\":3";
