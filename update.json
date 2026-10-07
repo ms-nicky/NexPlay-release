@@ -3,7 +3,7 @@
     "apkUrl": "https://github.com/ms-nicky/NexPlay-release/releases/download/v2.0.3/app-release.apk",
     "versionName": "2.0.3",
     "versionCode": 159,
-    "sha256": "REPLACE_WITH_SHA256_OF_THE_SIGNED_APK",
-    "releaseNotes": "NexPlay 2.0.3 - rebased onto OpenNOW android-native 2.0.3: HDR, stream recording, gyro input, touch controller skins and presets, 12 locales, settings backup, bug report threads, and 1165 unit tests."
+    "sha256": "e08a7920548c7bc62c72cc93fb6039ce41ddb6a97da270e371708397ba8bec31",
+    "releaseNotes": "NexPlay 2.0.3 - rebased onto OpenNOW android-native 2.0.3.\n\nNew: HDR output, stream recording, gyroscope input, touch controller skins and presets, 12 locales, settings backup, bug report threads.\n\nSecurity: APK updates now require the manifest to publish a sha256 and are re-verified at install time; release builds trust only system certificate roots; the live broadcast stream key is no longer written to logs.\n\nTests: 1169 unit tests."
   }
 }
