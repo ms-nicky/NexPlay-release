@@ -24,9 +24,13 @@ internal const val NEXPLAY_DEBUG_LOG_TAG = "NexPlayDebug"
 private const val DIAGNOSTIC_PAYLOAD_BODY_LIMIT = 20_000
 private const val HTTP_DIAGNOSTIC_MAX_REQUEST_CAPTURE_BYTES = 262_144L
 
+// stream_key/streamkey cover the YouTube live broadcast key. It is embedded in the RTMP URL, so it
+// must also be caught by DIAGNOSTIC_RTMP_PATTERN below rather than relying on the key=value form.
 private val DIAGNOSTIC_SENSITIVE_TEXT_PATTERN = Regex(
-    """(?i)\b(authorization|access[_-]?token|id[_-]?token|refresh[_-]?token|client[_-]?token|device[_-]?code|user[_-]?code|verification[_-]?uri[_-]?complete|credential|password|secret|cookie|code|sub)(\s*[=:]\s*)([^\s,;&]+)""",
+    """(?i)\b(authorization|access[_-]?token|id[_-]?token|refresh[_-]?token|client[_-]?token|device[_-]?code|user[_-]?code|verification[_-]?uri[_-]?complete|credential|password|secret|cookie|code|sub|stream[_-]?key)(\s*[=:]\s*)([^\s,;&]+)""",
 )
+/** Strips the stream key out of any RTMP(S) URL before it can reach a log or diagnostic export. */
+private val DIAGNOSTIC_RTMP_PATTERN = Regex("""(?i)\b(rtmps?://[^\s"']+)""")
 private val DIAGNOSTIC_BEARER_PATTERN = Regex("""(?i)\bBearer\s+[A-Za-z0-9._~+/=-]+""")
 private val DIAGNOSTIC_JSON_IDENTITY_PATTERN = Regex(
     """(?i)([\"']?(?:email|user(?:[_-]?id|[_-]?name)?|display[_-]?name|account[_-]?id|profile[_-]?id|session[_-]?id|server[_-]?ip|device[_-]?id|device[_-]?name|ip[_-]?address)[\"']?\s*:\s*)(\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|[^,}\r\n]+)""",
@@ -222,6 +226,9 @@ internal fun diagnosticParserBlock(data: JsonElement): String =
 
 private fun sanitizeDiagnosticText(raw: String): String {
     var sanitized = DIAGNOSTIC_BEARER_PATTERN.replace(raw, "Bearer [redacted]")
+    // Run before the key=value rules: an RTMP URL carries the broadcast key as its final path
+    // segment, with no "key=" hint for the generic pattern to latch onto.
+    sanitized = DIAGNOSTIC_RTMP_PATTERN.replace(sanitized) { match -> redactRtmpStreamKey(match.value) }
     sanitized = DIAGNOSTIC_JSON_SECRET_PATTERN.replace(sanitized) { "${it.groupValues[1]}\"[redacted]\"" }
     sanitized = redactDiagnosticText(sanitized)
     sanitized = DIAGNOSTIC_JSON_IDENTITY_PATTERN.replace(sanitized) { match ->
@@ -236,6 +243,16 @@ private fun sanitizeDiagnosticText(raw: String): String {
     sanitized = DIAGNOSTIC_IPV6_COMPRESSED_PATTERN.replace(sanitized, "[redacted-ip]")
     sanitized = DIAGNOSTIC_UUID_PATTERN.replace(sanitized, "[redacted-id]")
     return sanitized
+}
+
+/**
+ * Replaces the stream key in an RTMP URL with a placeholder while keeping the ingest host and any
+ * app name visible, which is what actually helps when reading a broadcast failure.
+ */
+internal fun redactRtmpStreamKey(url: String): String {
+    val separator = url.indexOfLast { it == '/' }
+    if (separator == -1 || separator == url.lastIndex) return url
+    return url.substring(0, separator + 1) + "[redacted]"
 }
 
 private const val ANDROID_DIAGNOSTIC_PASTE_URL =

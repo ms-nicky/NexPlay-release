@@ -1,6 +1,7 @@
 import com.android.build.api.instrumentation.FramesComputationMode
 import com.android.build.api.instrumentation.InstrumentationScope
 import com.opencloudgaming.buildlogic.WebRtcAudioGuardFactory
+import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -17,6 +18,31 @@ androidComponents.onVariants { variant ->
         FramesComputationMode.COMPUTE_FRAMES_FOR_INSTRUMENTED_METHODS,
     )
 }
+
+/**
+ * Telemetry is opt-in and off unless a token is supplied at build time. There is deliberately no
+ * committed default: a token baked into a public repo is an active, writable ingest credential.
+ *
+ * Supply one of, in priority order:
+ *   ./gradlew assembleRelease -Pposthog.projectToken=phc_... -Pposthog.host=https://...
+ *   POSTHOG_PROJECT_TOKEN / POSTHOG_HOST environment variables
+ *   posthog.projectToken / posthog.host in local.properties (gitignored)
+ */
+val posthogProjectToken: String = sequenceOf(
+    providers.gradleProperty("posthog.projectToken").orNull,
+    providers.environmentVariable("POSTHOG_PROJECT_TOKEN").orNull,
+    rootProject.file("local.properties").takeIf { it.isFile }?.let { file ->
+        Properties().apply { file.inputStream().use(::load) }.getProperty("posthog.projectToken")
+    },
+).filterNotNull().firstOrNull { it.isNotBlank() }.orEmpty()
+
+val posthogHost: String = sequenceOf(
+    providers.gradleProperty("posthog.host").orNull,
+    providers.environmentVariable("POSTHOG_HOST").orNull,
+    rootProject.file("local.properties").takeIf { it.isFile }?.let { file ->
+        Properties().apply { file.inputStream().use(::load) }.getProperty("posthog.host")
+    },
+).filterNotNull().firstOrNull { it.isNotBlank() } ?: "https://us.i.posthog.com"
 
 val buildingPlayReleaseBundle =
     providers.gradleProperty("distribution").orNull.equals("play-store", ignoreCase = true) ||
@@ -42,6 +68,8 @@ android {
         buildConfigField("boolean", "APK_UPDATES_SUPPORTED", "true")
         buildConfigField("boolean", "PLAY_STORE_RELEASE", "false")
         buildConfigField("boolean", "LOCAL_APP_LAUNCHER_SUPPORTED", "true")
+        buildConfigField("String", "POSTHOG_PROJECT_TOKEN", "\"${posthogProjectToken}\"")
+        buildConfigField("String", "POSTHOG_HOST", "\"$posthogHost\"")
 
         ndk {
             // Keep legacy Intel TV devices eligible; App Bundles deliver only the matching ABI.
@@ -195,6 +223,10 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
     implementation("org.snakeyaml:snakeyaml-engine:3.1.1")
+    // Optional YouTube Live rebroadcast: RTMP ingest plus MediaProjection screen capture.
+    implementation("com.github.pedroSG94.RootEncoder:library:2.8.0")
+    // Opt-in analytics. Inert unless a project token is supplied at build time.
+    implementation("com.posthog:posthog-android:3.51.2")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")

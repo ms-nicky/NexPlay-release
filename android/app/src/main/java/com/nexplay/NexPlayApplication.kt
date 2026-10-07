@@ -40,12 +40,22 @@ class NexPlayApplication : Application(), SingletonImageLoader.Factory {
             }
 
         startupScope.launch {
-            runCatching {
+            val settings = runCatching {
                 SettingsStore(this@NexPlayApplication).settings.value.also {
                     // Warm secure auth and run its one-time migration on the same background path.
                     authStore.state.value
                 }
+            }.getOrNull()
+
+            // Opt-in only: an unconfigured project token leaves the SDK inert, and the consent
+            // flag inside the settings decides whether it is allowed to send at all.
+            if (settings != null) {
+                runCatching { NexPlayAnalytics.setup(this@NexPlayApplication, settings) }
+                    .onFailure { error ->
+                        Log.w(NEXPLAY_DEBUG_LOG_TAG, "Analytics setup failed", error)
+                    }
             }
+
             startupDataReady.complete(Unit)
             if (isTelevisionDevice()) {
                 delay(TV_BACKGROUND_SERVICE_START_DELAY_MS)

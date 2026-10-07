@@ -682,6 +682,23 @@ data class AppSettings(
     val streamIntroMusic: Boolean = false,
     val streamIntroStartMode: IntroMusicStartMode = IntroMusicStartMode.Muted,
     val queueReadyMusic: Boolean = false,
+
+    // --- Telemetry -----------------------------------------------------------------------------
+    // Opt-in analytics, off until the user answers the consent prompt. Kept next to the other
+    // user-facing switches so a settings backup carries the choice with the rest of the profile.
+    /** True only after the consent prompt has been answered at least once. */
+    val analyticsConsentAsked: Boolean = false,
+    /** Master telemetry switch. Defaults to on so the consent prompt is the deciding factor. */
+    val analyticsOptOut: Boolean = false,
+
+    // --- Live broadcast ------------------------------------------------------------------------
+    /** RTMP ingest endpoint for the optional YouTube live broadcast. */
+    val youtubeLiveRtmpUrl: String = DEFAULT_YOUTUBE_LIVE_RTMP_URL,
+    /**
+     * YouTube stream key. This is a live-broadcast credential, so it is never logged, never
+     * included in a diagnostic export, and excluded from RTMP URLs written to the stream log.
+     */
+    val youtubeLiveStreamKey: String = "",
     @SerialName("stretchStreamToFill")
     val legacyCropStreamToFill: Boolean = false,
     /**
@@ -729,6 +746,17 @@ data class AppSettings(
      */
     val developerOptionsUnlocked: Boolean = false,
 )
+
+/**
+ * Telemetry is allowed only after the consent prompt has been answered and the user has not opted
+ * out. Reading it in one place keeps the gate from drifting between the SDK setup and capture paths.
+ */
+internal val AppSettings.analyticsSharingEnabled: Boolean
+    get() = analyticsConsentAsked && !analyticsOptOut
+
+/** True when the broadcast key is missing, so the UI can point at Settings instead of failing. */
+internal val AppSettings.youtubeLiveReady: Boolean
+    get() = youtubeLiveStreamKey.isNotBlank() && youtubeLiveRtmpUrl.isNotBlank()
 
 internal const val MIN_GAME_CARD_SCALE = 0.75f
 internal const val MAX_GAME_CARD_SCALE = 1.4f
@@ -2414,3 +2442,5 @@ private const val LOW_POWER_RECOMMENDED_BITRATE_MBPS = 12
 private const val ANDROID_1440P_PIXEL_BUDGET = 2560 * 1440
 private const val KNOWN_AMLOGIC_AV1_DECODER = "omx.amlogic.av1.decoder.awesome"
 private const val DECODER_RESOLUTION_HEADROOM = 1.4f
+/** YouTube's RTMP ingest host. Public and fixed; only the stream key is a secret. */
+internal const val DEFAULT_YOUTUBE_LIVE_RTMP_URL = "rtmp://a.rtmp.youtube.com/live2"

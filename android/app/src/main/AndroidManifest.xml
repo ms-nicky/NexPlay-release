@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <!-- Optional YouTube Live rebroadcast captures the screen. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -64,6 +66,14 @@
             android:name=".AndroidStreamKeepAliveService"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback|microphone" />
+        <!--
+          NOT_STICKY: a screen-capture token is single-use, so a restarted service would come back
+          with a projection it cannot use. The client restarts it deliberately instead.
+        -->
+        <service
+            android:name=".YouTubeLiveBroadcastService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection" />
         <activity
             android:name=".MainActivity"
             android:enableOnBackInvokedCallback="false"
