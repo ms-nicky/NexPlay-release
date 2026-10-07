@@ -14,6 +14,14 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // RootEncoder (RTMP ingest for the optional YouTube Live rebroadcast) and the WebRTC
+        // Android SDK are published to JitPack, not to Google's or Maven Central's indexes.
+        maven("https://jitpack.io") {
+            content {
+                includeGroupByRegex("com\\.github\\..*")
+                includeGroup("io.github.webrtc-sdk")
+            }
+        }
     }
 }
 
