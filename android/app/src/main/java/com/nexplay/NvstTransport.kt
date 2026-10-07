@@ -134,7 +134,10 @@ internal fun nvstEncodedImage(
 
 @Keep
 internal object NvstBridge {
-    init { System.loadLibrary("nexplay_nvst") }
+    // The Rust crate keeps its upstream name so the workspace and Cargo.lock stay consistent, so
+    // the packaged shared object is still libopennow_nvst.so even though everything else here is
+    // NexPlay. Keep this in sync with [name] in android/nvst/Cargo.toml.
+    init { System.loadLibrary("opennow_nvst") }
     external fun create(): Long
     external fun run(handle: Long, context: String, callback: NvstTransport)
     external fun stop(handle: Long)
