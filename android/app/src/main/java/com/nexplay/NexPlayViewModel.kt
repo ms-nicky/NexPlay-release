@@ -316,6 +316,7 @@ data class NexPlayUiState(
     val androidUpdate: AndroidUpdateState = AndroidUpdateState(),
     val dismissedAndroidUpdateNoticeKey: String? = null,
     val androidPictureInPictureActive: Boolean = false,
+    val youtubeLive: YouTubeLiveBroadcastState = YouTubeLiveBroadcastState(),
     val diagnosticShare: DiagnosticShareState = DiagnosticShareState(),
     val bugReportSubmission: BugReportSubmissionState = BugReportSubmissionState(),
     val bugReportThreads: AndroidBugReportThreadsState = AndroidBugReportThreadsState(),
@@ -598,6 +599,14 @@ class NexPlayViewModel(application: Application) : AndroidViewModel(application)
         viewModelScope.launch {
             settingsStore.settings.collect { next ->
                 _state.update { it.copy(settings = next) }
+                // Re-assert the SDK's opt-out whenever the stored preference changes, so a change
+                // made in Settings (or restored from a backup) takes effect without a restart.
+                NexPlayAnalytics.applyOptOut(!next.analyticsSharingEnabled)
+            }
+        }
+        viewModelScope.launch {
+            YouTubeLiveBroadcastService.state.collect { broadcast ->
+                _state.update { it.copy(youtubeLive = broadcast) }
             }
         }
         if (androidTvProfile) {

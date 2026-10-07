@@ -10,24 +10,61 @@ Open it from Android Studio with **File > Open > `NexPlay/android`**. Android St
 - `:app:assembleRelease` builds the direct-distribution release APK with APK update support.
 - `:app:bundleRelease` builds the Google Play Android App Bundle. This task removes `REQUEST_INSTALL_PACKAGES` and disables APK self-updates so Play installs use Google Play's update mechanism.
 
-Release and debug builds include `arm64-v8a`, `armeabi-v7a`, and `x86_64`. The `armeabi-v7a` slice supports 32-bit ARM phones and 32-bit Android TV firmware. NexPlay recommends 720p/30 FPS/12 Mbps for 32-bit processes and memory-constrained TVs, and warns when a custom profile exceeds that recommendation without overriding the user's selection.
+Release and debug builds include `arm64-v8a`, `armeabi-v7a`, `x86_64`, and `x86`. The `armeabi-v7a` and `x86` slices support 32-bit ARM phones, 32-bit Android TV firmware, and Intel TVs. NexPlay recommends 720p/30 FPS/12 Mbps for 32-bit processes and memory-constrained TVs, and warns when a custom profile exceeds that recommendation without overriding the user's selection.
 
 ## APK Update Manifest
 
-APK and debug builds check `https://api.printedwaste.com/releases/nexplay/latest` and can download the returned APK. App Bundle builds installed from Google Play detect `com.android.vending` as the install source and do not check, download, or install APK updates. The manifest should look like this:
+Sideload and debug builds check the `update.json` at the repository root,
+`https://raw.githubusercontent.com/ms-nicky/NexPlay-release/main/update.json`, and can download the
+APK it points at. App Bundle builds installed from Google Play detect `com.android.vending` as the
+install source and do not check, download, or install APK updates.
 
 ```json
 {
-  "versionCode": 7,
-  "versionName": "0.5.2",
-  "apkUrl": "https://api.printedwaste.com/release-files/nexplay/app-release.apk",
-  "artifactUrl": "https://api.printedwaste.com/release-files/nexplay/app-release.apk",
-  "sha256": "optional lowercase apk checksum",
-  "releaseNotes": "Short notes shown in Settings\nSecond line"
+  "android": {
+    "versionCode": 159,
+    "versionName": "2.0.3",
+    "apkUrl": "https://github.com/ms-nicky/NexPlay-release/releases/download/v2.0.3/app-release.apk",
+    "sha256": "64 lowercase hex characters covering the built APK",
+    "releaseNotes": "Short notes shown in Settings\nSecond line"
+  }
 }
 ```
 
-`apkUrl`, `artifactUrl`, or `url` may point at the APK. `releaseNotes` may use real newlines or literal `\n` separators. The app compares `versionCode` against its installed build and asks Android's package installer to confirm the downloaded APK.
+`apkUrl`, `artifactUrl`, or `url` may point at the APK, flat or nested under `android`. `releaseNotes`
+may use real newlines or literal `\n` separators.
+
+**`sha256` is required.** The app refuses to install a downloaded APK unless its bytes match the
+digest the manifest published, and re-checks the digest at install time so a file swapped after
+download is caught. A manifest with a missing, truncated, or mismatched digest fails the update
+rather than installing unverified bytes.
+
+## Telemetry (optional, opt-in)
+
+NexPlay ships no analytics by default. There is deliberately no project token committed to the
+repository — a token in a public repo is an active, writable ingest credential. To build with
+analytics, supply your own PostHog project token:
+
+```sh
+./gradlew :app:assembleRelease -Pposthog.projectToken=phc_... -Pposthog.host=https://...
+# or POSTHOG_PROJECT_TOKEN / POSTHOG_HOST environment variables
+# or posthog.projectToken / posthog.host in android/local.properties (gitignored)
+```
+
+Without a token the SDK is inert and performs no network work. With one, telemetry still only runs
+after the user answers the consent prompt, and every payload passes a sanitizer that drops
+credential-shaped properties and redacts free text before it leaves the device. Server-side
+geolocation is disabled on each event. Session replay, screenshots, and logcat capture are off.
+
+## YouTube Live rebroadcast (optional)
+
+An RTMP rebroadcast of the device screen, driven by a `mediaProjection` foreground service. Requires
+`FOREGROUND_SERVICE_MEDIA_PROJECTION`, explicit screen-capture consent per broadcast, and a stream key
+configured in Settings.
+
+RTMP is not encrypted, so treat the stream key as a live-broadcast credential: it is never logged, is
+stripped out of any RTMP URL that reaches a log or diagnostic export, and is excluded from analytics
+payloads. The ingest host stays visible in logs so broadcast failures remain diagnosable.
 
 ## Runtime Notes
 
@@ -35,6 +72,8 @@ APK and debug builds check `https://api.printedwaste.com/releases/nexplay/latest
 - GFN auth, catalog, subscription, CloudMatch session creation/polling/claim/stop, signaling, and input packet behavior are implemented in Kotlin from the Electron project contracts.
 - Streaming uses Android WebRTC plus hardware MediaCodec probing. The bundled `nexplay_native` JNI library exposes native runtime diagnostics and keeps the NDK/CMake path wired for media-sensitive code.
 - Queue ad metadata is preserved in `SessionInfo`; ad playback can use the included Media3 dependency when the server returns an ad media URL.
+- HDR output, screen recording, gyroscope input, touch-controller skins and presets, and settings backup are all present; see the Settings panels.
+- Release builds trust only system certificate roots. User-installed CAs are honoured in debug builds only, so a proxy certificate on the device cannot intercept the GFN session in a shipped build.
 
 ## Experimental NVST
 
