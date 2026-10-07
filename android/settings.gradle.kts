@@ -17,5 +17,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "OpenNOWAndroid"
+rootProject.name = "NexPlayAndroid"
 include(":app")

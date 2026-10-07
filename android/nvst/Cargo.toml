@@ -1,5 +1,5 @@
 [workspace]
-members = [".", "crates/opennow-streamer-protocol", "crates/opennow-streamer-transport"]
+members = [".", "crates/nexplay-streamer-protocol", "crates/nexplay-streamer-transport"]
 resolver = "2"
 [workspace.package]
 version = "0.2.0"
@@ -25,18 +25,18 @@ rustls = { version = "0.23", default-features = false, features = ["std", "ring"
 tungstenite = { version = "0.28", default-features = false, features = ["handshake", "rustls-tls-webpki-roots"] }
 
 [package]
-name = "opennow-nvst-android"
+name = "nexplay-nvst-android"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
 [lib]
-name = "opennow_nvst"
+name = "nexplay_nvst"
 crate-type = ["cdylib", "rlib"]
 [dependencies]
 opus = "0.3.1"
 audiopus_sys = { version = "0.2.2", features = ["static"] }
-opennow-streamer-protocol = { path = "crates/opennow-streamer-protocol" }
-opennow-streamer-transport = { path = "crates/opennow-streamer-transport" }
+nexplay-streamer-protocol = { path = "crates/nexplay-streamer-protocol" }
+nexplay-streamer-transport = { path = "crates/nexplay-streamer-transport" }
 jni = "0.21"
 serde_json.workspace = true
 getrandom.workspace = true

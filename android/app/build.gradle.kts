@@ -25,11 +25,11 @@ val buildingPlayReleaseBundle =
         }
 
 android {
-    namespace = "com.opencloudgaming.opennow"
+    namespace = "com.nexplay"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.opencloudgaming.opennow"
+        applicationId = "com.nexplay"
         minSdk = 24
         // Android 17
         // target changes are audited; LAN access is permission-gated at its feature boundary.

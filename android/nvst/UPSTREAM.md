@@ -1,6 +1,6 @@
 # Android NVST source provenance
 
-Transport, protocol, and RTSP negotiation imported from OpenCloudGaming/OpenNOW dev
+Transport, protocol, and RTSP negotiation imported from OpenCloudGaming/NexPlay dev
 commit 3002e5c67 (2026-09-07). Transport is independently authored MIT code.
 
 1.6.4 also imports the transport and regression-test portions of dev commit 52791d1d4
@@ -12,7 +12,7 @@ RTSP disconnect (never send TEARDOWN on local stop or reconnect), keep the curso
 composited by the server, and retain Android's selected FPS up to 360. Android owns MediaCodec,
 audio playback, UI, and CloudMatch session termination.
 
-To refresh, compare the two crates and src/nvst_rtsp.rs against native/opennow-streamer
+To refresh, compare the two crates and src/nvst_rtsp.rs against native/nexplay-streamer
 at the recorded upstream revision, retaining the Android lifecycle differences.
 
 Android now sends native touch records through the reliable RemoteInput envelope, forwards
@@ -33,7 +33,7 @@ Startup validation on Android (2026-09-07) found `invalid-media-peer` when Andro
 fallback classified an RTSPS usage-14 control endpoint as the UDP bundle peer. RTSP connections
 are now excluded from that fallback, matching dev's usage-2/17-only media selection; absent an
 explicit media endpoint, RTSP SETUP supplies the native peer. Android native stage logs also
-reach logcat under OpenNOWNvst. The Android NVST retry budget stops locally after three retries
+reach logcat under NexPlayNvst. The Android NVST retry budget stops locally after three retries
 instead of reopening the same session through unbounded CloudMatch recovery.
 
 The patched APK was installed over ADB on a Xiaomi 22101320G. A fresh Satisfactory session

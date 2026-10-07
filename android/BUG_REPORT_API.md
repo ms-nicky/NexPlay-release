@@ -36,12 +36,12 @@ and write the retry instruction in `message`.
 ```yaml
 openapi: 3.1.0
 info:
-  title: OpenNOW Android bug reports
+  title: NexPlay Android bug reports
   version: 1.0.0
 paths:
-  /releases/opennow/bug-reports:
+  /releases/nexplay/bug-reports:
     post:
-      operationId: createOpenNowAndroidBugReport
+      operationId: createNexPlayAndroidBugReport
       requestBody:
         required: true
         content:

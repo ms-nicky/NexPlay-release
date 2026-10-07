@@ -4,9 +4,9 @@ Desktop comparison: `origin/dev` at `3002e5c67` (September 7, 2026).
 
 ## Input
 
-Desktop `opennow-streamer-core/src/lib.rs::captured_input_packet` encodes relative mouse
+Desktop `nexplay-streamer-core/src/lib.rs::captured_input_packet` encodes relative mouse
 motion as type 7 with signed 16-bit deltas and absolute motion as type 5. Its Windows raw
-input producer splits large motion into multiple samples. `opennow-streamer-transport/src/nvst_input.rs`
+input producer splits large motion into multiple samples. `nexplay-streamer-transport/src/nvst_input.rs`
 recognizes the existing `0x22` / type 23 Unicode framing.
 
 Android now routes captured, touch, controller, and gyro relative motion through the existing
@@ -43,7 +43,7 @@ no SDR white-point multiplier, custom gamma, or fabricated mastering metadata.
 
 This follows Android's [MediaCodec-to-SurfaceView HDR playback guidance](https://developer.android.com/media/grow/hdr-playback).
 NVIDIA's [published Android/SHIELD requirements](https://www.nvidia.com/en-us/geforce-now/system-reqs/)
-do not establish third-party handset HDR support. OpenNOW's existing desktop-native allocation
+do not establish third-party handset HDR support. NexPlay's existing desktop-native allocation
 profile is used for high-quality handset requests; provider acceptance still needs a live test.
 
 ## Evidence and remaining physical checks
