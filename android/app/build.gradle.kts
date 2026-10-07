@@ -1,6 +1,7 @@
 import com.android.build.api.instrumentation.FramesComputationMode
 import com.android.build.api.instrumentation.InstrumentationScope
 import com.opencloudgaming.buildlogic.WebRtcAudioGuardFactory
+import java.io.File
 import java.util.Properties
 
 plugins {
@@ -44,6 +45,33 @@ val posthogHost: String = sequenceOf(
     },
 ).filterNotNull().firstOrNull { it.isNotBlank() } ?: "https://us.i.posthog.com"
 
+/**
+ * Release signing, read from a keystore.properties that is deliberately kept out of version control.
+ * Credentials never live in this file: point storeFile at a keystore on disk and supply the
+ * passwords through the NEXPLAY_STORE_PASSWORD / NEXPLAY_KEY_PASSWORD environment variables (or an
+ * untracked keystore.properties). With no credentials present the release build still succeeds, it
+ * just produces an unsigned APK, which is the correct failure mode for a contributor without the key.
+ */
+val keystoreProperties = Properties().apply {
+    val file = rootProject.file("keystore.properties")
+    if (file.isFile) file.inputStream().use(::load)
+}
+val signingSecrets = mapOf(
+    "storePassword" to (System.getenv("NEXPLAY_STORE_PASSWORD") ?: keystoreProperties.getProperty("storePassword")),
+    "keyPassword" to (System.getenv("NEXPLAY_KEY_PASSWORD") ?: keystoreProperties.getProperty("keyPassword")),
+)
+val keystorePath = keystoreProperties.getProperty("storeFile")?.let { configured ->
+    // Accept a path relative to this file, to the project root, or absolute.
+    sequenceOf(
+        configured,
+        rootProject.file(configured).path,
+        rootProject.projectDir.resolve(configured).path,
+    ).firstOrNull { File(it).isFile } ?: configured
+}
+val hasSigningMaterial = keystorePath != null &&
+    signingSecrets.values.all { !it.isNullOrBlank() } &&
+    keystoreProperties.getProperty("keyAlias")?.isNotBlank() == true
+
 val buildingPlayReleaseBundle =
     providers.gradleProperty("distribution").orNull.equals("play-store", ignoreCase = true) ||
         gradle.startParameter.taskNames.any { taskName ->
@@ -78,11 +106,32 @@ android {
 
     }
 
+    // Declared before buildTypes so the named lookup there resolves. Gradle registers named
+    // containers in evaluation order, so a later signingConfigs{} would still be missing.
+    if (hasSigningMaterial) {
+        signingConfigs {
+            create("release") {
+                storeFile = File(keystorePath!!)
+                storePassword = signingSecrets["storePassword"]
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = signingSecrets["keyPassword"]
+                // v1/v2 keep older install paths working; v3 is required from API 28.
+                enableV1Signing = true
+                enableV2Signing = true
+                enableV3Signing = true
+                enableV4Signing = false
+            }
+        }
+    }
+
     buildTypes {
         debug {
             isMinifyEnabled = false
         }
         release {
+            if (hasSigningMaterial) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             isMinifyEnabled = true
             isShrinkResources = true
             buildConfigField("boolean", "APK_UPDATES_SUPPORTED", (!buildingPlayReleaseBundle).toString())
