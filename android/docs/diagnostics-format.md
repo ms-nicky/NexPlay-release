@@ -9,7 +9,7 @@ import json
 import re
 from pathlib import Path
 
-text = Path("opennow-android-logs.txt").read_text(encoding="utf-8")
+text = Path("nexplay-android-logs.txt").read_text(encoding="utf-8")
 runs = [json.loads(block) for block in
         re.findall(r"(?ms)^<parser>\r?\n(.*?)^</parser>$", text)]
 current = runs[0]
@@ -112,7 +112,7 @@ app restarts and is replaced only after another stream has produced media sample
 it and the preview after an intentional contract change (JVM only):
 
 ```sh
-OPENNOW_UPDATE_DIAGNOSTIC_SCHEMA=1 ANDROID_HOME="$HOME/Library/Android/sdk" \
+NEXPLAY_UPDATE_DIAGNOSTIC_SCHEMA=1 ANDROID_HOME="$HOME/Library/Android/sdk" \
   android/gradlew -p android :app:testDebugUnitTest \
   --tests '*DiagnosticSchemaTest' --tests '*DiagnosticAssessmentTest' --rerun-tasks
 ```

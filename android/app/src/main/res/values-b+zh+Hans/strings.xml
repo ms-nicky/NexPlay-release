@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OpenNOW</string>
-    <string name="status_starting_opennow">正在启动 OpenNOW</string>
+    <string name="app_name">NexPlay</string>
+    <string name="status_starting_opennow">正在启动 NexPlay</string>
     <string name="login_with_provider">使用 %1$s 登录</string>
     <string name="login_tv_start">在另一台设备上使用 %1$s 登录</string>
     <string name="login_tv_title">使用此代码登录</string>
@@ -101,8 +101,8 @@
     <string name="stream_panel_direct_click">直接点击</string>
     <string name="stream_panel_touch_controller">触控控制器</string>
     <string name="stream_touch_builtin_title">检测到游戏内置触控</string>
-    <string name="stream_touch_builtin_available">此游戏支持内置触控。如果愿意，你仍可在下方开启 OpenNOW 触控控制器。</string>
-    <string name="stream_touch_builtin_overridden">此游戏支持内置触控。本次会话已启用 OpenNOW 触控控制器。</string>
+    <string name="stream_touch_builtin_available">此游戏支持内置触控。如果愿意，你仍可在下方开启 NexPlay 触控控制器。</string>
+    <string name="stream_touch_builtin_overridden">此游戏支持内置触控。本次会话已启用 NexPlay 触控控制器。</string>
     <string name="stream_touch_builtin_active">内置触控已启用</string>
     <string name="stream_panel_joysticks">摇杆</string>
     <string name="stream_panel_joystick_fixed">固定</string>
@@ -240,7 +240,7 @@
     <string name="settings_color">颜色</string>
     <string name="settings_av1_ten_bit_badge">仅限 H.264/H.265</string>
     <string name="settings_av1_ten_bit_hint">AV1 使用 8 位色彩。若要使用 10 位，请选择 H.265；HDR 仅限兼容的 Android TV 模式。</string>
-    <string name="settings_av1_ten_bit_downgraded">OpenNOW 中的 AV1 使用 8 位色彩。已切换为 8 位并关闭 HDR。若要使用 10 位，请选择 H.265 或 H.264。</string>
+    <string name="settings_av1_ten_bit_downgraded">NexPlay 中的 AV1 使用 8 位色彩。已切换为 8 位并关闭 HDR。若要使用 10 位，请选择 H.265 或 H.264。</string>
     <string name="settings_hdr">HDR（Performance &amp; Ultimate）</string>
     <string name="settings_hdr_android_handheld_hint">Android 手持设备不支持 HDR 串流。使用 H.265 时仍可使用 10 位 SDR。</string>
     <string name="settings_hdr_android_tv_compatibility_hint">Android TV 上的 HDR 需要使用 60 FPS 或更低帧率的 H.265，且分辨率不高于 3840 × 2160。</string>
@@ -264,7 +264,7 @@
     <string name="settings_cloud_gsync_desc">当你的设备、显示器、方案和 GFN 会话支持时，请求云会话使用可变刷新时序。</string>
     <string name="settings_microphone">麦克风</string>
     <string name="settings_microphone_desc">将 Android 默认麦克风发送到远程游戏。你可以在串流控制中将其静音。</string>
-    <string name="settings_microphone_permission_denied">未授予麦克风权限。OpenNOW 将保持麦克风串流关闭。</string>
+    <string name="settings_microphone_permission_denied">未授予麦克风权限。NexPlay 将保持麦克风串流关闭。</string>
     <string name="settings_dynamic_color">使用系统颜色</string>
     <string name="settings_accent">强调色</string>
     <string name="settings_launch_page">启动页面</string>
@@ -281,7 +281,7 @@
     <string name="settings_catalog_background_image_custom">自定义图片</string>
     <string name="settings_catalog_background_built_in">内置背景</string>
     <string name="catalog_background_colorful_abstract">彩色抽象（默认）</string>
-    <string name="catalog_background_original">原版 OpenNOW</string>
+    <string name="catalog_background_original">原版 NexPlay</string>
     <string name="catalog_background_absolute_cinema">Absolute Cinema</string>
     <string name="action_choose_image">选择图片</string>
     <string name="action_use_default">使用默认值</string>
@@ -305,12 +305,12 @@
     <string name="action_mute_music">音乐静音</string>
     <string name="settings_stretch_stream_to_fit">拉伸串流以填满屏幕</string>
     <string name="settings_session_counter">智能会话计时器</string>
-    <string name="settings_thanks_body">感谢所有帮助 OpenNOW 为大家变得更好的人。</string>
+    <string name="settings_thanks_body">感谢所有帮助 NexPlay 为大家变得更好的人。</string>
     <string name="settings_thanks_darkevilpt">DarkevilPT</string>
     <string name="settings_thanks_darkevilpt_note">社区支持</string>
     <string name="settings_donate">捐赠</string>
     <string name="settings_donate_link_copied">已复制捐赠链接</string>
-    <string name="accent_opennow">OpenNOW</string>
+    <string name="accent_opennow">NexPlay</string>
     <string name="accent_pixel">Pixel 蓝</string>
     <string name="accent_hot_pink">亮粉色</string>
     <string name="accent_lime">青柠色</string>
@@ -383,8 +383,8 @@
     <string name="stream_controller_hidden">因已连接实体控制器，屏幕控制器已隐藏。</string>
     <string name="common_dont_show_again">不再显示</string>
     <string name="tv_pair_starting">正在启动手机配对…</string>
-    <string name="tv_pair_start">与 OpenNOW 手机应用配对</string>
-    <string name="tv_pair_instructions">请先在 Android 手机上安装并打开 OpenNOW。将手机和电视连接到同一 Wi‑Fi，然后用手机摄像头扫描此二维码。链接将在五分钟后失效。</string>
+    <string name="tv_pair_start">与 NexPlay 手机应用配对</string>
+    <string name="tv_pair_instructions">请先在 Android 手机上安装并打开 NexPlay。将手机和电视连接到同一 Wi‑Fi，然后用手机摄像头扫描此二维码。链接将在五分钟后失效。</string>
     <string name="tv_pair_settings_title">电视配对</string>
     <string name="tv_pair_phone_title">与电视配对</string>
     <string name="tv_pair_phone_instructions">请让手机和电视连接到同一 Wi‑Fi。在此扫描电视上的二维码，或查找电视并输入其 4 位代码。</string>
@@ -409,7 +409,7 @@
     <string name="settings_touch_skin_tint">触控手柄颜色</string>
     <string name="settings_touch_button_labels">按钮字母</string>
     <string name="settings_touch_gyro">陀螺仪瞄准</string>
-    <string name="tv_pair_none_found">在此网络中未找到 OpenNOW 电视。</string>
+    <string name="tv_pair_none_found">在此网络中未找到 NexPlay 电视。</string>
     <string name="profile_menu_description">打开账号资料</string>
     <string name="profile_username">用户名</string>
     <string name="profile_tier">等级</string>
@@ -420,7 +420,7 @@
     <string name="settings_category_developer">开发者选项</string>
     <string name="settings_category_developer_summary">重置流程、查看运行环境并重建本地状态</string>
     <string name="dev_notice_title">用于开发与支持</string>
-    <string name="dev_notice_body">这些操作只会重置 OpenNOW 自身的本地状态，并显示诊断导出中已有的信息。具有破坏性的操作会先询问。你可以在列表底部重新隐藏此页面。</string>
+    <string name="dev_notice_body">这些操作只会重置 NexPlay 自身的本地状态，并显示诊断导出中已有的信息。具有破坏性的操作会先询问。你可以在列表底部重新隐藏此页面。</string>
     <string name="dev_section_flows">流程与提示</string>
     <string name="dev_section_catalog">目录与商店</string>
     <string name="dev_section_stream">串流</string>
@@ -475,10 +475,10 @@
     <string name="dev_check_update_desc">立即执行更新检查</string>
     <string name="dev_sign_out_all">退出所有账号</string>
     <string name="dev_sign_out_all_desc">已保存 %1$d 个</string>
-    <string name="dev_sign_out_all_confirm">所有已保存的账号都会从本设备移除，OpenNOW 将返回登录界面。</string>
+    <string name="dev_sign_out_all_confirm">所有已保存的账号都会从本设备移除，NexPlay 将返回登录界面。</string>
     <string name="dev_wipe_app_data">清除应用数据并重启</string>
-    <string name="dev_wipe_app_data_desc">将 OpenNOW 恢复到全新安装状态</string>
-    <string name="dev_wipe_app_data_confirm">账号、设置、缓存的游戏和本地文件都会被删除，OpenNOW 会像全新安装一样重启。此操作无法撤销。</string>
+    <string name="dev_wipe_app_data_desc">将 NexPlay 恢复到全新安装状态</string>
+    <string name="dev_wipe_app_data_confirm">账号、设置、缓存的游戏和本地文件都会被删除，NexPlay 会像全新安装一样重启。此操作无法撤销。</string>
     <string name="dev_lock">隐藏开发者选项</string>
     <string name="dev_lock_desc">在「关于」中连点十次版本号即可重新显示</string>
     <string name="dev_env_build">构建</string>
@@ -529,7 +529,7 @@
     <string name="stream_joysticks_lock_zone_summary">在右侧区域内任意位置拖动即可进行相对鼠标视角瞄准。</string>
     <string name="stream_joysticks_aim_zone_label">瞄准区域</string>
     <string name="discord_community_title">Discord 社区</string>
-    <string name="discord_community_bug_report_summary">在 OpenNOW 社区获取帮助并跟进错误报告。</string>
+    <string name="discord_community_bug_report_summary">在 NexPlay 社区获取帮助并跟进错误报告。</string>
     <string name="discord_community_credits_summary">社区支持与错误报告跟进</string>
     <string name="discord_community_action">加入</string>
     <string name="discord_community_link_copied">已复制 Discord 邀请链接</string>
@@ -553,9 +553,9 @@
     <string name="settings_local_apps">添加我自己的应用</string>
     <string name="settings_local_apps_desc">在库中显示一个货架，可添加、启动和移除已安装的 Android 应用和游戏。</string>
     <string name="settings_default_launcher">设为默认启动器</string>
-    <string name="settings_default_launcher_desc">打开 Android 的启动器选择界面，让 OpenNOW 可以成为主屏幕。你可以随时在 Android 设置中改回来。</string>
+    <string name="settings_default_launcher_desc">打开 Android 的启动器选择界面，让 NexPlay 可以成为主屏幕。你可以随时在 Android 设置中改回来。</string>
     <string name="settings_default_launcher_action">选择启动器</string>
-    <string name="settings_default_launcher_selected">OpenNOW 是默认启动器</string>
+    <string name="settings_default_launcher_selected">NexPlay 是默认启动器</string>
     <string name="settings_default_launcher_manage">管理</string>
     <string name="library_local_apps">我自己的应用</string>
     <string name="library_add_local_app">添加应用</string>
@@ -654,7 +654,7 @@
     <string name="setup_streaming_custom_desc">在下方选择分辨率、帧率和码率</string>
     <string name="setup_streaming_membership">%1$s 会员</string>
     <string name="setup_streaming_membership_ceiling">你的套餐最高可串流 %1$s、%2$d FPS。更高的选项会标注解锁所需的等级。</string>
-    <string name="setup_streaming_membership_upgrade">升级 GeForce NOW 会员即可提高此上限——这并非 OpenNOW 的限制。</string>
+    <string name="setup_streaming_membership_upgrade">升级 GeForce NOW 会员即可提高此上限——这并非 NexPlay 的限制。</string>
     <string name="setup_play_title">游玩时</string>
     <string name="setup_play_subtitle">选择串流的操作手感。</string>
     <string name="setup_play_preview">预览</string>
@@ -696,7 +696,7 @@
     <string name="settings_run_setup_again_desc">重新检视外观、串流画质、游玩操作、状态栏和错误报告</string>
     <string name="membership_gate_title">需要 %1$s</string>
     <string name="membership_gate_body">GeForce NOW 将 %1$s 标记为仅限 %2$s，而此账号为 %3$s。会话很可能会被拒绝，或被降级到更低的配置。</string>
-    <string name="membership_gate_hint">是否有权游玩由 GeForce NOW 决定，而非 OpenNOW，而且目录有时并不及时——所以你仍然可以试试。</string>
+    <string name="membership_gate_hint">是否有权游玩由 GeForce NOW 决定，而非 NexPlay，而且目录有时并不及时——所以你仍然可以试试。</string>
     <string name="membership_gate_continue">仍要尝试</string>
     <string name="action_copy_error">复制错误</string>
     <string name="action_disconnect">断开连接</string>
@@ -716,7 +716,7 @@
     <string name="bug_report_collected_redaction">自动日志会在上传前移除账号名称、凭据、会话 ID 和网络地址。原始设备 ID 不会被发送。</string>
     <string name="bug_report_collected_title">会收集哪些信息？</string>
     <string name="bug_report_collected_verbatim">你输入的标题和描述会原样发送，因此请不要填写个人或敏感信息。</string>
-    <string name="bug_report_collected_viewers">PrintedWaste 和 OpenNOW 的维护者可以查看报告正文、应用版本／构建号、设备型号、Android 版本、提供方与会员类别、当前游戏、串流状态与设置、用于防滥用的匿名安装标识符，以及脱敏后的诊断日志。</string>
+    <string name="bug_report_collected_viewers">PrintedWaste 和 NexPlay 的维护者可以查看报告正文、应用版本／构建号、设备型号、Android 版本、提供方与会员类别、当前游戏、串流状态与设置、用于防滥用的匿名安装标识符，以及脱敏后的诊断日志。</string>
     <string name="bug_report_confirm_body">要把此报告和随附的脱敏诊断信息发送到 PrintedWaste API 吗？</string>
     <string name="bug_report_confirm_title">发送错误报告？</string>
     <string name="bug_report_consent">我同意发送此报告。</string>
@@ -725,9 +725,9 @@
     <string name="bug_report_description_label">发生了什么？</string>
     <string name="bug_report_description_placeholder">你当时在做什么，出了什么问题，能否复现？</string>
     <string name="bug_report_english_required">需要使用英文</string>
-    <string name="bug_report_english_required_body">提交报告前，请将 OpenNOW 或设备语言设为英文。</string>
+    <string name="bug_report_english_required_body">提交报告前，请将 NexPlay 或设备语言设为英文。</string>
     <string name="bug_report_inline_subtitle">无需退出游戏即可描述问题。</string>
-    <string name="bug_report_known_issue_override">我了解 OpenNOW 已找到可能的原因。仍要发送；我可能会失去今后的报告权限。</string>
+    <string name="bug_report_known_issue_override">我了解 NexPlay 已找到可能的原因。仍要发送；我可能会失去今后的报告权限。</string>
     <string name="bug_report_matched_suggestions">匹配的建议</string>
     <string name="bug_report_no_suggestions">本次检查不会提示无关的解决方案。</string>
     <string name="bug_report_preflight_subtitle">来自本设备与本次会话的实时检查</string>
@@ -745,7 +745,7 @@
     <string name="bug_report_upload_action">上传报告</string>
     <string name="bug_report_upload_confirm_title">上传错误报告？</string>
     <string name="bug_report_uploading">正在上传报告…</string>
-    <string name="bug_report_use_english">将 OpenNOW 设为英文</string>
+    <string name="bug_report_use_english">将 NexPlay 设为英文</string>
     <string name="catalog_checking_queues">正在检查 PrintedWaste 队列与延迟</string>
     <string name="catalog_description">简介</string>
     <string name="catalog_filters">筛选</string>
@@ -755,7 +755,7 @@
     <string name="common_details">详情</string>
     <string name="diagnostics_clipboard_body">设备、账号类型、串流配置、当前状态和临时链接已复制到剪贴板。</string>
     <string name="diagnostics_copied_title">诊断信息已复制</string>
-    <string name="diagnostics_create_body">OpenNOW 会在上传前移除令牌、账号标识符、电子邮件地址、会话 ID 和网络地址。</string>
+    <string name="diagnostics_create_body">NexPlay 会在上传前移除令牌、账号标识符、电子邮件地址、会话 ID 和网络地址。</string>
     <string name="diagnostics_create_caveat">随机生成的链接不会公开列出，但并未加密，该服务会在 24 小时内删除上传内容。</string>
     <string name="diagnostics_create_title">创建临时诊断链接？</string>
     <string name="diagnostics_preparing_body">正在移除敏感信息并创建临时链接…</string>
@@ -773,7 +773,7 @@
     <string name="login_logs_exported">日志已导出</string>
     <string name="login_pairing_code">配对码</string>
     <string name="login_tagline">Android 原生 GeForce NOW 客户端</string>
-    <string name="login_token_body">粘贴 NVIDIA 访问令牌或令牌响应 JSON。OpenNOW 会先验证访问令牌，再保存账号。</string>
+    <string name="login_token_body">粘贴 NVIDIA 访问令牌或令牌响应 JSON。NexPlay 会先验证访问令牌，再保存账号。</string>
     <string name="login_token_title">使用令牌登录</string>
     <string name="login_token_warning">请仅使用你本人拥有的账号凭据。</string>
     <string name="login_tools_body">使用令牌免浏览器登录，或在登录前导出诊断信息。</string>
@@ -802,18 +802,18 @@
     <string name="settings_developer_label">开发者</string>
     <string name="settings_no_storage_addon">此账号未启用持久存储附加服务。</string>
     <string name="settings_release_notes">版本说明</string>
-    <string name="settings_reset_body">账号、设置、缓存的游戏、教程状态和本地应用文件都会被移除。OpenNOW 将像全新安装一样重启。</string>
-    <string name="settings_reset_explainer">「重置教程」只是让串流指南重新出现。「重置设置」具有破坏性：它会清除本地应用数据并重启 OpenNOW。</string>
+    <string name="settings_reset_body">账号、设置、缓存的游戏、教程状态和本地应用文件都会被移除。NexPlay 将像全新安装一样重启。</string>
+    <string name="settings_reset_explainer">「重置教程」只是让串流指南重新出现。「重置设置」具有破坏性：它会清除本地应用数据并重启 NexPlay。</string>
     <string name="settings_reset_title">重置设置和应用数据？</string>
     <string name="settings_select_provider">选择新账号要使用的 GeForce NOW 提供方。</string>
     <string name="settings_storage_usage">存储用量</string>
     <string name="settings_store_connections">游戏商店关联</string>
     <string name="settings_upload_logs_desc">在创建未公开列出的临时链接前，敏感信息会被移除。用手机扫描二维码即可分享。</string>
     <string name="settings_upload_logs_qr">上传日志并显示二维码</string>
-    <string name="stream_diag_confirm_body">这会把配置变更摘要和可能的原因发送给 PrintedWaste 和 OpenNOW 的维护者，以便他们排查。</string>
+    <string name="stream_diag_confirm_body">这会把配置变更摘要和可能的原因发送给 PrintedWaste 和 NexPlay 的维护者，以便他们排查。</string>
     <string name="stream_diag_confirm_title">发送串流诊断信息？</string>
     <string name="stream_diag_send">发送诊断信息</string>
-    <string name="stream_no_local_stream">OpenNOW 目前没有关联的本地串流。</string>
+    <string name="stream_no_local_stream">NexPlay 目前没有关联的本地串流。</string>
     <string name="stream_profile_changed_title">串流配置已更改</string>
     <string name="stream_profile_changed_why">为何会这样</string>
     <string name="stream_profile_sending">正在发送报告和脱敏诊断信息…</string>
@@ -823,7 +823,7 @@
     <string name="stream_text_placeholder">输入或编辑要发送到串流的文字</string>
     <string name="toast_cache_already_clear">游戏缓存本来就是空的</string>
     <string name="toast_cache_cleared">已清除游戏缓存</string>
-    <string name="toast_clearing_app_data">正在清除应用数据并重启 OpenNOW</string>
+    <string name="toast_clearing_app_data">正在清除应用数据并重启 NexPlay</string>
     <string name="toast_signed_in_from_phone">已通过手机安全登录</string>
     <string name="toast_store_disconnected">已断开商店连接</string>
     <string name="toast_tutorial_reset">教程将在下次串流时显示</string>

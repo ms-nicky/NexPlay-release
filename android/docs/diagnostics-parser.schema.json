@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "OpenNOW Android diagnostic parser format 2",
+    "title": "NexPlay Android diagnostic parser format 2",
     "anyOf": [
         {
             "type": "object",

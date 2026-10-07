@@ -46,8 +46,8 @@ for abi, target, clang_target in [
         env.setdefault('CMAKE_GENERATOR', 'Ninja')
         env['PATH'] = str(ninja.parent) + os.pathsep + env.get('PATH', '')
     env['OPUS_NO_PKG'] = '1'
-    env['OPENNOW_ANDROID_NDK'] = str(ndk)
-    env['OPENNOW_ANDROID_ABI'] = abi
+    env['NEXPLAY_ANDROID_NDK'] = str(ndk)
+    env['NEXPLAY_ANDROID_ABI'] = abi
     env['CMAKE_TOOLCHAIN_FILE'] = str(root / 'android-toolchain.cmake')
     env['CARGO_TARGET_DIR'] = str(root / 'target')
     env['RUSTFLAGS'] = env.get('RUSTFLAGS', '') + ' -C link-arg=-Wl,-z,max-page-size=16384'

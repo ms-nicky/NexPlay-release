@@ -7,9 +7,9 @@
     <string name="profile_account_options">Opsi akun</string>
     <string name="profile_identity">%1$s • %2$s</string>
     <string name="profile_not_available">Tidak tersedia</string>
-    <string name="app_name">OpenNOW</string>
-    <string name="action_close_opennow">Tutup OpenNOW</string>
-    <string name="status_starting_opennow">Mulai OpenNOW</string>
+    <string name="app_name">NexPlay</string>
+    <string name="action_close_opennow">Tutup NexPlay</string>
+    <string name="status_starting_opennow">Mulai NexPlay</string>
     <string name="login_with_provider">Login dengan %1$s</string>
     <string name="login_tv_start">Login di perangkat lain dengan %1$s</string>
     <string name="login_tv_title">Gunakan kode ini untuk masuk</string>
@@ -17,8 +17,8 @@
     <string name="login_tv_waiting">Menunggu proses masuk</string>
     <string name="login_tv_expires">Kode kedaluwarsa dalam %1$d:%2$02d</string>
     <string name="tv_pair_starting">Memulai pemasangan dengan ponsel…</string>
-    <string name="tv_pair_start">Pasangkan dengan aplikasi OpenNOW di ponsel</string>
-    <string name="tv_pair_instructions">Instal dan buka OpenNOW di ponsel Android Anda terlebih dahulu. Hubungkan ponsel dan TV ke jaringan Wi-Fi yang sama, lalu pindai kode QR ini dengan kamera ponsel. Android akan membuka tautan pemasangan di OpenNOW; tautan ini berlaku selama lima menit.</string>
+    <string name="tv_pair_start">Pasangkan dengan aplikasi NexPlay di ponsel</string>
+    <string name="tv_pair_instructions">Instal dan buka NexPlay di ponsel Android Anda terlebih dahulu. Hubungkan ponsel dan TV ke jaringan Wi-Fi yang sama, lalu pindai kode QR ini dengan kamera ponsel. Android akan membuka tautan pemasangan di NexPlay; tautan ini berlaku selama lima menit.</string>
     <string name="tv_pair_settings_title">Sambungkan TV</string>
     <string name="tv_pair_phone_title">Pasangkan dengan TV</string>
     <string name="tv_pair_phone_instructions">Pastikan ponsel dan TV terhubung ke jaringan Wi-Fi yang sama. Pindai kode QR TV di sini, atau cari TV Anda lalu masukkan kode 4 digitnya.</string>
@@ -31,7 +31,7 @@
     <string name="tv_pair_scan_failed">Tidak dapat membuka pemindai QR</string>
     <string name="tv_pair_find_tv">Cari TV</string>
     <string name="tv_pair_discovering">Mencari…</string>
-    <string name="tv_pair_none_found">Tidak ada TV OpenNOW yang ditemukan di jaringan ini.</string>
+    <string name="tv_pair_none_found">Tidak ada TV NexPlay yang ditemukan di jaringan ini.</string>
     <string name="tv_pair_code">Kode TV</string>
     <string name="tv_pair_code_hint">Masukkan kode 4 digit yang tampil di TV ini.</string>
     <string name="tv_pair_pair_action">Pasangkan</string>
@@ -79,7 +79,7 @@
 
     <!-- Opsi pengembang -->
     <string name="dev_notice_title">Untuk pengembangan dan dukungan teknis</string>
-    <string name="dev_notice_body">Tindakan di sini hanya menyetel ulang status lokal OpenNOW dan menampilkan informasi yang sudah ada di ekspor diagnostik. Tindakan yang bersifat merusak akan meminta konfirmasi terlebih dahulu. Anda dapat menyembunyikan halaman ini lagi dari bagian bawah daftar.</string>
+    <string name="dev_notice_body">Tindakan di sini hanya menyetel ulang status lokal NexPlay dan menampilkan informasi yang sudah ada di ekspor diagnostik. Tindakan yang bersifat merusak akan meminta konfirmasi terlebih dahulu. Anda dapat menyembunyikan halaman ini lagi dari bagian bawah daftar.</string>
     <string name="dev_section_flows">Alur dan perintah</string>
     <string name="dev_section_catalog">Katalog dan Store</string>
     <string name="dev_section_stream">Streaming</string>
@@ -136,10 +136,10 @@
     <string name="dev_check_update_desc">Menjalankan pemeriksaan pembaruan sekarang juga</string>
     <string name="dev_sign_out_all">Keluar dari semua akun</string>
     <string name="dev_sign_out_all_desc">%1$d tersimpan</string>
-    <string name="dev_sign_out_all_confirm">Semua akun tersimpan akan dihapus dari perangkat ini dan OpenNOW kembali ke layar masuk.</string>
+    <string name="dev_sign_out_all_confirm">Semua akun tersimpan akan dihapus dari perangkat ini dan NexPlay kembali ke layar masuk.</string>
     <string name="dev_wipe_app_data">Hapus data aplikasi dan mulai ulang</string>
-    <string name="dev_wipe_app_data_desc">Mengembalikan OpenNOW seperti baru diinstal</string>
-    <string name="dev_wipe_app_data_confirm">Akun, pengaturan, cache game, dan file lokal akan dihapus, lalu OpenNOW dimulai ulang seperti baru diinstal. Tindakan ini tidak dapat dibatalkan.</string>
+    <string name="dev_wipe_app_data_desc">Mengembalikan NexPlay seperti baru diinstal</string>
+    <string name="dev_wipe_app_data_confirm">Akun, pengaturan, cache game, dan file lokal akan dihapus, lalu NexPlay dimulai ulang seperti baru diinstal. Tindakan ini tidak dapat dibatalkan.</string>
     <string name="dev_lock">Sembunyikan opsi pengembang</string>
     <string name="dev_lock_desc">Ketuk nomor build di Tentang sepuluh kali untuk menampilkannya kembali</string>
     <string name="dev_env_build">Build</string>
@@ -336,8 +336,8 @@
     <string name="stream_panel_direct_click">Klik langsung</string>
     <string name="stream_panel_touch_controller">Kontroler sentuh</string>
     <string name="stream_touch_builtin_title">Kontrol sentuh bawaan game terdeteksi</string>
-    <string name="stream_touch_builtin_available">Game ini mendukung kontrol sentuh bawaan. Anda tetap dapat mengaktifkan kontroler sentuh OpenNOW di bawah jika lebih suka.</string>
-    <string name="stream_touch_builtin_overridden">Game ini mendukung kontrol sentuh bawaan. Kontroler sentuh OpenNOW diaktifkan untuk sesi ini.</string>
+    <string name="stream_touch_builtin_available">Game ini mendukung kontrol sentuh bawaan. Anda tetap dapat mengaktifkan kontroler sentuh NexPlay di bawah jika lebih suka.</string>
+    <string name="stream_touch_builtin_overridden">Game ini mendukung kontrol sentuh bawaan. Kontroler sentuh NexPlay diaktifkan untuk sesi ini.</string>
     <string name="stream_touch_builtin_active">Bawaan aktif</string>
     <string name="stream_panel_joysticks">Joystick</string>
     <string name="stream_panel_joystick_fixed">Tetap</string>
@@ -442,7 +442,7 @@
     <string name="bug_report_open_label">Laporkan bug streaming</string>
     <string name="bug_report_open_summary">Kirim laporan masalah beserta diagnostik yang telah disamarkan</string>
     <string name="discord_community_title">Komunitas Discord</string>
-    <string name="discord_community_bug_report_summary">Dapatkan bantuan dan pantau tindak lanjut laporan bug bersama komunitas OpenNOW.</string>
+    <string name="discord_community_bug_report_summary">Dapatkan bantuan dan pantau tindak lanjut laporan bug bersama komunitas NexPlay.</string>
     <string name="discord_community_credits_summary">Dukungan komunitas dan tindak lanjut laporan bug</string>
     <string name="discord_community_action">Gabung</string>
     <string name="discord_community_link_copied">Undangan Discord disalin</string>
@@ -534,7 +534,7 @@
     <string name="settings_color_desc">8-bit 4:2:0 paling ringan dan paling kompatibel. 10-bit menghasilkan gradasi yang lebih halus, tetapi menambah kebutuhan dekoder dan bandwidth. Android secara otomatis menormalkan kombinasi yang tidak didukung.</string>
     <string name="settings_av1_ten_bit_badge">Hanya H.264/H.265</string>
     <string name="settings_av1_ten_bit_hint">AV1 menggunakan warna 8-bit. Pilih H.265 untuk 10-bit dan HDR pada layar yang kompatibel.</string>
-    <string name="settings_av1_ten_bit_downgraded">AV1 menggunakan warna 8-bit di OpenNOW. Pengaturan dialihkan ke 8-bit dan HDR dinonaktifkan. Pilih H.265 atau H.264 untuk memakai 10-bit.</string>
+    <string name="settings_av1_ten_bit_downgraded">AV1 menggunakan warna 8-bit di NexPlay. Pengaturan dialihkan ke 8-bit dan HDR dinonaktifkan. Pilih H.265 atau H.264 untuk memakai 10-bit.</string>
     <string name="settings_hdr">HDR (Performance &amp; Ultimate)</string>
     <string name="settings_hdr_desc">HDR10 memerlukan layar yang kompatibel dan dekoder H.265 perangkat keras, hingga 4K pada 60 FPS, serta keanggotaan yang didukung. Video memakai pemrosesan HDR dari layar; penajaman tidak tersedia dalam HDR.</string>
     <string name="settings_hdr_android_handheld_hint">HDR memerlukan layar HDR10 yang melaporkan rentang luminansinya dan dekoder H.265 Main10 perangkat keras untuk resolusi dan FPS yang dipilih.</string>
@@ -554,12 +554,12 @@
     <string name="settings_experimental_streaming">Streaming eksperimental</string>
     <string name="settings_experimental_streaming_warning">Dapat menyebabkan sesi gagal diluncurkan.</string>
     <string name="settings_hdr_ten_bit_badge">Tidak tersedia dengan HDR</string>
-    <string name="settings_hdr_ten_bit_warning">Server GFN tidak dapat memproses warna 10-bit saat HDR aktif. OpenNOW memaksa 8-bit 4:2:0 untuk sesi HDR.</string>
+    <string name="settings_hdr_ten_bit_warning">Server GFN tidak dapat memproses warna 10-bit saat HDR aktif. NexPlay memaksa 8-bit 4:2:0 untuk sesi HDR.</string>
     <string name="settings_advanced_controller_customization">Kustomisasi kontroler lanjutan</string>
     <string name="settings_advanced_controller_customization_desc">Tampilkan kontrol pemetaan tombol, visibilitas, giroskop, ukuran, opasitas, dan tata letak.</string>
     <string name="settings_battery_optimization_title">Optimasi baterai</string>
     <string name="battery_queue_prompt_title">Izinkan streaming di latar belakang?</string>
-    <string name="battery_queue_prompt_body">Optimasi baterai dapat mengganggu %1$s saat Anda mengantre atau streaming. Izinkan OpenNOW berjalan tanpa pembatasan baterai sebelum melanjutkan?</string>
+    <string name="battery_queue_prompt_body">Optimasi baterai dapat mengganggu %1$s saat Anda mengantre atau streaming. Izinkan NexPlay berjalan tanpa pembatasan baterai sebelum melanjutkan?</string>
     <string name="battery_queue_prompt_continue">Tidak, lanjutkan</string>
     <string name="launch_recovery_title">Sesi tidak dapat dimulai</string>
     <string name="launch_recovery_lower_settings_body">GFN menolak profil streaming ini sebelum permainan dimulai. Anda dapat mencoba sekali lagi dengan 1080p, 60 FPS, H.264, SDR 8-bit, dan fitur transport eksperimental dinonaktifkan.</string>
@@ -568,15 +568,15 @@
     <string name="settings_l4s_desc">Meminta jalur transport latensi rendah dan kehilangan rendah milik NVIDIA jika server dan jaringan mendukungnya. Biarkan nonaktif jika jaringan Anda menjadi tidak stabil.</string>
     <string name="settings_microphone">Mikrofon</string>
     <string name="settings_microphone_desc">Mengirim mikrofon Android default Anda ke game streaming. Anda dapat membisukannya dari Kontrol Streaming.</string>
-    <string name="settings_microphone_permission_denied">Izin mikrofon tidak diberikan. OpenNOW akan tetap menonaktifkan streaming mikrofon.</string>
+    <string name="settings_microphone_permission_denied">Izin mikrofon tidak diberikan. NexPlay akan tetap menonaktifkan streaming mikrofon.</string>
     <string name="settings_dynamic_color">Gunakan warna sistem</string>
     <string name="settings_accent">Aksen</string>
     <string name="settings_local_apps">Tambahkan aplikasi saya sendiri</string>
     <string name="settings_local_apps_desc">Tampilkan rak di Pustaka untuk menambah, membuka, dan menghapus aplikasi serta game Android yang terpasang.</string>
     <string name="settings_default_launcher">Jadikan launcher default Anda</string>
-    <string name="settings_default_launcher_desc">Buka pemilih launcher Android agar OpenNOW dapat menjadi layar Utama. Anda dapat mengubahnya lagi di pengaturan Android.</string>
+    <string name="settings_default_launcher_desc">Buka pemilih launcher Android agar NexPlay dapat menjadi layar Utama. Anda dapat mengubahnya lagi di pengaturan Android.</string>
     <string name="settings_default_launcher_action">Pilih launcher</string>
-    <string name="settings_default_launcher_selected">OpenNOW adalah default</string>
+    <string name="settings_default_launcher_selected">NexPlay adalah default</string>
     <string name="settings_default_launcher_manage">Kelola</string>
     <string name="library_local_apps">Aplikasi saya</string>
     <string name="library_add_local_app">Tambah aplikasi</string>
@@ -653,7 +653,7 @@
     <string name="settings_catalog_background_image_custom">Gambar kustom</string>
     <string name="settings_catalog_background_built_in">Latar belakang bawaan</string>
     <string name="catalog_background_colorful_abstract">Abstrak warna-warni (default)</string>
-    <string name="catalog_background_original">OpenNOW Asli</string>
+    <string name="catalog_background_original">NexPlay Asli</string>
     <string name="catalog_background_absolute_cinema">Absolute Cinema</string>
     <string name="action_choose_image">Pilih gambar</string>
     <string name="action_use_default">Gunakan default</string>
@@ -682,12 +682,12 @@
     <string name="settings_stream_sharpening_desc">Menerapkan filter GPU tambahan setelah dekode. Dapat meningkatkan kesan detail, tetapi mungkin menambah beban render pada perangkat yang lebih lambat.</string>
     <string name="settings_stream_sharpening_amount_desc">Mengatur kekuatan filter penajaman pascapemrosesan. Tidak mengubah resolusi sumber streaming.</string>
     <string name="settings_session_counter">Pengatur waktu sesi cerdas</string>
-    <string name="settings_thanks_body">Terima kasih kepada semua yang telah membantu menjadikan OpenNOW lebih baik untuk semua orang.</string>
+    <string name="settings_thanks_body">Terima kasih kepada semua yang telah membantu menjadikan NexPlay lebih baik untuk semua orang.</string>
     <string name="settings_thanks_darkevilpt">DarkevilPT</string>
     <string name="settings_thanks_darkevilpt_note">Dukungan komunitas</string>
     <string name="settings_donate">Donasi</string>
     <string name="settings_donate_link_copied">Tautan donasi disalin</string>
-    <string name="accent_opennow">OpenNOW</string>
+    <string name="accent_opennow">NexPlay</string>
     <string name="accent_pixel">Biru Pixel</string>
     <string name="accent_hot_pink">Merah muda cerah</string>
     <string name="accent_lime">Hijau limau</string>
@@ -754,7 +754,7 @@
     <string name="setup_streaming_custom_desc">Pilih resolusi, codec, kecepatan bingkai, dan bitrate di bawah</string>
     <string name="setup_streaming_membership">Keanggotaan %1$s</string>
     <string name="setup_streaming_membership_ceiling">Paket Anda dapat streaming hingga %1$s pada %2$d FPS. Opsi yang lebih tinggi dicantumkan beserta paket yang membukanya.</string>
-    <string name="setup_streaming_membership_upgrade">Meningkatkan keanggotaan GeForce NOW Anda akan menaikkan batas ini — OpenNOW tidak membatasinya.</string>
+    <string name="setup_streaming_membership_upgrade">Meningkatkan keanggotaan GeForce NOW Anda akan menaikkan batas ini — NexPlay tidak membatasinya.</string>
 
     <string name="setup_play_title">Saat bermain</string>
     <string name="setup_play_subtitle">Pilih kontrol dan status yang ingin Anda gunakan selama streaming.</string>
@@ -828,7 +828,7 @@
 
     <string name="membership_gate_title">Membutuhkan %1$s</string>
     <string name="membership_gate_body">GeForce NOW mencantumkan %1$s hanya untuk %2$s, sedangkan akun ini menggunakan %3$s. Sesi kemungkinan besar akan ditolak atau diturunkan ke profil yang lebih rendah.</string>
-    <string name="membership_gate_hint">Hak akses ditentukan oleh GeForce NOW, bukan OpenNOW, dan katalog terkadang belum diperbarui — jadi Anda tetap boleh mencoba.</string>
+    <string name="membership_gate_hint">Hak akses ditentukan oleh GeForce NOW, bukan NexPlay, dan katalog terkadang belum diperbarui — jadi Anda tetap boleh mencoba.</string>
     <string name="membership_gate_continue">Tetap coba</string>
 
     <!-- Diekstrak dari pemanggilan Compose untuk 1.4.0; sinkronkan dengan setiap values-*/strings.xml -->
@@ -850,7 +850,7 @@
     <string name="bug_report_collected_redaction">Log otomatis menghapus nama akun, kredensial, ID sesi, dan alamat jaringan sebelum diunggah. ID perangkat asli tidak dikirim.</string>
     <string name="bug_report_collected_title">Apa saja yang dikumpulkan?</string>
     <string name="bug_report_collected_verbatim">Judul dan deskripsi yang Anda ketik dikirim persis seperti yang ditulis, jadi jangan sertakan informasi pribadi atau sensitif.</string>
-    <string name="bug_report_collected_viewers">Pengelola PrintedWaste dan OpenNOW dapat melihat teks laporan, versi/build aplikasi, model perangkat, versi Android, penyedia dan kategori keanggotaan, game saat ini, status/pengaturan streaming, pengenal instalasi pseudonim untuk pencegahan penyalahgunaan, serta log diagnostik yang telah disamarkan.</string>
+    <string name="bug_report_collected_viewers">Pengelola PrintedWaste dan NexPlay dapat melihat teks laporan, versi/build aplikasi, model perangkat, versi Android, penyedia dan kategori keanggotaan, game saat ini, status/pengaturan streaming, pengenal instalasi pseudonim untuk pencegahan penyalahgunaan, serta log diagnostik yang telah disamarkan.</string>
     <string name="bug_report_confirm_body">Kirim laporan ini beserta diagnostik yang telah disamarkan ke API PrintedWaste?</string>
     <string name="bug_report_confirm_title">Kirim laporan bug?</string>
     <string name="bug_report_consent">Saya setuju mengirim laporan ini.</string>
@@ -859,9 +859,9 @@
     <string name="bug_report_description_label">Apa yang terjadi?</string>
     <string name="bug_report_description_placeholder">Apa yang sedang Anda lakukan, apa yang salah, dan apakah Anda dapat mereproduksinya?</string>
     <string name="bug_report_english_required">Wajib menggunakan bahasa Inggris</string>
-    <string name="bug_report_english_required_body">Atur bahasa OpenNOW atau bahasa perangkat ke bahasa Inggris sebelum melapor.</string>
+    <string name="bug_report_english_required_body">Atur bahasa NexPlay atau bahasa perangkat ke bahasa Inggris sebelum melapor.</string>
     <string name="bug_report_inline_subtitle">Jelaskan masalahnya tanpa meninggalkan game Anda.</string>
-    <string name="bug_report_known_issue_override">Saya memahami bahwa OpenNOW menemukan kemungkinan penyebabnya. Tetap kirim; saya mungkin kehilangan akses pelaporan di masa mendatang.</string>
+    <string name="bug_report_known_issue_override">Saya memahami bahwa NexPlay menemukan kemungkinan penyebabnya. Tetap kirim; saya mungkin kehilangan akses pelaporan di masa mendatang.</string>
     <string name="bug_report_matched_suggestions">SARAN YANG COCOK</string>
     <string name="bug_report_no_suggestions">Tidak ada saran perbaikan yang relevan untuk pemeriksaan ini.</string>
     <string name="bug_report_preflight_subtitle">Pemeriksaan langsung dari perangkat dan sesi ini</string>
@@ -882,7 +882,7 @@
     <string name="bug_report_upload_action">Unggah laporan</string>
     <string name="bug_report_upload_confirm_title">Unggah laporan bug?</string>
     <string name="bug_report_uploading">Mengunggah laporan…</string>
-    <string name="bug_report_use_english">Gunakan bahasa Inggris untuk OpenNOW</string>
+    <string name="bug_report_use_english">Gunakan bahasa Inggris untuk NexPlay</string>
     <string name="catalog_checking_queues">Memeriksa antrean dan latensi PrintedWaste</string>
     <string name="catalog_description">Deskripsi</string>
     <string name="catalog_filters">Filter</string>
@@ -892,7 +892,7 @@
     <string name="common_details">Detail</string>
     <string name="diagnostics_clipboard_body">Perangkat, jenis akun, profil streaming, status saat ini, dan URL paste sementara telah disalin ke papan klip.</string>
     <string name="diagnostics_copied_title">Diagnostik disalin</string>
-    <string name="diagnostics_create_body">OpenNOW akan menghapus token, pengenal akun, alamat email, ID sesi, dan alamat jaringan sebelum mengunggah.</string>
+    <string name="diagnostics_create_body">NexPlay akan menghapus token, pengenal akun, alamat email, ID sesi, dan alamat jaringan sebelum mengunggah.</string>
     <string name="diagnostics_create_caveat">Tautan acak ini tidak dicantumkan secara publik tetapi tidak dienkripsi, dan layanan paste menghapus unggahan dalam 24 jam.</string>
     <string name="diagnostics_create_title">Buat paste diagnostik sementara?</string>
     <string name="diagnostics_preparing_body">Menghapus nilai sensitif dan membuat paste sementara…</string>
@@ -910,7 +910,7 @@
     <string name="login_logs_exported">Log diekspor</string>
     <string name="login_pairing_code">KODE PEMASANGAN</string>
     <string name="login_tagline">Klien GeForce NOW asli untuk Android</string>
-    <string name="login_token_body">Tempel token akses NVIDIA atau JSON respons token. OpenNOW memverifikasi token akses sebelum menyimpan akun.</string>
+    <string name="login_token_body">Tempel token akses NVIDIA atau JSON respons token. NexPlay memverifikasi token akses sebelum menyimpan akun.</string>
     <string name="login_token_title">Masuk dengan token</string>
     <string name="login_token_warning">Gunakan hanya kredensial untuk akun yang Anda kendalikan.</string>
     <string name="login_tools_body">Gunakan token untuk masuk tanpa browser, atau ekspor diagnostik sebelum masuk.</string>
@@ -944,18 +944,18 @@
     <string name="settings_developer_label">Pengembang</string>
     <string name="settings_no_storage_addon">Tidak ada add-on penyimpanan permanen yang aktif untuk akun ini.</string>
     <string name="settings_release_notes">Catatan rilis</string>
-    <string name="settings_reset_body">Akun, pengaturan, cache game, status tutorial, dan file aplikasi lokal akan dihapus. OpenNOW akan dimulai ulang seperti baru diinstal.</string>
-    <string name="settings_reset_explainer">Setel ulang tutorial hanya menampilkan kembali panduan streaming. Setel ulang pengaturan bersifat destruktif: menghapus data aplikasi lokal lalu memulai ulang OpenNOW.</string>
+    <string name="settings_reset_body">Akun, pengaturan, cache game, status tutorial, dan file aplikasi lokal akan dihapus. NexPlay akan dimulai ulang seperti baru diinstal.</string>
+    <string name="settings_reset_explainer">Setel ulang tutorial hanya menampilkan kembali panduan streaming. Setel ulang pengaturan bersifat destruktif: menghapus data aplikasi lokal lalu memulai ulang NexPlay.</string>
     <string name="settings_reset_title">Setel ulang pengaturan dan data aplikasi?</string>
     <string name="settings_select_provider">Pilih penyedia GeForce NOW yang akan digunakan untuk akun baru.</string>
     <string name="settings_storage_usage">Penggunaan penyimpanan</string>
     <string name="settings_store_connections">Koneksi Store game</string>
     <string name="settings_upload_logs_desc">Nilai sensitif dihapus sebelum paste sementara yang tidak dicantumkan secara publik dibuat. Pindai kode QR dengan ponsel Anda untuk membagikannya.</string>
     <string name="settings_upload_logs_qr">Unggah log dan tampilkan QR</string>
-    <string name="stream_diag_confirm_body">Tindakan ini mengirim ringkasan perubahan profil dan kemungkinan penyebabnya kepada pengelola PrintedWaste dan OpenNOW agar dapat diselidiki.</string>
+    <string name="stream_diag_confirm_body">Tindakan ini mengirim ringkasan perubahan profil dan kemungkinan penyebabnya kepada pengelola PrintedWaste dan NexPlay agar dapat diselidiki.</string>
     <string name="stream_diag_confirm_title">Kirim diagnostik streaming?</string>
     <string name="stream_diag_send">Kirim diagnostik</string>
-    <string name="stream_no_local_stream">OpenNOW saat ini tidak memiliki streaming lokal yang terhubung.</string>
+    <string name="stream_no_local_stream">NexPlay saat ini tidak memiliki streaming lokal yang terhubung.</string>
     <string name="stream_profile_changed_title">Profil streaming berubah</string>
     <string name="stream_profile_changed_why">Penyebabnya</string>
     <string name="stream_profile_sending">Mengirim laporan dan diagnostik yang telah disamarkan…</string>
@@ -965,7 +965,7 @@
     <string name="stream_text_placeholder">Ketik atau edit teks streaming</string>
     <string name="toast_cache_already_clear">Cache game sudah kosong</string>
     <string name="toast_cache_cleared">Cache game dihapus</string>
-    <string name="toast_clearing_app_data">Menghapus data aplikasi dan memulai ulang OpenNOW</string>
+    <string name="toast_clearing_app_data">Menghapus data aplikasi dan memulai ulang NexPlay</string>
     <string name="toast_signed_in_from_phone">Berhasil masuk dengan aman dari ponsel</string>
     <string name="toast_store_disconnected">Store diputuskan</string>
     <string name="toast_tutorial_reset">Tutorial akan tampil pada streaming berikutnya</string>

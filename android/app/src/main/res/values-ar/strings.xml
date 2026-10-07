@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OpenNOW</string>
-    <string name="status_starting_opennow">جارٍ تشغيل OpenNOW</string>
+    <string name="app_name">NexPlay</string>
+    <string name="status_starting_opennow">جارٍ تشغيل NexPlay</string>
     <string name="login_with_provider">تسجيل الدخول باستخدام %1$s</string>
     <string name="login_tv_start">تسجيل الدخول على جهاز آخر باستخدام %1$s</string>
     <string name="login_tv_title">استخدم هذا الرمز لتسجيل الدخول</string>
@@ -101,8 +101,8 @@
     <string name="stream_panel_direct_click">نقر مباشر</string>
     <string name="stream_panel_touch_controller">وحدة تحكم باللمس</string>
     <string name="stream_touch_builtin_title">تم اكتشاف عناصر لمس مدمجة في اللعبة</string>
-    <string name="stream_touch_builtin_available">تدعم هذه اللعبة عناصر تحكم باللمس مدمجة. لا يزال بإمكانك تشغيل وحدة التحكم باللمس من OpenNOW أدناه إذا كنت تفضل ذلك.</string>
-    <string name="stream_touch_builtin_overridden">تدعم هذه اللعبة عناصر تحكم باللمس مدمجة. تم تمكين وحدة التحكم باللمس من OpenNOW لهذه الجلسة.</string>
+    <string name="stream_touch_builtin_available">تدعم هذه اللعبة عناصر تحكم باللمس مدمجة. لا يزال بإمكانك تشغيل وحدة التحكم باللمس من NexPlay أدناه إذا كنت تفضل ذلك.</string>
+    <string name="stream_touch_builtin_overridden">تدعم هذه اللعبة عناصر تحكم باللمس مدمجة. تم تمكين وحدة التحكم باللمس من NexPlay لهذه الجلسة.</string>
     <string name="stream_touch_builtin_active">العناصر المدمجة نشطة</string>
     <string name="stream_panel_joysticks">عصي التحكم</string>
     <string name="stream_panel_joystick_fixed">ثابت</string>
@@ -240,7 +240,7 @@
     <string name="settings_color">اللون</string>
     <string name="settings_av1_ten_bit_badge">H.264/H.265 فقط</string>
     <string name="settings_av1_ten_bit_hint">يستخدم AV1 ألوان 8 بت. اختر H.265 لاستخدام 10 بت؛ يقتصر HDR على أوضاع Android TV المتوافقة.</string>
-    <string name="settings_av1_ten_bit_downgraded">يستخدم AV1 ألوان 8 بت في OpenNOW. تم التبديل إلى 8 بت وتعطيل HDR. اختر H.265 أو H.264 لاستخدام 10 بت.</string>
+    <string name="settings_av1_ten_bit_downgraded">يستخدم AV1 ألوان 8 بت في NexPlay. تم التبديل إلى 8 بت وتعطيل HDR. اختر H.265 أو H.264 لاستخدام 10 بت.</string>
     <string name="settings_hdr">HDR ‏(Performance &amp; Ultimate)</string>
     <string name="settings_hdr_android_handheld_hint">لا يتوفر بث HDR على أجهزة Android المحمولة. يظل SDR ‏10 بت متاحًا مع H.265.</string>
     <string name="settings_hdr_android_tv_compatibility_hint">يتطلب HDR على Android TV استخدام H.265 بمعدل 60 FPS أو أقل ودقة تصل إلى 3840 × 2160.</string>
@@ -264,7 +264,7 @@
     <string name="settings_cloud_gsync_desc">يطلب من الجلسة السحابية استخدام توقيت تحديث متغير عندما يدعمه جهازك وشاشتك وخطتك وجلسة GFN.</string>
     <string name="settings_microphone">الميكروفون</string>
     <string name="settings_microphone_desc">يرسل ميكروفون Android الافتراضي إلى اللعبة البعيدة. يمكنك كتمه من عناصر التحكم في البث.</string>
-    <string name="settings_microphone_permission_denied">لم يتم منح إذن الميكروفون. سيبقي OpenNOW بث الميكروفون متوقفًا.</string>
+    <string name="settings_microphone_permission_denied">لم يتم منح إذن الميكروفون. سيبقي NexPlay بث الميكروفون متوقفًا.</string>
     <string name="settings_dynamic_color">استخدام ألوان النظام</string>
     <string name="settings_accent">لون التمييز</string>
     <string name="settings_launch_page">صفحة البدء</string>
@@ -281,7 +281,7 @@
     <string name="settings_catalog_background_image_custom">صورة مخصصة</string>
     <string name="settings_catalog_background_built_in">خلفية مدمجة</string>
     <string name="catalog_background_colorful_abstract">تجريدي ملون (افتراضي)</string>
-    <string name="catalog_background_original">OpenNOW الأصلي</string>
+    <string name="catalog_background_original">NexPlay الأصلي</string>
     <string name="catalog_background_absolute_cinema">Absolute Cinema</string>
     <string name="action_choose_image">اختيار صورة</string>
     <string name="action_use_default">استخدام الافتراضي</string>
@@ -305,12 +305,12 @@
     <string name="action_mute_music">كتم الموسيقى</string>
     <string name="settings_stretch_stream_to_fit">تمديد البث لملء الشاشة</string>
     <string name="settings_session_counter">مؤقت جلسة ذكي</string>
-    <string name="settings_thanks_body">شكرًا لكل من يساعد في تحسين OpenNOW للجميع.</string>
+    <string name="settings_thanks_body">شكرًا لكل من يساعد في تحسين NexPlay للجميع.</string>
     <string name="settings_thanks_darkevilpt">DarkevilPT</string>
     <string name="settings_thanks_darkevilpt_note">دعم المجتمع</string>
     <string name="settings_donate">تبرع</string>
     <string name="settings_donate_link_copied">تم نسخ رابط التبرع</string>
-    <string name="accent_opennow">OpenNOW</string>
+    <string name="accent_opennow">NexPlay</string>
     <string name="accent_pixel">أزرق Pixel</string>
     <string name="accent_hot_pink">وردي فاقع</string>
     <string name="accent_lime">ليموني</string>
@@ -383,8 +383,8 @@
     <string name="stream_controller_hidden">تم إخفاء وحدة التحكم على الشاشة لأن وحدة تحكم فعلية متصلة.</string>
     <string name="common_dont_show_again">عدم العرض مرة أخرى</string>
     <string name="tv_pair_starting">جاري بدء اقتران الهاتف…</string>
-    <string name="tv_pair_start">الاقتران بتطبيق OpenNOW على الهاتف</string>
-    <string name="tv_pair_instructions">ثبّت OpenNOW وافتحه على هاتف Android أولاً. صِل الهاتف والتلفزيون بشبكة Wi‑Fi نفسها، ثم امسح رمز QR بكاميرا الهاتف. تنتهي صلاحية الرابط بعد خمس دقائق.</string>
+    <string name="tv_pair_start">الاقتران بتطبيق NexPlay على الهاتف</string>
+    <string name="tv_pair_instructions">ثبّت NexPlay وافتحه على هاتف Android أولاً. صِل الهاتف والتلفزيون بشبكة Wi‑Fi نفسها، ثم امسح رمز QR بكاميرا الهاتف. تنتهي صلاحية الرابط بعد خمس دقائق.</string>
     <string name="tv_pair_settings_title">إقران التلفزيون</string>
     <string name="tv_pair_phone_title">الاقتران بتلفزيون</string>
     <string name="tv_pair_phone_instructions">أبقِ الهاتف والتلفزيون على شبكة Wi‑Fi نفسها. امسح رمز QR الخاص بالتلفزيون هنا، أو ابحث عن التلفزيون وأدخل الرمز المكوّن من 4 أرقام.</string>
@@ -409,7 +409,7 @@
     <string name="settings_touch_skin_tint">لون وحدة التحكم اللمسية</string>
     <string name="settings_touch_button_labels">أحرف الأزرار</string>
     <string name="settings_touch_gyro">التصويب بالجيروسكوب</string>
-    <string name="tv_pair_none_found">لم يتم العثور على تلفزيون OpenNOW على هذه الشبكة.</string>
+    <string name="tv_pair_none_found">لم يتم العثور على تلفزيون NexPlay على هذه الشبكة.</string>
     <string name="profile_menu_description">فتح ملف الحساب</string>
     <string name="profile_username">اسم المستخدم</string>
     <string name="profile_tier">الفئة</string>
@@ -420,7 +420,7 @@
     <string name="settings_category_developer">خيارات المطوّر</string>
     <string name="settings_category_developer_summary">إعادة تعيين المسارات وفحص بيئة التشغيل وإعادة بناء الحالة المحلية</string>
     <string name="dev_notice_title">للتطوير والدعم</string>
-    <string name="dev_notice_body">هذه الإجراءات تعيد تعيين الحالة المحلية الخاصة بـ OpenNOW فقط، وتعرض معلومات موجودة أصلًا في تصدير التشخيص. الإجراءات المدمّرة تطلب تأكيدًا أولًا. يمكنك إخفاء هذه الصفحة مرة أخرى من أسفل القائمة.</string>
+    <string name="dev_notice_body">هذه الإجراءات تعيد تعيين الحالة المحلية الخاصة بـ NexPlay فقط، وتعرض معلومات موجودة أصلًا في تصدير التشخيص. الإجراءات المدمّرة تطلب تأكيدًا أولًا. يمكنك إخفاء هذه الصفحة مرة أخرى من أسفل القائمة.</string>
     <string name="dev_section_flows">المسارات والمطالبات</string>
     <string name="dev_section_catalog">الكتالوج والمتاجر</string>
     <string name="dev_section_stream">البث</string>
@@ -475,10 +475,10 @@
     <string name="dev_check_update_desc">يشغّل التحقق من التحديثات فورًا</string>
     <string name="dev_sign_out_all">تسجيل الخروج من كل الحسابات</string>
     <string name="dev_sign_out_all_desc">%1$d محفوظة</string>
-    <string name="dev_sign_out_all_confirm">سيُزال كل حساب محفوظ من هذا الجهاز وسيعود OpenNOW إلى شاشة تسجيل الدخول.</string>
+    <string name="dev_sign_out_all_confirm">سيُزال كل حساب محفوظ من هذا الجهاز وسيعود NexPlay إلى شاشة تسجيل الدخول.</string>
     <string name="dev_wipe_app_data">محو بيانات التطبيق وإعادة التشغيل</string>
-    <string name="dev_wipe_app_data_desc">يعيد OpenNOW إلى حالة التثبيت الجديد</string>
-    <string name="dev_wipe_app_data_confirm">ستُحذف الحسابات والإعدادات والألعاب المخزّنة والملفات المحلية، وسيُعاد تشغيل OpenNOW كتثبيت جديد. لا يمكن التراجع عن ذلك.</string>
+    <string name="dev_wipe_app_data_desc">يعيد NexPlay إلى حالة التثبيت الجديد</string>
+    <string name="dev_wipe_app_data_confirm">ستُحذف الحسابات والإعدادات والألعاب المخزّنة والملفات المحلية، وسيُعاد تشغيل NexPlay كتثبيت جديد. لا يمكن التراجع عن ذلك.</string>
     <string name="dev_lock">إخفاء خيارات المطوّر</string>
     <string name="dev_lock_desc">انقر على رقم الإصدار في «حول» عشر مرات لإعادتها</string>
     <string name="dev_env_build">الإصدار</string>
@@ -529,7 +529,7 @@
     <string name="stream_joysticks_lock_zone_summary">اسحب في أي مكان داخل المنطقة اليمنى للتصويب بحركة فأرة نسبية.</string>
     <string name="stream_joysticks_aim_zone_label">منطقة التصويب</string>
     <string name="discord_community_title">مجتمع Discord</string>
-    <string name="discord_community_bug_report_summary">احصل على مساعدة وتابع تقارير الأخطاء مع مجتمع OpenNOW.</string>
+    <string name="discord_community_bug_report_summary">احصل على مساعدة وتابع تقارير الأخطاء مع مجتمع NexPlay.</string>
     <string name="discord_community_credits_summary">دعم المجتمع ومتابعة تقارير الأخطاء</string>
     <string name="discord_community_action">انضم</string>
     <string name="discord_community_link_copied">تم نسخ دعوة Discord</string>
@@ -553,9 +553,9 @@
     <string name="settings_local_apps">إضافة تطبيقاتي</string>
     <string name="settings_local_apps_desc">يعرض رفًّا في المكتبة يمكنك فيه إضافة وتشغيل وإزالة تطبيقات وألعاب Android المثبّتة.</string>
     <string name="settings_default_launcher">جعله المُشغّل الافتراضي</string>
-    <string name="settings_default_launcher_desc">يفتح أداة اختيار المُشغّل في Android حتى يصبح OpenNOW الشاشة الرئيسية. يمكنك تغيير ذلك مرة أخرى من إعدادات Android.</string>
+    <string name="settings_default_launcher_desc">يفتح أداة اختيار المُشغّل في Android حتى يصبح NexPlay الشاشة الرئيسية. يمكنك تغيير ذلك مرة أخرى من إعدادات Android.</string>
     <string name="settings_default_launcher_action">اختيار المُشغّل</string>
-    <string name="settings_default_launcher_selected">OpenNOW هو الافتراضي</string>
+    <string name="settings_default_launcher_selected">NexPlay هو الافتراضي</string>
     <string name="settings_default_launcher_manage">إدارة</string>
     <string name="library_local_apps">تطبيقاتي</string>
     <string name="library_add_local_app">إضافة تطبيق</string>
@@ -654,7 +654,7 @@
     <string name="setup_streaming_custom_desc">اختر الدقة ومعدل الإطارات ومعدل البت أدناه</string>
     <string name="setup_streaming_membership">عضوية %1$s</string>
     <string name="setup_streaming_membership_ceiling">تبثّ باقتك حتى %1$s بمعدل %2$d إطارًا/ث. الخيارات الأعلى مُدرجة مع الفئة التي تفتحها.</string>
-    <string name="setup_streaming_membership_upgrade">ترقية عضوية GeForce NOW ترفع هذا الحد — وOpenNOW لا يقيّده.</string>
+    <string name="setup_streaming_membership_upgrade">ترقية عضوية GeForce NOW ترفع هذا الحد — وNexPlay لا يقيّده.</string>
     <string name="setup_play_title">أثناء اللعب</string>
     <string name="setup_play_subtitle">اختر إحساس البث.</string>
     <string name="setup_play_preview">معاينة</string>
@@ -696,7 +696,7 @@
     <string name="settings_run_setup_again_desc">راجع المظهر وجودة البث وأدوات التحكم أثناء اللعب وشريط الحالة والإبلاغ عن الأخطاء</string>
     <string name="membership_gate_title">يتطلب %1$s</string>
     <string name="membership_gate_body">يُدرِج GeForce NOW لعبة %1$s ضمن %2$s فقط، وهذا الحساب على %3$s. الأرجح أن تُرفض الجلسة أو تُخفَّض إلى ملف أدنى.</string>
-    <string name="membership_gate_hint">أحقّية اللعب يقرّرها GeForce NOW لا OpenNOW، والكتالوج قد يكون قديمًا أحيانًا — لذا لا يزال بإمكانك المحاولة.</string>
+    <string name="membership_gate_hint">أحقّية اللعب يقرّرها GeForce NOW لا NexPlay، والكتالوج قد يكون قديمًا أحيانًا — لذا لا يزال بإمكانك المحاولة.</string>
     <string name="membership_gate_continue">المحاولة على أي حال</string>
     <string name="action_copy_error">نسخ الخطأ</string>
     <string name="action_disconnect">قطع الاتصال</string>
@@ -716,7 +716,7 @@
     <string name="bug_report_collected_redaction">يزيل السجل التلقائي أسماء الحسابات وبيانات الاعتماد ومعرّفات الجلسات وعناوين الشبكة قبل الرفع. ولا يُرسل معرّف الجهاز الخام.</string>
     <string name="bug_report_collected_title">ما الذي يُجمع؟</string>
     <string name="bug_report_collected_verbatim">يُرسل العنوان والوصف اللذان تكتبهما كما هما تمامًا، لذا لا تُدرج معلومات شخصية أو حساسة.</string>
-    <string name="bug_report_collected_viewers">يمكن للقائمين على PrintedWaste وOpenNOW الاطلاع على نص التقرير وإصدار التطبيق وطراز الجهاز وإصدار Android والمزوّد وفئة العضوية واللعبة الحالية وحالة البث وإعداداته ومعرّف تثبيت مستعار لمنع إساءة الاستخدام وسجل تشخيص مُنقّى.</string>
+    <string name="bug_report_collected_viewers">يمكن للقائمين على PrintedWaste وNexPlay الاطلاع على نص التقرير وإصدار التطبيق وطراز الجهاز وإصدار Android والمزوّد وفئة العضوية واللعبة الحالية وحالة البث وإعداداته ومعرّف تثبيت مستعار لمنع إساءة الاستخدام وسجل تشخيص مُنقّى.</string>
     <string name="bug_report_confirm_body">هل تريد إرسال هذا التقرير والتشخيص المُنقّى المرفق إلى واجهة PrintedWaste؟</string>
     <string name="bug_report_confirm_title">إرسال تقرير الخطأ؟</string>
     <string name="bug_report_consent">أوافق على إرسال هذا التقرير.</string>
@@ -725,9 +725,9 @@
     <string name="bug_report_description_label">ماذا حدث؟</string>
     <string name="bug_report_description_placeholder">ماذا كنت تفعل، وما الذي حدث خطأً، وهل يمكنك تكراره؟</string>
     <string name="bug_report_english_required">الإنجليزية مطلوبة</string>
-    <string name="bug_report_english_required_body">اضبط OpenNOW أو لغة الجهاز على الإنجليزية قبل الإبلاغ.</string>
+    <string name="bug_report_english_required_body">اضبط NexPlay أو لغة الجهاز على الإنجليزية قبل الإبلاغ.</string>
     <string name="bug_report_inline_subtitle">صِف المشكلة دون مغادرة لعبتك.</string>
-    <string name="bug_report_known_issue_override">أفهم أن OpenNOW وجد سببًا محتملًا. أرسِل على أي حال؛ قد أفقد إمكانية الإبلاغ مستقبلًا.</string>
+    <string name="bug_report_known_issue_override">أفهم أن NexPlay وجد سببًا محتملًا. أرسِل على أي حال؛ قد أفقد إمكانية الإبلاغ مستقبلًا.</string>
     <string name="bug_report_matched_suggestions">الاقتراحات المطابقة</string>
     <string name="bug_report_no_suggestions">لا تُقترح حلول غير ذات صلة لهذا الفحص.</string>
     <string name="bug_report_preflight_subtitle">فحوصات مباشرة من هذا الجهاز وهذه الجلسة</string>
@@ -745,7 +745,7 @@
     <string name="bug_report_upload_action">رفع التقرير</string>
     <string name="bug_report_upload_confirm_title">رفع تقرير الخطأ؟</string>
     <string name="bug_report_uploading">جارٍ رفع التقرير…</string>
-    <string name="bug_report_use_english">استخدام الإنجليزية في OpenNOW</string>
+    <string name="bug_report_use_english">استخدام الإنجليزية في NexPlay</string>
     <string name="catalog_checking_queues">جارٍ فحص طوابير PrintedWaste والتأخير</string>
     <string name="catalog_description">الوصف</string>
     <string name="catalog_filters">المرشّحات</string>
@@ -755,7 +755,7 @@
     <string name="common_details">التفاصيل</string>
     <string name="diagnostics_clipboard_body">تم نسخ الجهاز ونوع الحساب وملف البث والحالة الراهنة والرابط المؤقت إلى الحافظة.</string>
     <string name="diagnostics_copied_title">تم نسخ التشخيص</string>
-    <string name="diagnostics_create_body">سيزيل OpenNOW الرموز ومعرّفات الحسابات وعناوين البريد الإلكتروني ومعرّفات الجلسات وعناوين الشبكة قبل الرفع.</string>
+    <string name="diagnostics_create_body">سيزيل NexPlay الرموز ومعرّفات الحسابات وعناوين البريد الإلكتروني ومعرّفات الجلسات وعناوين الشبكة قبل الرفع.</string>
     <string name="diagnostics_create_caveat">الرابط العشوائي غير مُدرج لكنه غير مشفّر، وتحذف الخدمة الملفات المرفوعة خلال 24 ساعة.</string>
     <string name="diagnostics_create_title">إنشاء رابط تشخيص مؤقت؟</string>
     <string name="diagnostics_preparing_body">جارٍ إزالة القيم الحساسة وإنشاء رابط مؤقت…</string>
@@ -773,7 +773,7 @@
     <string name="login_logs_exported">تم تصدير السجلات</string>
     <string name="login_pairing_code">رمز الاقتران</string>
     <string name="login_tagline">عميل GeForce NOW أصلي على Android</string>
-    <string name="login_token_body">الصق رمز وصول NVIDIA أو استجابة الرمز بصيغة JSON. يتحقق OpenNOW من رمز الوصول قبل حفظ الحساب.</string>
+    <string name="login_token_body">الصق رمز وصول NVIDIA أو استجابة الرمز بصيغة JSON. يتحقق NexPlay من رمز الوصول قبل حفظ الحساب.</string>
     <string name="login_token_title">تسجيل الدخول برمز</string>
     <string name="login_token_warning">استخدم فقط بيانات اعتماد حساب تملكه.</string>
     <string name="login_tools_body">سجّل الدخول برمز دون متصفّح، أو صدّر التشخيص قبل تسجيل الدخول.</string>
@@ -802,18 +802,18 @@
     <string name="settings_developer_label">المطوّر</string>
     <string name="settings_no_storage_addon">لا توجد إضافة تخزين دائم مفعّلة لهذا الحساب.</string>
     <string name="settings_release_notes">ملاحظات الإصدار</string>
-    <string name="settings_reset_body">ستُزال الحسابات والإعدادات والألعاب المخزّنة وحالة الدليل التعليمي وملفات التطبيق المحلية. وسيُعاد تشغيل OpenNOW كتثبيت جديد.</string>
-    <string name="settings_reset_explainer">«إعادة تعيين الدليل التعليمي» تجعل دليل البث يظهر مجددًا فقط. أما «إعادة تعيين الإعدادات» فمدمّرة: تمحو بيانات التطبيق المحلية وتعيد تشغيل OpenNOW.</string>
+    <string name="settings_reset_body">ستُزال الحسابات والإعدادات والألعاب المخزّنة وحالة الدليل التعليمي وملفات التطبيق المحلية. وسيُعاد تشغيل NexPlay كتثبيت جديد.</string>
+    <string name="settings_reset_explainer">«إعادة تعيين الدليل التعليمي» تجعل دليل البث يظهر مجددًا فقط. أما «إعادة تعيين الإعدادات» فمدمّرة: تمحو بيانات التطبيق المحلية وتعيد تشغيل NexPlay.</string>
     <string name="settings_reset_title">إعادة تعيين الإعدادات وبيانات التطبيق؟</string>
     <string name="settings_select_provider">اختر مزوّد GeForce NOW الذي سيُستخدم للحساب الجديد.</string>
     <string name="settings_storage_usage">استخدام التخزين</string>
     <string name="settings_store_connections">اتصالات متاجر الألعاب</string>
     <string name="settings_upload_logs_desc">تُزال القيم الحساسة قبل إنشاء رابط مؤقت غير مُدرج. امسح رمز QR بهاتفك لمشاركته.</string>
     <string name="settings_upload_logs_qr">رفع السجلات وعرض رمز QR</string>
-    <string name="stream_diag_confirm_body">يرسل هذا ملخّص تغيّر الملف والسبب المرجّح إلى القائمين على PrintedWaste وOpenNOW ليتمكّنوا من التحقيق فيه.</string>
+    <string name="stream_diag_confirm_body">يرسل هذا ملخّص تغيّر الملف والسبب المرجّح إلى القائمين على PrintedWaste وNexPlay ليتمكّنوا من التحقيق فيه.</string>
     <string name="stream_diag_confirm_title">إرسال تشخيص البث؟</string>
     <string name="stream_diag_send">إرسال التشخيص</string>
-    <string name="stream_no_local_stream">لا يوجد بث محلي مرتبط بـ OpenNOW في الوقت الحالي.</string>
+    <string name="stream_no_local_stream">لا يوجد بث محلي مرتبط بـ NexPlay في الوقت الحالي.</string>
     <string name="stream_profile_changed_title">تغيّر ملف البث</string>
     <string name="stream_profile_changed_why">لماذا حدث ذلك</string>
     <string name="stream_profile_sending">جارٍ إرسال التقرير والتشخيص المُنقّى…</string>
@@ -823,7 +823,7 @@
     <string name="stream_text_placeholder">اكتب نص البث أو حرّره</string>
     <string name="toast_cache_already_clear">كانت ذاكرة الألعاب المؤقتة فارغة أصلًا</string>
     <string name="toast_cache_cleared">تم محو ذاكرة الألعاب المؤقتة</string>
-    <string name="toast_clearing_app_data">جارٍ محو بيانات التطبيق وإعادة تشغيل OpenNOW</string>
+    <string name="toast_clearing_app_data">جارٍ محو بيانات التطبيق وإعادة تشغيل NexPlay</string>
     <string name="toast_signed_in_from_phone">تم تسجيل الدخول بأمان من الهاتف</string>
     <string name="toast_store_disconnected">تم قطع الاتصال بالمتجر</string>
     <string name="toast_tutorial_reset">سيظهر الدليل التعليمي في البث التالي</string>

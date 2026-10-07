@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OpenNOW</string>
-    <string name="status_starting_opennow">OpenNOW başlatılıyor</string>
+    <string name="app_name">NexPlay</string>
+    <string name="status_starting_opennow">NexPlay başlatılıyor</string>
     <string name="login_with_provider">%1$s ile oturum aç</string>
     <string name="login_tv_start">Başka bir cihazda %1$s ile oturum aç</string>
     <string name="login_tv_title">Oturum açmak için bu kodu kullanın</string>
@@ -101,8 +101,8 @@
     <string name="stream_panel_direct_click">Doğrudan tıklama</string>
     <string name="stream_panel_touch_controller">Dokunmatik kontrolcü</string>
     <string name="stream_touch_builtin_title">Oyunun yerleşik dokunmatik kontrolü algılandı</string>
-    <string name="stream_touch_builtin_available">Bu oyun yerleşik dokunmatik kontrolleri destekliyor. İsterseniz aşağıdan OpenNOW dokunmatik kontrolcüsünü yine de açabilirsiniz.</string>
-    <string name="stream_touch_builtin_overridden">Bu oyun yerleşik dokunmatik kontrolleri destekliyor. Bu oturumda OpenNOW dokunmatik kontrolcüsü etkin.</string>
+    <string name="stream_touch_builtin_available">Bu oyun yerleşik dokunmatik kontrolleri destekliyor. İsterseniz aşağıdan NexPlay dokunmatik kontrolcüsünü yine de açabilirsiniz.</string>
+    <string name="stream_touch_builtin_overridden">Bu oyun yerleşik dokunmatik kontrolleri destekliyor. Bu oturumda NexPlay dokunmatik kontrolcüsü etkin.</string>
     <string name="stream_touch_builtin_active">Yerleşik kontrol etkin</string>
     <string name="stream_panel_joysticks">Kumanda çubukları</string>
     <string name="stream_panel_joystick_fixed">Sabit</string>
@@ -240,7 +240,7 @@
     <string name="settings_color">Renk</string>
     <string name="settings_av1_ten_bit_badge">Yalnızca H.264/H.265</string>
     <string name="settings_av1_ten_bit_hint">AV1, 8 bit renk kullanır. 10 bit için H.265’i seçin; HDR yalnızca uyumlu Android TV modlarında kullanılabilir.</string>
-    <string name="settings_av1_ten_bit_downgraded">OpenNOW’da AV1, 8 bit renk kullanır. 8 bite geçildi ve HDR kapatıldı. 10 bit için H.265 veya H.264’ü seçin.</string>
+    <string name="settings_av1_ten_bit_downgraded">NexPlay’da AV1, 8 bit renk kullanır. 8 bite geçildi ve HDR kapatıldı. 10 bit için H.265 veya H.264’ü seçin.</string>
     <string name="settings_hdr">HDR (Performance &amp; Ultimate)</string>
     <string name="settings_hdr_android_handheld_hint">Android taşınabilir cihazlarda HDR yayın kullanılamaz. H.265 ile 10 bit SDR kullanılmaya devam edilebilir.</string>
     <string name="settings_hdr_android_tv_compatibility_hint">Android TV’de HDR için 60 FPS veya altında H.265 ve en fazla 3840 × 2160 çözünürlük gerekir.</string>
@@ -264,7 +264,7 @@
     <string name="settings_cloud_gsync_desc">Cihazınız, ekranınız, planınız ve GFN oturumu desteklediğinde bulut oturumundan değişken yenileme zamanlaması kullanmasını ister.</string>
     <string name="settings_microphone">Mikrofon</string>
     <string name="settings_microphone_desc">Varsayılan Android mikrofonunuzu uzak oyuna gönderir. Yayın Kontrollerinden sessize alabilirsiniz.</string>
-    <string name="settings_microphone_permission_denied">Mikrofon izni verilmedi. OpenNOW mikrofon yayınını kapalı tutacak.</string>
+    <string name="settings_microphone_permission_denied">Mikrofon izni verilmedi. NexPlay mikrofon yayınını kapalı tutacak.</string>
     <string name="settings_dynamic_color">Sistem renklerini kullan</string>
     <string name="settings_accent">Vurgu</string>
     <string name="settings_launch_page">Başlangıç sayfası</string>
@@ -281,7 +281,7 @@
     <string name="settings_catalog_background_image_custom">Özel resim</string>
     <string name="settings_catalog_background_built_in">Yerleşik arka plan</string>
     <string name="catalog_background_colorful_abstract">Renkli soyut (varsayılan)</string>
-    <string name="catalog_background_original">Orijinal OpenNOW</string>
+    <string name="catalog_background_original">Orijinal NexPlay</string>
     <string name="catalog_background_absolute_cinema">Absolute Cinema</string>
     <string name="action_choose_image">Resim seç</string>
     <string name="action_use_default">Varsayılanı kullan</string>
@@ -305,12 +305,12 @@
     <string name="action_mute_music">Müziği sessize al</string>
     <string name="settings_stretch_stream_to_fit">Yayını ekranı dolduracak şekilde uzat</string>
     <string name="settings_session_counter">Akıllı oturum sayacı</string>
-    <string name="settings_thanks_body">OpenNOW’u herkes için geliştirmeye yardımcı olanlara teşekkürler.</string>
+    <string name="settings_thanks_body">NexPlay’u herkes için geliştirmeye yardımcı olanlara teşekkürler.</string>
     <string name="settings_thanks_darkevilpt">DarkevilPT</string>
     <string name="settings_thanks_darkevilpt_note">Topluluk desteği</string>
     <string name="settings_donate">Bağış yap</string>
     <string name="settings_donate_link_copied">Bağış bağlantısı kopyalandı</string>
-    <string name="accent_opennow">OpenNOW</string>
+    <string name="accent_opennow">NexPlay</string>
     <string name="accent_pixel">Pixel mavisi</string>
     <string name="accent_hot_pink">Canlı pembe</string>
     <string name="accent_lime">Limon yeşili</string>
@@ -383,8 +383,8 @@
     <string name="stream_controller_hidden">Fiziksel bir kumanda bağlı olduğu için ekran kumandası gizlendi.</string>
     <string name="common_dont_show_again">Bir daha gösterme</string>
     <string name="tv_pair_starting">Telefon eşleştirmesi başlatılıyor…</string>
-    <string name="tv_pair_start">OpenNOW telefon uygulamasıyla eşleştir</string>
-    <string name="tv_pair_instructions">Önce Android telefonunuza OpenNOW’u yükleyip açın. Telefonu ve TV’yi aynı Wi‑Fi ağına bağlayın, ardından bu QR kodunu telefon kamerasıyla tarayın. Bağlantı beş dakika sonra sona erer.</string>
+    <string name="tv_pair_start">NexPlay telefon uygulamasıyla eşleştir</string>
+    <string name="tv_pair_instructions">Önce Android telefonunuza NexPlay’u yükleyip açın. Telefonu ve TV’yi aynı Wi‑Fi ağına bağlayın, ardından bu QR kodunu telefon kamerasıyla tarayın. Bağlantı beş dakika sonra sona erer.</string>
     <string name="tv_pair_settings_title">TV eşleştirme</string>
     <string name="tv_pair_phone_title">Bir TV ile eşleştir</string>
     <string name="tv_pair_phone_instructions">Bu telefonu ve TV’yi aynı Wi‑Fi ağında tutun. TV’nin QR kodunu burada tarayın veya TV’yi bulup 4 haneli kodunu girin.</string>
@@ -409,7 +409,7 @@
     <string name="settings_touch_skin_tint">Dokunmatik kontrolcü rengi</string>
     <string name="settings_touch_button_labels">Düğme harfleri</string>
     <string name="settings_touch_gyro">Jiroskopla nişan alma</string>
-    <string name="tv_pair_none_found">Bu ağda OpenNOW TV bulunamadı.</string>
+    <string name="tv_pair_none_found">Bu ağda NexPlay TV bulunamadı.</string>
     <string name="profile_menu_description">Hesap profilini aç</string>
     <string name="profile_username">Kullanıcı adı</string>
     <string name="profile_tier">Seviye</string>
@@ -420,7 +420,7 @@
     <string name="settings_category_developer">Geliştirici seçenekleri</string>
     <string name="settings_category_developer_summary">Akışları sıfırla, çalışma ortamını incele ve yerel durumu yeniden oluştur</string>
     <string name="dev_notice_title">Geliştirme ve destek için</string>
-    <string name="dev_notice_body">Bu işlemler yalnızca OpenNOW’un kendi yerel durumunu sıfırlar ve tanılama dışa aktarımında zaten bulunan bilgileri gösterir. Yıkıcı olanlar önce onay ister. Bu sayfayı listenin altından yeniden gizleyebilirsiniz.</string>
+    <string name="dev_notice_body">Bu işlemler yalnızca NexPlay’un kendi yerel durumunu sıfırlar ve tanılama dışa aktarımında zaten bulunan bilgileri gösterir. Yıkıcı olanlar önce onay ister. Bu sayfayı listenin altından yeniden gizleyebilirsiniz.</string>
     <string name="dev_section_flows">Akışlar ve istemler</string>
     <string name="dev_section_catalog">Katalog ve mağazalar</string>
     <string name="dev_section_stream">Yayın</string>
@@ -475,10 +475,10 @@
     <string name="dev_check_update_desc">Güncelleme denetimini hemen çalıştırır</string>
     <string name="dev_sign_out_all">Tüm hesaplardan çıkış yap</string>
     <string name="dev_sign_out_all_desc">%1$d kayıtlı</string>
-    <string name="dev_sign_out_all_confirm">Kayıtlı her hesap bu cihazdan kaldırılacak ve OpenNOW oturum açma ekranına dönecek.</string>
+    <string name="dev_sign_out_all_confirm">Kayıtlı her hesap bu cihazdan kaldırılacak ve NexPlay oturum açma ekranına dönecek.</string>
     <string name="dev_wipe_app_data">Uygulama verilerini sil ve yeniden başlat</string>
-    <string name="dev_wipe_app_data_desc">OpenNOW’u yeni kurulmuş haline döndürür</string>
-    <string name="dev_wipe_app_data_confirm">Hesaplar, ayarlar, önbelleğe alınmış oyunlar ve yerel dosyalar silinecek ve OpenNOW yeni kurulmuş gibi yeniden başlayacak. Bu işlem geri alınamaz.</string>
+    <string name="dev_wipe_app_data_desc">NexPlay’u yeni kurulmuş haline döndürür</string>
+    <string name="dev_wipe_app_data_confirm">Hesaplar, ayarlar, önbelleğe alınmış oyunlar ve yerel dosyalar silinecek ve NexPlay yeni kurulmuş gibi yeniden başlayacak. Bu işlem geri alınamaz.</string>
     <string name="dev_lock">Geliştirici seçeneklerini gizle</string>
     <string name="dev_lock_desc">Geri getirmek için Hakkında bölümünde derleme numarasına on kez dokunun</string>
     <string name="dev_env_build">Derleme</string>
@@ -529,7 +529,7 @@
     <string name="stream_joysticks_lock_zone_summary">Göreli fare bakışıyla nişan almak için sağ bölgenin herhangi bir yerinde sürükleyin.</string>
     <string name="stream_joysticks_aim_zone_label">NİŞAN BÖLGESİ</string>
     <string name="discord_community_title">Discord topluluğu</string>
-    <string name="discord_community_bug_report_summary">OpenNOW topluluğuyla yardım alın ve hata raporlarını takip edin.</string>
+    <string name="discord_community_bug_report_summary">NexPlay topluluğuyla yardım alın ve hata raporlarını takip edin.</string>
     <string name="discord_community_credits_summary">Topluluk desteği ve hata raporu takibi</string>
     <string name="discord_community_action">Katıl</string>
     <string name="discord_community_link_copied">Discord daveti kopyalandı</string>
@@ -553,9 +553,9 @@
     <string name="settings_local_apps">Kendi uygulamalarımı ekle</string>
     <string name="settings_local_apps_desc">Kitaplıkta yüklü Android uygulamalarını ve oyunlarını ekleyip başlatabileceğiniz ve kaldırabileceğiniz bir raf gösterir.</string>
     <string name="settings_default_launcher">Varsayılan başlatıcın yap</string>
-    <string name="settings_default_launcher_desc">OpenNOW’un ana ekran olabilmesi için Android’in başlatıcı seçiciyi açar. Bunu Android ayarlarından yeniden değiştirebilirsiniz.</string>
+    <string name="settings_default_launcher_desc">NexPlay’un ana ekran olabilmesi için Android’in başlatıcı seçiciyi açar. Bunu Android ayarlarından yeniden değiştirebilirsiniz.</string>
     <string name="settings_default_launcher_action">Başlatıcı seç</string>
-    <string name="settings_default_launcher_selected">OpenNOW varsayılan</string>
+    <string name="settings_default_launcher_selected">NexPlay varsayılan</string>
     <string name="settings_default_launcher_manage">Yönet</string>
     <string name="library_local_apps">Kendi uygulamalarım</string>
     <string name="library_add_local_app">Uygulama ekle</string>
@@ -654,7 +654,7 @@
     <string name="setup_streaming_custom_desc">Aşağıdan çözünürlük, kare hızı ve bit hızı seçin</string>
     <string name="setup_streaming_membership">%1$s üyeliği</string>
     <string name="setup_streaming_membership_ceiling">Planınız %2$d FPS ile %1$s değerine kadar yayın yapar. Daha yüksek seçenekler, onları açan seviyeyle birlikte listelenir.</string>
-    <string name="setup_streaming_membership_upgrade">GeForce NOW üyeliğinizi yükseltmek bu sınırı artırır — OpenNOW onu kısıtlamaz.</string>
+    <string name="setup_streaming_membership_upgrade">GeForce NOW üyeliğinizi yükseltmek bu sınırı artırır — NexPlay onu kısıtlamaz.</string>
     <string name="setup_play_title">Oyun sırasında</string>
     <string name="setup_play_subtitle">Yayının nasıl hissettirdiğini seçin.</string>
     <string name="setup_play_preview">Önizleme</string>
@@ -696,7 +696,7 @@
     <string name="settings_run_setup_again_desc">Görünümü, yayın kalitesini, oyun kontrollerini, durum satırını ve hata raporlamayı yeniden gözden geçirin</string>
     <string name="membership_gate_title">%1$s gerekiyor</string>
     <string name="membership_gate_body">GeForce NOW %1$s oyununu yalnızca %2$s olarak listeliyor ve bu hesap %3$s kullanıyor. Oturum büyük olasılıkla reddedilecek veya daha düşük bir profile indirilecek.</string>
-    <string name="membership_gate_hint">Erişim hakkına OpenNOW değil GeForce NOW karar verir ve katalog bazen güncel olmaz — yine de deneyebilirsiniz.</string>
+    <string name="membership_gate_hint">Erişim hakkına NexPlay değil GeForce NOW karar verir ve katalog bazen güncel olmaz — yine de deneyebilirsiniz.</string>
     <string name="membership_gate_continue">Yine de dene</string>
     <string name="action_copy_error">Hatayı kopyala</string>
     <string name="action_disconnect">Bağlantıyı kes</string>
@@ -716,7 +716,7 @@
     <string name="bug_report_collected_redaction">Otomatik günlük, yüklemeden önce hesap adlarını, kimlik bilgilerini, oturum kimliklerini ve ağ adreslerini kaldırır. Ham cihaz kimliği gönderilmez.</string>
     <string name="bug_report_collected_title">Neler toplanıyor?</string>
     <string name="bug_report_collected_verbatim">Yazdığınız başlık ve açıklama tam olarak yazdığınız gibi gönderilir; bu yüzden kişisel veya hassas bilgi eklemeyin.</string>
-    <string name="bug_report_collected_viewers">PrintedWaste ve OpenNOW geliştiricileri rapor metnini, uygulama sürümünü/derlemesini, cihaz modelini, Android sürümünü, sağlayıcı ve üyelik kategorisini, geçerli oyunu, yayın durumunu/ayarlarını, kötüye kullanımı önlemeye yönelik takma adlı bir kurulum tanımlayıcısını ve temizlenmiş bir tanılama günlüğünü görebilir.</string>
+    <string name="bug_report_collected_viewers">PrintedWaste ve NexPlay geliştiricileri rapor metnini, uygulama sürümünü/derlemesini, cihaz modelini, Android sürümünü, sağlayıcı ve üyelik kategorisini, geçerli oyunu, yayın durumunu/ayarlarını, kötüye kullanımı önlemeye yönelik takma adlı bir kurulum tanımlayıcısını ve temizlenmiş bir tanılama günlüğünü görebilir.</string>
     <string name="bug_report_confirm_body">Bu rapor ve ekli temizlenmiş tanılama verileri PrintedWaste API’sine gönderilsin mi?</string>
     <string name="bug_report_confirm_title">Hata raporu gönderilsin mi?</string>
     <string name="bug_report_consent">Bu raporun gönderilmesine izin veriyorum.</string>
@@ -725,9 +725,9 @@
     <string name="bug_report_description_label">Ne oldu?</string>
     <string name="bug_report_description_placeholder">Ne yapıyordunuz, ne ters gitti ve bunu tekrarlayabiliyor musunuz?</string>
     <string name="bug_report_english_required">İngilizce gerekli</string>
-    <string name="bug_report_english_required_body">Rapor göndermeden önce OpenNOW’u veya cihaz dilini İngilizce yapın.</string>
+    <string name="bug_report_english_required_body">Rapor göndermeden önce NexPlay’u veya cihaz dilini İngilizce yapın.</string>
     <string name="bug_report_inline_subtitle">Oyununuzdan çıkmadan sorunu açıklayın.</string>
-    <string name="bug_report_known_issue_override">OpenNOW’un olası bir neden bulduğunu anlıyorum. Yine de gönder; ileride rapor gönderme erişimimi kaybedebilirim.</string>
+    <string name="bug_report_known_issue_override">NexPlay’un olası bir neden bulduğunu anlıyorum. Yine de gönder; ileride rapor gönderme erişimimi kaybedebilirim.</string>
     <string name="bug_report_matched_suggestions">EŞLEŞEN ÖNERİLER</string>
     <string name="bug_report_no_suggestions">Bu denetim için alakasız çözümler önerilmiyor.</string>
     <string name="bug_report_preflight_subtitle">Bu cihazdan ve bu oturumdan canlı denetimler</string>
@@ -745,7 +745,7 @@
     <string name="bug_report_upload_action">Raporu yükle</string>
     <string name="bug_report_upload_confirm_title">Hata raporu yüklensin mi?</string>
     <string name="bug_report_uploading">Rapor yükleniyor…</string>
-    <string name="bug_report_use_english">OpenNOW için İngilizce kullan</string>
+    <string name="bug_report_use_english">NexPlay için İngilizce kullan</string>
     <string name="catalog_checking_queues">PrintedWaste kuyrukları ve gecikme denetleniyor</string>
     <string name="catalog_description">Açıklama</string>
     <string name="catalog_filters">Filtreler</string>
@@ -755,7 +755,7 @@
     <string name="common_details">Ayrıntılar</string>
     <string name="diagnostics_clipboard_body">Cihaz, hesap türü, yayın profili, geçerli durum ve geçici bağlantı adresi panoya kopyalandı.</string>
     <string name="diagnostics_copied_title">Tanılama verileri kopyalandı</string>
-    <string name="diagnostics_create_body">OpenNOW, yüklemeden önce belirteçleri, hesap tanımlayıcılarını, e-posta adreslerini, oturum kimliklerini ve ağ adreslerini kaldıracak.</string>
+    <string name="diagnostics_create_body">NexPlay, yüklemeden önce belirteçleri, hesap tanımlayıcılarını, e-posta adreslerini, oturum kimliklerini ve ağ adreslerini kaldıracak.</string>
     <string name="diagnostics_create_caveat">Rastgele oluşturulan bağlantı listelenmez ama şifrelenmez ve servis yüklemeleri 24 saat içinde siler.</string>
     <string name="diagnostics_create_title">Geçici tanılama bağlantısı oluşturulsun mu?</string>
     <string name="diagnostics_preparing_body">Hassas değerler kaldırılıyor ve geçici bir bağlantı oluşturuluyor…</string>
@@ -773,7 +773,7 @@
     <string name="login_logs_exported">Günlükler dışa aktarıldı</string>
     <string name="login_pairing_code">EŞLEŞTİRME KODU</string>
     <string name="login_tagline">Android için yerel GeForce NOW istemcisi</string>
-    <string name="login_token_body">Bir NVIDIA erişim belirteci veya belirteç yanıtı JSON’u yapıştırın. OpenNOW, hesabı kaydetmeden önce erişim belirtecini doğrular.</string>
+    <string name="login_token_body">Bir NVIDIA erişim belirteci veya belirteç yanıtı JSON’u yapıştırın. NexPlay, hesabı kaydetmeden önce erişim belirtecini doğrular.</string>
     <string name="login_token_title">Belirteçle oturum aç</string>
     <string name="login_token_warning">Yalnızca size ait bir hesabın kimlik bilgilerini kullanın.</string>
     <string name="login_tools_body">Tarayıcı olmadan oturum açmak için bir belirteç kullanın veya oturum açmadan önce tanılama verilerini dışa aktarın.</string>
@@ -802,18 +802,18 @@
     <string name="settings_developer_label">Geliştirici</string>
     <string name="settings_no_storage_addon">Bu hesap için etkin bir kalıcı depolama eklentisi yok.</string>
     <string name="settings_release_notes">Sürüm notları</string>
-    <string name="settings_reset_body">Hesaplar, ayarlar, önbelleğe alınmış oyunlar, öğretici durumu ve yerel uygulama dosyaları kaldırılacak. OpenNOW yeni kurulmuş gibi yeniden başlayacak.</string>
-    <string name="settings_reset_explainer">«Öğreticiyi sıfırla» yalnızca yayın kılavuzunun yeniden görünmesini sağlar. «Ayarları sıfırla» yıkıcıdır: yerel uygulama verilerini siler ve OpenNOW’u yeniden başlatır.</string>
+    <string name="settings_reset_body">Hesaplar, ayarlar, önbelleğe alınmış oyunlar, öğretici durumu ve yerel uygulama dosyaları kaldırılacak. NexPlay yeni kurulmuş gibi yeniden başlayacak.</string>
+    <string name="settings_reset_explainer">«Öğreticiyi sıfırla» yalnızca yayın kılavuzunun yeniden görünmesini sağlar. «Ayarları sıfırla» yıkıcıdır: yerel uygulama verilerini siler ve NexPlay’u yeniden başlatır.</string>
     <string name="settings_reset_title">Ayarlar ve uygulama verileri sıfırlansın mı?</string>
     <string name="settings_select_provider">Yeni hesap için kullanılacak GeForce NOW sağlayıcısını seçin.</string>
     <string name="settings_storage_usage">Depolama kullanımı</string>
     <string name="settings_store_connections">Mağaza bağlantıları</string>
     <string name="settings_upload_logs_desc">Listelenmeyen geçici bir bağlantı oluşturulmadan önce hassas değerler kaldırılır. Paylaşmak için QR kodunu telefonunuzla tarayın.</string>
     <string name="settings_upload_logs_qr">Günlükleri yükle ve QR göster</string>
-    <string name="stream_diag_confirm_body">Bu, profil değişikliği özetini ve olası nedeni inceleyebilmeleri için PrintedWaste ve OpenNOW geliştiricilerine gönderir.</string>
+    <string name="stream_diag_confirm_body">Bu, profil değişikliği özetini ve olası nedeni inceleyebilmeleri için PrintedWaste ve NexPlay geliştiricilerine gönderir.</string>
     <string name="stream_diag_confirm_title">Yayın tanılama verileri gönderilsin mi?</string>
     <string name="stream_diag_send">Tanılama gönder</string>
-    <string name="stream_no_local_stream">OpenNOW’a şu anda bağlı bir yerel yayın yok.</string>
+    <string name="stream_no_local_stream">NexPlay’a şu anda bağlı bir yerel yayın yok.</string>
     <string name="stream_profile_changed_title">Yayın profili değişti</string>
     <string name="stream_profile_changed_why">Neden oldu</string>
     <string name="stream_profile_sending">Rapor ve temizlenmiş tanılama verileri gönderiliyor…</string>
@@ -823,7 +823,7 @@
     <string name="stream_text_placeholder">Yayın metnini yazın veya düzenleyin</string>
     <string name="toast_cache_already_clear">Oyun önbelleği zaten boştu</string>
     <string name="toast_cache_cleared">Oyun önbelleği temizlendi</string>
-    <string name="toast_clearing_app_data">Uygulama verileri siliniyor ve OpenNOW yeniden başlatılıyor</string>
+    <string name="toast_clearing_app_data">Uygulama verileri siliniyor ve NexPlay yeniden başlatılıyor</string>
     <string name="toast_signed_in_from_phone">Telefondan güvenli şekilde oturum açıldı</string>
     <string name="toast_store_disconnected">Mağaza bağlantısı kesildi</string>
     <string name="toast_tutorial_reset">Öğretici bir sonraki yayında gösterilecek</string>

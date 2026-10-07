@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OpenNOW</string>
-    <string name="status_starting_opennow">Démarrage d’OpenNOW</string>
+    <string name="app_name">NexPlay</string>
+    <string name="status_starting_opennow">Démarrage d’NexPlay</string>
     <string name="login_with_provider">Se connecter avec %1$s</string>
     <string name="login_tv_start">Se connecter sur un autre appareil avec %1$s</string>
     <string name="login_tv_title">Utilisez ce code pour vous connecter</string>
@@ -101,8 +101,8 @@
     <string name="stream_panel_direct_click">Clic direct</string>
     <string name="stream_panel_touch_controller">Manette tactile</string>
     <string name="stream_touch_builtin_title">Commandes tactiles intégrées détectées</string>
-    <string name="stream_touch_builtin_available">Ce jeu prend en charge les commandes tactiles intégrées. Vous pouvez tout de même activer ci-dessous la manette tactile d’OpenNOW.</string>
-    <string name="stream_touch_builtin_overridden">Ce jeu prend en charge les commandes tactiles intégrées. La manette tactile d’OpenNOW est activée pour cette session.</string>
+    <string name="stream_touch_builtin_available">Ce jeu prend en charge les commandes tactiles intégrées. Vous pouvez tout de même activer ci-dessous la manette tactile d’NexPlay.</string>
+    <string name="stream_touch_builtin_overridden">Ce jeu prend en charge les commandes tactiles intégrées. La manette tactile d’NexPlay est activée pour cette session.</string>
     <string name="stream_touch_builtin_active">Commandes intégrées actives</string>
     <string name="stream_panel_joysticks">Joysticks</string>
     <string name="stream_panel_joystick_fixed">Fixe</string>
@@ -240,7 +240,7 @@
     <string name="settings_color">Couleur</string>
     <string name="settings_av1_ten_bit_badge">H.264/H.265 uniquement</string>
     <string name="settings_av1_ten_bit_hint">AV1 utilise des couleurs 8 bits. Choisissez H.265 pour 10 bits ; le HDR est limité aux modes Android TV compatibles.</string>
-    <string name="settings_av1_ten_bit_downgraded">AV1 utilise des couleurs 8 bits dans OpenNOW. Passage à 8 bits et HDR désactivé. Choisissez H.265 ou H.264 pour utiliser 10 bits.</string>
+    <string name="settings_av1_ten_bit_downgraded">AV1 utilise des couleurs 8 bits dans NexPlay. Passage à 8 bits et HDR désactivé. Choisissez H.265 ou H.264 pour utiliser 10 bits.</string>
     <string name="settings_hdr">HDR (Performance &amp; Ultimate)</string>
     <string name="settings_hdr_android_handheld_hint">Le streaming HDR n’est pas disponible sur les appareils Android portables. Le SDR 10 bits reste disponible avec H.265.</string>
     <string name="settings_hdr_android_tv_compatibility_hint">Le HDR sur Android TV nécessite H.265 à 60 FPS ou moins et une résolution maximale de 3840 × 2160.</string>
@@ -264,7 +264,7 @@
     <string name="settings_cloud_gsync_desc">Demande à la session cloud d’utiliser une fréquence de rafraîchissement variable si votre appareil, écran, abonnement et session GFN le permettent.</string>
     <string name="settings_microphone">Microphone</string>
     <string name="settings_microphone_desc">Envoie le microphone Android par défaut au jeu distant. Vous pouvez le couper depuis les commandes du streaming.</string>
-    <string name="settings_microphone_permission_denied">L’autorisation du microphone n’a pas été accordée. OpenNOW gardera le streaming du microphone désactivé.</string>
+    <string name="settings_microphone_permission_denied">L’autorisation du microphone n’a pas été accordée. NexPlay gardera le streaming du microphone désactivé.</string>
     <string name="settings_dynamic_color">Utiliser les couleurs du système</string>
     <string name="settings_accent">Couleur d’accentuation</string>
     <string name="settings_launch_page">Page de démarrage</string>
@@ -281,7 +281,7 @@
     <string name="settings_catalog_background_image_custom">Image personnalisée</string>
     <string name="settings_catalog_background_built_in">Arrière-plan intégré</string>
     <string name="catalog_background_colorful_abstract">Abstrait coloré (par défaut)</string>
-    <string name="catalog_background_original">OpenNOW original</string>
+    <string name="catalog_background_original">NexPlay original</string>
     <string name="catalog_background_absolute_cinema">Cinéma absolu</string>
     <string name="action_choose_image">Choisir une image</string>
     <string name="action_use_default">Utiliser la valeur par défaut</string>
@@ -305,12 +305,12 @@
     <string name="action_mute_music">Couper la musique</string>
     <string name="settings_stretch_stream_to_fit">Étirer le streaming pour remplir l’écran</string>
     <string name="settings_session_counter">Minuteur de session intelligent</string>
-    <string name="settings_thanks_body">Merci à toutes les personnes qui contribuent à améliorer OpenNOW pour tous.</string>
+    <string name="settings_thanks_body">Merci à toutes les personnes qui contribuent à améliorer NexPlay pour tous.</string>
     <string name="settings_thanks_darkevilpt">DarkevilPT</string>
     <string name="settings_thanks_darkevilpt_note">Soutien de la communauté</string>
     <string name="settings_donate">Faire un don</string>
     <string name="settings_donate_link_copied">Lien de don copié</string>
-    <string name="accent_opennow">OpenNOW</string>
+    <string name="accent_opennow">NexPlay</string>
     <string name="accent_pixel">Bleu Pixel</string>
     <string name="accent_hot_pink">Rose vif</string>
     <string name="accent_lime">Citron vert</string>
@@ -383,8 +383,8 @@
     <string name="stream_controller_hidden">La manette à l’écran a été masquée car une manette physique est connectée.</string>
     <string name="common_dont_show_again">Ne plus afficher</string>
     <string name="tv_pair_starting">Démarrage de l’association au téléphone…</string>
-    <string name="tv_pair_start">Associer à l’application OpenNOW du téléphone</string>
-    <string name="tv_pair_instructions">Installez et ouvrez d’abord OpenNOW sur votre téléphone Android. Connectez le téléphone et le téléviseur au même Wi‑Fi, puis scannez ce code QR avec l’appareil photo du téléphone. Le lien expire après cinq minutes.</string>
+    <string name="tv_pair_start">Associer à l’application NexPlay du téléphone</string>
+    <string name="tv_pair_instructions">Installez et ouvrez d’abord NexPlay sur votre téléphone Android. Connectez le téléphone et le téléviseur au même Wi‑Fi, puis scannez ce code QR avec l’appareil photo du téléphone. Le lien expire après cinq minutes.</string>
     <string name="tv_pair_settings_title">Association au téléviseur</string>
     <string name="tv_pair_phone_title">Associer à un téléviseur</string>
     <string name="tv_pair_phone_instructions">Gardez le téléphone et le téléviseur sur le même Wi‑Fi. Scannez ici le code QR du téléviseur, ou recherchez-le et saisissez son code à 4 chiffres.</string>
@@ -409,7 +409,7 @@
     <string name="settings_touch_skin_tint">Couleur de la manette tactile</string>
     <string name="settings_touch_button_labels">Lettres des boutons</string>
     <string name="settings_touch_gyro">Visée au gyroscope</string>
-    <string name="tv_pair_none_found">Aucun téléviseur OpenNOW n’a été trouvé sur ce réseau.</string>
+    <string name="tv_pair_none_found">Aucun téléviseur NexPlay n’a été trouvé sur ce réseau.</string>
     <string name="profile_menu_description">Ouvrir le profil du compte</string>
     <string name="profile_username">Nom d’utilisateur</string>
     <string name="profile_tier">Niveau</string>
@@ -420,7 +420,7 @@
     <string name="settings_category_developer">Options pour les développeurs</string>
     <string name="settings_category_developer_summary">Réinitialiser des parcours, inspecter l’exécution et reconstruire l’état local</string>
     <string name="dev_notice_title">Pour le développement et l’assistance</string>
-    <string name="dev_notice_body">Ces actions réinitialisent uniquement l’état local d’OpenNOW et affichent des informations déjà présentes dans l’export de diagnostic. Les actions destructives demandent confirmation. Vous pouvez masquer cette page à nouveau depuis le bas de la liste.</string>
+    <string name="dev_notice_body">Ces actions réinitialisent uniquement l’état local d’NexPlay et affichent des informations déjà présentes dans l’export de diagnostic. Les actions destructives demandent confirmation. Vous pouvez masquer cette page à nouveau depuis le bas de la liste.</string>
     <string name="dev_section_flows">Parcours et invites</string>
     <string name="dev_section_catalog">Catalogue et boutiques</string>
     <string name="dev_section_stream">Flux</string>
@@ -475,10 +475,10 @@
     <string name="dev_check_update_desc">Lance immédiatement la vérification de mise à jour</string>
     <string name="dev_sign_out_all">Se déconnecter de tous les comptes</string>
     <string name="dev_sign_out_all_desc">%1$d enregistrés</string>
-    <string name="dev_sign_out_all_confirm">Tous les comptes enregistrés seront supprimés de cet appareil et OpenNOW reviendra à l’écran de connexion.</string>
+    <string name="dev_sign_out_all_confirm">Tous les comptes enregistrés seront supprimés de cet appareil et NexPlay reviendra à l’écran de connexion.</string>
     <string name="dev_wipe_app_data">Effacer les données et relancer</string>
-    <string name="dev_wipe_app_data_desc">Ramène OpenNOW à une installation neuve</string>
-    <string name="dev_wipe_app_data_confirm">Les comptes, réglages, jeux en cache et fichiers locaux seront supprimés, et OpenNOW redémarrera comme une installation neuve. Cette action est irréversible.</string>
+    <string name="dev_wipe_app_data_desc">Ramène NexPlay à une installation neuve</string>
+    <string name="dev_wipe_app_data_confirm">Les comptes, réglages, jeux en cache et fichiers locaux seront supprimés, et NexPlay redémarrera comme une installation neuve. Cette action est irréversible.</string>
     <string name="dev_lock">Masquer les options pour développeurs</string>
     <string name="dev_lock_desc">Appuyez dix fois sur le numéro de build dans À propos pour les retrouver</string>
     <string name="dev_env_build">Build</string>
@@ -529,7 +529,7 @@
     <string name="stream_joysticks_lock_zone_summary">Faites glisser n’importe où dans la zone de droite pour une visée à la souris relative.</string>
     <string name="stream_joysticks_aim_zone_label">ZONE DE VISÉE</string>
     <string name="discord_community_title">Communauté Discord</string>
-    <string name="discord_community_bug_report_summary">Obtenez de l’aide et suivez vos rapports de bug avec la communauté OpenNOW.</string>
+    <string name="discord_community_bug_report_summary">Obtenez de l’aide et suivez vos rapports de bug avec la communauté NexPlay.</string>
     <string name="discord_community_credits_summary">Assistance de la communauté et suivi des rapports de bug</string>
     <string name="discord_community_action">Rejoindre</string>
     <string name="discord_community_link_copied">Invitation Discord copiée</string>
@@ -553,9 +553,9 @@
     <string name="settings_local_apps">Ajouter mes propres applis</string>
     <string name="settings_local_apps_desc">Affiche une étagère dans la Bibliothèque où vous pouvez ajouter, lancer et retirer des applis et jeux Android installés.</string>
     <string name="settings_default_launcher">En faire votre lanceur par défaut</string>
-    <string name="settings_default_launcher_desc">Ouvre le sélecteur de lanceur d’Android pour qu’OpenNOW puisse devenir l’écran d’accueil. Vous pouvez le modifier à nouveau dans les paramètres Android.</string>
+    <string name="settings_default_launcher_desc">Ouvre le sélecteur de lanceur d’Android pour qu’NexPlay puisse devenir l’écran d’accueil. Vous pouvez le modifier à nouveau dans les paramètres Android.</string>
     <string name="settings_default_launcher_action">Choisir un lanceur</string>
-    <string name="settings_default_launcher_selected">OpenNOW est le lanceur par défaut</string>
+    <string name="settings_default_launcher_selected">NexPlay est le lanceur par défaut</string>
     <string name="settings_default_launcher_manage">Gérer</string>
     <string name="library_local_apps">Mes propres applis</string>
     <string name="library_add_local_app">Ajouter une appli</string>
@@ -654,7 +654,7 @@
     <string name="setup_streaming_custom_desc">Choisissez ci-dessous la résolution, la fréquence d’images et le débit</string>
     <string name="setup_streaming_membership">Abonnement %1$s</string>
     <string name="setup_streaming_membership_ceiling">Votre formule diffuse jusqu’à %1$s à %2$d FPS. Les options supérieures sont indiquées avec le niveau qui les débloque.</string>
-    <string name="setup_streaming_membership_upgrade">Améliorer votre abonnement GeForce NOW relève ce plafond — OpenNOW ne le limite pas.</string>
+    <string name="setup_streaming_membership_upgrade">Améliorer votre abonnement GeForce NOW relève ce plafond — NexPlay ne le limite pas.</string>
     <string name="setup_play_title">Pendant le jeu</string>
     <string name="setup_play_subtitle">Choisissez le ressenti du flux.</string>
     <string name="setup_play_preview">Aperçu</string>
@@ -696,7 +696,7 @@
     <string name="settings_run_setup_again_desc">Revoir l’apparence, la qualité du flux, les commandes de jeu, l’état et les rapports de bug</string>
     <string name="membership_gate_title">Nécessite %1$s</string>
     <string name="membership_gate_body">GeForce NOW indique %1$s uniquement en %2$s, et ce compte est en %3$s. La session sera très probablement refusée ou rétrogradée vers un profil inférieur.</string>
-    <string name="membership_gate_hint">L’éligibilité est décidée par GeForce NOW, pas par OpenNOW, et le catalogue est parfois obsolète — vous pouvez donc quand même essayer.</string>
+    <string name="membership_gate_hint">L’éligibilité est décidée par GeForce NOW, pas par NexPlay, et le catalogue est parfois obsolète — vous pouvez donc quand même essayer.</string>
     <string name="membership_gate_continue">Essayer quand même</string>
     <string name="action_copy_error">Copier l’erreur</string>
     <string name="action_disconnect">Déconnecter</string>
@@ -716,7 +716,7 @@
     <string name="bug_report_collected_redaction">Le journal automatique supprime les noms de compte, les identifiants, les ID de session et les adresses réseau avant l’envoi. L’identifiant brut de l’appareil n’est pas envoyé.</string>
     <string name="bug_report_collected_title">Que collecte-t-on ?</string>
     <string name="bug_report_collected_verbatim">Le titre et la description que vous saisissez sont envoyés tels quels : n’y incluez donc aucune information personnelle ou sensible.</string>
-    <string name="bug_report_collected_viewers">Les mainteneurs de PrintedWaste et d’OpenNOW peuvent consulter le texte du rapport, la version/le build de l’appli, le modèle d’appareil, la version d’Android, le fournisseur et la catégorie d’abonnement, le jeu en cours, l’état et les réglages du flux, un identifiant d’installation pseudonyme pour prévenir les abus, et un journal de diagnostic expurgé.</string>
+    <string name="bug_report_collected_viewers">Les mainteneurs de PrintedWaste et d’NexPlay peuvent consulter le texte du rapport, la version/le build de l’appli, le modèle d’appareil, la version d’Android, le fournisseur et la catégorie d’abonnement, le jeu en cours, l’état et les réglages du flux, un identifiant d’installation pseudonyme pour prévenir les abus, et un journal de diagnostic expurgé.</string>
     <string name="bug_report_confirm_body">Envoyer ce rapport et le diagnostic expurgé joint à l’API PrintedWaste ?</string>
     <string name="bug_report_confirm_title">Envoyer le rapport de bug ?</string>
     <string name="bug_report_consent">Je consens à envoyer ce rapport.</string>
@@ -725,9 +725,9 @@
     <string name="bug_report_description_label">Que s’est-il passé ?</string>
     <string name="bug_report_description_placeholder">Que faisiez-vous, qu’est-ce qui a mal tourné, et pouvez-vous le reproduire ?</string>
     <string name="bug_report_english_required">Anglais requis</string>
-    <string name="bug_report_english_required_body">Réglez OpenNOW ou la langue de l’appareil sur l’anglais avant de signaler.</string>
+    <string name="bug_report_english_required_body">Réglez NexPlay ou la langue de l’appareil sur l’anglais avant de signaler.</string>
     <string name="bug_report_inline_subtitle">Décrivez le problème sans quitter votre jeu.</string>
-    <string name="bug_report_known_issue_override">Je comprends qu’OpenNOW a trouvé une cause probable. Envoyer quand même ; je risque de perdre l’accès aux signalements.</string>
+    <string name="bug_report_known_issue_override">Je comprends qu’NexPlay a trouvé une cause probable. Envoyer quand même ; je risque de perdre l’accès aux signalements.</string>
     <string name="bug_report_matched_suggestions">SUGGESTIONS CORRESPONDANTES</string>
     <string name="bug_report_no_suggestions">Aucun correctif hors sujet n’est proposé pour cette vérification.</string>
     <string name="bug_report_preflight_subtitle">Vérifications en direct depuis cet appareil et cette session</string>
@@ -745,7 +745,7 @@
     <string name="bug_report_upload_action">Envoyer le rapport</string>
     <string name="bug_report_upload_confirm_title">Envoyer le rapport de bug ?</string>
     <string name="bug_report_uploading">Envoi du rapport…</string>
-    <string name="bug_report_use_english">Utiliser l’anglais pour OpenNOW</string>
+    <string name="bug_report_use_english">Utiliser l’anglais pour NexPlay</string>
     <string name="catalog_checking_queues">Vérification des files et de la latence PrintedWaste</string>
     <string name="catalog_description">Description</string>
     <string name="catalog_filters">Filtres</string>
@@ -755,7 +755,7 @@
     <string name="common_details">Détails</string>
     <string name="diagnostics_clipboard_body">L’appareil, le type de compte, le profil de flux, l’état actuel et l’URL temporaire ont été copiés dans le presse-papiers.</string>
     <string name="diagnostics_copied_title">Diagnostics copiés</string>
-    <string name="diagnostics_create_body">OpenNOW supprimera les jetons, les identifiants de compte, les adresses e-mail, les ID de session et les adresses réseau avant l’envoi.</string>
+    <string name="diagnostics_create_body">NexPlay supprimera les jetons, les identifiants de compte, les adresses e-mail, les ID de session et les adresses réseau avant l’envoi.</string>
     <string name="diagnostics_create_caveat">Le lien aléatoire n’est pas répertorié mais n’est pas chiffré, et le service supprime les envois sous 24 heures.</string>
     <string name="diagnostics_create_title">Créer un lien de diagnostic temporaire ?</string>
     <string name="diagnostics_preparing_body">Suppression des valeurs sensibles et création d’un lien temporaire…</string>
@@ -773,7 +773,7 @@
     <string name="login_logs_exported">Journaux exportés</string>
     <string name="login_pairing_code">CODE D’APPAIRAGE</string>
     <string name="login_tagline">Client GeForce NOW natif pour Android</string>
-    <string name="login_token_body">Collez un jeton d’accès NVIDIA ou le JSON de réponse du jeton. OpenNOW vérifie le jeton d’accès avant d’enregistrer le compte.</string>
+    <string name="login_token_body">Collez un jeton d’accès NVIDIA ou le JSON de réponse du jeton. NexPlay vérifie le jeton d’accès avant d’enregistrer le compte.</string>
     <string name="login_token_title">Se connecter avec un jeton</string>
     <string name="login_token_warning">N’utilisez que les identifiants d’un compte qui vous appartient.</string>
     <string name="login_tools_body">Utilisez un jeton pour vous connecter sans navigateur, ou exportez les diagnostics avant de vous connecter.</string>
@@ -802,18 +802,18 @@
     <string name="settings_developer_label">Développeur</string>
     <string name="settings_no_storage_addon">Aucune option de stockage persistant n’est active pour ce compte.</string>
     <string name="settings_release_notes">Notes de version</string>
-    <string name="settings_reset_body">Les comptes, réglages, jeux en cache, l’état du tutoriel et les fichiers locaux de l’appli seront supprimés. OpenNOW redémarrera comme une installation neuve.</string>
-    <string name="settings_reset_explainer">« Réinitialiser le tutoriel » fait seulement réapparaître le guide de flux. « Réinitialiser les réglages » est destructif : cela efface les données locales et relance OpenNOW.</string>
+    <string name="settings_reset_body">Les comptes, réglages, jeux en cache, l’état du tutoriel et les fichiers locaux de l’appli seront supprimés. NexPlay redémarrera comme une installation neuve.</string>
+    <string name="settings_reset_explainer">« Réinitialiser le tutoriel » fait seulement réapparaître le guide de flux. « Réinitialiser les réglages » est destructif : cela efface les données locales et relance NexPlay.</string>
     <string name="settings_reset_title">Réinitialiser les réglages et les données ?</string>
     <string name="settings_select_provider">Sélectionnez le fournisseur GeForce NOW à utiliser pour le nouveau compte.</string>
     <string name="settings_storage_usage">Utilisation du stockage</string>
     <string name="settings_store_connections">Connexions aux boutiques</string>
     <string name="settings_upload_logs_desc">Les valeurs sensibles sont supprimées avant la création d’un lien temporaire non répertorié. Scannez le code QR avec votre téléphone pour le partager.</string>
     <string name="settings_upload_logs_qr">Envoyer les journaux et afficher le QR</string>
-    <string name="stream_diag_confirm_body">Cela envoie le résumé du changement de profil et la cause probable aux mainteneurs de PrintedWaste et d’OpenNOW afin qu’ils puissent enquêter.</string>
+    <string name="stream_diag_confirm_body">Cela envoie le résumé du changement de profil et la cause probable aux mainteneurs de PrintedWaste et d’NexPlay afin qu’ils puissent enquêter.</string>
     <string name="stream_diag_confirm_title">Envoyer les diagnostics du flux ?</string>
     <string name="stream_diag_send">Envoyer les diagnostics</string>
-    <string name="stream_no_local_stream">OpenNOW n’a aucun flux local rattaché pour le moment.</string>
+    <string name="stream_no_local_stream">NexPlay n’a aucun flux local rattaché pour le moment.</string>
     <string name="stream_profile_changed_title">Profil de flux modifié</string>
     <string name="stream_profile_changed_why">Pourquoi cela s’est produit</string>
     <string name="stream_profile_sending">Envoi du rapport et des diagnostics expurgés…</string>
@@ -823,7 +823,7 @@
     <string name="stream_text_placeholder">Saisir ou modifier le texte du flux</string>
     <string name="toast_cache_already_clear">Le cache des jeux était déjà vide</string>
     <string name="toast_cache_cleared">Cache des jeux vidé</string>
-    <string name="toast_clearing_app_data">Effacement des données et redémarrage d’OpenNOW</string>
+    <string name="toast_clearing_app_data">Effacement des données et redémarrage d’NexPlay</string>
     <string name="toast_signed_in_from_phone">Connexion sécurisée depuis le téléphone</string>
     <string name="toast_store_disconnected">Boutique déconnectée</string>
     <string name="toast_tutorial_reset">Le tutoriel s’affichera au prochain flux</string>

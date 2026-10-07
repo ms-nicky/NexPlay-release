@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OpenNOW</string>
-    <string name="status_starting_opennow">OpenNOW wordt gestart</string>
+    <string name="app_name">NexPlay</string>
+    <string name="status_starting_opennow">NexPlay wordt gestart</string>
     <string name="login_with_provider">Inloggen met %1$s</string>
     <string name="login_tv_start">Op een ander apparaat inloggen met %1$s</string>
     <string name="login_tv_title">Gebruik deze code om in te loggen</string>
@@ -101,8 +101,8 @@
     <string name="stream_panel_direct_click">Direct klikken</string>
     <string name="stream_panel_touch_controller">Aanraakcontroller</string>
     <string name="stream_touch_builtin_title">Ingebouwde aanraakbediening gedetecteerd</string>
-    <string name="stream_touch_builtin_available">Deze game ondersteunt ingebouwde aanraakbediening. Je kunt hieronder alsnog de aanraakcontroller van OpenNOW inschakelen.</string>
-    <string name="stream_touch_builtin_overridden">Deze game ondersteunt ingebouwde aanraakbediening. De aanraakcontroller van OpenNOW is voor deze sessie ingeschakeld.</string>
+    <string name="stream_touch_builtin_available">Deze game ondersteunt ingebouwde aanraakbediening. Je kunt hieronder alsnog de aanraakcontroller van NexPlay inschakelen.</string>
+    <string name="stream_touch_builtin_overridden">Deze game ondersteunt ingebouwde aanraakbediening. De aanraakcontroller van NexPlay is voor deze sessie ingeschakeld.</string>
     <string name="stream_touch_builtin_active">Ingebouwde bediening actief</string>
     <string name="stream_panel_joysticks">Joysticks</string>
     <string name="stream_panel_joystick_fixed">Vast</string>
@@ -240,7 +240,7 @@
     <string name="settings_color">Kleur</string>
     <string name="settings_av1_ten_bit_badge">Alleen H.264/H.265</string>
     <string name="settings_av1_ten_bit_hint">AV1 gebruikt 8-bits kleur. Kies H.265 voor 10-bits; HDR is beperkt tot compatibele Android TV-modi.</string>
-    <string name="settings_av1_ten_bit_downgraded">AV1 gebruikt 8-bits kleur in OpenNOW. Overgeschakeld naar 8-bits en HDR uitgeschakeld. Kies H.265 of H.264 voor 10-bits.</string>
+    <string name="settings_av1_ten_bit_downgraded">AV1 gebruikt 8-bits kleur in NexPlay. Overgeschakeld naar 8-bits en HDR uitgeschakeld. Kies H.265 of H.264 voor 10-bits.</string>
     <string name="settings_hdr">HDR (Performance &amp; Ultimate)</string>
     <string name="settings_hdr_android_handheld_hint">HDR-streaming is niet beschikbaar op draagbare Android-apparaten. 10-bits SDR blijft beschikbaar met H.265.</string>
     <string name="settings_hdr_android_tv_compatibility_hint">HDR op Android TV vereist H.265 met maximaal 60 FPS en een resolutie tot 3840 × 2160.</string>
@@ -264,7 +264,7 @@
     <string name="settings_cloud_gsync_desc">Vraagt de cloudsessie variabele vernieuwingsintervallen te gebruiken wanneer je apparaat, scherm, abonnement en GFN-sessie dit ondersteunen.</string>
     <string name="settings_microphone">Microfoon</string>
     <string name="settings_microphone_desc">Stuurt je standaard Android-microfoon naar de gestreamde game. Je kunt deze dempen via Streambediening.</string>
-    <string name="settings_microphone_permission_denied">Microfoontoestemming is niet verleend. OpenNOW houdt microfoonstreaming uitgeschakeld.</string>
+    <string name="settings_microphone_permission_denied">Microfoontoestemming is niet verleend. NexPlay houdt microfoonstreaming uitgeschakeld.</string>
     <string name="settings_dynamic_color">Systeemkleuren gebruiken</string>
     <string name="settings_accent">Accent</string>
     <string name="settings_launch_page">Startpagina</string>
@@ -281,7 +281,7 @@
     <string name="settings_catalog_background_image_custom">Aangepaste afbeelding</string>
     <string name="settings_catalog_background_built_in">Ingebouwde achtergrond</string>
     <string name="catalog_background_colorful_abstract">Kleurrijk abstract (standaard)</string>
-    <string name="catalog_background_original">Originele OpenNOW</string>
+    <string name="catalog_background_original">Originele NexPlay</string>
     <string name="catalog_background_absolute_cinema">Absolute Cinema</string>
     <string name="action_choose_image">Afbeelding kiezen</string>
     <string name="action_use_default">Standaard gebruiken</string>
@@ -305,12 +305,12 @@
     <string name="action_mute_music">Muziek dempen</string>
     <string name="settings_stretch_stream_to_fit">Stream uitrekken om te vullen</string>
     <string name="settings_session_counter">Slimme sessietimer</string>
-    <string name="settings_thanks_body">Dank aan iedereen die OpenNOW voor iedereen helpt verbeteren.</string>
+    <string name="settings_thanks_body">Dank aan iedereen die NexPlay voor iedereen helpt verbeteren.</string>
     <string name="settings_thanks_darkevilpt">DarkevilPT</string>
     <string name="settings_thanks_darkevilpt_note">Communityondersteuning</string>
     <string name="settings_donate">Doneren</string>
     <string name="settings_donate_link_copied">Donatielink gekopieerd</string>
-    <string name="accent_opennow">OpenNOW</string>
+    <string name="accent_opennow">NexPlay</string>
     <string name="accent_pixel">Pixelblauw</string>
     <string name="accent_hot_pink">Felroze</string>
     <string name="accent_lime">Limoen</string>
@@ -383,8 +383,8 @@
     <string name="stream_controller_hidden">De controller op het scherm is verborgen omdat er een fysieke controller is aangesloten.</string>
     <string name="common_dont_show_again">Niet meer tonen</string>
     <string name="tv_pair_starting">Telefoonkoppeling starten…</string>
-    <string name="tv_pair_start">Koppelen met de OpenNOW-telefoonapp</string>
-    <string name="tv_pair_instructions">Installeer en open eerst OpenNOW op je Android-telefoon. Verbind de telefoon en tv met hetzelfde wifi-netwerk en scan deze QR-code met de telefooncamera. De link verloopt na vijf minuten.</string>
+    <string name="tv_pair_start">Koppelen met de NexPlay-telefoonapp</string>
+    <string name="tv_pair_instructions">Installeer en open eerst NexPlay op je Android-telefoon. Verbind de telefoon en tv met hetzelfde wifi-netwerk en scan deze QR-code met de telefooncamera. De link verloopt na vijf minuten.</string>
     <string name="tv_pair_settings_title">Tv koppelen</string>
     <string name="tv_pair_phone_title">Koppelen met een tv</string>
     <string name="tv_pair_phone_instructions">Houd deze telefoon en de tv op hetzelfde wifi-netwerk. Scan hier de QR-code van de tv, of zoek de tv en voer de 4-cijferige code in.</string>
@@ -409,7 +409,7 @@
     <string name="settings_touch_skin_tint">Kleur van touchcontroller</string>
     <string name="settings_touch_button_labels">Knopletters</string>
     <string name="settings_touch_gyro">Richten met gyroscoop</string>
-    <string name="tv_pair_none_found">Er is geen OpenNOW-tv gevonden op dit netwerk.</string>
+    <string name="tv_pair_none_found">Er is geen NexPlay-tv gevonden op dit netwerk.</string>
     <string name="profile_menu_description">Accountprofiel openen</string>
     <string name="profile_username">Gebruikersnaam</string>
     <string name="profile_tier">Niveau</string>
@@ -420,7 +420,7 @@
     <string name="settings_category_developer">Ontwikkelaarsopties</string>
     <string name="settings_category_developer_summary">Stromen resetten, de runtime inspecteren en lokale status opnieuw opbouwen</string>
     <string name="dev_notice_title">Voor ontwikkeling en ondersteuning</string>
-    <string name="dev_notice_body">Deze acties resetten alleen de eigen lokale status van OpenNOW en tonen informatie die al in de diagnostische export staat. Destructieve acties vragen eerst om bevestiging. Je kunt deze pagina onderaan de lijst weer verbergen.</string>
+    <string name="dev_notice_body">Deze acties resetten alleen de eigen lokale status van NexPlay en tonen informatie die al in de diagnostische export staat. Destructieve acties vragen eerst om bevestiging. Je kunt deze pagina onderaan de lijst weer verbergen.</string>
     <string name="dev_section_flows">Stromen en meldingen</string>
     <string name="dev_section_catalog">Catalogus en winkels</string>
     <string name="dev_section_stream">Stream</string>
@@ -475,10 +475,10 @@
     <string name="dev_check_update_desc">Voert de updatecontrole meteen uit</string>
     <string name="dev_sign_out_all">Uitloggen bij alle accounts</string>
     <string name="dev_sign_out_all_desc">%1$d opgeslagen</string>
-    <string name="dev_sign_out_all_confirm">Elk opgeslagen account wordt van dit apparaat verwijderd en OpenNOW keert terug naar het inlogscherm.</string>
+    <string name="dev_sign_out_all_confirm">Elk opgeslagen account wordt van dit apparaat verwijderd en NexPlay keert terug naar het inlogscherm.</string>
     <string name="dev_wipe_app_data">Appgegevens wissen en opnieuw starten</string>
-    <string name="dev_wipe_app_data_desc">Zet OpenNOW terug naar een verse installatie</string>
-    <string name="dev_wipe_app_data_confirm">Accounts, instellingen, opgeslagen spellen en lokale bestanden worden verwijderd, en OpenNOW start opnieuw als een verse installatie. Dit kan niet ongedaan worden gemaakt.</string>
+    <string name="dev_wipe_app_data_desc">Zet NexPlay terug naar een verse installatie</string>
+    <string name="dev_wipe_app_data_confirm">Accounts, instellingen, opgeslagen spellen en lokale bestanden worden verwijderd, en NexPlay start opnieuw als een verse installatie. Dit kan niet ongedaan worden gemaakt.</string>
     <string name="dev_lock">Ontwikkelaarsopties verbergen</string>
     <string name="dev_lock_desc">Tik tien keer op het buildnummer in Over om ze terug te halen</string>
     <string name="dev_env_build">Build</string>
@@ -529,7 +529,7 @@
     <string name="stream_joysticks_lock_zone_summary">Sleep ergens binnen de rechterzone voor relatief muisrichten.</string>
     <string name="stream_joysticks_aim_zone_label">RICHTZONE</string>
     <string name="discord_community_title">Discord-community</string>
-    <string name="discord_community_bug_report_summary">Krijg hulp en volg foutrapporten op met de OpenNOW-community.</string>
+    <string name="discord_community_bug_report_summary">Krijg hulp en volg foutrapporten op met de NexPlay-community.</string>
     <string name="discord_community_credits_summary">Communityondersteuning en opvolging van foutrapporten</string>
     <string name="discord_community_action">Deelnemen</string>
     <string name="discord_community_link_copied">Discord-uitnodiging gekopieerd</string>
@@ -553,9 +553,9 @@
     <string name="settings_local_apps">Mijn eigen apps toevoegen</string>
     <string name="settings_local_apps_desc">Toont een plank in de Bibliotheek waar je geïnstalleerde Android-apps en -spellen kunt toevoegen, starten en verwijderen.</string>
     <string name="settings_default_launcher">Als standaardlauncher instellen</string>
-    <string name="settings_default_launcher_desc">Opent de launcherkiezer van Android zodat OpenNOW het startscherm kan worden. Je kunt dit later weer wijzigen in de Android-instellingen.</string>
+    <string name="settings_default_launcher_desc">Opent de launcherkiezer van Android zodat NexPlay het startscherm kan worden. Je kunt dit later weer wijzigen in de Android-instellingen.</string>
     <string name="settings_default_launcher_action">Launcher kiezen</string>
-    <string name="settings_default_launcher_selected">OpenNOW is de standaard</string>
+    <string name="settings_default_launcher_selected">NexPlay is de standaard</string>
     <string name="settings_default_launcher_manage">Beheren</string>
     <string name="library_local_apps">Mijn eigen apps</string>
     <string name="library_add_local_app">App toevoegen</string>
@@ -654,7 +654,7 @@
     <string name="setup_streaming_custom_desc">Kies hieronder resolutie, beeldsnelheid en bitsnelheid</string>
     <string name="setup_streaming_membership">%1$s-abonnement</string>
     <string name="setup_streaming_membership_ceiling">Jouw abonnement streamt tot %1$s bij %2$d FPS. Hogere opties staan vermeld met het niveau dat ze ontgrendelt.</string>
-    <string name="setup_streaming_membership_upgrade">Je GeForce NOW-abonnement upgraden verhoogt deze limiet — OpenNOW beperkt hem niet.</string>
+    <string name="setup_streaming_membership_upgrade">Je GeForce NOW-abonnement upgraden verhoogt deze limiet — NexPlay beperkt hem niet.</string>
     <string name="setup_play_title">Tijdens het spelen</string>
     <string name="setup_play_subtitle">Kies hoe de stream aanvoelt.</string>
     <string name="setup_play_preview">Voorbeeld</string>
@@ -696,7 +696,7 @@
     <string name="settings_run_setup_again_desc">Bekijk uiterlijk, streamkwaliteit, spelbesturing, status en foutrapportage opnieuw</string>
     <string name="membership_gate_title">Vereist %1$s</string>
     <string name="membership_gate_body">GeForce NOW vermeldt %1$s alleen als %2$s, en dit account gebruikt %3$s. De sessie wordt hoogstwaarschijnlijk geweigerd of teruggezet naar een lager profiel.</string>
-    <string name="membership_gate_hint">Het recht op toegang wordt bepaald door GeForce NOW, niet door OpenNOW, en de catalogus is soms verouderd — je kunt het dus nog steeds proberen.</string>
+    <string name="membership_gate_hint">Het recht op toegang wordt bepaald door GeForce NOW, niet door NexPlay, en de catalogus is soms verouderd — je kunt het dus nog steeds proberen.</string>
     <string name="membership_gate_continue">Toch proberen</string>
     <string name="action_copy_error">Fout kopiëren</string>
     <string name="action_disconnect">Ontkoppelen</string>
@@ -716,7 +716,7 @@
     <string name="bug_report_collected_redaction">Het automatische logboek verwijdert accountnamen, inloggegevens, sessie-ID’s en netwerkadressen vóór het uploaden. De ruwe apparaat-ID wordt niet verzonden.</string>
     <string name="bug_report_collected_title">Wat wordt er verzameld?</string>
     <string name="bug_report_collected_verbatim">De titel en beschrijving die je typt worden precies zo verzonden als je ze schrijft, dus vermeld geen persoonlijke of gevoelige informatie.</string>
-    <string name="bug_report_collected_viewers">Beheerders van PrintedWaste en OpenNOW kunnen de rapporttekst, appversie/-build, apparaatmodel, Android-versie, aanbieder en abonnementscategorie, huidige spel, streamstatus/-instellingen, een pseudonieme installatie-identificatie ter voorkoming van misbruik, en een geschoond diagnostisch logboek inzien.</string>
+    <string name="bug_report_collected_viewers">Beheerders van PrintedWaste en NexPlay kunnen de rapporttekst, appversie/-build, apparaatmodel, Android-versie, aanbieder en abonnementscategorie, huidige spel, streamstatus/-instellingen, een pseudonieme installatie-identificatie ter voorkoming van misbruik, en een geschoond diagnostisch logboek inzien.</string>
     <string name="bug_report_confirm_body">Dit rapport en de bijgevoegde geschoonde diagnostiek naar de PrintedWaste-API sturen?</string>
     <string name="bug_report_confirm_title">Foutrapport verzenden?</string>
     <string name="bug_report_consent">Ik geef toestemming om dit rapport te verzenden.</string>
@@ -725,9 +725,9 @@
     <string name="bug_report_description_label">Wat is er gebeurd?</string>
     <string name="bug_report_description_placeholder">Wat was je aan het doen, wat ging er mis, en kun je het reproduceren?</string>
     <string name="bug_report_english_required">Engels vereist</string>
-    <string name="bug_report_english_required_body">Stel OpenNOW of de apparaattaal in op Engels voordat je rapporteert.</string>
+    <string name="bug_report_english_required_body">Stel NexPlay of de apparaattaal in op Engels voordat je rapporteert.</string>
     <string name="bug_report_inline_subtitle">Beschrijf het probleem zonder je spel te verlaten.</string>
-    <string name="bug_report_known_issue_override">Ik begrijp dat OpenNOW een waarschijnlijke oorzaak heeft gevonden. Toch verzenden; ik kan toekomstige rapportagetoegang verliezen.</string>
+    <string name="bug_report_known_issue_override">Ik begrijp dat NexPlay een waarschijnlijke oorzaak heeft gevonden. Toch verzenden; ik kan toekomstige rapportagetoegang verliezen.</string>
     <string name="bug_report_matched_suggestions">OVEREENKOMENDE SUGGESTIES</string>
     <string name="bug_report_no_suggestions">Er worden geen irrelevante oplossingen voorgesteld voor deze controle.</string>
     <string name="bug_report_preflight_subtitle">Live controles van dit apparaat en deze sessie</string>
@@ -745,7 +745,7 @@
     <string name="bug_report_upload_action">Rapport uploaden</string>
     <string name="bug_report_upload_confirm_title">Foutrapport uploaden?</string>
     <string name="bug_report_uploading">Rapport uploaden…</string>
-    <string name="bug_report_use_english">Engels gebruiken voor OpenNOW</string>
+    <string name="bug_report_use_english">Engels gebruiken voor NexPlay</string>
     <string name="catalog_checking_queues">PrintedWaste-wachtrijen en vertraging controleren</string>
     <string name="catalog_description">Beschrijving</string>
     <string name="catalog_filters">Filters</string>
@@ -755,7 +755,7 @@
     <string name="common_details">Details</string>
     <string name="diagnostics_clipboard_body">Het apparaat, accounttype, streamprofiel, de huidige status en de tijdelijke URL zijn naar het klembord gekopieerd.</string>
     <string name="diagnostics_copied_title">Diagnostiek gekopieerd</string>
-    <string name="diagnostics_create_body">OpenNOW verwijdert tokens, account-identificaties, e-mailadressen, sessie-ID’s en netwerkadressen vóór het uploaden.</string>
+    <string name="diagnostics_create_body">NexPlay verwijdert tokens, account-identificaties, e-mailadressen, sessie-ID’s en netwerkadressen vóór het uploaden.</string>
     <string name="diagnostics_create_caveat">De willekeurige link staat niet in een lijst maar is niet versleuteld, en de dienst verwijdert uploads binnen 24 uur.</string>
     <string name="diagnostics_create_title">Tijdelijke diagnostische link maken?</string>
     <string name="diagnostics_preparing_body">Gevoelige waarden verwijderen en een tijdelijke link maken…</string>
@@ -773,7 +773,7 @@
     <string name="login_logs_exported">Logboeken geëxporteerd</string>
     <string name="login_pairing_code">KOPPELCODE</string>
     <string name="login_tagline">Native GeForce NOW-client voor Android</string>
-    <string name="login_token_body">Plak een NVIDIA-toegangstoken of de JSON van het tokenantwoord. OpenNOW verifieert het toegangstoken voordat het account wordt opgeslagen.</string>
+    <string name="login_token_body">Plak een NVIDIA-toegangstoken of de JSON van het tokenantwoord. NexPlay verifieert het toegangstoken voordat het account wordt opgeslagen.</string>
     <string name="login_token_title">Inloggen met token</string>
     <string name="login_token_warning">Gebruik alleen inloggegevens van een account dat van jou is.</string>
     <string name="login_tools_body">Log in met een token zonder browser, of exporteer diagnostiek voordat je inlogt.</string>
@@ -802,18 +802,18 @@
     <string name="settings_developer_label">Ontwikkelaar</string>
     <string name="settings_no_storage_addon">Voor dit account is geen add-on voor permanente opslag actief.</string>
     <string name="settings_release_notes">Release-opmerkingen</string>
-    <string name="settings_reset_body">Accounts, instellingen, opgeslagen spellen, tutorialstatus en lokale appbestanden worden verwijderd. OpenNOW start opnieuw als een verse installatie.</string>
-    <string name="settings_reset_explainer">‘Tutorial resetten’ laat alleen de streamgids opnieuw verschijnen. ‘Instellingen resetten’ is destructief: het wist lokale appgegevens en start OpenNOW opnieuw.</string>
+    <string name="settings_reset_body">Accounts, instellingen, opgeslagen spellen, tutorialstatus en lokale appbestanden worden verwijderd. NexPlay start opnieuw als een verse installatie.</string>
+    <string name="settings_reset_explainer">‘Tutorial resetten’ laat alleen de streamgids opnieuw verschijnen. ‘Instellingen resetten’ is destructief: het wist lokale appgegevens en start NexPlay opnieuw.</string>
     <string name="settings_reset_title">Instellingen en appgegevens resetten?</string>
     <string name="settings_select_provider">Selecteer de GeForce NOW-aanbieder voor het nieuwe account.</string>
     <string name="settings_storage_usage">Opslaggebruik</string>
     <string name="settings_store_connections">Winkelverbindingen</string>
     <string name="settings_upload_logs_desc">Gevoelige waarden worden verwijderd voordat er een niet-vermelde, tijdelijke link wordt gemaakt. Scan de QR-code met je telefoon om die te delen.</string>
     <string name="settings_upload_logs_qr">Logboeken uploaden en QR tonen</string>
-    <string name="stream_diag_confirm_body">Dit stuurt de samenvatting van de profielwijziging en de waarschijnlijke oorzaak naar de beheerders van PrintedWaste en OpenNOW zodat zij het kunnen onderzoeken.</string>
+    <string name="stream_diag_confirm_body">Dit stuurt de samenvatting van de profielwijziging en de waarschijnlijke oorzaak naar de beheerders van PrintedWaste en NexPlay zodat zij het kunnen onderzoeken.</string>
     <string name="stream_diag_confirm_title">Streamdiagnostiek verzenden?</string>
     <string name="stream_diag_send">Diagnostiek verzenden</string>
-    <string name="stream_no_local_stream">OpenNOW heeft op dit moment geen lokale stream gekoppeld.</string>
+    <string name="stream_no_local_stream">NexPlay heeft op dit moment geen lokale stream gekoppeld.</string>
     <string name="stream_profile_changed_title">Streamprofiel gewijzigd</string>
     <string name="stream_profile_changed_why">Waarom het gebeurde</string>
     <string name="stream_profile_sending">Het rapport en de geschoonde diagnostiek verzenden…</string>
@@ -823,7 +823,7 @@
     <string name="stream_text_placeholder">Streamtekst typen of bewerken</string>
     <string name="toast_cache_already_clear">De spelcache was al leeg</string>
     <string name="toast_cache_cleared">Spelcache gewist</string>
-    <string name="toast_clearing_app_data">Appgegevens wissen en OpenNOW opnieuw starten</string>
+    <string name="toast_clearing_app_data">Appgegevens wissen en NexPlay opnieuw starten</string>
     <string name="toast_signed_in_from_phone">Veilig ingelogd vanaf de telefoon</string>
     <string name="toast_store_disconnected">Winkel ontkoppeld</string>
     <string name="toast_tutorial_reset">De tutorial wordt bij de volgende stream getoond</string>

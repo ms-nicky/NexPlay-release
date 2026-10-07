@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OpenNOW</string>
-    <string name="status_starting_opennow">Se pornește OpenNOW</string>
+    <string name="app_name">NexPlay</string>
+    <string name="status_starting_opennow">Se pornește NexPlay</string>
     <string name="login_with_provider">Conectare cu %1$s</string>
     <string name="login_tv_start">Conectare pe alt dispozitiv cu %1$s</string>
     <string name="login_tv_title">Folosește acest cod pentru conectare</string>
@@ -101,8 +101,8 @@
     <string name="stream_panel_direct_click">Clic direct</string>
     <string name="stream_panel_touch_controller">Controler tactil</string>
     <string name="stream_touch_builtin_title">S-au detectat comenzi tactile integrate</string>
-    <string name="stream_touch_builtin_available">Acest joc acceptă comenzi tactile integrate. Dacă preferi, poți activa mai jos controlerul tactil OpenNOW.</string>
-    <string name="stream_touch_builtin_overridden">Acest joc acceptă comenzi tactile integrate. Controlerul tactil OpenNOW este activat pentru această sesiune.</string>
+    <string name="stream_touch_builtin_available">Acest joc acceptă comenzi tactile integrate. Dacă preferi, poți activa mai jos controlerul tactil NexPlay.</string>
+    <string name="stream_touch_builtin_overridden">Acest joc acceptă comenzi tactile integrate. Controlerul tactil NexPlay este activat pentru această sesiune.</string>
     <string name="stream_touch_builtin_active">Comenzi integrate active</string>
     <string name="stream_panel_joysticks">Joystickuri</string>
     <string name="stream_panel_joystick_fixed">Fix</string>
@@ -240,7 +240,7 @@
     <string name="settings_color">Culoare</string>
     <string name="settings_av1_ten_bit_badge">Doar H.264/H.265</string>
     <string name="settings_av1_ten_bit_hint">AV1 folosește culoare pe 8 biți. Alege H.265 pentru 10 biți; HDR este limitat la modurile Android TV compatibile.</string>
-    <string name="settings_av1_ten_bit_downgraded">AV1 folosește culoare pe 8 biți în OpenNOW. S-a trecut la 8 biți și HDR a fost dezactivat. Alege H.265 sau H.264 pentru 10 biți.</string>
+    <string name="settings_av1_ten_bit_downgraded">AV1 folosește culoare pe 8 biți în NexPlay. S-a trecut la 8 biți și HDR a fost dezactivat. Alege H.265 sau H.264 pentru 10 biți.</string>
     <string name="settings_hdr">HDR (Performance &amp; Ultimate)</string>
     <string name="settings_hdr_android_handheld_hint">Redarea HDR nu este disponibilă pe dispozitivele Android portabile. SDR pe 10 biți rămâne disponibil cu H.265.</string>
     <string name="settings_hdr_android_tv_compatibility_hint">HDR pe Android TV necesită H.265 la maximum 60 FPS și o rezoluție de până la 3840 × 2160.</string>
@@ -264,7 +264,7 @@
     <string name="settings_cloud_gsync_desc">Solicită sesiunii cloud o rată de reîmprospătare variabilă când dispozitivul, ecranul, abonamentul și sesiunea GFN o acceptă.</string>
     <string name="settings_microphone">Microfon</string>
     <string name="settings_microphone_desc">Trimite microfonul Android implicit către jocul de la distanță. Îl poți dezactiva din comenzile fluxului.</string>
-    <string name="settings_microphone_permission_denied">Permisiunea pentru microfon nu a fost acordată. OpenNOW va menține redarea microfonului dezactivată.</string>
+    <string name="settings_microphone_permission_denied">Permisiunea pentru microfon nu a fost acordată. NexPlay va menține redarea microfonului dezactivată.</string>
     <string name="settings_dynamic_color">Folosește culorile sistemului</string>
     <string name="settings_accent">Accent</string>
     <string name="settings_launch_page">Pagină de pornire</string>
@@ -281,7 +281,7 @@
     <string name="settings_catalog_background_image_custom">Imagine personalizată</string>
     <string name="settings_catalog_background_built_in">Fundal integrat</string>
     <string name="catalog_background_colorful_abstract">Abstract colorat (implicit)</string>
-    <string name="catalog_background_original">OpenNOW original</string>
+    <string name="catalog_background_original">NexPlay original</string>
     <string name="catalog_background_absolute_cinema">Absolute Cinema</string>
     <string name="action_choose_image">Alege imaginea</string>
     <string name="action_use_default">Folosește valoarea implicită</string>
@@ -305,12 +305,12 @@
     <string name="action_mute_music">Dezactivează muzica</string>
     <string name="settings_stretch_stream_to_fit">Întinde fluxul pentru a umple ecranul</string>
     <string name="settings_session_counter">Cronometru inteligent de sesiune</string>
-    <string name="settings_thanks_body">Mulțumim tuturor celor care ajută la îmbunătățirea OpenNOW.</string>
+    <string name="settings_thanks_body">Mulțumim tuturor celor care ajută la îmbunătățirea NexPlay.</string>
     <string name="settings_thanks_darkevilpt">DarkevilPT</string>
     <string name="settings_thanks_darkevilpt_note">Asistență comunitară</string>
     <string name="settings_donate">Donează</string>
     <string name="settings_donate_link_copied">Linkul pentru donații a fost copiat</string>
-    <string name="accent_opennow">OpenNOW</string>
+    <string name="accent_opennow">NexPlay</string>
     <string name="accent_pixel">Albastru Pixel</string>
     <string name="accent_hot_pink">Roz intens</string>
     <string name="accent_lime">Verde lime</string>
@@ -383,8 +383,8 @@
     <string name="stream_controller_hidden">Controlerul de pe ecran a fost ascuns deoarece este conectat un controler fizic.</string>
     <string name="common_dont_show_again">Nu mai afișa</string>
     <string name="tv_pair_starting">Se pornește asocierea telefonului…</string>
-    <string name="tv_pair_start">Asociază cu aplicația OpenNOW de pe telefon</string>
-    <string name="tv_pair_instructions">Mai întâi instalează și deschide OpenNOW pe telefonul Android. Conectează telefonul și televizorul la aceeași rețea Wi‑Fi, apoi scanează acest cod QR cu camera telefonului. Linkul expiră după cinci minute.</string>
+    <string name="tv_pair_start">Asociază cu aplicația NexPlay de pe telefon</string>
+    <string name="tv_pair_instructions">Mai întâi instalează și deschide NexPlay pe telefonul Android. Conectează telefonul și televizorul la aceeași rețea Wi‑Fi, apoi scanează acest cod QR cu camera telefonului. Linkul expiră după cinci minute.</string>
     <string name="tv_pair_settings_title">Asociere TV</string>
     <string name="tv_pair_phone_title">Asociază cu un televizor</string>
     <string name="tv_pair_phone_instructions">Ține telefonul și televizorul în aceeași rețea Wi‑Fi. Scanează aici codul QR al televizorului sau găsește televizorul și introdu codul său de 4 cifre.</string>
@@ -409,7 +409,7 @@
     <string name="settings_touch_skin_tint">Culoarea controlerului tactil</string>
     <string name="settings_touch_button_labels">Literele butoanelor</string>
     <string name="settings_touch_gyro">Țintire cu giroscop</string>
-    <string name="tv_pair_none_found">Nu a fost găsit niciun televizor OpenNOW în această rețea.</string>
+    <string name="tv_pair_none_found">Nu a fost găsit niciun televizor NexPlay în această rețea.</string>
     <string name="profile_menu_description">Deschide profilul contului</string>
     <string name="profile_username">Nume de utilizator</string>
     <string name="profile_tier">Nivel</string>
@@ -420,7 +420,7 @@
     <string name="settings_category_developer">Opțiuni pentru dezvoltatori</string>
     <string name="settings_category_developer_summary">Resetează fluxuri, inspectează execuția și reconstruiește starea locală</string>
     <string name="dev_notice_title">Pentru dezvoltare și asistență</string>
-    <string name="dev_notice_body">Aceste acțiuni resetează doar starea locală a OpenNOW și afișează informații care există deja în exportul de diagnostic. Cele distructive cer confirmare. Poți ascunde din nou această pagină din josul listei.</string>
+    <string name="dev_notice_body">Aceste acțiuni resetează doar starea locală a NexPlay și afișează informații care există deja în exportul de diagnostic. Cele distructive cer confirmare. Poți ascunde din nou această pagină din josul listei.</string>
     <string name="dev_section_flows">Fluxuri și solicitări</string>
     <string name="dev_section_catalog">Catalog și magazine</string>
     <string name="dev_section_stream">Transmisiune</string>
@@ -475,10 +475,10 @@
     <string name="dev_check_update_desc">Rulează imediat verificarea actualizărilor</string>
     <string name="dev_sign_out_all">Deconectează-te de la toate conturile</string>
     <string name="dev_sign_out_all_desc">%1$d salvate</string>
-    <string name="dev_sign_out_all_confirm">Toate conturile salvate vor fi eliminate de pe acest dispozitiv, iar OpenNOW va reveni la ecranul de autentificare.</string>
+    <string name="dev_sign_out_all_confirm">Toate conturile salvate vor fi eliminate de pe acest dispozitiv, iar NexPlay va reveni la ecranul de autentificare.</string>
     <string name="dev_wipe_app_data">Șterge datele aplicației și repornește</string>
-    <string name="dev_wipe_app_data_desc">Readuce OpenNOW la o instalare nouă</string>
-    <string name="dev_wipe_app_data_confirm">Conturile, setările, jocurile memorate și fișierele locale vor fi șterse, iar OpenNOW va reporni ca o instalare nouă. Această acțiune nu poate fi anulată.</string>
+    <string name="dev_wipe_app_data_desc">Readuce NexPlay la o instalare nouă</string>
+    <string name="dev_wipe_app_data_confirm">Conturile, setările, jocurile memorate și fișierele locale vor fi șterse, iar NexPlay va reporni ca o instalare nouă. Această acțiune nu poate fi anulată.</string>
     <string name="dev_lock">Ascunde opțiunile pentru dezvoltatori</string>
     <string name="dev_lock_desc">Atinge de zece ori numărul versiunii din Despre pentru a le readuce</string>
     <string name="dev_env_build">Versiune</string>
@@ -529,7 +529,7 @@
     <string name="stream_joysticks_lock_zone_summary">Trage oriunde în zona din dreapta pentru ochire cu mouse relativ.</string>
     <string name="stream_joysticks_aim_zone_label">ZONĂ DE OCHIRE</string>
     <string name="discord_community_title">Comunitatea Discord</string>
-    <string name="discord_community_bug_report_summary">Primește ajutor și urmărește rapoartele de eroare împreună cu comunitatea OpenNOW.</string>
+    <string name="discord_community_bug_report_summary">Primește ajutor și urmărește rapoartele de eroare împreună cu comunitatea NexPlay.</string>
     <string name="discord_community_credits_summary">Asistență din partea comunității și urmărirea rapoartelor de eroare</string>
     <string name="discord_community_action">Alătură-te</string>
     <string name="discord_community_link_copied">Invitația Discord a fost copiată</string>
@@ -553,9 +553,9 @@
     <string name="settings_local_apps">Adaugă propriile aplicații</string>
     <string name="settings_local_apps_desc">Afișează un raft în Bibliotecă unde poți adăuga, lansa și elimina aplicații și jocuri Android instalate.</string>
     <string name="settings_default_launcher">Setează ca lansator implicit</string>
-    <string name="settings_default_launcher_desc">Deschide selectorul de lansatoare din Android pentru ca OpenNOW să poată deveni ecranul principal. Poți schimba acest lucru din nou în setările Android.</string>
+    <string name="settings_default_launcher_desc">Deschide selectorul de lansatoare din Android pentru ca NexPlay să poată deveni ecranul principal. Poți schimba acest lucru din nou în setările Android.</string>
     <string name="settings_default_launcher_action">Alege lansatorul</string>
-    <string name="settings_default_launcher_selected">OpenNOW este implicit</string>
+    <string name="settings_default_launcher_selected">NexPlay este implicit</string>
     <string name="settings_default_launcher_manage">Gestionează</string>
     <string name="library_local_apps">Propriile aplicații</string>
     <string name="library_add_local_app">Adaugă aplicație</string>
@@ -654,7 +654,7 @@
     <string name="setup_streaming_custom_desc">Alege mai jos rezoluția, rata de cadre și rata de biți</string>
     <string name="setup_streaming_membership">Abonament %1$s</string>
     <string name="setup_streaming_membership_ceiling">Planul tău transmite până la %1$s la %2$d FPS. Opțiunile superioare sunt listate cu nivelul care le deblochează.</string>
-    <string name="setup_streaming_membership_upgrade">Trecerea la un abonament GeForce NOW superior ridică această limită — OpenNOW nu o restricționează.</string>
+    <string name="setup_streaming_membership_upgrade">Trecerea la un abonament GeForce NOW superior ridică această limită — NexPlay nu o restricționează.</string>
     <string name="setup_play_title">În timpul jocului</string>
     <string name="setup_play_subtitle">Alege cum se simte transmisiunea.</string>
     <string name="setup_play_preview">Previzualizare</string>
@@ -696,7 +696,7 @@
     <string name="settings_run_setup_again_desc">Revezi aspectul, calitatea transmisiunii, comenzile de joc, starea și raportarea erorilor</string>
     <string name="membership_gate_title">Necesită %1$s</string>
     <string name="membership_gate_body">GeForce NOW listează %1$s doar ca %2$s, iar acest cont este pe %3$s. Sesiunea va fi cel mai probabil refuzată sau coborâtă la un profil inferior.</string>
-    <string name="membership_gate_hint">Dreptul de acces este stabilit de GeForce NOW, nu de OpenNOW, iar catalogul este uneori depășit — așa că tot poți încerca.</string>
+    <string name="membership_gate_hint">Dreptul de acces este stabilit de GeForce NOW, nu de NexPlay, iar catalogul este uneori depășit — așa că tot poți încerca.</string>
     <string name="membership_gate_continue">Încearcă oricum</string>
     <string name="action_copy_error">Copiază eroarea</string>
     <string name="action_disconnect">Deconectează</string>
@@ -716,7 +716,7 @@
     <string name="bug_report_collected_redaction">Jurnalul automat elimină numele de cont, credențialele, ID-urile de sesiune și adresele de rețea înainte de încărcare. ID-ul brut al dispozitivului nu este trimis.</string>
     <string name="bug_report_collected_title">Ce se colectează?</string>
     <string name="bug_report_collected_verbatim">Titlul și descrierea pe care le scrii sunt trimise exact așa cum le redactezi, deci nu include informații personale sau sensibile.</string>
-    <string name="bug_report_collected_viewers">Întreținătorii PrintedWaste și OpenNOW pot vedea textul raportului, versiunea aplicației, modelul dispozitivului, versiunea de Android, furnizorul și categoria de abonament, jocul curent, starea și setările transmisiunii, un identificator de instalare pseudonim pentru prevenirea abuzurilor și un jurnal de diagnostic curățat.</string>
+    <string name="bug_report_collected_viewers">Întreținătorii PrintedWaste și NexPlay pot vedea textul raportului, versiunea aplicației, modelul dispozitivului, versiunea de Android, furnizorul și categoria de abonament, jocul curent, starea și setările transmisiunii, un identificator de instalare pseudonim pentru prevenirea abuzurilor și un jurnal de diagnostic curățat.</string>
     <string name="bug_report_confirm_body">Trimiți acest raport și diagnosticele curățate atașate către API-ul PrintedWaste?</string>
     <string name="bug_report_confirm_title">Trimiți raportul de eroare?</string>
     <string name="bug_report_consent">Sunt de acord să trimit acest raport.</string>
@@ -725,9 +725,9 @@
     <string name="bug_report_description_label">Ce s-a întâmplat?</string>
     <string name="bug_report_description_placeholder">Ce făceai, ce a mers prost și poți reproduce problema?</string>
     <string name="bug_report_english_required">Este necesară limba engleză</string>
-    <string name="bug_report_english_required_body">Setează OpenNOW sau limba dispozitivului pe engleză înainte de a raporta.</string>
+    <string name="bug_report_english_required_body">Setează NexPlay sau limba dispozitivului pe engleză înainte de a raporta.</string>
     <string name="bug_report_inline_subtitle">Descrie problema fără să părăsești jocul.</string>
-    <string name="bug_report_known_issue_override">Înțeleg că OpenNOW a găsit o cauză probabilă. Trimite oricum; s-ar putea să pierd accesul viitor la raportare.</string>
+    <string name="bug_report_known_issue_override">Înțeleg că NexPlay a găsit o cauză probabilă. Trimite oricum; s-ar putea să pierd accesul viitor la raportare.</string>
     <string name="bug_report_matched_suggestions">SUGESTII POTRIVITE</string>
     <string name="bug_report_no_suggestions">Nu sunt sugerate remedii irelevante pentru această verificare.</string>
     <string name="bug_report_preflight_subtitle">Verificări în timp real de pe acest dispozitiv și din această sesiune</string>
@@ -745,7 +745,7 @@
     <string name="bug_report_upload_action">Încarcă raportul</string>
     <string name="bug_report_upload_confirm_title">Încarci raportul de eroare?</string>
     <string name="bug_report_uploading">Se încarcă raportul…</string>
-    <string name="bug_report_use_english">Folosește engleza pentru OpenNOW</string>
+    <string name="bug_report_use_english">Folosește engleza pentru NexPlay</string>
     <string name="catalog_checking_queues">Se verifică cozile și latența PrintedWaste</string>
     <string name="catalog_description">Descriere</string>
     <string name="catalog_filters">Filtre</string>
@@ -755,7 +755,7 @@
     <string name="common_details">Detalii</string>
     <string name="diagnostics_clipboard_body">Dispozitivul, tipul de cont, profilul de transmisiune, starea curentă și adresa temporară au fost copiate în clipboard.</string>
     <string name="diagnostics_copied_title">Diagnostice copiate</string>
-    <string name="diagnostics_create_body">OpenNOW va elimina tokenurile, identificatorii de cont, adresele de e-mail, ID-urile de sesiune și adresele de rețea înainte de încărcare.</string>
+    <string name="diagnostics_create_body">NexPlay va elimina tokenurile, identificatorii de cont, adresele de e-mail, ID-urile de sesiune și adresele de rețea înainte de încărcare.</string>
     <string name="diagnostics_create_caveat">Linkul aleatoriu nu este listat, dar nu este criptat, iar serviciul șterge încărcările în 24 de ore.</string>
     <string name="diagnostics_create_title">Creezi un link temporar de diagnostic?</string>
     <string name="diagnostics_preparing_body">Se elimină valorile sensibile și se creează un link temporar…</string>
@@ -773,7 +773,7 @@
     <string name="login_logs_exported">Jurnale exportate</string>
     <string name="login_pairing_code">COD DE ASOCIERE</string>
     <string name="login_tagline">Client GeForce NOW nativ pentru Android</string>
-    <string name="login_token_body">Lipește un token de acces NVIDIA sau JSON-ul de răspuns al tokenului. OpenNOW verifică tokenul de acces înainte de a salva contul.</string>
+    <string name="login_token_body">Lipește un token de acces NVIDIA sau JSON-ul de răspuns al tokenului. NexPlay verifică tokenul de acces înainte de a salva contul.</string>
     <string name="login_token_title">Autentificare cu token</string>
     <string name="login_token_warning">Folosește doar credențiale pentru un cont care îți aparține.</string>
     <string name="login_tools_body">Folosește un token pentru autentificare fără browser sau exportă diagnosticele înainte de autentificare.</string>
@@ -802,18 +802,18 @@
     <string name="settings_developer_label">Dezvoltator</string>
     <string name="settings_no_storage_addon">Pentru acest cont nu este activ niciun supliment de stocare permanentă.</string>
     <string name="settings_release_notes">Note de versiune</string>
-    <string name="settings_reset_body">Conturile, setările, jocurile memorate, starea tutorialului și fișierele locale ale aplicației vor fi eliminate. OpenNOW va reporni ca o instalare nouă.</string>
-    <string name="settings_reset_explainer">„Resetează tutorialul” face doar ca ghidul de transmisiune să reapară. „Resetează setările” este distructiv: șterge datele locale ale aplicației și repornește OpenNOW.</string>
+    <string name="settings_reset_body">Conturile, setările, jocurile memorate, starea tutorialului și fișierele locale ale aplicației vor fi eliminate. NexPlay va reporni ca o instalare nouă.</string>
+    <string name="settings_reset_explainer">„Resetează tutorialul” face doar ca ghidul de transmisiune să reapară. „Resetează setările” este distructiv: șterge datele locale ale aplicației și repornește NexPlay.</string>
     <string name="settings_reset_title">Resetezi setările și datele aplicației?</string>
     <string name="settings_select_provider">Selectează furnizorul GeForce NOW pentru contul nou.</string>
     <string name="settings_storage_usage">Utilizarea stocării</string>
     <string name="settings_store_connections">Conexiuni cu magazine</string>
     <string name="settings_upload_logs_desc">Valorile sensibile sunt eliminate înainte de crearea unui link temporar nelistat. Scanează codul QR cu telefonul pentru a-l partaja.</string>
     <string name="settings_upload_logs_qr">Încarcă jurnalele și afișează QR</string>
-    <string name="stream_diag_confirm_body">Aceasta trimite rezumatul schimbării de profil și cauza probabilă către întreținătorii PrintedWaste și OpenNOW pentru a putea investiga.</string>
+    <string name="stream_diag_confirm_body">Aceasta trimite rezumatul schimbării de profil și cauza probabilă către întreținătorii PrintedWaste și NexPlay pentru a putea investiga.</string>
     <string name="stream_diag_confirm_title">Trimiți diagnosticele transmisiunii?</string>
     <string name="stream_diag_send">Trimite diagnosticele</string>
-    <string name="stream_no_local_stream">OpenNOW nu are nicio transmisiune locală atașată în acest moment.</string>
+    <string name="stream_no_local_stream">NexPlay nu are nicio transmisiune locală atașată în acest moment.</string>
     <string name="stream_profile_changed_title">Profilul transmisiunii s-a schimbat</string>
     <string name="stream_profile_changed_why">De ce s-a întâmplat</string>
     <string name="stream_profile_sending">Se trimit raportul și diagnosticele curățate…</string>
@@ -823,7 +823,7 @@
     <string name="stream_text_placeholder">Scrie sau editează textul transmisiunii</string>
     <string name="toast_cache_already_clear">Memoria cache a jocurilor era deja goală</string>
     <string name="toast_cache_cleared">Memoria cache a jocurilor a fost golită</string>
-    <string name="toast_clearing_app_data">Se șterg datele aplicației și se repornește OpenNOW</string>
+    <string name="toast_clearing_app_data">Se șterg datele aplicației și se repornește NexPlay</string>
     <string name="toast_signed_in_from_phone">Autentificare securizată de pe telefon</string>
     <string name="toast_store_disconnected">Magazin deconectat</string>
     <string name="toast_tutorial_reset">Tutorialul va fi afișat la următoarea transmisiune</string>

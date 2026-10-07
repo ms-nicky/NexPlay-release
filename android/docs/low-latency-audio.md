@@ -1,6 +1,6 @@
 # Android WebRTC low-latency audio
 
-Issue [#793](https://github.com/OpenCloudGaming/OpenNOW/issues/793) reports delayed
+Issue [#793](https://github.com/OpenCloudGaming/NexPlay/issues/793) reports delayed
 audio with WebRTC using the normal Android mixer path. `StreamAudioPolicy.kt`
 requests `JavaAudioDeviceModule.setUseLowLatency(true)` on Android 8 and newer,
 including TVs. Stereo output and `USAGE_GAME` are preserved. Android 6/7 retain

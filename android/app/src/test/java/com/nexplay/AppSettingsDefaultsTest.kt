@@ -1,0 +1,540 @@
+package com.nexplay
+
+import kotlinx.serialization.decodeFromString
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class AppSettingsDefaultsTest {
+    @Test
+    fun streamStatusBarDefaultsToConnectionEssentials() {
+        val settings = AppSettings()
+        val metrics = settings.streamStatsMetrics
+
+        assertTrue(settings.showStatsOnLaunch)
+        assertFalse(settings.hideStreamButtons)
+        assertFalse(settings.streamKeyboardClearConfirmationDisabled)
+        assertTrue(settings.externalMousePointerLock)
+        assertEquals(DEFAULT_ANDROID_STREAM_MENU_SHORTCUT, settings.streamMenuShortcut)
+        assertFalse(settings.compactGameCards)
+        assertFalse(settings.showCardTitles)
+        assertFalse(settings.showFavoriteIconOnGameCards)
+        assertTrue(settings.showPremiumMarker)
+        assertFalse(settings.liveSelectedOutlines)
+        assertFalse(settings.absoluteCinemaEffects)
+        assertFalse(settings.absoluteCinemaEverywhere)
+        assertFalse(settings.localAppsEnabled)
+        assertFalse(settings.stretchStreamToFit)
+        assertTrue(settings.ambientBackgroundEnabled)
+        assertFalse(settings.systemWallpaperBackground)
+        assertNull(settings.navigationRailBackgroundOpacity)
+        assertTrue(settings.localAppPackageNames.isEmpty())
+        // The shelf opens on first sight; folding it is a choice the reader makes and keeps.
+        assertFalse(settings.localAppsCollapsed)
+        assertTrue(settings.landscapeNewGamesHero)
+        assertFalse(settings.landscapeNewGamesHeroCollapsed)
+        assertFalse(settings.higherPingWarningDismissed)
+        assertFalse(settings.batteryOptimizationPromptDismissed)
+        // Rumble routing stays automatic until someone's hardware proves it needs forcing.
+        assertEquals(HapticsOutputPreference.Auto, settings.hapticsOutput)
+        assertEquals(TouchControllerStyle.V1, settings.androidTouch.touchControllerStyle)
+        assertNull(settings.androidTouch.touchSkinTint)
+        assertTrue(settings.androidTouch.touchButtonLabels)
+        assertFalse(settings.androidTouch.gyroscopeEnabled)
+        assertEquals(1f, settings.androidTouch.aimZoneScale, 0.0001f)
+        assertEquals(1f, settings.androidTouch.aimZoneSensitivity, 0.0001f)
+        assertEquals(1f, settings.androidTouch.faceButtonScale, 0.0001f)
+        assertEquals(1f, settings.androidTouch.leftStickScale, 0.0001f)
+        assertEquals(1f, settings.androidTouch.rightStickScale, 0.0001f)
+        assertEquals(TouchControlGroup.entries.toSet(), settings.androidTouch.visibleControlGroups)
+        assertEquals(TouchExtraButtonAction.Guide, settings.androidTouch.extraButtonAction(0))
+        assertEquals(TouchExtraButtonAction.None, settings.androidTouch.extraButtonAction(3))
+        // Developer options are a hidden gesture, never a shipped or migrated-in default.
+        assertFalse(settings.developerOptionsUnlocked)
+        assertEquals(StreamKeyboardButtonPosition(), settings.streamKeyboardButtonPosition)
+        assertTrue(settings.streamStatsBackgroundEnabled)
+        assertEquals(0.52f, settings.streamStatsBackgroundAlpha(), 0.0001f)
+        assertTrue(metrics.fps)
+        assertTrue(metrics.ping)
+        assertFalse(metrics.bitrate)
+        assertTrue(metrics.battery)
+        assertFalse(metrics.sessionBattery)
+        assertFalse(metrics.playtime)
+        assertTrue(metrics.connection)
+        assertFalse(metrics.resolution)
+        assertFalse(metrics.codec)
+        assertFalse(metrics.location)
+        assertFalse(metrics.latency)
+        assertFalse(metrics.packetLoss)
+        assertEquals(4, metrics.enabledCount())
+    }
+
+    @Test
+    fun olderSavedSettingsReceiveStatusBarDefaults() {
+        val settings = NexPlayJson.decodeFromString<AppSettings>("{}")
+
+        assertEquals(StreamStatsMetrics(), settings.streamStatsMetrics)
+        assertTrue(settings.streamStatsBackgroundEnabled)
+        assertEquals(0.52f, settings.streamStatsBackgroundAlpha(), 0.0001f)
+        assertTrue(settings.showStatsOnLaunch)
+        assertFalse(settings.hideStreamButtons)
+        assertFalse(settings.streamKeyboardClearConfirmationDisabled)
+        assertTrue(settings.externalMousePointerLock)
+        assertEquals(DEFAULT_ANDROID_STREAM_MENU_SHORTCUT, settings.streamMenuShortcut)
+        assertEquals(StreamKeyboardButtonPosition(), settings.streamKeyboardButtonPosition)
+        assertEquals(CatalogBackgroundPreset.ColorfulAbstract, settings.catalogBackgroundPreset)
+        assertFalse(settings.systemWallpaperBackground)
+        assertNull(settings.navigationRailBackgroundOpacity)
+        assertFalse(settings.compactGameCards)
+        assertFalse(settings.showCardTitles)
+        assertFalse(settings.showFavoriteIconOnGameCards)
+        assertTrue(settings.showPremiumMarker)
+        assertFalse(settings.liveSelectedOutlines)
+        assertFalse(settings.absoluteCinemaEffects)
+        assertFalse(settings.absoluteCinemaEverywhere)
+        assertFalse(settings.localAppsEnabled)
+        assertFalse(settings.stretchStreamToFit)
+        assertTrue(settings.localAppPackageNames.isEmpty())
+        assertTrue(settings.landscapeNewGamesHero)
+        assertFalse(settings.landscapeNewGamesHeroCollapsed)
+        assertFalse(settings.higherPingWarningDismissed)
+        assertFalse(settings.batteryOptimizationPromptDismissed)
+        // Developer options are a hidden gesture, never a shipped or migrated-in default.
+        assertFalse(settings.developerOptionsUnlocked)
+        assertTrue(settings.showSessionReportAfterStream)
+        assertEquals(TouchJoystickMode.Fixed, settings.androidTouch.joystickMode)
+        assertEquals(TouchAimMode.LockJoystick, settings.androidTouch.aimMode)
+        assertEquals(0f, settings.androidTouch.joystickDeadZone, 0.0001f)
+        assertEquals(TouchControlGroup.entries.toSet(), settings.androidTouch.visibleControlGroups)
+        assertEquals(TouchExtraButtonAction.Guide, settings.androidTouch.extraButtonAction(0))
+    }
+
+    @Test
+    fun statusBarBackgroundCanBeHiddenWithoutChangingItsSavedOpacity() {
+        val settings = AppSettings(streamStatsBackgroundOpacity = 0.8f)
+
+        assertEquals(0.8f, settings.streamStatsBackgroundAlpha(), 0.0001f)
+        assertEquals(0f, settings.copy(streamStatsBackgroundEnabled = false).streamStatsBackgroundAlpha(), 0.0001f)
+        assertEquals(0f, settings.copy(streamStatsBackgroundOpacity = 0f).streamStatsBackgroundAlpha(), 0.0001f)
+        assertEquals(0.8f, settings.copy(streamStatsBackgroundEnabled = false)
+            .copy(streamStatsBackgroundEnabled = true).streamStatsBackgroundAlpha(), 0.0001f)
+        assertEquals(1f, settings.copy(streamStatsBackgroundOpacity = 2f)
+            .normalizedForAndroid().streamStatsBackgroundAlpha(), 0.0001f)
+    }
+
+    @Test
+    fun draggedStatusPositionIsClampedAndInvalidValuesAreDiscarded() {
+        val normalized = AppSettings(streamStatsCustomX = 1.5f, streamStatsCustomY = Float.NaN)
+            .normalizedForAndroid()
+        assertEquals(1f, normalized.streamStatsCustomX ?: -1f, 0.0001f)
+        assertEquals(null, normalized.streamStatsCustomY)
+    }
+
+    @Test
+    fun customNavigationBackgroundOpacitySurvivesSettingsNormalization() {
+        assertEquals(0.85f, AppSettings(navigationRailBackgroundOpacity = 0.85f)
+            .normalizedForAndroid().navigationRailBackgroundOpacity ?: -1f, 0.0001f)
+        assertEquals(1f, AppSettings(navigationRailBackgroundOpacity = 2f)
+            .normalizedForAndroid().navigationRailBackgroundOpacity ?: -1f, 0.0001f)
+        assertNull(AppSettings().normalizedForAndroid().navigationRailBackgroundOpacity)
+    }
+
+    @Test
+    fun higherPingWarningDefaultsOnAndPreservesDismissal() {
+        val defaulted = NexPlayJson.decodeFromString<AppSettings>("{}")
+        val dismissed = NexPlayJson.decodeFromString<AppSettings>(
+            """{"higherPingWarningDismissed":true}""",
+        )
+
+        assertFalse(defaulted.higherPingWarningDismissed)
+        assertTrue(dismissed.higherPingWarningDismissed)
+    }
+
+    @Test
+    fun removedNativeTouchMotionOverridesDoNotBreakExistingSettings() {
+        val restored = NexPlayJson.decodeFromString<AppSettings>(
+            """{"androidTouch":{"nativeTouchMode":"Always","nativeTouchScrollScale":0.5,"nativeTouchJitterThresholdDp":24.0}}""",
+        )
+
+        assertEquals(NativeTouchMode.Always, restored.androidTouch.nativeTouchMode)
+    }
+
+    @Test
+    fun streamKeyboardClearConfirmationDefaultsOnAndPreservesOptOut() {
+        val defaulted = NexPlayJson.decodeFromString<AppSettings>("{}")
+        val optedOut = NexPlayJson.decodeFromString<AppSettings>(
+            """{"streamKeyboardClearConfirmationDisabled":true}""",
+        )
+
+        assertFalse(defaulted.streamKeyboardClearConfirmationDisabled)
+        assertTrue(optedOut.streamKeyboardClearConfirmationDisabled)
+    }
+
+    @Test
+    fun favoriteIconDefaultsOffAndPreservesExplicitOptIn() {
+        val defaulted = NexPlayJson.decodeFromString<AppSettings>("{}")
+        val optedIn = NexPlayJson.decodeFromString<AppSettings>(
+            """{"showFavoriteIconOnGameCards":true}""",
+        )
+
+        assertFalse(defaulted.showFavoriteIconOnGameCards)
+        assertTrue(optedIn.showFavoriteIconOnGameCards)
+    }
+
+    @Test
+    fun premiumMarkerDefaultsOnAndPreservesExplicitOptOut() {
+        val defaulted = NexPlayJson.decodeFromString<AppSettings>("{}")
+        val optedOut = NexPlayJson.decodeFromString<AppSettings>(
+            """{"showPremiumMarker":false}""",
+        )
+
+        assertTrue(defaulted.showPremiumMarker)
+        assertFalse(optedOut.showPremiumMarker)
+    }
+
+    @Test
+    fun gameCardLayoutDefaultsOffAndPreservesExplicitOptIn() {
+        val defaulted = NexPlayJson.decodeFromString<AppSettings>("{}")
+        val optedIn = NexPlayJson.decodeFromString<AppSettings>(
+            """{"compactGameCards":true,"showCardTitles":true}""",
+        )
+
+        assertFalse(defaulted.compactGameCards)
+        assertFalse(defaulted.showCardTitles)
+        assertTrue(optedIn.compactGameCards)
+        assertTrue(optedIn.showCardTitles)
+    }
+
+    @Test
+    fun liveSelectedOutlinesDefaultOffAndPreserveOptIn() {
+        val defaulted = NexPlayJson.decodeFromString<AppSettings>("{}")
+        val optedIn = NexPlayJson.decodeFromString<AppSettings>(
+            """{"liveSelectedOutlines":true}""",
+        )
+
+        assertFalse(defaulted.liveSelectedOutlines)
+        assertTrue(optedIn.liveSelectedOutlines)
+    }
+
+    @Test
+    fun legacyGameBordersAreDisabledOnceAndLaterOptInSurvives() {
+        val migrated = NexPlayJson.decodeFromString<AppSettings>(
+            """{"liveSelectedOutlines":true}""",
+        ).normalizedForAndroid()
+        val optedInAgain = migrated.copy(liveSelectedOutlines = true).normalizedForAndroid()
+
+        assertFalse(migrated.liveSelectedOutlines)
+        assertEquals(GAME_BORDERS_DEFAULT_VERSION, migrated.gameBordersDefaultVersion)
+        assertTrue(optedInAgain.liveSelectedOutlines)
+        assertEquals(GAME_BORDERS_DEFAULT_VERSION, optedInAgain.gameBordersDefaultVersion)
+    }
+
+    @Test
+    fun localAppsAreOptInAndSavedPackagesRemainCompatible() {
+        val defaulted = NexPlayJson.decodeFromString<AppSettings>("{}")
+        val optedIn = NexPlayJson.decodeFromString<AppSettings>(
+            """{"localAppsEnabled":true,"localAppPackageNames":["com.epicgames.fortnite"]}""",
+        )
+
+        assertFalse(defaulted.localAppsEnabled)
+        assertTrue(defaulted.localAppPackageNames.isEmpty())
+        assertTrue(optedIn.localAppsEnabled)
+        assertEquals(listOf("com.epicgames.fortnite"), optedIn.localAppPackageNames)
+    }
+
+    @Test
+    fun absoluteCinemaAccentRemainsIndependentFromEffectToggle() {
+        val cinema = NexPlayJson.decodeFromString<AppSettings>("""{"uiAccent":"AbsoluteCinema"}""").normalizedForAndroid()
+        val switch = NexPlayJson.decodeFromString<AppSettings>("""{"uiAccent":"Switch"}""")
+
+        assertEquals(UiAccent.AbsoluteCinema, cinema.uiAccent)
+        assertFalse(cinema.absoluteCinemaEffects)
+        assertEquals(UiAccent.Switch, switch.uiAccent)
+    }
+
+    @Test
+    fun removedOrangeAccentMigratesToViolet() {
+        val settings = NexPlayJson.decodeFromString<AppSettings>(
+            """{"uiAccent":"Orange"}""",
+        ).normalizedForAndroid()
+
+        assertEquals(UiAccent.Violet, settings.uiAccent)
+    }
+
+    @Test
+    fun crazyCinemaPersistsOnlyAsAnAbsoluteCinemaSuboption() {
+        val enabled = NexPlayJson.decodeFromString<AppSettings>(
+            """{"absoluteCinemaEffects":true,"absoluteCinemaEverywhere":true}""",
+        ).normalizedForAndroid()
+        val orphaned = NexPlayJson.decodeFromString<AppSettings>(
+            """{"absoluteCinemaEverywhere":true}""",
+        ).normalizedForAndroid()
+
+        assertTrue(enabled.absoluteCinemaEverywhere)
+        assertFalse(orphaned.absoluteCinemaEverywhere)
+    }
+
+    @Test
+    fun catalogueSortAndFiltersSurviveSettingsDecode() {
+        val settings = NexPlayJson.decodeFromString<AppSettings>(
+            """{"catalogSortId":"latest","catalogFilterIds":["genre-action","nexplay:supported-controls:touchscreen"],"librarySortId":"recent","libraryFilterIds":["library_store:steam"]}""",
+        ).normalizedForAndroid()
+
+        assertEquals("latest", settings.catalogSortId)
+        assertEquals(listOf("genre-action", CATALOG_FILTER_TOUCHSCREEN), settings.catalogFilterIds)
+        assertEquals(LIBRARY_SORT_RECENT, settings.librarySortId)
+        assertEquals(listOf("library_store:steam"), settings.libraryFilterIds)
+    }
+
+    @Test
+    fun legacyRelevanceDefaultMigratesOnceToMostPopular() {
+        val migrated = NexPlayJson.decodeFromString<AppSettings>(
+            """{"catalogSortId":"relevance"}""",
+        ).normalizedForAndroid()
+        val explicitRelevance = migrated.copy(catalogSortId = "relevance").normalizedForAndroid()
+
+        assertEquals(DEFAULT_CATALOG_SORT_ID, migrated.catalogSortId)
+        assertEquals(CATALOG_SORT_DEFAULT_VERSION, migrated.catalogSortDefaultVersion)
+        assertEquals("relevance", explicitRelevance.catalogSortId)
+    }
+
+    @Test
+    fun touchAimZoneIsOptInAndPersistsWhenSelected() {
+        val defaulted = NexPlayJson.decodeFromString<AppSettings>("{}")
+        val optedIn = NexPlayJson.decodeFromString<AppSettings>(
+            """{"androidTouch":{"aimMode":"LockZone"}}""",
+        )
+
+        assertEquals(TouchAimMode.LockJoystick, defaulted.androidTouch.aimMode)
+        assertEquals(TouchAimMode.LockZone, optedIn.androidTouch.aimMode)
+    }
+
+    @Test
+    fun touchAimZoneCustomizationPersistsAndNormalizes() {
+        val persisted = NexPlayJson.decodeFromString<AppSettings>(
+            """{"androidTouch":{"aimZoneScale":1.25,"aimZoneSensitivity":1.75}}""",
+        ).normalizedForAndroid()
+        val invalid = AppSettings(
+            androidTouch = AndroidTouchSettings(
+                aimZoneScale = Float.NaN,
+                aimZoneSensitivity = Float.POSITIVE_INFINITY,
+            ),
+        ).normalizedForAndroid()
+        val bounded = AppSettings(
+            androidTouch = AndroidTouchSettings(
+                aimZoneScale = 9f,
+                aimZoneSensitivity = 0.1f,
+            ),
+        ).normalizedForAndroid()
+
+        assertEquals(1.25f, persisted.androidTouch.aimZoneScale, 0.0001f)
+        assertEquals(1.75f, persisted.androidTouch.aimZoneSensitivity, 0.0001f)
+        assertEquals(1f, invalid.androidTouch.aimZoneScale, 0.0001f)
+        assertEquals(1f, invalid.androidTouch.aimZoneSensitivity, 0.0001f)
+        assertEquals(1.5f, bounded.androidTouch.aimZoneScale, 0.0001f)
+        assertEquals(0.25f, bounded.androidTouch.aimZoneSensitivity, 0.0001f)
+    }
+
+    @Test
+    fun retiredLibraryHeroPreferenceDoesNotInvalidateSavedSettings() {
+        val settings = NexPlayJson.decodeFromString<AppSettings>(
+            """{"libraryHeroCarousel":false,"landscapeNewGamesHero":false}""",
+        )
+
+        assertFalse(settings.landscapeNewGamesHero)
+    }
+
+    @Test
+    fun defaultsUseRecommendedProfileAndKeepOptionalMusicOff() {
+        val settings = AppSettings()
+
+        assertFalse(settings.nerdMode)
+        assertEquals(CatalogBackgroundPreset.ColorfulAbstract, settings.catalogBackgroundPreset)
+        assertTrue(settings.controllerUiSounds)
+        assertTrue(settings.vibrationEnabled)
+        assertEquals(AppLaunchPage.Store, settings.launchPage)
+        assertEquals(StreamPreset.Recommended, settings.streamPreset)
+        assertFalse(settings.streamIntroMusic)
+        assertEquals(IntroMusicStartMode.Muted, settings.streamIntroStartMode)
+        assertFalse(settings.queueReadyMusic)
+        assertTrue(settings.showSessionReportAfterStream)
+        assertFalse(settings.stream.streamSharpeningEnabled)
+    }
+
+    @Test
+    fun legacyPhoneRumbleSettingControlsTheUnifiedVibrationToggle() {
+        val disabled = NexPlayJson.decodeFromString<AppSettings>(
+            """{"phoneRumbleFallback":false}""",
+        )
+
+        assertFalse(disabled.vibrationEnabled)
+    }
+
+    @Test
+    fun olderSavedSettingsKeepStreamSharpeningDisabledUnlessExplicitlyEnabled() {
+        val defaulted = NexPlayJson.decodeFromString<AppSettings>("{}")
+        val optedIn = NexPlayJson.decodeFromString<AppSettings>(
+            """{"stream":{"streamSharpeningEnabled":true}}""",
+        )
+
+        assertFalse(defaulted.stream.streamSharpeningEnabled)
+        assertTrue(optedIn.stream.streamSharpeningEnabled)
+    }
+
+    @Test
+    fun mouseLockDefaultsOnAndPreservesExplicitOptOut() {
+        val defaulted = NexPlayJson.decodeFromString<AppSettings>("{}")
+        val optedOut = NexPlayJson.decodeFromString<AppSettings>(
+            """{"externalMousePointerLock":false}""",
+        )
+
+        assertTrue(defaulted.externalMousePointerLock)
+        assertFalse(optedOut.externalMousePointerLock)
+    }
+
+    @Test
+    fun phonePresentationKeepsExactGeometryByDefaultAndRunsOnce() {
+        val migrated = AppSettings().withCurrentStreamPresentationDefaults()
+
+        assertFalse(migrated.stretchStreamToFit)
+        assertFalse(migrated.legacyCropStreamToFill)
+        assertEquals(STREAM_PRESENTATION_PROFILE_VERSION, migrated.streamPresentationProfileVersion)
+
+        // Already migrated: a later opt-in is the user's, and must survive every launch after it.
+        val optedIn = migrated.copy(stretchStreamToFit = true)
+        assertEquals(optedIn, optedIn.withCurrentStreamPresentationDefaults())
+    }
+
+    @Test
+    fun existingInstallKeepsItsSavedStretchPreference() {
+        val optedIn = AppSettings(stretchStreamToFit = true, streamPresentationProfileVersion = 2)
+        val optedOut = AppSettings(stretchStreamToFit = false, streamPresentationProfileVersion = 2)
+
+        assertTrue(optedIn.withCurrentStreamPresentationDefaults().stretchStreamToFit)
+        assertFalse(optedOut.withCurrentStreamPresentationDefaults().stretchStreamToFit)
+    }
+
+    @Test
+    fun tvPresentationKeepsExactGeometry() {
+        // A TV panel and a 16:9 stream already agree; filling would be a no-op that misreports.
+        val migrated = AppSettings().withCurrentStreamPresentationDefaults()
+
+        assertFalse(migrated.legacyCropStreamToFill)
+        assertFalse(migrated.stretchStreamToFit)
+        assertEquals(STREAM_PRESENTATION_PROFILE_VERSION, migrated.streamPresentationProfileVersion)
+    }
+
+    @Test
+    fun retiredAnalyticsKeysDoNotDiscardExistingSettings() {
+        val settings = NexPlayJson.decodeFromString<AppSettings>(
+            """{"analyticsOptOut":false,"analyticsConsentAsked":true,"setupFlowCompletedVersion":2,"showSessionReportAfterStream":false}""",
+        )
+        assertEquals(2, settings.setupFlowCompletedVersion)
+        assertFalse(settings.showSessionReportAfterStream)
+    }
+
+    @Test
+    fun sessionReportOptOutSurvivesSettingsSerialization() {
+        val settings = NexPlayJson.decodeFromString<AppSettings>(
+            """{"showSessionReportAfterStream":false}""",
+        )
+
+        assertFalse(settings.showSessionReportAfterStream)
+    }
+
+    @Test
+    fun legacySessionReportIsEnabledOnce() {
+        val migrated = NexPlayJson.decodeFromString<AppSettings>(
+            """{"showSessionReportAfterStream":true}""",
+        ).normalizedForAndroid()
+
+        assertTrue(migrated.showSessionReportAfterStream)
+        assertEquals(SESSION_REPORT_DEFAULT_VERSION, migrated.sessionReportDefaultVersion)
+    }
+
+    @Test
+    fun currentSessionReportOptOutRemainsOffAfterNormalization() {
+        val settings = AppSettings(showSessionReportAfterStream = false,
+            sessionReportDefaultVersion = SESSION_REPORT_DEFAULT_VERSION).normalizedForAndroid()
+        assertFalse(settings.showSessionReportAfterStream)
+        assertFalse(settings.normalizedForAndroid().showSessionReportAfterStream)
+    }
+
+    @Test
+    fun previousDefaultOffIsEnabledOnUpgrade() {
+        val settings = AppSettings(showSessionReportAfterStream = false,
+            sessionReportDefaultVersion = 1).normalizedForAndroid()
+        assertTrue(settings.showSessionReportAfterStream)
+    }
+
+    @Test
+    fun currentSessionReportOptInRemainsAvailable() {
+        val optedIn = NexPlayJson.decodeFromString<AppSettings>(
+            """{"showSessionReportAfterStream":true,"sessionReportDefaultVersion":1}""",
+        ).normalizedForAndroid()
+
+        assertTrue(optedIn.showSessionReportAfterStream)
+    }
+
+    @Test
+    fun persistedPortalStreamModePreservesSelectedGeometry() {
+        val normalized = AppSettings(
+            stream = StreamSettings(
+                resolution = "1376x640",
+                aspectRatio = "19.5:9",
+                fps = 120,
+            ),
+        ).normalizedForAndroid()
+
+        assertEquals("1376x640", normalized.stream.resolution)
+        assertEquals("19.5:9", normalized.stream.aspectRatio)
+        assertEquals(120, normalized.stream.fps)
+    }
+
+    @Test
+    fun persistedNonFiniteInputSettingsFallBackBeforeTheyReachMotionRounding() {
+        val normalized = AppSettings(
+            stream = StreamSettings(
+                mouseSensitivity = Float.NaN,
+                streamSharpeningAmount = Float.POSITIVE_INFINITY,
+            ),
+            posterSizeScale = Float.NaN,
+            tvSafeAreaPaddingDp = Float.NEGATIVE_INFINITY,
+            androidTouch = AndroidTouchSettings(
+                opacity = Float.NaN,
+                offsets = mapOf("bad" to TouchOffset(Float.NaN, Float.POSITIVE_INFINITY)),
+            ),
+        ).normalizedForAndroid()
+
+        assertEquals(1f, normalized.stream.mouseSensitivity, 0f)
+        assertEquals(0.25f, normalized.stream.streamSharpeningAmount, 0f)
+        assertEquals(1f, normalized.posterSizeScale, 0f)
+        assertEquals(16f, normalized.tvSafeAreaPaddingDp, 0f)
+        assertEquals(AndroidTouchSettings().opacity, normalized.androidTouch.opacity, 0f)
+        assertEquals(TouchOffset(), normalized.androidTouch.offsets["bad"])
+    }
+
+    @Test
+    fun fullyTransparentTouchControlsRemainInteractivePreference() {
+        val normalized = AppSettings(
+            androidTouch = AndroidTouchSettings(opacity = 0f),
+        ).normalizedForAndroid()
+
+        assertEquals(0f, normalized.androidTouch.opacity, 0f)
+    }
+
+    @Test
+    fun keyboardButtonPositionIsKeptInsideTheStreamViewport() {
+        val normalized = AppSettings(
+            streamKeyboardButtonPosition = StreamKeyboardButtonPosition(
+                horizontalFraction = Float.POSITIVE_INFINITY,
+                verticalFraction = -0.25f,
+            ),
+        ).normalizedForAndroid()
+
+        assertEquals(1f, normalized.streamKeyboardButtonPosition.horizontalFraction, 0f)
+        assertEquals(0f, normalized.streamKeyboardButtonPosition.verticalFraction, 0f)
+    }
+}

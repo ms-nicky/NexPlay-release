@@ -3,6 +3,6 @@
 -keep class kotlinx.serialization.** { *; }
 -keep class com.google.mlkit.common.internal.CommonComponentRegistrar { *; }
 -keep class com.google.mlkit.common.sdkinternal.SharedPrefManager { *; }
--keepclassmembers class com.opencloudgaming.opennow.** {
+-keepclassmembers class com.nexplay.** {
     @kotlinx.serialization.Serializable *;
 }
