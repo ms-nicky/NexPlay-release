@@ -1370,7 +1370,7 @@ private const val GFN_STORAGE_MANAGEMENT_URL = "https://gfn.link/cloudstorage"
 private const val GFN_STORAGE_RESET_URL = "https://gfn.link/resetstorage"
 private const val GFN_ADD_STORAGE_URL = "https://gfn.link/addstorage"
 private const val GFN_ACCOUNT_HELP_URL = "https://gfn.link/5399"
-private const val NEXPLAY_GITHUB_URL = "https://github.com/OpenCloudGaming/NexPlay"
+private const val NEXPLAY_GITHUB_URL = "https://github.com/ms-nicky/NexPlay-release"
 
 private data class DeveloperCredit(
     val name: String,

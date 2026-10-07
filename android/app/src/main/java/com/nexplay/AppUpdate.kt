@@ -36,7 +36,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 private const val APK_MIME_TYPE = "application/vnd.android.package-archive"
-internal const val ANDROID_UPDATE_SOURCE_URL = "https://api.printedwaste.com/releases/nexplay/latest"
+internal const val ANDROID_UPDATE_SOURCE_URL = "https://raw.githubusercontent.com/ms-nicky/NexPlay-release/main/update.json"
 internal const val GOOGLE_PLAY_STORE_PACKAGE = "com.android.vending"
 internal const val GOOGLE_PLAY_STORE_LISTING_URL = "https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}"
 private const val UPDATE_FILE_PROVIDER_AUTHORITY_SUFFIX = ".updates"
@@ -373,6 +373,19 @@ class AndroidAppUpdater(
             publishError(_state.value.sourceUrl, "Downloaded APK is no longer available.")
             return
         }
+        // The digest was checked once at download time. Re-check here so an APK swapped on disk
+        // between download and install is caught rather than handed to the package installer.
+        val candidate = latestCandidate
+        if (candidate == null) {
+            publishError(_state.value.sourceUrl, "Update details are no longer available.")
+            return
+        }
+        runCatching { verifyCandidateDigest(candidate, apk) }.onFailure { error ->
+            apk.delete()
+            downloadedApk = null
+            publishError(_state.value.sourceUrl, error.message ?: "Update verification failed.")
+            return
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !appContext.packageManager.canRequestPackageInstalls()) {
             val settingsIntent = Intent(
                 Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
@@ -521,13 +534,7 @@ class AndroidAppUpdater(
                     }
                 }
             }
-            candidate.sha256?.takeIf { it.isNotBlank() }?.let { expected ->
-                val actual = tmp.sha256()
-                if (!actual.equals(expected.cleanHex(), ignoreCase = true)) {
-                    tmp.delete()
-                    error("Downloaded APK failed SHA-256 verification.")
-                }
-            }
+            verifyCandidateDigest(candidate, tmp)
             if (outputFile.exists()) outputFile.delete()
             if (!tmp.renameTo(outputFile)) {
                 tmp.copyTo(outputFile, overwrite = true)
@@ -725,6 +732,31 @@ private fun looksLikeApk(url: String, contentType: String): Boolean =
 
 private fun HttpUrl.isLoopbackHttp(): Boolean =
     scheme == "http" && host.lowercase(Locale.US) in setOf("localhost", "127.0.0.1", "::1")
+
+/**
+ * Refuses to hand an APK to the package installer unless the bytes match a digest the update
+ * manifest published. Upstream treated a missing `sha256` as "skip verification", which meant a
+ * manifest without that field silently disabled the only integrity check there was. A manifest we
+ * cannot authenticate is not worth installing, so an absent or malformed digest is now a hard
+ * failure rather than a bypass.
+ */
+internal fun verifyCandidateDigest(candidate: AndroidUpdateCandidate, file: File) {
+    val expected = candidate.sha256?.cleanHex()
+    if (!expected.isDigestSized()) {
+        file.delete()
+        error("Update manifest did not publish a usable SHA-256 digest.")
+    }
+    val actual = file.sha256()
+    if (!actual.equals(expected, ignoreCase = true)) {
+        file.delete()
+        error("Downloaded APK failed SHA-256 verification.")
+    }
+}
+
+private fun String?.isDigestSized(): Boolean =
+    !isNullOrBlank() && length == SHA256_HEX_LENGTH && all { it in '0'..'9' || it in 'a'..'f' || it in 'A'..'F' }
+
+internal const val SHA256_HEX_LENGTH = 64
 
 private fun AndroidUpdateCandidate.safeFileName(): String {
     val raw = fileName

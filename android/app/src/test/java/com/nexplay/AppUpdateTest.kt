@@ -129,6 +129,77 @@ class AppUpdateTest {
         assertEquals("https://updates.example.com/nexplay.json", normalizeAndroidUpdateSourceUrl("updates.example.com/nexplay.json"))
     }
 
+    @Test
+    fun acceptsApkWhoseDigestMatchesTheManifest() {
+        val file = temporaryApk("nexplay digest match payload")
+        val candidate = updateCandidate(sha256 = file.sha256ForTest())
+
+        verifyCandidateDigest(candidate, file)
+
+        assertTrue(file.exists())
+    }
+
+    @Test
+    fun rejectsApkWhoseDigestDoesNotMatchTheManifest() {
+        val file = temporaryApk("nexplay digest mismatch payload")
+        val candidate = updateCandidate(sha256 = "0".repeat(SHA256_HEX_LENGTH))
+
+        val failure = runCatching { verifyCandidateDigest(candidate, file) }.exceptionOrNull()
+
+        assertTrue(failure is IllegalStateException)
+        assertFalse(file.exists())
+    }
+
+    @Test
+    fun rejectsApkWhenTheManifestPublishesNoDigest() {
+        val file = temporaryApk("nexplay manifest without digest")
+
+        val failure = runCatching { verifyCandidateDigest(updateCandidate(sha256 = null), file) }.exceptionOrNull()
+
+        assertTrue(failure is IllegalStateException)
+        assertFalse(file.exists())
+    }
+
+    @Test
+    fun rejectsApkWhenTheManifestDigestIsNotAFullSha256() {
+        val file = temporaryApk("nexplay truncated digest")
+
+        val failure = runCatching { verifyCandidateDigest(updateCandidate(sha256 = "aabbcc"), file) }.exceptionOrNull()
+
+        assertTrue(failure is IllegalStateException)
+        assertFalse(file.exists())
+    }
+
+    private fun temporaryApk(contents: String): java.io.File {
+        val file = java.io.File.createTempFile("nexplay-update-test", ".apk")
+        file.deleteOnExit()
+        file.writeText(contents)
+        return file
+    }
+
+    private fun updateCandidate(sha256: String?) = AndroidUpdateCandidate(
+        sourceUrl = "https://updates.example.com/nexplay.json",
+        apkUrl = "https://updates.example.com/nexplay.apk",
+        versionName = "2.0.3",
+        versionCode = 159,
+        sha256 = sha256,
+        releaseNotes = null,
+        fileName = "nexplay.apk",
+    )
+
+    private fun java.io.File.sha256ForTest(): String {
+        val digest = java.security.MessageDigest.getInstance("SHA-256")
+        inputStream().use { input ->
+            val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+            while (true) {
+                val read = input.read(buffer)
+                if (read == -1) break
+                digest.update(buffer, 0, read)
+            }
+        }
+        return digest.digest().joinToString("") { byte -> "%02x".format(byte) }
+    }
+
     @Test(expected = IllegalStateException::class)
     fun rejectsNonLoopbackHttpSource() {
         normalizeAndroidUpdateSourceUrl("http://updates.example.com/nexplay.json")
