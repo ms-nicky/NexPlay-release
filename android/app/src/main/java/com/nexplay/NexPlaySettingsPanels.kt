@@ -1370,16 +1370,13 @@ private const val GFN_STORAGE_MANAGEMENT_URL = "https://gfn.link/cloudstorage"
 private const val GFN_STORAGE_RESET_URL = "https://gfn.link/resetstorage"
 private const val GFN_ADD_STORAGE_URL = "https://gfn.link/addstorage"
 private const val GFN_ACCOUNT_HELP_URL = "https://gfn.link/5399"
-private const val NEXPLAY_GITHUB_URL = "https://github.com/ms-nicky/NexPlay-release"
 
 private data class DeveloperCredit(
     val name: String,
-    val githubUrl: String,
 )
 
 private val DEVELOPER_CREDITS = listOf(
-    DeveloperCredit("Kiefer", "https://github.com/Kief5555"),
-    DeveloperCredit("Zortos", "https://github.com/zortos293"),
+    DeveloperCredit("ms-nicky"),
 )
 
 private fun formatStorageGb(value: Double): String =
@@ -1622,36 +1619,7 @@ internal fun AppVersionPanel(settings: AppSettings, onSettingsChange: (AppSettin
 }
 
 @Composable
-internal fun NexPlayGitHubPanel() {
-    val context = LocalContext.current
-    val clipboard = LocalClipboard.current
-    val scope = rememberCoroutineScope()
-    Row(
-        Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(14.dp))
-            .background(SettingsPanelAlt)
-            .padding(horizontal = 14.dp, vertical = 12.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            Text("NexPlay Repository", color = SettingsText, fontWeight = FontWeight.SemiBold)
-            Text("OpenCloudGaming/NexPlay", color = SettingsTextMuted, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
-        }
-        OutlinedButton(onClick = {
-            scope.launch { openExternalUrlOrCopy(context, clipboard, NEXPLAY_GITHUB_URL, "GitHub link copied") }
-        }) {
-            Text("GitHub", maxLines = 1, overflow = TextOverflow.Ellipsis)
-        }
-    }
-}
-
-@Composable
 internal fun DeveloperPanel() {
-    val context = LocalContext.current
-    val clipboard = LocalClipboard.current
-    val scope = rememberCoroutineScope()
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         DEVELOPER_CREDITS.forEach { developer ->
             Row(
@@ -1668,16 +1636,11 @@ internal fun DeveloperPanel() {
                     shape = CircleShape,
                     color = MaterialTheme.colorScheme.surfaceVariant,
                 ) {
-                    UrlImage("${developer.githubUrl}.png?size=160", Modifier.fillMaxSize().clip(CircleShape))
+                    NexPlayMark(size = 40.dp, modifier = Modifier.fillMaxSize())
                 }
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                     Text(developer.name, color = SettingsText, fontWeight = FontWeight.SemiBold)
                     Text(stringResource(R.string.settings_developer_label), color = SettingsTextMuted, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                }
-                OutlinedButton(onClick = {
-                    scope.launch { openExternalUrlOrCopy(context, clipboard, developer.githubUrl, "GitHub link copied") }
-                }) {
-                    Text("GitHub", maxLines = 1, overflow = TextOverflow.Ellipsis)
                 }
             }
         }

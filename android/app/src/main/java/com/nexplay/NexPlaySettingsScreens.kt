@@ -1984,9 +1984,8 @@ private fun SettingsContent(
     CategorySettingsSection(selectedCategory, SettingsCategory.Advanced, searchQuery, "Debug Logs", "debug", "logs", "logcat", "events", "export", "json", "cloudmatch", "queue", "stream") {
                     DebugLogsPanel(state = state, viewModel = viewModel)
                 }
-    CategorySettingsSection(selectedCategory, SettingsCategory.About, searchQuery, stringResource(R.string.settings_category_about), "about", "version", "build", "app", "github", "developer", "kiefer", "zortos", "nexplay", "repository") {
+    CategorySettingsSection(selectedCategory, SettingsCategory.About, searchQuery, stringResource(R.string.settings_category_about), "about", "version", "build", "app", "developer", "ms-nicky") {
                 AppVersionPanel(settings = settings, onSettingsChange = viewModel::updateSettings)
-                NexPlayGitHubPanel()
                 DeveloperPanel()
             }
     CategorySettingsSection(selectedCategory, SettingsCategory.About, searchQuery, stringResource(R.string.settings_section_thanks), "thanks", "credits", "contributors", "darkevilpt", "discord", "community", "support", "donate", "paypal", "printedwaste") {
